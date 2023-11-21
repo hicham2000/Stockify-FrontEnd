@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -13,6 +15,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
@@ -21,12 +27,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String url = "http://10.0.2.2:1111/produits";
+    private ArrayList<String> items = new ArrayList<>();
+    private String[] itemss = {"hicham","ghj"};
 
 
 
@@ -35,11 +44,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        TextView myTextView = findViewById(R.id.mytext);
-
+        ListView mylistview = findViewById(R.id.simpleListView);
 
 
+
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        ListView mylistview = findViewById(R.id.simpleListView);
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -47,19 +62,43 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        myTextView.setText(response.toString());
-                      //Log.e("api","OnError : " + response.toString());
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            JSONObject embedded = jsonResponse.getJSONObject("_embedded");
+                            JSONArray produitsArray = embedded.getJSONArray("produits");
+                            for (int i = 0; i < produitsArray.length(); i++) {
+                                JSONObject product = produitsArray.getJSONObject(i);
+                                String productName = product.getString("name");
+
+                                System.out.println("Product Name: " + productName);
+                                items.add(productName);
+                            }
+
+                            ArrayAdapter adapter = new ArrayAdapter<>(MainActivity.this, R.layout.simplelistv, items);
+                            mylistview.setAdapter(adapter);
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //textView.setText("That didn't work!");
-                Log.e("api","OnError : " + error.getLocalizedMessage());
+               items.add("That didn't work!");
+                ArrayAdapter adapter = new ArrayAdapter<>(MainActivity.this, R.layout.simplelistv, items);
+                mylistview.setAdapter(adapter);
+
             }
         });
 
         queue.add(stringRequest);
+
+        String[] stringArray = items.toArray(new String[0]);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.simplelistv,stringArray);
+        mylistview.setAdapter(adapter);
     }
 
 
