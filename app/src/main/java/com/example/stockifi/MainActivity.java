@@ -29,13 +29,13 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import butterknife.BindView;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private final String url = "http://10.0.2.2:1111/produits";
     private ArrayList<String> items = new ArrayList<>();
-    private String[] itemss = {"hicham","ghj"};
+
 
 
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ListView mylistview = findViewById(R.id.simpleListView);
+
 
 
 
