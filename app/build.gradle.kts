@@ -38,5 +38,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.jakewharton:butterknife:10.2.3")
     annotationProcessor ("com.jakewharton:butterknife-compiler:10.2.3")
+    implementation("com.android.volley:volley:1.2.1")
 
 }
