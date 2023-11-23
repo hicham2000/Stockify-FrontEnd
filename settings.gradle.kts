@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "stockify"
+rootProject.name = "Stockify"
 include(":app")
