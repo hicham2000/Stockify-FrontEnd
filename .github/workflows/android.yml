@@ -41,6 +41,12 @@ jobs:
     - name: Verify with Gradle
       run: ./gradlew check
 
+    - name: Build apk debug project (APK) - ${{ env.main_project_module }} module
+      run: ./gradlew ${{ env.main_project_module }}:assembleDebug
+
+
+    - name: Build app bundle debug (AAB) - ${{ env.main_project_module }} module
+      run: ./gradlew ${{ env.main_project_module }}:bundleDebug
 
     - name: Build apk release project (APK) - ${{ env.main_project_module }} module
       run: ./gradlew ${{ env.main_project_module }}:assembleRelease
