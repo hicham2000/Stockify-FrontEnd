@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.Stockify"
+    namespace = "com.example.stockifi"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.Stockify"
+        applicationId = "com.example.stockifi"
         minSdk = 21
         targetSdk = 33
         versionCode = 1
