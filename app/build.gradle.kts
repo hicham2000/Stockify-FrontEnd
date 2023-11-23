@@ -20,9 +20,6 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            getOutputs().each {
-                it.outputFileName = "Stockify-Release.apk"
-                it.outputDirectory = new File(buildDir, "releases")
         }
     }
     compileOptions {
