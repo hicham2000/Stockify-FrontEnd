@@ -42,6 +42,10 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    - name: Clear Gradle cache
+      run: rm -rf $HOME/.gradle
+
+
     - name: Build with Gradle
       run: ./gradlew build
 
