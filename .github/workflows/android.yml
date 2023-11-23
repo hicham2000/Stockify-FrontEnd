@@ -41,18 +41,18 @@ jobs:
       run: ./gradlew check
 
     - name: Build apk debug project (APK) - ${{ env.main_project_module }} module
-      run: ./gradlew ${{ env.main_project_module }}:assembleDebug
+      run: ./gradlew assembleDebug
 
 
     - name: Build app bundle debug (AAB) - ${{ env.main_project_module }} module
-      run: ./gradlew ${{ env.main_project_module }}:bundleDebug
+      run: ./gradlew bundleDebug
 
     - name: Build apk release project (APK) - ${{ env.main_project_module }} module
-      run: ./gradlew ${{ env.main_project_module }}:assembleRelease
+      run: ./gradlew assembleRelease
 
 
     - name: Build app bundle release (AAB) - ${{ env.main_project_module }} module
-      run: ./gradlew ${{ env.main_project_module }}:bundleRelease
+      run: ./gradlew bundleRelease
 
 
 
