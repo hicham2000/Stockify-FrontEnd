@@ -53,8 +53,6 @@ jobs:
     - name: Build app bundle release (AAB) - ${{ env.main_project_module }} module
       run: ./gradlew ${{ env.main_project_module }}:bundleRelease
       
-    - name: Create release directory
-      run: mkdir app/build/outputs/apk/release/
 
     - name: Move APK to release directory
       run: mv app/build/outputs/apk/release/app-release.apk release/
