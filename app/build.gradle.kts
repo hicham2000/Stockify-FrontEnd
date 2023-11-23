@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.stockifi"
+    namespace = "com.example.Stockify"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.stockifi"
+        applicationId = "com.example.Stockify"
         minSdk = 21
         targetSdk = 33
         versionCode = 1
@@ -20,6 +20,8 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            outputFileName = "Stockify-Release.apk"
+            outputDirectory = new File(buildDir, "releases")
         }
     }
     compileOptions {
