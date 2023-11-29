@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">stockifi</string>
+    <string-array name="genre">
+        <item>Homme</item>
+        <item>Femme</item>
+    </string-array>
+    <string-array name="taille">
+        <item>m</item>
+        <item>cm</item>
+    </string-array>
+
+    <string-array name="poids">
+        <item>Kg</item>
+        <item>g</item>
+    </string-array>
+
+    <string name="date">Date de naissance</string>
+    <string name="password"><u>Changer mot de passe</u></string>
 </resources>

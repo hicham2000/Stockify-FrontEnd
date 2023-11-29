@@ -3,7 +3,12 @@
     <style name="Base.Theme.Stockifi" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/white</item>
     </style>
 
     <style name="Theme.Stockifi" parent="Base.Theme.Stockifi" />
+    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">@color/vert</item>
+    </style>
+
 </resources>
