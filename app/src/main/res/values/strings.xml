@@ -16,4 +16,9 @@
 
     <string name="date">Date de naissance</string>
     <string name="password"><u>Changer mot de passe</u></string>
+    <string name="reussite">Reussite/Information</string>
+    <string name="produit_en_cuisine">Produit en cuisine</string>
+    <string name="Kg_jetes">Kg jetes</string>
+    <string name="economies">Economies</string>
+
 </resources>

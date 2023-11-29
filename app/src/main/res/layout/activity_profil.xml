@@ -201,23 +201,123 @@
             />
 
 
-        <TextView
-            android:layout_marginTop="@dimen/enHaut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/enHaut"
-            android:text="@string/password"
-            android:textColor="@color/vertTexte"
-            android:layout_gravity="center"/>
+
 
         <TextView
-            android:layout_marginTop="@dimen/enHaut"
+            android:layout_marginTop="60dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/enHaut"
-            android:text="@string/password"
+            android:text="@string/reussite"
             android:textColor="@color/vertTexte"
+
             android:layout_gravity="center"/>
+
+
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_marginTop="20dp"
+           android:layout_marginLeft="1dp"
+
+           >
+
+           <TextView
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:text="50"
+
+
+               android:textColor="@color/vertTexte"
+
+               android:gravity="center"
+               android:background="@drawable/sphere"/>
+
+           <TextView
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:text="0,0"
+
+               android:layout_marginLeft="@dimen/enHaut"
+
+               android:textColor="@color/vertTexte"
+               android:gravity="center"
+               android:background="@drawable/sphere"/>
+
+
+
+           <TextView
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:text="0 mad"
+
+               android:textColor="@color/vertTexte"
+
+               android:layout_marginLeft="@dimen/enHaut"
+
+               android:layout_gravity=""
+
+               android:gravity="center"
+               android:background="@drawable/sphere"/>
+
+
+       </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/produit_en_cuisine"
+
+                android:textColor="@color/white"
+               />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:textColor="@color/white"
+                android:text="@string/Kg_jetes"
+                android:layout_marginLeft="47dp"
+
+                android:gravity="center"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/economies"
+
+
+                android:textColor="@color/white"
+                android:layout_marginLeft="70dp"
+
+                android:layout_gravity=""
+
+                android:gravity="center"
+                />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            />
 
 
 
