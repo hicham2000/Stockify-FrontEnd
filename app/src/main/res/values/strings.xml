@@ -14,11 +14,31 @@
         <item>g</item>
     </string-array>
 
+    <string-array name="regime_speciaux">
+        <item>Végan</item>
+        <item>Végétarisme</item>
+    </string-array>
+
+    <string-array name="devise">
+        <item>Devise</item>
+
+    </string-array>
+
     <string name="date">Date de naissance</string>
     <string name="password"><u>Changer mot de passe</u></string>
     <string name="reussite">Reussite/Information</string>
     <string name="produit_en_cuisine">Produit en cuisine</string>
     <string name="Kg_jetes">Kg jetes</string>
     <string name="economies">Economies</string>
-
+    <string name="regime_speciaux">Regimes speciaux et Intolerences</string>
+    <string name="affichage_quantites">Affichage des quantites</string>
+    <string name="device">Devise Par defaut</string>
+    <string name="Personnalisation">Personnalisation</string>
+    <string name="mode_sportif">Mode Sportif</string>
+    <string name="device2">Ajout automatique des produit
+    a la corbeille en cas de peremption</string>
+    <string name="notification">Notification</string>
+    <string name="notification1">Alerte des dates expirations</string>
+    <string name="notification2">Alerte quand les produits atteignent
+la quantite critique</string>
 </resources>

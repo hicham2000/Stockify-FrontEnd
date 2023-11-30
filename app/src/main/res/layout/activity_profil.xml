@@ -19,7 +19,9 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/profil"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+
+            />
         <TextView
             android:id="@+id/nomProfil"
             android:layout_width="wrap_content"
@@ -57,10 +59,6 @@
             android:padding="10dp"
             android:background="@drawable/ellipse"
             android:entries="@array/genre"
-
-
-
-
             />
 
             <LinearLayout
@@ -82,9 +80,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/date"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="8dp"
+                    android:layout_marginTop="4dp"
+
+
 
                     />
           <ImageView
@@ -207,7 +205,7 @@
             android:layout_marginTop="60dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/enHaut"
+            android:textSize="@dimen/dimenTexte"
             android:text="@string/reussite"
             android:textColor="@color/vertTexte"
 
@@ -220,28 +218,29 @@
            android:layout_height="wrap_content"
            android:orientation="horizontal"
            android:layout_marginTop="20dp"
-           android:layout_marginLeft="1dp"
+           android:layout_marginLeft="10dp"
+           android:layout_gravity="center"
 
            >
 
            <TextView
-               android:layout_width="100dp"
-               android:layout_height="100dp"
+               android:layout_width="@dimen/rond"
+               android:layout_height="@dimen/rond"
                android:text="50"
 
 
                android:textColor="@color/vertTexte"
 
+               android:textStyle="bold"
                android:gravity="center"
                android:background="@drawable/sphere"/>
 
            <TextView
-               android:layout_width="100dp"
-               android:layout_height="100dp"
+               android:layout_width="@dimen/rond"
+               android:layout_height="@dimen/rond"
                android:text="0,0"
-
+               android:textStyle="bold"
                android:layout_marginLeft="@dimen/enHaut"
-
                android:textColor="@color/vertTexte"
                android:gravity="center"
                android:background="@drawable/sphere"/>
@@ -249,16 +248,14 @@
 
 
            <TextView
-               android:layout_width="100dp"
-               android:layout_height="100dp"
+               android:layout_width="@dimen/rond"
+               android:layout_height="@dimen/rond"
                android:text="0 mad"
-
                android:textColor="@color/vertTexte"
-
                android:layout_marginLeft="@dimen/enHaut"
 
+               android:textStyle="bold"
                android:layout_gravity=""
-
                android:gravity="center"
                android:background="@drawable/sphere"/>
 
@@ -278,7 +275,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/produit_en_cuisine"
-
+                android:layout_marginLeft="24dp"
                 android:textColor="@color/white"
                />
 
@@ -289,7 +286,7 @@
 
                 android:textColor="@color/white"
                 android:text="@string/Kg_jetes"
-                android:layout_marginLeft="47dp"
+                android:layout_marginLeft="32dp"
 
                 android:gravity="center"
                 />
@@ -303,7 +300,7 @@
 
 
                 android:textColor="@color/white"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="50dp"
 
                 android:layout_gravity=""
 
@@ -314,13 +311,220 @@
         </LinearLayout>
 
 
+
+
+
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimenTexte"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/enHaut"
+            android:text="@string/regime_speciaux"
+            android:textColor="@color/vertTexte"/>
+
+
+
+        <Spinner
+            android:id="@+id/spinner_regime"
+            android:layout_marginTop="@dimen/enHaut"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            style="@style/SpinnerStyle"
+            android:entries="@array/regime_speciaux"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimenTexte"
+           android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/enHaut"
+            android:text="@string/affichage_quantites"
+            android:textColor="@color/vertTexte"/>
+
+        <!-- res/layout/activity_main.xml -->
+        <!-- res/layout/activity_main.xml -->
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/enHaut"
+            android:layout_marginTop="@dimen/enHaut">
+
+            <RadioButton
+                android:id="@+id/radioButtonMetric"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/vertTexte"
+
+                android:text="Métrique"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonImperial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/vertTexte"
+                android:text="Impérial"
+                android:shadowColor="@color/vertTexte"
+                />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimenTexte"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/enHaut"
+            android:text="@string/device"
+            android:textColor="@color/vertTexte"/>
+
+        <Spinner
+            android:id="@+id/devise"
+            android:layout_marginTop="@dimen/enHaut"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ellipse"
+            android:entries="@array/devise"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimenTexte"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/enHaut"
+            android:text="@string/Personnalisation"
+            android:textColor="@color/vertTexte"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="15dp"
+
+                android:text="@string/mode_sportif"
+                android:textColor="@color/white"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp"
+                />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+
+                android:layout_marginLeft="15dp"
+
+                android:text="@string/device2"
+                android:textColor="@color/white"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:shadowColor="@color/vertTexte"
+                />
+
+
+
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dimenTexte"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="@dimen/enHaut"
+        android:text="@string/notification"
+        android:textColor="@color/vertTexte"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="15dp"
+
+            android:text="@string/notification1"
+            android:textColor="@color/white"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="107dp"
             />
 
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+
+            android:layout_marginLeft="15dp"
+
+            android:text="@string/notification2"
+            android:textColor="@color/white"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:shadowColor="@color/vertTexte"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            />
     </LinearLayout>
 
 

@@ -8,7 +8,21 @@
 
     <style name="Theme.Stockifi" parent="Base.Theme.Stockifi" />
     <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:background">@color/vert</item>
+        <item name="android:background">#ACB7B6</item>
     </style>
+
+    <style name="SpinnerStyle">
+        <item name="android:background">@color/vertTexte</item> <!-- Remplacez #00FF00 par le code couleur de votre choix (vert dans cet exemple) -->
+    </style>
+
+    <!-- res/values/styles.xml -->
+    <style name="RadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/custom_radio_button</item>
+    </style>
+
+    <style name="RadioButtonText" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textColor">#FFFFFF</item> <!-- Couleur du texte (blanc dans cet exemple) -->
+    </style>
+
 
 </resources>

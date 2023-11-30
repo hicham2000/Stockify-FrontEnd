@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dimenTexte">36dp</dimen>
+    <dimen name="dimenTexte">22dp</dimen>
     <dimen name="enHaut">30dp</dimen>
+    <dimen name="rond">80dp</dimen>
 </resources>
