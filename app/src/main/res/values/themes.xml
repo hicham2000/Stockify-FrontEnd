@@ -3,7 +3,7 @@
     <style name="Base.Theme.Stockifi" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/vertTexte</item>
     </style>
 
     <style name="Theme.Stockifi" parent="Base.Theme.Stockifi" />
@@ -22,6 +22,9 @@
 
     <style name="RadioButtonText" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:textColor">#FFFFFF</item> <!-- Couleur du texte (blanc dans cet exemple) -->
+    </style>
+    <style name="edit">
+        <item name="android:background">@color/white</item> <!-- Remplacez #00FF00 par le code couleur de votre choix (vert dans cet exemple) -->
     </style>
 
 
