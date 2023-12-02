@@ -49,7 +49,6 @@
     </string-array>
 
 
-
     <string name="date">Date de naissance</string>
     <string name="password"><u>Changer mot de passe</u></string>
     <string name="reussite">Reussite/Information</string>
@@ -82,5 +81,11 @@ la quantite critique</string>
     <string name="Budget">Budget</string>
     <string name="Courses">Courses</string>
     <string name="Profil">Profil</string>
+    <string name="TitleApp">Stockify</string>
+    <string name="login">exemple@email.com</string>
+    <string name="LoginPassword">password</string>
+    <string name="seConnecterBtn">se connecter</string>
+    <string name="récupererBtn">Enregistrer</string>
+
 
 </resources>

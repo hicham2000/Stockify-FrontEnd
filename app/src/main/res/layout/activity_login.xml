@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@color/vert"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="@string/TitleApp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
+
+
+
+        />
+    <EditText
+
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ellipse"
+        android:inputType="textMultiLine"
+        android:hint="@string/login"
+        android:paddingLeft="@dimen/paddin_left_text"
+
+
+        />
+    <EditText
+
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ellipse"
+        android:inputType="textPassword"
+        android:hint="@string/LoginPassword"
+        android:paddingLeft="@dimen/paddin_left_text"
+
+
+        />
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/seConnecterBtn"
+
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+
+        />
+
+
+
+</LinearLayout>
