@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +28,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.widget.Toolbar;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +39,10 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ProfilActivity extends AppCompatActivity {
+
+    private static final int MENU_POUBELLE = R.id.poubelle;
+    private static final int MENU_MESSAGE = R.id.message;
+    private static final int MENU_PROFIL = R.id.profil1;
 
     private LinearLayout pickDateButton;
     private TextView date_naissace;
@@ -48,6 +58,16 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+       // AppBarLayout appBarLayout = findViewById(R.id.appBar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar); // Assurez-vous que le R.id.toolbar correspond à votre MaterialToolbar
+
+        // Ajoutez ceci pour afficher le bouton de retour (optionnel)
+
+
+        // Gestionnaire d'événements du menu
+
+
 
         final EditText editText = findViewById(R.id.editTexte_taille);
 
@@ -261,6 +281,12 @@ public class ProfilActivity extends AppCompatActivity {
         },year, month, day);
 
         dialog.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profil, menu);
+        return true;
     }
 
     private void showToast(String message) {
