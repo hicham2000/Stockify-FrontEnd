@@ -13,24 +13,24 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
+        android:fontFamily="@font/jost_extrabold"
         android:text="@string/TitleApp"
         android:textColor="@color/white"
-        android:textSize="30dp"
-        android:textStyle="bold"
+        android:textSize="30sp"
 
 
-        />
+        android:textStyle="bold" />
 
     <EditText
 
         android:layout_width="300dp"
-        android:layout_height="35dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:background="@drawable/ellipse"
         android:hint="@string/login"
         android:inputType="textMultiLine"
-        android:paddingLeft="@dimen/paddin_left_text"
+        android:paddingLeft="20dp"
 
 
         />
@@ -38,14 +38,28 @@
     <EditText
 
         android:layout_width="300dp"
-        android:layout_height="35dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/ellipse"
         android:hint="@string/LoginPassword"
         android:inputType="textPassword"
-        android:paddingLeft="@dimen/paddin_left_text"
+        android:paddingLeft="20dp"
 
+
+        />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:fontFamily="@font/hubballi_regular"
+        android:paddingRight="10dp"
+        android:text="@string/pwdoublié"
+        android:textColor="@color/white"
+        android:textSize="20sp"
 
         />
     <Button
@@ -53,26 +67,38 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:text="@string/seConnecterBtn"
+        android:fontFamily="@font/hubballi_regular"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
 
         />
-
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewNoCompte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/hubballi_regular"
-        android:paddingRight="10dp"
-        android:text="@string/pwdoublié"
+        android:text="@string/nocompte"
         android:textColor="@color/white"
-
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:id="@+id/textViewCreateCompte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hubballi_regular"
+        android:text="@string/createcompte"
+        android:textColor="@color/vertTexte"
+        android:textSize="18sp"
+        android:layout_gravity="center"
 
         />
+
+
 
 
 </LinearLayout>
