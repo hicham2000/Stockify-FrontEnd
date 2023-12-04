@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button boutonLogin = findViewById(R.id.button_login);
-
+        TextView to_inscription = findViewById(R.id.textViewCreateCompte) ;
 
 
         boutonLogin.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +29,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Lorsque le bouton est cliqué, ouvrir l'écran profil
                 Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        to_inscription.setOnClickListener(new View.OnClickListener() {
+
+
+            // Créer un Intent pour passer à une autre activité
+            @Override
+            public void onClick(View view) {
+                // Lorsque le bouton est cliqué, ouvrir l'écran profil
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
