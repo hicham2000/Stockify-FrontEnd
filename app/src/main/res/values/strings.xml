@@ -86,6 +86,7 @@ la quantite critique</string>
     <string name="LoginPassword">password</string>
     <string name="seConnecterBtn">se connecter</string>
     <string name="récupererBtn">Enregistrer</string>
+    <string name="pwdoublié">Mot de passe oublié ?</string>
 
 
 </resources>
