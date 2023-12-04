@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/appBar">
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -23,9 +22,7 @@
             app:title="@string/Profil"
             app:menu="@menu/menu_profil"
 
-
             />
-
     </com.google.android.material.appbar.AppBarLayout>
 
 
