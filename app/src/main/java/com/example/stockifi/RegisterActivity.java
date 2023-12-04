@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                     passwordText.setText(" ");
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length() > 0) {
-                    Toast.makeText(getApplicationContext(),"email format invalid",3).show();}
+                    Toast.makeText(getApplicationContext(),"email format invalid",Toast.LENGTH_SHORT).show();}
                 if(nom.length()==0){Toast.makeText(getApplicationContext(),"Nom est un champs obligtoire", Toast.LENGTH_SHORT).show();}
                 if(prenom.length()==0){Toast.makeText(getApplicationContext(),"Prenom est un champs obligtoire", Toast.LENGTH_SHORT).show();}
                 if(email.length()==0){Toast.makeText(getApplicationContext(),"email est un champs obligtoire", Toast.LENGTH_SHORT).show();}
