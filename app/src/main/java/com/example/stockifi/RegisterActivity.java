@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String regimeDescription = regimeDescriptionText.getText().toString();
                 boolean acceptCondition = acceptConditionCheckBox.isChecked();
                 if (password !=password){
-                    errorMessage.set("Les mots de passe ne correspondent pas",3).show();
+                    Toast.makeText(getApplicationContext(),"Les mots de passe ne correspondent pas",3).show();
                     passwordText.setText(" ");
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length() > 0) {
