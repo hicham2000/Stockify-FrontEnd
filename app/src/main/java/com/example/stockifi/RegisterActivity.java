@@ -2,6 +2,7 @@ package com.example.stockifi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -39,20 +40,23 @@ public class RegisterActivity extends AppCompatActivity {
                 String regimeDescription = regimeDescriptionText.getText().toString();
                 boolean acceptCondition = acceptConditionCheckBox.isChecked();
                 if (password !=password){
-                    Toast.makeText(getApplicationContext(),"Les mots de passe ne correspondent pas",3).show();
+                    Toast.makeText(getApplicationContext(),"Les mots de passe ne correspondent pas", Toast.LENGTH_SHORT).show();
                     passwordText.setText(" ");
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length() > 0) {
             Toast.makeText(getApplicationContext(),"email format invalid",3).show();}
-                if(nom.length()==0){Toast.makeText(getApplicationContext(),"Nom est un champs obligtoire",3).show();}
-                if(prenom.length()==0){Toast.makeText(getApplicationContext(),"Prenom est un champs obligtoire",3).show();}
-                if(email.length()==0){Toast.makeText(getApplicationContext(),"email est un champs obligtoire",3).show();}
+                if(nom.length()==0){Toast.makeText(getApplicationContext(),"Nom est un champs obligtoire", Toast.LENGTH_SHORT).show();}
+                if(prenom.length()==0){Toast.makeText(getApplicationContext(),"Prenom est un champs obligtoire", Toast.LENGTH_SHORT).show();}
+                if(email.length()==0){Toast.makeText(getApplicationContext(),"email est un champs obligtoire", Toast.LENGTH_SHORT).show();}
 
-                if(password.length()==0){Toast.makeText(getApplicationContext(),"password est un champs obligtoire",3).show();}
-                if(confirmPassword.length()==0){Toast.makeText(getApplicationContext(),"confirmer le mot de pass",3).show();}
+                if(password.length()==0){Toast.makeText(getApplicationContext(),"password est un champs obligtoire", Toast.LENGTH_SHORT).show();}
+                if(confirmPassword.length()==0){Toast.makeText(getApplicationContext(),"confirmer le mot de pass", Toast.LENGTH_SHORT).show();}
 
                 if(selectedRegime=="Regimes specieux"){selectedRegime="Sans";}
-                if(acceptCondition == false ){Toast.makeText(getApplicationContext(),"Accepter les conditions d'utilisation ",3).show();}
+                if(acceptCondition == false ){Toast.makeText(getApplicationContext(),"Accepter les conditions d'utilisation ", Toast.LENGTH_SHORT).show();}
+
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
 
             }
         });
