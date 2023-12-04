@@ -1,22 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Stockifi" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.Theme.Stockifi" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/vertTexte</item>
     </style>
 
     <style name="Theme.Stockifi" parent="Base.Theme.Stockifi" />
-
-    <style name="label">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
-    <style name="s_inscrire">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
-
     <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:background">#ACB7B6</item>
     </style>
@@ -36,7 +26,6 @@
     <style name="edit">
         <item name="android:background">@color/white</item> <!-- Remplacez #00FF00 par le code couleur de votre choix (vert dans cet exemple) -->
     </style>
-
 
 
 </resources>
