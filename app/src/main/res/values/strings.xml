@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">stockifi</string>
+
     <string name="nom_champ">Nom</string>
     <string name="prenom_champ">Prénom</string>
     <string name="email_champ">Email</string>
@@ -18,6 +19,90 @@
     </string-array>
 
     <string name="title_activity_register">RegisterActivity</string>
+
+
+    <string-array name="genre">
+        <item>Homme</item>
+        <item>Femme</item>
+    </string-array>
+    <string-array name="taille">
+        <item>m</item>
+        <item>cm</item>
+    </string-array>
+
+    <string-array name="poids">
+        <item>Kg</item>
+        <item>g</item>
+    </string-array>
+
+    <string-array name="regime_speciaux">
+        <item>Végan</item>
+        <item>Végétarisme</item>
+    </string-array>
+
+    <string-array name="devise">
+        <item>Devise</item>
+
+    </string-array>
+
+    <string-array name="date">
+        <item>annee</item>
+        <item>mois</item>
+        <item>jours</item>
+
+    </string-array>
+
+    <string-array name="mesure">
+        <item>gramme(s)</item>
+        <item>kilogramme(s)</item>
+        <item>once(s)</item>
+        <item>livre(s)</item>
+        <item>cuillère(s) à soupe</item>
+        <item>cuillère(s) à café</item>
+        <item>tasse(s)</item>
+        <item>verre(s)</item>
+        <item>pièce(s)</item>
+        <item>paquet(s)</item>
+        <item>botte(s)</item>
+        <item>boîte(s)</item>
+
+
+    </string-array>
+
+
+
+    <string name="date">Date de naissance</string>
+    <string name="password"><u>Changer mot de passe</u></string>
+    <string name="reussite">Reussite/Information</string>
+    <string name="produit_en_cuisine">Produit en cuisine</string>
+    <string name="Kg_jetes">Kg jetes</string>
+    <string name="economies">Economies</string>
+    <string name="regime_speciaux">Regimes speciaux et Intolerences</string>
+    <string name="affichage_quantites">Affichage des quantites</string>
+    <string name="device">Devise Par defaut</string>
+    <string name="Personnalisation">Personnalisation</string>
+    <string name="mode_sportif">Mode Sportif</string>
+    <string name="device2">Ajout automatique des produit
+    a la corbeille en cas de peremption</string>
+    <string name="notification">Notification</string>
+    <string name="notification1">Alerte des dates expirations</string>
+    <string name="notification2">Alerte quand les produits atteignent
+la quantite critique</string>
+    <string name="delai">Delai du rappel par defaut</string>
+    <string name="quantite">Quantite Critique par Defaut</string>
+    <string name="peremption">Delai de Peremption par Defaut</string>
+    <string name="inst_face_twi">Suivez-nous pour participer à des concours, gagner des prix, obtenir des conseils et bien plus</string>
+    <string name="quest_demand">Questions/Demandes</string>
+    <string name="cont">Contactez-nous pour toute demande</string>
+    <string name="changer_pass">Changer Mot de Passe</string>
+    <string name="mot_de_passe_courant">Mot de Passe Courant</string>
+    <string name="nouv_mot_passe">Nouveau Mot de Passe</string>
+    <string name="conf_pass">Confirmation du Mot de Passe</string>
+    <string name="stock">Stock</string>
+    <string name="Recette">Recette</string>
+    <string name="Budget">Budget</string>
+    <string name="Courses">Courses</string>
+    <string name="Profil">Profil</string>
 
 
 </resources>

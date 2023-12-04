@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/stock"
+        android:icon="@drawable/chef"
+        android:title="@string/stock"/>
+    <item
+        android:id="@+id/recette"
+        android:icon="@drawable/hamburger"
+        android:title="@string/Recette"/>
+
+    <item
+        android:id="@+id/budget"
+        android:icon="@drawable/dollar"
+        android:title="@string/Budget"/>
+    <item
+        android:id="@+id/courses"
+        android:icon="@drawable/courses"
+        android:title="@string/Courses"/>
+
+</menu>

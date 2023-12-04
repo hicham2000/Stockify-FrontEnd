@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/ellipse_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="1000dp" /> <!-- Utilisez une valeur suffisamment grande pour rendre le coin pratiquement rond -->
+    <solid android:color="@android:color/transparent" />
+    <stroke
+        android:width="2dp"
+        android:color="@android:color/white" /> <!-- Couleur du bord, ajustez selon vos besoins -->
+</shape>
