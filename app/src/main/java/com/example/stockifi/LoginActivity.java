@@ -34,7 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-         to_inscription.setOnClickListener(new View.OnClickListener() {
+
+        to_inscription.setOnClickListener(new View.OnClickListener() {
+
 
 
             // Créer un Intent pour passer à une autre activité
