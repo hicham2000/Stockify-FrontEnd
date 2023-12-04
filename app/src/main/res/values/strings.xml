@@ -1,5 +1,26 @@
 <resources>
     <string name="app_name">stockifi</string>
+
+    <string name="nom_champ">Nom</string>
+    <string name="prenom_champ">Prénom</string>
+    <string name="email_champ">Email</string>
+    <string name="password_champ">Password</string>
+    <string name="confirm_password_champ">Confirm password</string>
+    <string name="regime_specieux_champ">Regimes specieux</string>
+    <string name="accepter">Accepter</string>
+    <string name="conditions_utilisation"> les condition d\'utilisation </string>
+    <string name="description_regime"> Description regime </string>
+    <string name="inscrire">S\'inscrire</string>
+    <string-array name="regimes">
+        <item>Regimes specieux</item>
+        <item>Sans</item>
+        <item>Vegan</item>
+        <item>Sans Gluten</item>
+    </string-array>
+
+    <string name="title_activity_register">RegisterActivity</string>
+
+
     <string-array name="genre">
         <item>Homme</item>
         <item>Femme</item>
@@ -82,5 +103,6 @@ la quantite critique</string>
     <string name="Budget">Budget</string>
     <string name="Courses">Courses</string>
     <string name="Profil">Profil</string>
+
 
 </resources>
