@@ -18,8 +18,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".LoginActivity"
             android:exported="true">
+=======
+            android:name=".ChangerPassword"
+            android:exported="false" />
+        <activity
+            android:name=".ProfilActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true" >
+>>>>>>> 2d7ae5cb3a45845096b8d42b557b29c8173963da
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

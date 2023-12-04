@@ -6,7 +6,9 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ToggleButton;
+import android.widget.Toolbar;
 
 public class ChangerPassword extends AppCompatActivity {
 
@@ -15,7 +17,19 @@ public class ChangerPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changer_password);
 
-        final EditText editTextPassword = findViewById(R.id.editTextPassword);
+
+
+        ImageView toolbarBackButton = findViewById(R.id.toolbar_back_button);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
+
      //   final ToggleButton toggleButtonShowPassword = findViewById(R.id.toggleButtonShowPassword);
 
   //      toggleButtonShowPassword.setOnClickListener(new View.OnClickListener() {
