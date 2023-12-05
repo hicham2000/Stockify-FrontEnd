@@ -32,7 +32,15 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        TextView textViewForgottenPwd = findViewById(R.id.textViewForgottenPwd);
+        textViewForgottenPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the click event for the "Forgotten Password" TextView
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         to_inscription.setOnClickListener(new View.OnClickListener() {
 
