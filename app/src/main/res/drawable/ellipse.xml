@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <!-- res/drawable/ellipse_shape.xml -->
+<!-- res/drawable/rounded_rectangle_shape.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="30dp" /> <!-- Rayon des coins arrondis -->
+    <solid android:color="@color/white" /> <!-- Couleur de fond du rectangle -->
+    <size
+        android:width="100dp"
+    android:height="20dp" /> <!-- Hauteur du rectangle -->
+</shape>
+
+

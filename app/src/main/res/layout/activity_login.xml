@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vert"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/jost_extrabold"
+        android:text="@string/TitleApp"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+
+
+        android:textStyle="bold" />
+
+    <EditText
+
+        android:id="@+id/email_login"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
+        android:hint="@string/login"
+        android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+
+
+        />
+
+    <EditText
+
+        android:id="@+id/password_login"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
+        android:hint="@string/LoginPassword"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+
+        />
+    <TextView
+        android:id="@+id/textViewForgottenPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:fontFamily="@font/hubballi_regular"
+        android:paddingRight="10dp"
+        android:text="@string/pwdoublié"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+
+        />
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/seConnecterBtn"
+        android:fontFamily="@font/hubballi_regular"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
+
+        />
+    <TextView
+        android:id="@+id/textViewNoCompte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/hubballi_regular"
+        android:text="@string/nocompte"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        />
+    <TextView
+
+        android:id="@+id/textViewCreateCompte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hubballi_regular"
+        android:text="@string/createcompte"
+        android:textColor="@color/vertTexte"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+
+        />
+
+
+
+
+</LinearLayout>
