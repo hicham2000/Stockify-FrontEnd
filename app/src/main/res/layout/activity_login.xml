@@ -30,6 +30,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
         android:hint="@string/login"
         android:inputType="textMultiLine"
         android:paddingLeft="20dp"
@@ -45,10 +46,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
         android:hint="@string/LoginPassword"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
-
 
         />
     <TextView

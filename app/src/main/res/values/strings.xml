@@ -111,8 +111,8 @@ la quantite critique</string>
     <string name="pwdoublié">Mot de passe oublié ?</string>
     <string name="nocompte">Vous n\'avez pas de compte ?</string>
     <string name="createcompte">S\'inscrire</string>
-
-
+    <string name="resetpasswordBtn">Récupérer</string>
+    <string name="resetpasswordHeader">Récupérer mot de passe</string>
 
 
 
