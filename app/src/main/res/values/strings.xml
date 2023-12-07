@@ -92,6 +92,9 @@ la quantite critique</string>
     <string name="peremption">Delai de Peremption par Defaut</string>
     <string name="inst_face_twi">Suivez-nous pour participer à des concours, gagner des prix, obtenir des conseils et bien plus</string>
     <string name="quest_demand">Questions/Demandes</string>
+    <string name="condi_util">Conditions d\'utilisation</string>
+    <string name="consulter">Consulter </string>
+    <string name="cond_utili">les conditions d\'utilisation</string>
     <string name="cont">Contactez-nous pour toute demande</string>
     <string name="changer_pass">Changer Mot de Passe</string>
     <string name="mot_de_passe_courant">Mot de Passe Courant</string>
@@ -113,7 +116,9 @@ la quantite critique</string>
     <string name="createcompte">S\'inscrire</string>
     <string name="resetpasswordBtn">Récupérer</string>
     <string name="resetpasswordHeader">Récupérer mot de passe</string>
+    <string name="text_cond_utili">Description de l\'application</string>
 
+    <!-- Description de l'application -->
 
 
 </resources>
