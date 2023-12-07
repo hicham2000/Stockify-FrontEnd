@@ -77,12 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
         isValid = false;}else{nomText.setError(null);}
         if(prenom.isEmpty()){prenomText.setError("Prénom est un champs obligtoire");
             isValid = false;}else{prenomText.setError(null);}
-        if(email.isEmpty()){ emailText.setError("Email est un champs obligtoire");
+        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){ emailText.setError("Email est un champs obligtoire");
             isValid = false;}else{emailText.setError(null);}
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() ) {
 
-            emailText.setError("Email format invalide");
-            isValid = false;}else{emailText.setError(null);}
         if(password.isEmpty()){passwordText.setError("Password est un champs obligtoire");
             isValid = false;}else{passwordText.setError(null);}
         if(confirmPassword.isEmpty()){

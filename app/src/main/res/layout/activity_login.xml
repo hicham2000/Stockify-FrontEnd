@@ -99,7 +99,6 @@
         android:textColor="@color/vertTexte"
         android:textSize="18sp"
         android:layout_gravity="center"
-
         />
 
 
