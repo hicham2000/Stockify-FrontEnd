@@ -117,8 +117,66 @@ la quantite critique</string>
     <string name="resetpasswordBtn">Récupérer</string>
     <string name="resetpasswordHeader">Récupérer mot de passe</string>
     <string name="text_cond_utili">Description de l\'application</string>
+    <string name="text_inscr">Inscription de l\'utilisateur</string>
+    <string name="texte_poli">Politique de confidentialité</string>
+    <string name="utilisa_texte">Utilisation de l\'application</string>
 
+    <string name="titre_desc">Description de l\'application</string>
+
+    <string name="text_inscrip">Pour utiliser certaines fonctionnalités de l\'application, vous pouvez être amené à vous inscrire pour un compte. Vous acceptez de fournir des informations précises et complètes lors du processus d\'inscription. Vous êtes responsable de maintenir la confidentialité de vos informations de compte et de toutes les activités qui se déroulent sous votre compte.</string>
+
+    <string name="texte_polit">Votre utilisation de l\'application est également régie par notre Politique de confidentialité, que vous pouvez trouver [lien vers votre politique de confidentialité]. Veuillez consulter notre Politique de confidentialité pour comprendre comment nous collectons, utilisons et divulguons vos informations.
+</string>
+
+<string name="desc">L\'application est conçue pour vous aider à gérer et suivre vos produits et vos repas, y compris, mais sans s\'y limiter, la gestion des stocks, la planification des repas et la création de listes de courses.
+    </string>
+    <string name="uti_acc">Vous acceptez d\'utiliser l\'application en conformité avec toutes les lois et réglementations applicables. Vous n\'utiliserez pas l\'application à des fins illégales ou nuisibles, y compris, mais sans s\'y limiter :
+</string>
+<string name="conte">Contenu de l\'utilisateur
+</string>
+    <string name="conte_texte">En utilisant l\'application, vous pouvez avoir la possibilité de soumettre et de partager du contenu, y compris du texte, des images et d\'autres matériaux. Vous êtes seul responsable du contenu que vous soumettez, et vous acceptez de ne pas soumettre de contenu qui est :
+</string>
+    <!-- Point a -->
+    <string name="violation_a">
+        a/Transmettre tout matériel non autorisé ou nuisible.
+    </string>
+
+    <!-- Point b -->
+    <string name="violation_b">
+        b/Tenter d\'accéder de manière non autorisée à l\'application ou aux comptes d\'autres utilisateurs.
+    </string>
+
+    <!-- Point c -->
+    <string name="violation_c">
+        c/Perturber le fonctionnement de l\'application.
+    </string>
+
+    <!-- Point d -->
+    <string name="violation_d">
+        d/Enfreindre les droits de propriété intellectuelle de tout tiers.
+    </string>
     <!-- Description de l'application -->
+
+    <!-- Point a -->
+    <string name="violation_aa">
+        a/Faux ou trompeur.
+    </string>
+
+    <!-- Point b -->
+    <string name="violation_bb">
+        b/Porte atteinte aux droits de propriété intellectuelle d\'autres personnes.
+    </string>
+
+    <!-- Point c -->
+    <string name="violation_cc">
+        c/Offensant, diffamatoire ou nuisible pour autrui.
+    </string>
+
+    <!-- Réservation du droit de suppression ou restriction d'accès -->
+    <string name="right_to_restrict">
+        Nous nous réservons le droit de supprimer ou de restreindre l\'accès à tout contenu qui enfreint ces termes.
+    </string>
+
 
 
 </resources>
