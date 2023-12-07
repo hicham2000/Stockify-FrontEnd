@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/page_2_cree"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".RegisterActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
-    android:background="#083D27"
-    >
+    android:background="@color/vert">
+
+<RelativeLayout
+    android:id="@+id/page_2_cree"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vert"
+    tools:ignore="ExtraText">
 
 
     <ImageView
@@ -17,15 +26,14 @@
         android:layout_height="100dp"
 
 
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="148dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/camer_in_circle"
+        android:src="@drawable/camer_in_circle"
         android:foregroundGravity="fill"
-        app:srcCompat="@drawable/camer_in_circle" />
+        android:onClick="upload_image"
+
+        />
 
     <EditText
         android:id="@+id/nom"
@@ -35,9 +43,10 @@
         android:layout_below="@id/camera_icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/input_background_small"
-        android:hint="@string/nom_champ"
+        android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
 
+        android:hint="@string/nom_champ"
         android:inputType="text"
         android:paddingStart="16dp"
         android:paddingTop="8dp"
@@ -53,7 +62,8 @@
         android:layout_below="@id/nom"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/spacing_between_inputs"
-        android:background="@drawable/input_background_small"
+        android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
         android:hint="@string/prenom_champ"
         android:inputType="text"
         android:paddingStart="16dp"
@@ -63,6 +73,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
 
+
     <EditText
         android:id="@+id/email"
         android:layout_width="288dp"
@@ -71,7 +82,8 @@
         android:layout_centerHorizontal="true"
 
         android:layout_marginTop="@dimen/spacing_between_inputs"
-        android:background="@drawable/input_background_small"
+        android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
         android:hint="@string/email_champ"
         android:inputType="text|textEmailAddress"
         android:paddingStart="16dp"
@@ -89,7 +101,8 @@
         android:layout_below="@id/email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/spacing_between_inputs"
-        android:background="@drawable/input_background_small"
+        android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
         android:hint="@string/password_champ"
         android:inputType="textPassword"
         android:paddingStart="16dp"
@@ -99,6 +112,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
 
+
     <EditText
         android:id="@+id/confirm_password"
         android:layout_width="288dp"
@@ -106,7 +120,8 @@
         android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:background="@drawable/input_background_small"
+        android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
         android:hint="@string/confirm_password_champ"
         android:inputType="textPassword"
         android:paddingStart="16dp"
@@ -115,7 +130,6 @@
         android:paddingBottom="8dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
-
 
     <Spinner
         android:id="@+id/regime_option"
@@ -126,7 +140,7 @@
         android:layout_marginTop="15dp"
 
 
-        android:background="@drawable/input_background_small"
+        android:background="@drawable/ellipse"
         android:dropDownSelector="@color/black"
         android:entries="@array/regimes"
         android:spinnerMode="dropdown"
@@ -141,6 +155,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/input_background_small"
+        android:fontFamily="@font/hubballi_regular"
         android:hint="@string/description_regime"
         android:inputType="text|textMultiLine"
         android:paddingStart="16dp"
@@ -166,19 +181,20 @@
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="22dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="20dp"
 
             android:textColorLink="#00FFFFFF" />
 
         <TextView
             android:id="@+id/accepter"
-            android:layout_width="70dp"
+            android:layout_width="60dp"
             android:layout_height="24dp"
             android:layout_toEndOf="@+id/checkBox"
+            android:fontFamily="@font/hubballi_regular"
             android:fontFeatureSettings="tnum, lnum"
-            android:gravity="top"
 
+            android:gravity="center"
             android:lineSpacingExtra="1sp"
             android:text="@string/accepter"
             android:textColor="@color/white"
@@ -189,27 +205,28 @@
             android:layout_width="282dp"
             android:layout_height="24dp"
             android:layout_toEndOf="@+id/accepter"
+            android:fontFamily="@font/hubballi_regular"
             android:fontFeatureSettings="tnum, lnum"
-            android:gravity="top"
+            android:gravity="center|start"
             android:lineSpacingExtra="1sp"
             android:text="@string/conditions_utilisation"
-
             android:textColor="@color/menu_bas"
             android:translationY="-0.44sp" />
     </RelativeLayout>
 
     <Button
         android:id="@+id/registerButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/accept_condition"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/inscrit_image_background"
-        android:text="@string/inscrire"
-        android:textColor="#FFFFFF" />
 
+        android:fontFamily="@font/hubballi_regular"
+        android:onClick="inscrire"
+        android:text="@string/inscrire"
+        android:textColor="@color/white" />
 
 
 </RelativeLayout>
+</ScrollView>
