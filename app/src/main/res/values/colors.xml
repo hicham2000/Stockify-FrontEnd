@@ -13,5 +13,5 @@
     <color name="switch_thumb_color">#FF0000</color> <!-- Couleur du pouce (la partie mobile) du switch par défaut -->
     <color name="switch_track_color">#808080</color> <!-- Couleur de la piste (la partie fixe) du switch par défaut -->
     <color name="switch_thumb_checked_color">#00FF00</color> <!-- Couleur du pouce lorsque le switch est activé -->
->>>>>>> Dev
+
 </resources>

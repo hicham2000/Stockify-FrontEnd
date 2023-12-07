@@ -28,11 +28,13 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
+
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
-        android:background="@color/menu_bas"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ellipse_menu"
         app:menu="@menu/menu_bottom_navigation"/>
 
 <ScrollView
@@ -85,15 +87,26 @@
             android:layout_marginLeft="15dp"
             >
 
-        <Spinner
+            <RelativeLayout
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ellipse">
 
-            android:id="@+id/spinner_gender"
-            android:layout_width="160dp"
-            android:layout_height="60dp"
-            android:padding="10dp"
-            android:background="@drawable/ellipse"
-            android:entries="@array/genre"
-            />
+                <Spinner
+
+                    android:id="@+id/spinner_gender"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:padding="10dp"
+
+                    android:entries="@array/genre"
+                    />
+            </RelativeLayout>
+
+
+
+
+
 
             <LinearLayout
                 android:id="@+id/date_naissance"
@@ -163,21 +176,28 @@
                 android:focusableInTouchMode="false"
                 android:gravity="center"
                 android:background="@drawable/ellipse"/>
+            <RelativeLayout
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ellipse"
+                android:layout_marginLeft="10dp"
+                >
 
             <Spinner
 
-                android:layout_marginLeft="10dp"
+
                 android:id="@+id/spinner_taille"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:padding="10dp"
-                android:background="@drawable/ellipse"
-                android:entries="@array/taille"
+
+                android:entries="@array/taille"/>
+            </RelativeLayout>
 
 
 
 
-                />
+
 
         </LinearLayout>
 
@@ -199,22 +219,26 @@
                     android:gravity="center"
                     android:background="@drawable/ellipse"/>
 
+                <RelativeLayout
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ellipse"
+                    android:layout_marginLeft="10dp"
+                    >
+
                 <Spinner
 
 
-                    android:layout_marginLeft="10dp"
+
                     android:id="@+id/spinner_poids"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
                     android:padding="10dp"
-                    android:background="@drawable/ellipse"
+
                     android:entries="@array/poids"
-
-
-
-
                     />
 
+                </RelativeLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -360,17 +384,25 @@
             android:textColor="@color/vertTexte"/>
 
 
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ellipse"
+            android:layout_marginTop="@dimen/enHaut"
+            android:layout_gravity="center"
 
+            >
         <Spinner
             android:id="@+id/spinner_regime"
-            android:layout_marginTop="@dimen/enHaut"
+
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_gravity="center"
-            style="@style/SpinnerStyle"
+
+
             android:entries="@array/regime_speciaux"
             />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -421,16 +453,24 @@
             android:text="@string/device"
             android:textColor="@color/vertTexte"/>
 
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ellipse"
+            android:layout_marginTop="@dimen/enHaut"
+            android:layout_gravity="center">
+
         <Spinner
             android:id="@+id/devise"
-            android:layout_marginTop="@dimen/enHaut"
+
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_gravity="center"
-            android:background="@drawable/ellipse"
+
             android:entries="@array/devise"
             />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -594,16 +634,24 @@
 
                />
 
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ellipse"
+                android:layout_marginLeft="20dp"
+                >
+
             <Spinner
 
                 android:id="@+id/spinner_date"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:padding="10dp"
-                android:background="@drawable/ellipse"
+
                 android:entries="@array/date"
-                android:layout_marginLeft="20dp"
+
                 />
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -636,6 +684,12 @@
                 android:inputType="number"
 
                 />
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ellipse"
+                android:layout_marginLeft="20dp"
+                >
 
             <Spinner
 
@@ -643,11 +697,11 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:padding="10dp"
-                android:background="@drawable/ellipse"
-                android:entries="@array/date"
-                android:layout_marginLeft="20dp"
-                />
 
+                android:entries="@array/date"
+
+                />
+            </RelativeLayout>
         </LinearLayout>
 
         <TextView
@@ -680,17 +734,24 @@
 
                 />
 
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ellipse"
+                android:layout_marginLeft="20dp"
+                >
             <Spinner
 
                 android:id="@+id/spinner_date_per"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:padding="10dp"
-                android:background="@drawable/ellipse"
+
                 android:entries="@array/date"
-                android:layout_marginLeft="20dp"
+
                 />
 
+            </RelativeLayout>
         </LinearLayout>
 
 
@@ -757,6 +818,42 @@
             android:layout_marginTop="40dp"
 
            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimenTexte"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/enHaut"
+            android:text="@string/condi_util"
+            android:textColor="@color/vertTexte"/>
+
+    <LinearLayout
+        android:id="@+id/boutton_condi"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+    android:orientation="horizontal"
+        android:clickable="true"
+        android:onClick="onBouttonCondiClick">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/consulter"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cond_utili"
+            android:textColor="@color/vertTexte"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="20dp"/>
+
+
+     </LinearLayout>
 
         <Button
             android:id="@+id/button_deconne"

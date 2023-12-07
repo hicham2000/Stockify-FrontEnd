@@ -2,8 +2,10 @@ package com.example.stockifi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -122,9 +124,15 @@ public class ProfilActivity extends AppCompatActivity {
 
     private EditText editTextPerempt;
 
+    private Button buttonSupCompte ;
 
 
 
+    public void onBouttonCondiClick(View view) {
+        // Code à exécuter lorsque le LinearLayout est cliqué
+        Intent intent = new Intent(this, ConditionUtilisationActivity.class);
+        startActivity(intent);
+    }
 
 
 
@@ -132,6 +140,16 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+        buttonSupCompte = findViewById(R.id.button_supCompte);
+        buttonSupCompte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                afficherConfirmationSuppression();
+            }
+        });
+
+
 
 
         Button envoyerEmailButton=findViewById(R.id.button_email);
@@ -840,6 +858,29 @@ public class ProfilActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void afficherConfirmationSuppression() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation de suppression");
+        builder.setMessage("Voulez-vous vraiment supprimer votre compte?");
+        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Ajoutez le code pour supprimer le compte ici
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Annuler la suppression
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
