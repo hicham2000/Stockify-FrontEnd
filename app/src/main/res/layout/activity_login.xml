@@ -118,8 +118,6 @@
         android:fontFamily="@font/hubballi_regular"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:onClick="confirmInput"
-
         />
     <TextView
         android:id="@+id/textViewNoCompte"
