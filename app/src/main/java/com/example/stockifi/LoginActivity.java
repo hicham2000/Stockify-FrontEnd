@@ -3,7 +3,7 @@ package com.example.stockifi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
+import com.google.android.material.textfield.TextInputLayout;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -55,6 +55,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Disable hint animation for email
+        TextInputLayout textInputLayoutEmail = findViewById(R.id.text_input_email);
+        textInputLayoutEmail.setHintEnabled(false);
+
+        // Disable hint animation for password
+        TextInputLayout textInputLayoutPassword = findViewById(R.id.text_input_password);
+        textInputLayoutPassword.setHintEnabled(false);
     }
 }
 
