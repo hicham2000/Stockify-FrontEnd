@@ -23,7 +23,7 @@
             android:exported="false" />
         <activity
             android:name=".ProduitCardActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ConditionUtilisationActivity"
             android:exported="false" />
@@ -32,7 +32,7 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ChangerPassword"
             android:exported="false" />
