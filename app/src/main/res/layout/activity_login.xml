@@ -22,7 +22,7 @@
 
         android:textStyle="bold" />
 
-    <EditText
+    <!--<EditText
 
         android:id="@+id/email_login"
         android:layout_width="300dp"
@@ -51,7 +51,49 @@
         android:inputType="textPassword"
         android:paddingLeft="20dp"
 
-        />
+        />-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="-18dp"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_login"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ellipse"
+            android:fontFamily="@font/hubballi_regular"
+            android:hint="@string/login"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:errorEnabled="true"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_login"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+        android:background="@drawable/ellipse"
+        android:fontFamily="@font/hubballi_regular"
+        android:hint="@string/LoginPassword"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:id="@+id/textViewForgottenPwd"
         android:layout_width="wrap_content"
@@ -76,8 +118,6 @@
         android:fontFamily="@font/hubballi_regular"
         android:textStyle="bold"
         android:textSize="20sp"
-
-
         />
     <TextView
         android:id="@+id/textViewNoCompte"
