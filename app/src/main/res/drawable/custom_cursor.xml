@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/custom_cursor.xml -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Couleur du curseur -->
+    <solid android:color="@color/vertTexte" />
+    <!-- Taille du curseur -->
+    <size android:width="2dp" />
+</shape>

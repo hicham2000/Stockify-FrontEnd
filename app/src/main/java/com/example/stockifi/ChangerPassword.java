@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ToggleButton;
 import android.widget.Toolbar;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class ChangerPassword extends AppCompatActivity {
 
     @Override
@@ -17,6 +19,15 @@ public class ChangerPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changer_password);
 
+        TextInputLayout textInputLayoutpass_courant = findViewById(R.id.text_input_password);
+        textInputLayoutpass_courant.setHintEnabled(false);
+
+        // Disable hint animation for password
+        TextInputLayout textInputLayoutpass_nouv = findViewById(R.id.text_input_password2);
+        textInputLayoutpass_nouv.setHintEnabled(false);
+
+        TextInputLayout textInputLayoutpass_conf = findViewById(R.id.text_input_password3);
+        textInputLayoutpass_conf.setHintEnabled(false);
 
 
         ImageView toolbarBackButton = findViewById(R.id.toolbar_back_button);

@@ -39,7 +39,7 @@
         android:id="@+id/nom"
         android:layout_width="288dp"
         android:layout_height="48dp"
-
+        style="@style/EditTextStyle"
         android:layout_below="@id/camera_icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -71,7 +71,8 @@
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/black"
+        style="@style/EditTextStyle"/>
 
 
     <EditText
@@ -80,7 +81,7 @@
         android:layout_height="48dp"
         android:layout_below="@id/prenom"
         android:layout_centerHorizontal="true"
-
+        style="@style/EditTextStyle"
         android:layout_marginTop="@dimen/spacing_between_inputs"
         android:background="@drawable/ellipse"
         android:fontFamily="@font/hubballi_regular"
@@ -110,6 +111,7 @@
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         android:textColor="@color/black"
+        style="@style/EditTextStyle"
         android:textColorHint="@color/black" />
 
 
@@ -129,6 +131,7 @@
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         android:textColor="@color/black"
+        style="@style/EditTextStyle"
         android:textColorHint="@color/black" />
 
     <Spinner
@@ -163,6 +166,7 @@
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         android:textColor="@color/black"
+        style="@style/EditTextStyle"
         android:textColorHint="@color/black" />
 
     <RelativeLayout

@@ -172,6 +172,7 @@
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:hint="Taille"
+                style="@style/EditTextStyle"
                 android:inputType="numberDecimal"
                 android:focusableInTouchMode="false"
                 android:gravity="center"
@@ -213,7 +214,7 @@
                     android:layout_width="70dp"
                     android:layout_height="60dp"
                     android:hint="Poids"
-
+                    style="@style/EditTextStyle"
                     android:inputType="numberDecimal"
 
                     android:gravity="center"
@@ -631,7 +632,7 @@
                android:inputType="number"
                android:text="3"
                android:backgroundTint="@color/white"
-
+               style="@style/EditTextStyle"
                />
 
             <RelativeLayout
@@ -682,7 +683,7 @@
                 android:text="20"
                 android:backgroundTint="@color/white"
                 android:inputType="number"
-
+                style="@style/EditTextStyle"
                 />
             <RelativeLayout
                 android:layout_width="100dp"
@@ -731,7 +732,7 @@
                 android:text="3"
                 android:backgroundTint="@color/white"
                 android:inputType="number"
-
+                style="@style/EditTextStyle"
                 />
 
             <RelativeLayout
