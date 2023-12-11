@@ -43,11 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
                     .load(selectedImageUri)
                     .into(imageview);
 
-
         }
-
-
-
     }
 
     // this function hundel the Click event on the button "s'incrire "
@@ -102,7 +98,6 @@ public class RegisterActivity extends AppCompatActivity {
     // function handel the click on the camera icon to upload images
     public void upload_image(View view){
         photouploader();
-
 
     }
 // create implement photouploader

@@ -128,11 +128,11 @@ la quantite critique</string>
     <string name="texte_polit">Votre utilisation de l\'application est également régie par notre Politique de confidentialité, que vous pouvez trouver [lien vers votre politique de confidentialité]. Veuillez consulter notre Politique de confidentialité pour comprendre comment nous collectons, utilisons et divulguons vos informations.
 </string>
 
-<string name="desc">L\'application est conçue pour vous aider à gérer et suivre vos produits et vos repas, y compris, mais sans s\'y limiter, la gestion des stocks, la planification des repas et la création de listes de courses.
+    <string name="desc">L\'application est conçue pour vous aider à gérer et suivre vos produits et vos repas, y compris, mais sans s\'y limiter, la gestion des stocks, la planification des repas et la création de listes de courses.
     </string>
     <string name="uti_acc">Vous acceptez d\'utiliser l\'application en conformité avec toutes les lois et réglementations applicables. Vous n\'utiliserez pas l\'application à des fins illégales ou nuisibles, y compris, mais sans s\'y limiter :
 </string>
-<string name="conte">Contenu de l\'utilisateur
+    <string name="conte">Contenu de l\'utilisateur
 </string>
     <string name="conte_texte">En utilisant l\'application, vous pouvez avoir la possibilité de soumettre et de partager du contenu, y compris du texte, des images et d\'autres matériaux. Vous êtes seul responsable du contenu que vous soumettez, et vous acceptez de ne pas soumettre de contenu qui est :
 </string>
@@ -176,7 +176,7 @@ la quantite critique</string>
     <string name="right_to_restrict">
         Nous nous réservons le droit de supprimer ou de restreindre l\'accès à tout contenu qui enfreint ces termes.
     </string>
-
-
+    <string name="no">J\'en ai pas</string>
+    <string name="yes">J\'en ai </string>
 
 </resources>
