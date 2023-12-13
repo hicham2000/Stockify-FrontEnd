@@ -105,7 +105,12 @@ la quantite critique</string>
     <string name="Budget">Budget</string>
     <string name="Courses">Courses</string>
     <string name="Profil">Profil</string>
-
+    <string name="liste_course">Liste de Course</string>
+    <string name="produit_acheter">+  Nouveau Produit a acheter</string>
+    <string name="ajout_prod">Ajouter Produit</string>
+    <string name="Ajouter_produit"> +  Ajouter</string>
+    <string name="sauvegarder">Sauvegarder</string>
+    <string name="modifier_prod">Modifier Produit</string>
     <string name="TitleApp">Stockify</string>
     <string name="login">exemple@email.com</string>
     <string name="LoginPassword">password</string>

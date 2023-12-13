@@ -4,20 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,16 +26,12 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-import android.widget.Toolbar;
 
-import com.google.android.material.appbar.AppBarLayout;
+import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -140,6 +130,19 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+        // Gestionnaire de clic pour l'élément "Courses"
+        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window);
+        Menu menu = bottomNavigationView.getMenu();
+
+
+        // Gestionnaire de clic pour l'élément "Courses"
+        menu.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(ProfilActivity.this, ListeDeCourse.class);
+            startActivity(intent);
+
+            return true;
+        });
 
         buttonSupCompte = findViewById(R.id.button_supCompte);
         buttonSupCompte.setOnClickListener(new View.OnClickListener() {

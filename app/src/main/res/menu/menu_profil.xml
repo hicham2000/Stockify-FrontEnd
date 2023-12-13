@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/poubelle"
-        android:icon="@drawable/poubelle"
+        android:icon="@drawable/poubelle_blanc"
         android:title="poubelle"
         app:showAsAction="ifRoom"
 

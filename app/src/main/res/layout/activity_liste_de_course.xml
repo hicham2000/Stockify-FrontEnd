@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vert"
+
+    tools:context=".Liste_Course.ListeDeCourse">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBar_liste_course">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_liste_course"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/liste_course"
+            app:menu="@menu/menu_profil"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+        android:id="@+id/androidx_window_course"
+        android:layout_width="350dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ellipse_menu"
+        app:menu="@menu/menu_bottom_navigation"/>
+
+    <android.widget.SearchView
+        android:id="@+id/search"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/ellipse_menu"
+        android:layout_centerHorizontal="true"
+
+
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_below="@+id/search">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dimenTexte">
+
+            <!-- CheckBox 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:paddingLeft="10dp"
+                android:text="Option 1"
+                android:textColor="@color/white"
+
+
+                />
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="20dp"
+                   android:src="@drawable/poubelle"
+                   android:layout_gravity="center"
+                   android:layout_marginLeft="200dp"/>
+
+                <ImageView
+                    android:id="@+id/poubelle_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/modifier"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:paddingLeft="10dp"
+                    android:text="Option 1"
+                    android:textColor="@color/white"
+
+
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/poubelle"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="200dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/modifier"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"/>
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+    <Button
+        android:id="@+id/ajouter_produit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ellipse_menu"
+        android:textColor="@color/white"
+        android:padding="10dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="200dp"
+        android:text="@string/produit_acheter"/>
+
+
+</RelativeLayout>
