@@ -21,9 +21,7 @@
         <activity
             android:name=".Liste_Course.ModifierProduit"
             android:exported="false" />
-        <activity
-            android:name=".Liste_Course.ModifierProfil"
-            android:exported="false" />
+
         <activity
             android:name=".Liste_Course.AjouterProduit"
             android:exported="false" />
