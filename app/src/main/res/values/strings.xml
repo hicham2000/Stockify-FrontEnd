@@ -10,6 +10,8 @@
     <string name="accepter">Accepter</string>
     <string name="conditions_utilisation"> les condition d\'utilisation </string>
     <string name="description_regime"> Description regime </string>
+    <string name="ingredient"> Ingrédients </string>
+
     <string name="inscrire">S\'inscrire</string>
     <string-array name="regimes">
         <item>Regimes specieux</item>
