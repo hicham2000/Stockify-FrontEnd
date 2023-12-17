@@ -9,9 +9,10 @@
 
         <CheckBox
             android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
 
+            android:textColor="@color/white"
             android:paddingLeft="10dp"
             android:text="Option 1"
 
@@ -19,14 +20,15 @@
 
             />
         <ImageView
+            android:id="@+id/supprim"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:src="@drawable/poubelle"
             android:layout_gravity="center"
-            android:layout_marginLeft="200dp"/>
+            android:layout_marginLeft="100dp"/>
 
         <ImageView
-            android:id="@+id/poubelle_image"
+            android:id="@+id/modifier_prod"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:src="@drawable/modifier"

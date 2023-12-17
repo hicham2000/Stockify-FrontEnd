@@ -4,28 +4,115 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.search.SearchView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class ListeDeCourse extends AppCompatActivity {
 
     Button AjouterBouton;
+  //  ImageView poubelleImage = findViewById(R.id.poubelle_image);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_liste_de_course);
+
+
+
+        MyApp myApp = (MyApp) getApplication();
+        int User_id = myApp.getUser_id();
+        int User_listeCourse_id = myApp.getUser_listeCourse_id();
+        String url = "http://192.168.11.103:1111/listeCourses/"+User_listeCourse_id+"/products";
+
+        ListView listView = findViewById(R.id.myListViewCourse);
+
+        ArrayList<Produit> dataList = new ArrayList<>();
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                        try {
+                            JSONArray jsonResponse = new JSONArray(response);
+                            for (int i = 0; i < jsonResponse.length(); i++) {
+                                JSONObject jsonObject = jsonResponse.getJSONObject(i);
+                                int id=jsonObject.getInt("id");
+                                String intitule = jsonObject.getString("intitule");
+                                String quantite = jsonObject.getString("quantite");
+                                String mesure = jsonObject.getString("uniteDeMesure");
+                                dataList.add(new Produit(id,intitule,quantite,mesure));
+                            }
+
+                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                            adapter.notifyDataSetChanged();
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Informer à l'adaptateur que les données ont changé
+                                    adapter.notifyDataSetChanged();
+
+                                    // Forcer la ListView à invalider et redessiner ses vues
+                                    listView.invalidateViews();
+                                }
+                            });
+
+
+                            listView.setAdapter(adapter);
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+             //   dataList.add("That didn't work!");
+                ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+
+                adapter.notifyDataSetChanged();
+                listView.setAdapter(adapter);
+
+            }
+        });
+
+        queue.add(stringRequest);
+
+
+
+
+
+
+
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_course);
 
 
@@ -46,16 +133,16 @@ public class ListeDeCourse extends AppCompatActivity {
             return false;
         });
 
-        ImageView poubelleImage = findViewById(R.id.poubelle_image);
 
-        poubelleImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+      // poubelleImage.setOnClickListener(new View.OnClickListener() {
+      //      @Override
+        //    public void onClick(View view) {
                 // Action à effectuer lors du clic sur l'image
-                Intent intent = new Intent(ListeDeCourse.this, ModifierProduit.class);
-                startActivity(intent);
-            }
-        });
+          //      Intent intent = new Intent(ListeDeCourse.this, ModifierProduit.class);
+            //    startActivity(intent);
+        //    }
+      //  });
 
         AjouterBouton = findViewById(R.id.ajouter_produit);
 
@@ -70,6 +157,7 @@ public class ListeDeCourse extends AppCompatActivity {
 
             }
         });
+
 
     }
 }
