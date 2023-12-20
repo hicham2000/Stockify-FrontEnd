@@ -63,7 +63,7 @@ public class ListeDeCourse extends AppCompatActivity {
                                 JSONObject jsonObject = jsonResponse.getJSONObject(i);
                                 int id=jsonObject.getInt("id");
                                 String intitule = jsonObject.getString("intitule");
-                                String quantite = jsonObject.getString("quantite");
+                                Double quantite = jsonObject.getDouble("quantite");
                                 String mesure = jsonObject.getString("uniteDeMesure");
                                 dataList.add(new Produit(id,intitule,quantite,mesure));
                             }

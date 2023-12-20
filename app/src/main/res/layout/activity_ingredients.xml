@@ -70,14 +70,17 @@ android:background="@color/vert">
 
             >
 
+
+
             <ListView
                 android:id="@+id/myListViewingredient"
                 android:layout_width="match_parent"
                 android:layout_height="480dp"
                 android:paddingBottom="20dp"/>
 
+
             <Button
-                android:id="@+id/ajouterhgf"
+                android:id="@+id/ajouteringredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ellipse_menu"

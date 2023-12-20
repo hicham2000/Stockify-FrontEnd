@@ -2,9 +2,15 @@ package com.example.stockifi.Repas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Liste_Course.Produit;
 import com.example.stockifi.R;
 
 import org.json.JSONArray;
@@ -20,9 +27,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ingredients extends AppCompatActivity {
-
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,11 @@ public class ingredients extends AppCompatActivity {
                             JSONArray jsonResponse = new JSONArray(response);
                             for (int i = 0; i < jsonResponse.length(); i++) {
                                 JSONObject jsonObject = jsonResponse.getJSONObject(i);
+                                Produit produit = new Produit(jsonObject.getInt("id"));
+                                produit.setIntitule(jsonObject.getString("intitule"));
+                                produit.setQuantite(jsonObject.getDouble("quantite"));
+                                produit.setUniteMesure(jsonObject.getString("uniteDeMesure"));
+                                System.out.println(produit);
                                 String intitule = jsonObject.getString("intitule");
                                 dataList.add(intitule);
                             }
@@ -54,6 +67,23 @@ public class ingredients extends AppCompatActivity {
                             CustomAdapter adapter = new CustomAdapter(ingredients.this, dataList);
 
                             listView.setAdapter(adapter);
+                            Button nextButton = findViewById(R.id.ajouteringredients);
+
+
+                            nextButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ArrayList<String> checked = adapter.getCheckedPositions();
+                                    System.out.println("hicham + " + checked);
+
+
+                                    if (!checked.isEmpty()) {
+                                        Intent intent = new Intent(ingredients.this, ingredients_quantity.class);
+                                        intent.putStringArrayListExtra("selectedItems", (ArrayList<String>) checked);
+                                        startActivity(intent);
+                                    }
+                                }
+                            });
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
@@ -80,4 +110,6 @@ public class ingredients extends AppCompatActivity {
 
 
     }
+
+
 }
