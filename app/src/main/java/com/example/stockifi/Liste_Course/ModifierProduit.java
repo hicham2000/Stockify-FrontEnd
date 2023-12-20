@@ -95,7 +95,7 @@ public class ModifierProduit extends AppCompatActivity {
                                                      RequestQueue queue = Volley.newRequestQueue(ModifierProduit.this);
                                                      int User_id = myApp.getUser_id();
                                                      int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                                                     String url = "http://192.168.11.103:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                                                     String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
                                                      JSONObject jsonBody = new JSONObject();
 
                                                      try {
