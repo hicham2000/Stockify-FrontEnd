@@ -1,6 +1,9 @@
 package com.example.stockifi.Liste_Course;
 
-public class Produit {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Produit implements Parcelable {
 
     private int id;
     private String intitule;
@@ -63,5 +66,35 @@ public class Produit {
                 ", quantite=" + quantite +
                 ", uniteMesure='" + uniteMesure + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(intitule);
+        dest.writeInt(id);
+        dest.writeString(uniteMesure);
+        dest.writeDouble(quantite);
+    }
+
+    public static final Parcelable.Creator<Produit> CREATOR = new Parcelable.Creator<Produit>() {
+        public Produit createFromParcel(Parcel in) {
+            return new Produit(in);
+        }
+
+        public Produit[] newArray(int size) {
+            return new Produit[size];
+        }
+    };
+
+    private Produit(Parcel in) {
+        intitule = in.readString();
+        id = in.readInt();
+        uniteMesure = in.readString();
+        quantite = in.readDouble();
     }
 }

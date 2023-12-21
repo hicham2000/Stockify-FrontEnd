@@ -44,7 +44,7 @@ public class ingredients extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.myListViewingredient);
 
-        ArrayList<String> dataList = new ArrayList<>();
+        ArrayList<Produit> dataList = new ArrayList<>();
 
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -61,7 +61,7 @@ public class ingredients extends AppCompatActivity {
                                 produit.setUniteMesure(jsonObject.getString("uniteDeMesure"));
                                 System.out.println(produit);
                                 String intitule = jsonObject.getString("intitule");
-                                dataList.add(intitule);
+                                dataList.add(produit);
                             }
 
                             CustomAdapter adapter = new CustomAdapter(ingredients.this, dataList);
@@ -73,13 +73,14 @@ public class ingredients extends AppCompatActivity {
                             nextButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    ArrayList<String> checked = adapter.getCheckedPositions();
-                                    System.out.println("hicham + " + checked);
+                                    ArrayList<Produit> checked = adapter.getCheckedPositions();
+
 
 
                                     if (!checked.isEmpty()) {
                                         Intent intent = new Intent(ingredients.this, ingredients_quantity.class);
-                                        intent.putStringArrayListExtra("selectedItems", (ArrayList<String>) checked);
+                                      intent.putParcelableArrayListExtra("selectedItems", checked);
+                                      //  System.out.println(checked);
                                         startActivity(intent);
                                     }
                                 }
@@ -95,7 +96,7 @@ public class ingredients extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                dataList.add("That didn't work!");
+                //dataList.add("That didn't work!");
                 CustomAdapter adapter = new CustomAdapter(ingredients.this, dataList);
 
                 listView.setAdapter(adapter);
