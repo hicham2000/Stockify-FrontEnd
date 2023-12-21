@@ -1,5 +1,6 @@
 package com.example.stockifi.Repas;
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends ArrayAdapter<String> {
     private ArrayList<Boolean> checkedPositions = new ArrayList<>();
+    private ArrayList<String> checkedPosition = new ArrayList<>();
+
 
     public CustomAdapter(Context context, ArrayList<String> data) {
         super(context, 0, data);
@@ -35,10 +38,25 @@ public class CustomAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View v) {
                 checkedPositions.set(position, !checkedPositions.get(position));
+                if(!checkedPosition.contains(radioButton.getText().toString())){
+                    checkedPosition.add(radioButton.getText().toString());
+                }
+                else{
+                    checkedPosition.remove(radioButton.getText().toString());
+                }
+
+                System.out.println(checkedPosition);
                 notifyDataSetChanged();
             }
         });
 
+
+
         return convertView;
+    }
+
+    public ArrayList<String> getCheckedPositions() {
+        System.out.println(checkedPosition);
+        return checkedPosition;
     }
 }

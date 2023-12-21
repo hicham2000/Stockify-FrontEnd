@@ -31,6 +31,7 @@ public class ModifierProduit extends AppCompatActivity {
     EditText nom;
     EditText quantite;
 
+
     Button sauvegarderButton;
 
 
@@ -43,28 +44,34 @@ public class ModifierProduit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_produit);
 
-        Spinner spinnerPoidAjoutmodif = findViewById(R.id.spinner_poid_ajoutModif);
+     //   Spinner spinner = findViewById(R.id.spinner_poid_ajoutModif1);
+
+
+        Spinner spinnerPoidAjoutmodif = findViewById(R.id.spinner_poid_ajoutModif1);
 
         nom=findViewById(R.id.editTexte_modifProduit);
         quantite=findViewById(R.id.quant_ajoutModif);
-      //  mesure=findViewById(R.id.spinner_poid_ajoutModif);
+
 
         Bundle extras=getIntent().getExtras();
         int id= new Integer(extras.getInt("id"));
         String titre=new String(extras.getString("intitule"));
-        String titre2=new String(extras.getString("quantite"));
+        double quantitee = extras.getDouble("quantite");
         String mesurePoid=new String(extras.getString("mesure"));
 
 
 
-        String[] poidsArray = getResources().getStringArray(R.array.poids);
-        int position = getPositionInArray(mesurePoid, poidsArray);
 
-        spinnerPoidAjoutmodif.setSelection(position);
+
+     //   String[] poidsArray = getResources().getStringArray(R.array.poids);
+     //   int position = getPositionInArray(mesurePoid, poidsArray);
+
+     //   spinnerPoidAjoutmodif.setSelection(position);
        // image200.setImageResource(image);
         nom.setText(titre);
-        quantite.setText(titre2);
-
+        String quantiteString = String.valueOf(quantitee);
+        quantite.setText(quantiteString);
+      // spinnerPoidAjoutmodif.getI;
         sauvegarderButton = findViewById(R.id.sauvegarder_prod_modif);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -77,8 +84,18 @@ public class ModifierProduit extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Appliquer l'adaptateur au Spinner
-        spinnerPoidAjoutmodif.setAdapter(adapter);
+       spinnerPoidAjoutmodif.setAdapter(adapter);
 
+        for (int i = 0; i < spinnerPoidAjoutmodif.getCount(); i++) {
+            String itemValue = (String) spinnerPoidAjoutmodif.getItemAtPosition(i);
+
+            // Vérifier si la valeur correspond à celle recherchée
+            if (itemValue != null && itemValue.equals(mesurePoid)) {
+                // Définir la sélection sur la position correspondante
+                spinnerPoidAjoutmodif.setSelection(i);
+                break; // Sortir de la boucle une fois que la position est trouvée
+            }
+        }
         sauvegarderButton.setOnClickListener(new View.OnClickListener() {
                                                  @Override
                                                  public void onClick(View v) {

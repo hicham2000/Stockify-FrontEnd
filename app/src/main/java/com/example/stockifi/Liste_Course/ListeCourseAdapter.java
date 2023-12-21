@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
     public ListeCourseAdapter(Context context, ArrayList<Produit> data) {
         super(context, 0, data);
         this.data = data;
-        checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), false));
+        checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), true));
     }
 
     @NonNull
@@ -54,6 +56,17 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
         ImageView suppr=convertView.findViewById(R.id.supprim);
         checkBox.setChecked(checkedPositions.get(position));
         checkBox.setText(data.get(position).getIntitule());
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+        public void onClick(View view) {
+                // Appeler une méthode
+                Intent intent = new Intent(getContext(), ListeDeCourse.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getContext().startActivity(intent);
+            }
+        });
 
 
         suppr.setOnClickListener(new View.OnClickListener() {

@@ -94,11 +94,11 @@ public class AjouterProduit extends AppCompatActivity {
 
                 JSONObject jsonProduit = new JSONObject();
                 try {
-                    if (!nomProduit.equals(null)) {
+
                         jsonProduit.put("intitule", nomProduit);
                         jsonProduit.put("quantite", quantiteProduit);
                         jsonProduit.put("uniteDeMesure", poidsProduit);
-                    }
+
                     // Ajoutez d'autres champs si nécessaire
                 } catch (JSONException e) {
                     e.printStackTrace();
