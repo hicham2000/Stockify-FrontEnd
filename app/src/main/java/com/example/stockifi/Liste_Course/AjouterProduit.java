@@ -87,22 +87,24 @@ public class AjouterProduit extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(AjouterProduit.this);
                 int User_id = myApp.getUser_id();
                 int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                String url = "http://192.168.11.103:1111/listeCourses/" + User_listeCourse_id + "/products";
+                String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products";
 
                 // Remplacez {courseId} par la valeur réelle du courseId
                 //  url = url.replace("{courseId}", String.valueOf(courseId));
 
                 JSONObject jsonProduit = new JSONObject();
                 try {
-                    jsonProduit.put("intitule", nomProduit);
-                    jsonProduit.put("quantite", quantiteProduit);
-                    jsonProduit.put("uniteDeMesure", poidsProduit);
+
+                        jsonProduit.put("intitule", nomProduit);
+                        jsonProduit.put("quantite", quantiteProduit);
+                        jsonProduit.put("uniteDeMesure", poidsProduit);
+
                     // Ajoutez d'autres champs si nécessaire
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-
+                if (!nomProduit.isEmpty()) {
                     JsonObjectRequest request = new JsonObjectRequest(
                             Request.Method.POST,
                             url,
@@ -118,7 +120,7 @@ public class AjouterProduit extends AppCompatActivity {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     // Gérez les erreurs de réseau ou du serveur
-                             //       Toast.makeText(AjouterProduit.this, "Erreur lors de l'ajout du produit", Toast.LENGTH_SHORT).show();
+                                    //       Toast.makeText(AjouterProduit.this, "Erreur lors de l'ajout du produit", Toast.LENGTH_SHORT).show();
                                 }
                             }
                     );
@@ -126,10 +128,14 @@ public class AjouterProduit extends AppCompatActivity {
                     // Ajoutez la requête à la file d'attente Volley
                     queue.add(request);
 
-                Intent intent = new Intent(AjouterProduit.this, ListeDeCourse.class);
-                startActivity(intent);
+                    Intent intent = new Intent(AjouterProduit.this, ListeDeCourse.class);
+                    startActivity(intent);
                 }
+                else {
+                    Toast.makeText(AjouterProduit.this, "vous dever entrer le nom du produit", Toast.LENGTH_SHORT).show();
 
+                }
+            }
 
 
 

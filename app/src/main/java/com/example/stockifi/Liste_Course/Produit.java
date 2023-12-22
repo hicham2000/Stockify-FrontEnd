@@ -11,6 +11,8 @@ public class Produit implements Parcelable {
     private double quantite;
     private String uniteMesure;
 
+    private Boolean check;
+
     public int getId() {
         return id;
     }
@@ -44,11 +46,12 @@ public class Produit implements Parcelable {
         this.uniteMesure = uniteMesure;
     }
 
-    public Produit(int id, String intitule, double quantite, String uniteMesure) {
+    public Produit(int id, String intitule, double quantite, String uniteMesure,boolean check) {
         this.id = id;
         this.intitule = intitule;
         this.quantite = quantite;
         this.uniteMesure = uniteMesure;
+        this.check=check;
     }
 
     public Produit(int id){

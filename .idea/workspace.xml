@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65e10bcb-001d-4511-b071-c09ab7bf2c88" name="Changes" comment="">
+    <list default="true" id="b246899b-5d25-474b-a057-e4feb1bfa3df" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Repas/ingredients_quantity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Repas/ingredients_quantity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ingredients_quantity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ingredients_quantity.xml" afterDir="false" />
@@ -20,44 +21,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/hicham/.android/avd/Pixel_3a_API_34_extension_level_7_arm64-v8a.avd]" />
-  <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$">
-      <ProjectState />
-    </projectState>
-  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\DELL\.android\avd\Pixel_2_API_30.avd]" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Stockify" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Stockify" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Stockify" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Stockify" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
       </state>
     </system>
   </component>
@@ -66,6 +37,8 @@
       <list>
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
+=======
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -75,7 +48,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2ZgX6jA8KyJPkmQqmdwkoHTZIa9" />
+  <component name="ProjectId" id="2ZtVW3HBcimJ4lMU0hHnCYX44f1" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -306,14 +279,22 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="65e10bcb-001d-4511-b071-c09ab7bf2c88" name="Changes" comment="" />
-      <created>1702844525960</created>
+      <changelist id="b246899b-5d25-474b-a057-e4feb1bfa3df" name="Changes" comment="" />
+      <created>1703241394827</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1702844525960</updated>
+      <updated>1703241394827</updated>
     </task>
     <servers />
   </component>

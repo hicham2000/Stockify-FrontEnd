@@ -9,12 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
@@ -27,11 +30,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ListeDeCourse extends AppCompatActivity {
 
     Button AjouterBouton;
+    SearchView search_listeCourse;
   //  ImageView poubelleImage = findViewById(R.id.poubelle_image);
 
     @Override
@@ -39,12 +44,216 @@ public class ListeDeCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_de_course);
 
+        search_listeCourse=findViewById(R.id.search_course);
 
+
+
+
+        search_listeCourse.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                String produit = search_listeCourse.getQuery().toString();
+                MyApp myApp = (MyApp) getApplication();
+                int User_id = myApp.getUser_id();
+                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+
+                ListView listView = findViewById(R.id.myListViewCourse);
+
+                ArrayList<Produit> dataList = new ArrayList<>();
+
+                RequestQueue queue = Volley.newRequestQueue(ListeDeCourse.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+
+                                try {
+                                    JSONArray jsonResponse = new JSONArray(response);
+                                    for (int i = 0; i < jsonResponse.length(); i++) {
+                                        JSONObject jsonObject = jsonResponse.getJSONObject(i);
+                                        int id = jsonObject.getInt("id");
+                                        String intitule = jsonObject.getString("intitule");
+                                        Double quantite = jsonObject.getDouble("quantite");
+                                        String mesure = jsonObject.getString("uniteDeMesure");
+                                        boolean check = jsonObject.getBoolean("etat");
+                                        dataList.add(new Produit(id, intitule, quantite, mesure, check));
+                                    }
+
+                                    ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                    adapter.notifyDataSetChanged();
+
+
+                                    listView.setAdapter(adapter);
+
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+
+                            }
+
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //   dataList.add("That didn't work!");
+                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+
+                        adapter.notifyDataSetChanged();
+                        listView.setAdapter(adapter);
+
+                    }
+
+                });
+
+                queue.add(stringRequest);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+
+                String produit = search_listeCourse.getQuery().toString();
+
+                if (!produit.isEmpty()){
+
+                    MyApp myApp = (MyApp) getApplication();
+                    int User_id = myApp.getUser_id();
+                    int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                    String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+
+                    ListView listView = findViewById(R.id.myListViewCourse);
+
+                    ArrayList<Produit> dataList = new ArrayList<>();
+
+                    RequestQueue queue = Volley.newRequestQueue(ListeDeCourse.this);
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+
+                                    try {
+                                        JSONArray jsonResponse = new JSONArray(response);
+                                        for (int i = 0; i < jsonResponse.length(); i++) {
+                                            JSONObject jsonObject = jsonResponse.getJSONObject(i);
+                                            int id = jsonObject.getInt("id");
+                                            String intitule = jsonObject.getString("intitule");
+                                            Double quantite = jsonObject.getDouble("quantite");
+                                            String mesure = jsonObject.getString("uniteDeMesure");
+                                            boolean check = jsonObject.getBoolean("etat");
+                                            dataList.add(new Produit(id, intitule, quantite, mesure, check));
+                                        }
+
+                                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                        adapter.notifyDataSetChanged();
+
+
+                                        listView.setAdapter(adapter);
+
+
+                                    } catch (JSONException e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+
+                                }
+
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //   dataList.add("That didn't work!");
+                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+
+                            adapter.notifyDataSetChanged();
+                            listView.setAdapter(adapter);
+
+                        }
+
+                    });
+
+                    queue.add(stringRequest);
+
+                }
+                else {
+                    MyApp myApp = (MyApp) getApplication();
+                    int User_id = myApp.getUser_id();
+                    int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                    String url = "http://192.168.11.100:1111/listeCourses/"+User_listeCourse_id+"/products";
+
+                    ListView listView = findViewById(R.id.myListViewCourse);
+
+                    ArrayList<Produit> dataList = new ArrayList<>();
+
+                    RequestQueue queue = Volley.newRequestQueue(ListeDeCourse.this);
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+
+                                    try {
+                                        JSONArray jsonResponse = new JSONArray(response);
+                                        for (int i = 0; i < jsonResponse.length(); i++) {
+                                            JSONObject jsonObject = jsonResponse.getJSONObject(i);
+                                            int id=jsonObject.getInt("id");
+                                            String intitule = jsonObject.getString("intitule");
+                                            Double quantite = jsonObject.getDouble("quantite");
+                                            String mesure = jsonObject.getString("uniteDeMesure");
+                                            boolean check=jsonObject.getBoolean("etat");
+                                            dataList.add(new Produit(id,intitule,quantite,mesure,check));
+                                        }
+
+                                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                        adapter.notifyDataSetChanged();
+
+
+
+                                        listView.setAdapter(adapter);
+
+
+
+
+                                    } catch (JSONException e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+
+
+                                }
+
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //   dataList.add("That didn't work!");
+                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+
+                            adapter.notifyDataSetChanged();
+                            listView.setAdapter(adapter);
+
+                        }
+
+                    });
+
+                    queue.add(stringRequest);
+
+
+                }
+
+                    return false;
+                }
+
+        });
 
         MyApp myApp = (MyApp) getApplication();
         int User_id = myApp.getUser_id();
         int User_listeCourse_id = myApp.getUser_listeCourse_id();
-        String url = "http://192.168.11.103:1111/listeCourses/"+User_listeCourse_id+"/products";
+        String url = "http://192.168.11.100:1111/listeCourses/"+User_listeCourse_id+"/products";
 
         ListView listView = findViewById(R.id.myListViewCourse);
 
@@ -65,25 +274,19 @@ public class ListeDeCourse extends AppCompatActivity {
                                 String intitule = jsonObject.getString("intitule");
                                 Double quantite = jsonObject.getDouble("quantite");
                                 String mesure = jsonObject.getString("uniteDeMesure");
-                                dataList.add(new Produit(id,intitule,quantite,mesure));
+                                boolean check=jsonObject.getBoolean("etat");
+                                dataList.add(new Produit(id,intitule,quantite,mesure,check));
                             }
 
                             ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                             adapter.notifyDataSetChanged();
 
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Informer à l'adaptateur que les données ont changé
-                                    adapter.notifyDataSetChanged();
-
-                                    // Forcer la ListView à invalider et redessiner ses vues
-                                    listView.invalidateViews();
-                                }
-                            });
 
 
                             listView.setAdapter(adapter);
+
+
+
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
@@ -92,6 +295,7 @@ public class ListeDeCourse extends AppCompatActivity {
 
 
                     }
+
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -102,6 +306,7 @@ public class ListeDeCourse extends AppCompatActivity {
                 listView.setAdapter(adapter);
 
             }
+
         });
 
         queue.add(stringRequest);

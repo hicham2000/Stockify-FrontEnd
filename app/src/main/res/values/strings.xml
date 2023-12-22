@@ -11,6 +11,7 @@
     <string name="conditions_utilisation"> les condition d\'utilisation </string>
     <string name="description_regime"> Description regime </string>
     <string name="ingredient"> Ingrédients </string>
+    <string name="chercherProd">Chercher un produit</string>
 
     <string name="inscrire">S\'inscrire</string>
     <string-array name="regimes">
@@ -189,5 +190,7 @@ la quantite critique</string>
     </string>
     <string name="no">J\'en ai pas</string>
     <string name="yes">J\'en ai </string>
+    <string name="recherche_produit">Rechercher Produit</string>
+    <string name="produit_ajoute">Nouveau Produit a ajouter</string>
 
 </resources>
