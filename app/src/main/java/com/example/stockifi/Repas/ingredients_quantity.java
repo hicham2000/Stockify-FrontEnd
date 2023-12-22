@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 public class ingredients_quantity extends AppCompatActivity {
 
     private Spinner spinnerDate;
+    private ArrayList<String> quantity = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,10 @@ public class ingredients_quantity extends AppCompatActivity {
         Intent intent = getIntent();
 
             ArrayList<Produit> productList =intent.getParcelableArrayListExtra("selectedItems");
+
+
+
+
 
 
 
@@ -66,6 +73,62 @@ public class ingredients_quantity extends AppCompatActivity {
                 finish();
             }
         });
+
+        Button displayButton = findViewById(R.id.ajouteringredients);
+        displayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Function to display content of all EditText fields
+                LinearLayout rootView = findViewById(R.id.ingredientscontent); // Replace with your root layout ID
+                int childCount = rootView.getChildCount();
+                ListView a = (ListView) rootView.getChildAt(0);
+                //System.out.println(a);
+                int b = a.getChildCount();
+                //System.out.println(b);
+                quantity.clear();
+
+                for (int i = 0; i < b; i++) {
+                    LinearLayout vieww = (LinearLayout) a.getChildAt(i);
+                    View view = vieww.getChildAt(1);
+
+
+
+                    EditText editText = (EditText) view;
+                    String content = editText.getText().toString();
+                    quantity.add(content);
+
+
+                }
+
+                if(quantity.size() == productList.size() ){
+                    for (int i =0 ; i<quantity.size() ; i++){
+                        Double asfd = Double.parseDouble(quantity.get(i));
+
+                        if (asfd >  productList.get(i).getQuantite() || asfd == 0){
+
+                            break;
+                        }
+                        if (i == quantity.size() -1){
+                            Intent intent = new Intent(ingredients_quantity.this, ajouter_repas.class);
+                            intent.putParcelableArrayListExtra("selectedItems", productList);
+                            intent.putStringArrayListExtra("stringListExtra", quantity);
+                            startActivity(intent);
+                        }
+
+                    }
+                }
+
+
+
+
+            }
+        });
+    }
+
+    private void displayEditTextContent() {
+
+
     }
 
 
