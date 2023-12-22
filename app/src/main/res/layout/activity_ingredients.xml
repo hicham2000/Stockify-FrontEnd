@@ -16,14 +16,6 @@ android:background="@color/vert">
     android:background="?attr/colorPrimary">
 
     <!-- Ajoutez une flèche de retour à la Toolbar -->
-    <ImageView
-        android:id="@+id/toolbar_back_button"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/fleche"
-        android:layout_gravity="start"
-        android:layout_marginStart="16dp"
-        />
 
     <com.google.android.material.appbar.MaterialToolbar
 
@@ -70,14 +62,17 @@ android:background="@color/vert">
 
             >
 
+
+
             <ListView
                 android:id="@+id/myListViewingredient"
                 android:layout_width="match_parent"
                 android:layout_height="480dp"
                 android:paddingBottom="20dp"/>
 
+
             <Button
-                android:id="@+id/ajouterhgf"
+                android:id="@+id/ajouteringredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ellipse_menu"

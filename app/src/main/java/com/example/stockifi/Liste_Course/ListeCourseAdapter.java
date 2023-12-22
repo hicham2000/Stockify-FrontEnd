@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
     public ListeCourseAdapter(Context context, ArrayList<Produit> data) {
         super(context, 0, data);
         this.data = data;
-        checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), false));
+        checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), true));
     }
 
     @NonNull
@@ -55,6 +57,17 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
         checkBox.setChecked(checkedPositions.get(position));
         checkBox.setText(data.get(position).getIntitule());
 
+        checkBox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+        public void onClick(View view) {
+                // Appeler une méthode
+                Intent intent = new Intent(getContext(), ListeDeCourse.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getContext().startActivity(intent);
+            }
+        });
+
 
         suppr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +78,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
                     RequestQueue queue = Volley.newRequestQueue(ListeCourseAdapter.this.getContext());
                     int User_id = myApp.getUser_id();
                     int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                    String url = "http://192.168.11.103:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                    String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
                     JSONObject jsonBody = new JSONObject();
                     JsonObjectRequest request = new JsonObjectRequest(
                             Request.Method.DELETE,

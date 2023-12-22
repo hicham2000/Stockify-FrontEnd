@@ -1,12 +1,17 @@
 package com.example.stockifi.Liste_Course;
 
-public class Produit {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Produit implements Parcelable {
 
     private int id;
     private String intitule;
 
-    private String quantite;
+    private double quantite;
     private String uniteMesure;
+
+    private Boolean check;
 
     public int getId() {
         return id;
@@ -24,11 +29,12 @@ public class Produit {
         this.intitule = intitule;
     }
 
-    public String getQuantite() {
+
+    public double getQuantite() {
         return quantite;
     }
 
-    public void setQuantite(String quantite) {
+    public void setQuantite(double quantite) {
         this.quantite = quantite;
     }
 
@@ -40,10 +46,55 @@ public class Produit {
         this.uniteMesure = uniteMesure;
     }
 
-    public Produit(int id, String intitule, String quantite, String uniteMesure) {
+    public Produit(int id, String intitule, double quantite, String uniteMesure,boolean check) {
         this.id = id;
         this.intitule = intitule;
         this.quantite = quantite;
         this.uniteMesure = uniteMesure;
+        this.check=check;
+    }
+
+    public Produit(int id){
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Produit{" +
+                "id=" + id +
+                ", intitule='" + intitule + '\'' +
+                ", quantite=" + quantite +
+                ", uniteMesure='" + uniteMesure + '\'' +
+                '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(intitule);
+        dest.writeInt(id);
+        dest.writeString(uniteMesure);
+        dest.writeDouble(quantite);
+    }
+
+    public static final Parcelable.Creator<Produit> CREATOR = new Parcelable.Creator<Produit>() {
+        public Produit createFromParcel(Parcel in) {
+            return new Produit(in);
+        }
+
+        public Produit[] newArray(int size) {
+            return new Produit[size];
+        }
+    };
+
+    private Produit(Parcel in) {
+        intitule = in.readString();
+        id = in.readInt();
+        uniteMesure = in.readString();
+        quantite = in.readDouble();
     }
 }

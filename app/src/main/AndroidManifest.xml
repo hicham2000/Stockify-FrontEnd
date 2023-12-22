@@ -20,8 +20,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".Produit.AjouterProduitRecherche"
             android:exported="false" />
+=======
+            android:name=".Repas.ingredients_quantity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+>>>>>>> 5163f86e02129470ed4475e561ca999ea3d1952a
         <activity
             android:name=".Repas.ingredients"
             android:exported="true" />

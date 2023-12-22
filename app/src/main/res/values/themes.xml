@@ -6,6 +6,13 @@
         <item name="colorPrimary">@color/vertTexte</item>
     </style>
 
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Autres attributs du style si nécessaire -->
+        <item name="searchIcon">@drawable/ic_search_custom</item>
+        <item name="colorPrimary">@color/white</item>
+    </style>
+
+
     <style name="Theme.Stockifi" parent="Base.Theme.Stockifi" />
     <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:background">#ACB7B6</item>
