@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.example.stockifi"
         minSdk = 21
-        targetSdk = 21
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
