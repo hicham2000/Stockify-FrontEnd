@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
@@ -52,13 +53,23 @@ public class LoginActivity extends AppCompatActivity {
                         backendManager.login(email, password, new BackendManager.BackendCallback() {
                             @Override
                             public void onSuccess(String response) {
-                                // myApp.setUser_id(response.getChars("id"));
+                                try {
+                                    // Parse the JSON response
+                                    JSONObject jsonResponse = new JSONObject(response);
+                                    int userId = jsonResponse.getInt("user_id");
 
-                                // Handle the success response from the server
-                                // For example, you can parse the JSON response and navigate to the next screen
-                                Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
-                                startActivity(intent);
-                                finish();
+                                    // Set the user_id in myApp
+                                    myApp.setUser_id(userId);
+
+                                    // Handle the success response from the server
+                                    // For example, you can navigate to the next screen
+                                    Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    // Handle JSON parsing error
+                                }
                             }
 
                             @Override
@@ -73,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         TextView textViewForgottenPwd = findViewById(R.id.textViewForgottenPwd);
         textViewForgottenPwd.setOnClickListener(new View.OnClickListener() {
