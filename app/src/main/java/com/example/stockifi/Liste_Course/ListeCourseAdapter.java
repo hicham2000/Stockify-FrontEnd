@@ -40,7 +40,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
     public ListeCourseAdapter(Context context, ArrayList<Produit> data) {
         super(context, 0, data);
         this.data = data;
-        checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), true));
+        checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), false));
     }
 
     @NonNull
@@ -54,19 +54,16 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
         CheckBox checkBox = convertView.findViewById(R.id.checkBox1);
         ImageView modif=convertView.findViewById(R.id.modifier_prod);
         ImageView suppr=convertView.findViewById(R.id.supprim);
+        if (data.get(position).getCheck()){
+                  checkedPositions.set(position,true);
+        }
         checkBox.setChecked(checkedPositions.get(position));
         checkBox.setText(data.get(position).getIntitule());
 
-        checkBox.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-        public void onClick(View view) {
-                // Appeler une méthode
-                Intent intent = new Intent(getContext(), ListeDeCourse.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                getContext().startActivity(intent);
-            }
-        });
+
+
+
 
 
         suppr.setOnClickListener(new View.OnClickListener() {
@@ -131,11 +128,58 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
             }
         });
 
+
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkedPositions.set(position, !checkedPositions.get(position));
-                notifyDataSetChanged();
+                Produit produit = getItem(position);
+                if (produit != null) {
+                    MyApp myApp = (MyApp) (MyApp) getContext().getApplicationContext();
+                    RequestQueue queue = Volley.newRequestQueue(ListeCourseAdapter.this.getContext());
+                    int User_id = myApp.getUser_id();
+                    int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                    produit.setCheck(!produit.getCheck());
+                    String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                    JSONObject jsonBody = new JSONObject();
+
+                    try {
+
+                            jsonBody.put("quantite", produit.getQuantite());
+                            jsonBody.put("intitule", produit.getIntitule());
+                            jsonBody.put("uniteDeMesure", produit.getUniteMesure());
+                            jsonBody.put("etat", produit.getCheck());
+
+
+
+                        // Ajoutez d'autres champs si nécessaire
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    JsonObjectRequest request = new JsonObjectRequest(
+                            Request.Method.PUT,
+                            url,
+                            jsonBody,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                    //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // Gérez les erreurs de la requête ici
+                                    //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                    );
+
+                    queue.add(request);
+                    notifyDataSetChanged();
+                }
             }
         });
 
