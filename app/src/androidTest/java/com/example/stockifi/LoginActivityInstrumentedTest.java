@@ -1,8 +1,5 @@
 package com.example.stockifi;
 
-import android.widget.Button;
-import android.widget.TextView;
-
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
@@ -21,7 +18,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LoginActivityTest {
+public class LoginActivityInstrumentedTest {
 
     @Rule
     public IntentsTestRule<LoginActivity> activityRule = new IntentsTestRule<>(LoginActivity.class);
@@ -41,7 +38,7 @@ public class LoginActivityTest {
         Espresso.onView(withId(R.id.button_login)).perform(ViewActions.click());
 
         // Check if the ProfilActivity is launched after successful login
-        Espresso.onView(withId(R.id.profil_activity_layout)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.layout.activity_profil)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -50,7 +47,7 @@ public class LoginActivityTest {
         Espresso.onView(withId(R.id.textViewForgottenPwd)).perform(ViewActions.click());
 
         // Check if the ResetPasswordActivity is launched
-        Espresso.onView(withId(R.id.reset_password_activity_layout)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.layout.activity_reset_password)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -59,7 +56,7 @@ public class LoginActivityTest {
         Espresso.onView(withId(R.id.textViewCreateCompte)).perform(ViewActions.click());
 
         // Check if the RegisterActivity is launched
-        Espresso.onView(withId(R.id.register_activity_layout)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.layout.activity_register)).check(matches(isDisplayed()));
     }
 
     // Add more tests for other functionalities in the LoginActivity
