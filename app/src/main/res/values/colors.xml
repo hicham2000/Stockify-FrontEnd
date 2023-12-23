@@ -15,4 +15,7 @@
     <color name="switch_thumb_checked_color">#00FF00</color> <!-- Couleur du pouce lorsque le switch est activé -->
     <color name ="yes_button_card">#00AF12</color>
     <color name ="non_button_card">#E03131</color>
+    <color name ="viderCorbeille">#FFA6A1</color>
+
+
 </resources>
