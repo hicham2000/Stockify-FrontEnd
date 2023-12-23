@@ -7,7 +7,12 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.stockifi.GlobalVariables.MyApp;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.json.JSONException;
 
 import java.util.regex.Pattern;
 
@@ -27,15 +32,44 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button boutonLogin = findViewById(R.id.button_login);
         TextView to_inscription = findViewById(R.id.textViewCreateCompte);
+        TextInputEditText emailTextEdit = findViewById(R.id.email_login);
+        TextInputEditText passwordTextEdit = findViewById(R.id.password_login);
+
+        MyApp myApp = (MyApp) getApplication();
+
+        // Create an instance of BackendManager in your LoginActivity
+        BackendManager backendManager = new BackendManager(this);
 
         boutonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateEmail() && validatePassword()) {
-                    // If email and password are valid, open the profile screen
-                    Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
-                    startActivity(intent);
-                    finish();
+                    String email = emailTextEdit.getText().toString();
+                    String password = passwordTextEdit.getText().toString();
+
+                    // If email and password are valid, send a login request
+                    try {
+                        backendManager.login(email, password, new BackendManager.BackendCallback() {
+                            @Override
+                            public void onSuccess(String response) {
+                                // myApp.setUser_id(response.getChars("id"));
+
+                                // Handle the success response from the server
+                                // For example, you can parse the JSON response and navigate to the next screen
+                                Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onError(Exception error) {
+                                // Handle errors, for example, display an error message
+                                error.printStackTrace();
+                            }
+                        });
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
