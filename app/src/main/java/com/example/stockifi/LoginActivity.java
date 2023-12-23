@@ -52,11 +52,12 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         backendManager.login(email, password, new BackendManager.BackendCallback() {
                             @Override
-                            public void onSuccess(String response) {
+                            public void onSuccess(JSONObject response) {
                                 try {
-                                    // Parse the JSON response
-                                    JSONObject jsonResponse = new JSONObject(response);
-                                    int userId = jsonResponse.getInt("user_id");
+                                    // Affichez simplement la réponse pour déboguer
+                                    System.out.println("Response: " + response);
+
+                                    int userId = response.getInt("user_id");
 
                                     // Set the user_id in myApp
                                     myApp.setUser_id(userId);
@@ -69,8 +70,10 @@ public class LoginActivity extends AppCompatActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     // Handle JSON parsing error
+                                    System.out.println("JSON parsing error " + e);
                                 }
                             }
+
 
                             @Override
                             public void onError(Exception error) {

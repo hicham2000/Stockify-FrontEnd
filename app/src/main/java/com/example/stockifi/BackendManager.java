@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class BackendManager {
 
-    private static final String BASE_URL = "https://192.168.1.60:1111";
+    private static final String BASE_URL = "http://192.168.1.60:1111";
     private static final String LOGIN_ENDPOINT = "/api/Login";
 
     private final RequestQueue requestQueue;
@@ -28,18 +28,8 @@ public class BackendManager {
                 getFullUrl(LOGIN_ENDPOINT),
                 createLoginRequestBody(email, password),
                 response -> {
-                    try {
-                        // Parse the JSON response
-                        int userId = response.getInt("user_id");
-                        String message = response.getString("message");
+                    callback.onSuccess(response);
 
-                        // Do something with the parsed data, for example:
-                        callback.onSuccess("User ID: " + userId + ", Message: " + message);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        callback.onError(e);
-                    }
                 },
                 error -> callback.onError(error));
 
@@ -63,7 +53,7 @@ public class BackendManager {
     }
 
     public interface BackendCallback {
-        void onSuccess(String response);
+        void onSuccess(JSONObject response);
 
         void onError(Exception error);
 
