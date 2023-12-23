@@ -21,9 +21,12 @@
         tools:targetApi="31"
         tools:ignore="ExtraText">
         <activity
+            android:name=".Repas.ajouter_repas"
+            android:exported="true" />
+        <activity
             android:name=".Repas.ingredients_quantity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients"
             android:exported="true" />

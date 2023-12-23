@@ -29,13 +29,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/androidx_window"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/ellipse_menu"
+        android:background="@color/vertTexte"
         app:menu="@menu/menu_bottom_navigation"
         app:labelVisibilityMode="auto"
         app:itemIconTint="@color/white"

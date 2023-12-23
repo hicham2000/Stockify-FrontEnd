@@ -275,6 +275,7 @@ public class ListeDeCourse extends AppCompatActivity {
                                 Double quantite = jsonObject.getDouble("quantite");
                                 String mesure = jsonObject.getString("uniteDeMesure");
                                 boolean check=jsonObject.getBoolean("etat");
+
                                 dataList.add(new Produit(id,intitule,quantite,mesure,check));
                             }
 

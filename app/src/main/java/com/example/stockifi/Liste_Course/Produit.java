@@ -58,6 +58,14 @@ public class Produit implements Parcelable {
         this.id = id;
     }
 
+    public Boolean getCheck() {
+        return check;
+    }
+
+    public void setCheck(Boolean check) {
+        this.check = check;
+    }
+
     @Override
     public String toString() {
         return "Produit{" +
