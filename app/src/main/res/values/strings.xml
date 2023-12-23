@@ -190,5 +190,7 @@ la quantite critique</string>
     </string>
     <string name="no">J\'en ai pas</string>
     <string name="yes">J\'en ai </string>
+    <string name="recherche_produit">Rechercher Produit</string>
+    <string name="produit_ajoute">Nouveau Produit a ajouter</string>
 
 </resources>
