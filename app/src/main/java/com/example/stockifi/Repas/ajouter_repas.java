@@ -2,13 +2,16 @@ package com.example.stockifi.Repas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -28,10 +31,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ajouter_repas extends AppCompatActivity {
     private LinearLayout container;
+    private LinearLayout peremtion;
+    private TextView peremtiontext;
+
+
+    private LinearLayout alert;
+    private TextView alerttext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +101,37 @@ public class ajouter_repas extends AppCompatActivity {
 
         queue.add(stringRequest);
 
+        peremtion=findViewById(R.id.peremtion);
+        peremtiontext = findViewById(R.id.peremtiontext);
+        peremtion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Afficher le DatePickerDialog
+
+                openDialogPeremstion();
+            }
+        });
+
+        alert=findViewById(R.id.alert);
+        alerttext = findViewById(R.id.alertt);
+        alert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Afficher le DatePickerDialog
+
+                openDialogalert();
+            }
+        });
+
+        Button buttonannuler = findViewById(R.id.button_annuler);
+        buttonannuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ajouter_repas.this, ingredients.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 
@@ -124,5 +165,43 @@ public class ajouter_repas extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void openDialogPeremstion(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog=new DatePickerDialog(this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                String selectedDate = "       " + String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
+                peremtiontext.setText(selectedDate);
+
+
+            }
+        },year, month, day);
+
+        dialog.show();
+    }
+
+    private void openDialogalert(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog=new DatePickerDialog(this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                String selectedDate = "       " + String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
+                alerttext.setText(selectedDate);
+
+
+            }
+        },year, month, day);
+
+        dialog.show();
     }
 }
