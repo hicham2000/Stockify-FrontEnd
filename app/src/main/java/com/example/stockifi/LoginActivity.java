@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
 
         MyApp myApp = (MyApp) getApplication();
 
-        // Create an instance of BackendManager in your LoginActivity
         BackendManager backendManager = new BackendManager(this);
 
         boutonLogin.setOnClickListener(new View.OnClickListener() {
@@ -47,30 +46,20 @@ public class LoginActivity extends AppCompatActivity {
                 if (validateEmail() && validatePassword()) {
                     String email = emailTextEdit.getText().toString();
                     String password = passwordTextEdit.getText().toString();
-
-                    // If email and password are valid, send a login request
                     try {
-                        backendManager.login(email, password, new BackendManager.BackendCallback() {
+                        backendManager.login(email, password, new BackendManager.BackendResponseCallback() {
                             @Override
                             public void onSuccess(JSONObject response) {
                                 try {
-                                    // Affichez simplement la réponse pour déboguer
-                                    System.out.println("Response: " + response);
-
                                     int userId = response.getInt("user_id");
 
-                                    // Set the user_id in myApp
                                     myApp.setUser_id(userId);
 
-                                    // Handle the success response from the server
-                                    // For example, you can navigate to the next screen
                                     Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                    // Handle JSON parsing error
-                                    System.out.println("JSON parsing error " + e);
                                 }
                             }
 
@@ -103,8 +92,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-
-
 
             }
         });

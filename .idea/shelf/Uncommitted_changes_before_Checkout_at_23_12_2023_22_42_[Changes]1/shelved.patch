@@ -1,0 +1,92 @@
+Index: app/src/main/java/com/example/stockifi/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.stockifi;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport android.os.Bundle;\r\nimport android.content.Intent;\r\nimport android.util.Patterns;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.TextView;\r\n\r\nimport com.example.stockifi.GlobalVariables.MyApp;\r\nimport com.google.android.material.textfield.TextInputEditText;\r\nimport com.google.android.material.textfield.TextInputLayout;\r\n\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.util.regex.Pattern;\r\n\r\npublic class LoginActivity extends AppCompatActivity {\r\n\r\n    private static final Pattern PASSWORD_PATTERN =\r\n            Pattern.compile(\"^\" +\r\n                    \"(?=.*[a-zA-Z])\" +      // any letter\r\n                    \"(?=.*[@#$%^&+=])\" +    // at least 1 special character\r\n                    \"(?=\\\\S+$)\" +           // no white spaces\r\n                    \".{4,}\" +               // at least 4 characters\r\n                    \"$\");\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_login);\r\n        Button boutonLogin = findViewById(R.id.button_login);\r\n        TextView to_inscription = findViewById(R.id.textViewCreateCompte);\r\n        TextInputEditText emailTextEdit = findViewById(R.id.email_login);\r\n        TextInputEditText passwordTextEdit = findViewById(R.id.password_login);\r\n\r\n        MyApp myApp = (MyApp) getApplication();\r\n\r\n        // Create an instance of BackendManager in your LoginActivity\r\n        BackendManager backendManager = new BackendManager(this);\r\n\r\n        boutonLogin.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                if (validateEmail() && validatePassword()) {\r\n                    String email = emailTextEdit.getText().toString();\r\n                    String password = passwordTextEdit.getText().toString();\r\n\r\n                    // If email and password are valid, send a login request\r\n                    try {\r\n                        backendManager.login(email, password, new BackendManager.BackendCallback() {\r\n                            @Override\r\n                            public void onSuccess(String response) {\r\n                                try {\r\n                                    // Parse the JSON response\r\n                                    JSONObject jsonResponse = new JSONObject(response);\r\n                                    int userId = jsonResponse.getInt(\"user_id\");\r\n\r\n                                    // Set the user_id in myApp\r\n                                    myApp.setUser_id(userId);\r\n\r\n                                    // Handle the success response from the server\r\n                                    // For example, you can navigate to the next screen\r\n                                    Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);\r\n                                    startActivity(intent);\r\n                                    finish();\r\n                                } catch (JSONException e) {\r\n                                    e.printStackTrace();\r\n                                    // Handle JSON parsing error\r\n                                }\r\n                            }\r\n\r\n                            @Override\r\n                            public void onError(Exception error) {\r\n                                // Handle errors, for example, display an error message\r\n                                error.printStackTrace();\r\n                            }\r\n                        });\r\n                    } catch (JSONException e) {\r\n                        throw new RuntimeException(e);\r\n                    }\r\n                }\r\n            }\r\n        });\r\n\r\n\r\n        TextView textViewForgottenPwd = findViewById(R.id.textViewForgottenPwd);\r\n        textViewForgottenPwd.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        to_inscription.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);\r\n                startActivity(intent);\r\n\r\n\r\n\r\n            }\r\n        });\r\n\r\n        // Disable hint animation for email\r\n        TextInputLayout textInputLayoutEmail = findViewById(R.id.text_input_email);\r\n        textInputLayoutEmail.setHintEnabled(false);\r\n\r\n        // Disable hint animation for password\r\n        TextInputLayout textInputLayoutPassword = findViewById(R.id.text_input_password);\r\n        textInputLayoutPassword.setHintEnabled(false);\r\n    }\r\n\r\n    private boolean validateEmail() {\r\n        TextInputLayout textInputLayoutEmail = findViewById(R.id.text_input_email);\r\n        String emailInput = textInputLayoutEmail.getEditText().getText().toString().trim();\r\n\r\n        if (emailInput.isEmpty()) {\r\n            textInputLayoutEmail.setError(\"Email field can't be empty\");\r\n            return false;\r\n        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {\r\n            textInputLayoutEmail.setError(\"Please enter a valid email address\");\r\n            return false;\r\n        } else {\r\n            textInputLayoutEmail.setError(null);\r\n            return true;\r\n        }\r\n    }\r\n\r\n    private boolean validatePassword() {\r\n        TextInputLayout textInputLayoutPassword = findViewById(R.id.text_input_password);\r\n        String passwordInput = textInputLayoutPassword.getEditText().getText().toString().trim();\r\n\r\n        if (passwordInput.isEmpty()) {\r\n            textInputLayoutPassword.setError(\"Password field can't be empty\");\r\n            return false;\r\n        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {\r\n            textInputLayoutPassword.setError(\"Password must be at least 4 characters long and include at least one letter, one special character (@, #, $, %, ^, &, +), and no white spaces.\");\r\n            return false;\r\n        } else {\r\n            textInputLayoutPassword.setError(null);\r\n            return true;\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/stockifi/LoginActivity.java b/app/src/main/java/com/example/stockifi/LoginActivity.java
+--- a/app/src/main/java/com/example/stockifi/LoginActivity.java	
++++ b/app/src/main/java/com/example/stockifi/LoginActivity.java	
+@@ -52,11 +52,9 @@
+                     try {
+                         backendManager.login(email, password, new BackendManager.BackendCallback() {
+                             @Override
+-                            public void onSuccess(String response) {
++                            public void onSuccess(JSONObject response) {
+                                 try {
+-                                    // Parse the JSON response
+-                                    JSONObject jsonResponse = new JSONObject(response);
+-                                    int userId = jsonResponse.getInt("user_id");
++                                    int userId = response.getInt("user_id");
+ 
+                                     // Set the user_id in myApp
+                                     myApp.setUser_id(userId);
+@@ -69,16 +67,19 @@
+                                 } catch (JSONException e) {
+                                     e.printStackTrace();
+                                     // Handle JSON parsing error
++                                    System.out.println("JSON parsing error " + e);
+                                 }
+                             }
+ 
+                             @Override
+                             public void onError(Exception error) {
+                                 // Handle errors, for example, display an error message
++                                System.out.println("Handler error: " + error);
+                                 error.printStackTrace();
+                             }
+                         });
+                     } catch (JSONException e) {
++                        e.printStackTrace();
+                         throw new RuntimeException(e);
+                     }
+                 }
+@@ -86,6 +87,7 @@
+         });
+ 
+ 
++
+         TextView textViewForgottenPwd = findViewById(R.id.textViewForgottenPwd);
+         textViewForgottenPwd.setOnClickListener(new View.OnClickListener() {
+             @Override
+Index: app/src/main/java/com/example/stockifi/Repas/ingredients.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.stockifi.Repas;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.SparseBooleanArray;\r\nimport android.view.View;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.ListView;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\n\r\nimport com.android.volley.Request;\r\nimport com.android.volley.RequestQueue;\r\nimport com.android.volley.Response;\r\nimport com.android.volley.VolleyError;\r\nimport com.android.volley.toolbox.StringRequest;\r\nimport com.android.volley.toolbox.Volley;\r\nimport com.example.stockifi.GlobalVariables.MyApp;\r\nimport com.example.stockifi.Liste_Course.Produit;\r\nimport com.example.stockifi.R;\r\n\r\nimport org.json.JSONArray;\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class ingredients extends AppCompatActivity {\r\n    private RadioGroup radioGroup;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_ingredients);\r\n\r\n        MyApp myApp = (MyApp) getApplication();\r\n        int User_id = myApp.getUser_id();\r\n        int User_Stock_id = myApp.getUser_stock_id();\r\n        String url = \"http://10.0.2.2:1111/stocks/\"+User_Stock_id+\"/products\";\r\n\r\n        ListView listView = findViewById(R.id.myListViewingredient);\r\n\r\n        ArrayList<Produit> dataList = new ArrayList<>();\r\n\r\n        RequestQueue queue = Volley.newRequestQueue(this);\r\n        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,\r\n                new Response.Listener<String>() {\r\n                    @Override\r\n                    public void onResponse(String response) {\r\n                        try {\r\n                            JSONArray jsonResponse = new JSONArray(response);\r\n                            for (int i = 0; i < jsonResponse.length(); i++) {\r\n                                JSONObject jsonObject = jsonResponse.getJSONObject(i);\r\n                                Produit produit = new Produit(jsonObject.getInt(\"id\"));\r\n                                produit.setIntitule(jsonObject.getString(\"intitule\"));\r\n                                produit.setQuantite(jsonObject.getDouble(\"quantite\"));\r\n                                produit.setUniteMesure(jsonObject.getString(\"uniteDeMesure\"));\r\n                                System.out.println(produit);\r\n                                String intitule = jsonObject.getString(\"intitule\");\r\n                                dataList.add(produit);\r\n                            }\r\n\r\n                            CustomAdapter adapter = new CustomAdapter(ingredients.this, dataList);\r\n\r\n                            listView.setAdapter(adapter);\r\n                            Button nextButton = findViewById(R.id.ajouteringredients);\r\n\r\n\r\n                            nextButton.setOnClickListener(new View.OnClickListener() {\r\n                                @Override\r\n                                public void onClick(View v) {\r\n                                    ArrayList<Produit> checked = adapter.getCheckedPositions();\r\n\r\n\r\n\r\n                                    if (!checked.isEmpty()) {\r\n                                        Intent intent = new Intent(ingredients.this, ingredients_quantity.class);\r\n                                      intent.putParcelableArrayListExtra(\"selectedItems\", checked);\r\n                                      //  System.out.println(checked);\r\n                                        startActivity(intent);\r\n                                    }\r\n                                }\r\n                            });\r\n\r\n                        } catch (JSONException e) {\r\n                            throw new RuntimeException(e);\r\n                        }\r\n\r\n\r\n\r\n                    }\r\n                }, new Response.ErrorListener() {\r\n            @Override\r\n            public void onErrorResponse(VolleyError error) {\r\n                //dataList.add(\"That didn't work!\");\r\n                CustomAdapter adapter = new CustomAdapter(ingredients.this, dataList);\r\n\r\n                listView.setAdapter(adapter);\r\n\r\n            }\r\n        });\r\n\r\n        queue.add(stringRequest);\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/stockifi/Repas/ingredients.java b/app/src/main/java/com/example/stockifi/Repas/ingredients.java
+--- a/app/src/main/java/com/example/stockifi/Repas/ingredients.java	
++++ b/app/src/main/java/com/example/stockifi/Repas/ingredients.java	
+@@ -75,8 +75,6 @@
+                                 public void onClick(View v) {
+                                     ArrayList<Produit> checked = adapter.getCheckedPositions();
+ 
+-
+-
+                                     if (!checked.isEmpty()) {
+                                         Intent intent = new Intent(ingredients.this, ingredients_quantity.class);
+                                       intent.putParcelableArrayListExtra("selectedItems", checked);
+@@ -94,14 +92,14 @@
+ 
+                     }
+                 }, new Response.ErrorListener() {
+-            @Override
+-            public void onErrorResponse(VolleyError error) {
+-                //dataList.add("That didn't work!");
+-                CustomAdapter adapter = new CustomAdapter(ingredients.this, dataList);
++                @Override
++                public void onErrorResponse(VolleyError error) {
++                    //dataList.add("That didn't work!");
++                    CustomAdapter adapter = new CustomAdapter(ingredients.this, dataList);
+ 
+-                listView.setAdapter(adapter);
++                    listView.setAdapter(adapter);
+ 
+-            }
++                }
+         });
+ 
+         queue.add(stringRequest);

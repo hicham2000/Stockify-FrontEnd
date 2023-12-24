@@ -12,28 +12,23 @@ import org.json.JSONObject;
 public class BackendManager {
 
     private static final String BASE_URL = "http://192.168.1.60:1111";
-    private static final String LOGIN_ENDPOINT = "/api/Login";
+    private static final String ENDPOINT = "/api";
 
     private final RequestQueue requestQueue;
 
     public BackendManager(Context context) {
-        // Initialize the RequestQueue.
         requestQueue = Volley.newRequestQueue(context.getApplicationContext());
     }
 
-    public void login(String email, String password, BackendCallback callback) throws JSONException {
-        // Create a JSON object with the user's credentials
+    public void login(String email, String password, BackendResponseCallback callback) throws JSONException {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
-                getFullUrl(LOGIN_ENDPOINT),
+                getFullUrl(ENDPOINT + "/Login"),
                 createLoginRequestBody(email, password),
-                response -> {
-                    callback.onSuccess(response);
+                callback::onSuccess,
+                callback::onError);
 
-                },
-                error -> callback.onError(error));
 
-        // Add the request to the queue
         requestQueue.add(jsonObjectRequest);
     }
 
@@ -43,16 +38,45 @@ public class BackendManager {
     }
 
     private JSONObject createLoginRequestBody(String email, String password) throws JSONException {
-        // Create a JSON object with the user's credentials
-        // Customize this method based on your backend API requirements
-        // For example:
         JSONObject jsonRequest = new JSONObject();
         jsonRequest.put("email", email);
         jsonRequest.put("password", password);
         return jsonRequest;
     }
 
-    public interface BackendCallback {
+    public void signup(RegisterRequest registerRequest, BackendResponseCallback callback) throws JSONException {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                getFullUrl(ENDPOINT + "/signup"),
+                createSignupRequestBody(registerRequest),
+                response -> {
+                    if (response != null && response.length() > 0) {
+                        callback.onSuccess(response);
+                    } else {
+                        // If not, handle the error
+                        callback.onError(new JSONException("Invalid JSON response"));
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private JSONObject createSignupRequestBody(RegisterRequest registerRequest) throws JSONException {
+        JSONObject jsonRequest = new JSONObject();
+
+        jsonRequest.put("prénom", registerRequest.getPrénom());
+        jsonRequest.put("nom", registerRequest.getNom());
+        jsonRequest.put("email", registerRequest.getEmail());
+        jsonRequest.put("password", registerRequest.getPassword());
+        jsonRequest.put("régimeSpécieux", registerRequest.getRégimeSpécieux());
+        jsonRequest.put("modeSportif", registerRequest.isModeSportif());
+
+        return jsonRequest;
+    }
+
+
+    public interface BackendResponseCallback {
         void onSuccess(JSONObject response);
 
         void onError(Exception error);
