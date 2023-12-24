@@ -198,4 +198,13 @@ la quantite critique</string>
     <string name="Emptycorbeille">Vider la Corbeille</string>
 
 
+
+        <string-array name="options_array">
+            <item>Réfrigérateur</item>
+            <item>Congélateur</item>
+            <item>garde-manger</item>
+        </string-array>
+
+
+
 </resources>
