@@ -57,8 +57,11 @@ public class LoginActivity extends AppCompatActivity {
                             public void onSuccess(JSONObject response) {
                                 try {
                                     int userId = response.getInt("user_id");
-
                                     myApp.setUser_id(userId);
+                                    int stockId = response.getInt("stock_id");
+                                    myApp.setUser_stock_id(stockId);
+                                    int listeDeCourseId = response.getInt("listeDeCourse_id");
+                                    myApp.setUser_listeCourse_id(listeDeCourseId);
 
                                     Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
                                     startActivity(intent);
