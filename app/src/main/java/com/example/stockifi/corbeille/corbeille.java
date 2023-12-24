@@ -64,13 +64,6 @@ public class corbeille extends AppCompatActivity{
         grayedOutIcon.setColorFilter(disabledColor, PorterDuff.Mode.SRC_IN);
         itempo.setIcon(grayedOutIcon);
 
-     /*   ImageView trashImageView = findViewById(R.id.trash);
-        trashImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
         TextView textView = findViewById(R.id.aboveListViewText);
         ImageView imageView = findViewById(R.id.trash);
 
