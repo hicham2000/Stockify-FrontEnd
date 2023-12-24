@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
-
+import android.widget.ImageView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.LoginActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -40,6 +41,8 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -60,6 +63,26 @@ public class corbeille extends AppCompatActivity{
         int disabledColor = getResources().getColor(android.R.color.darker_gray);
         grayedOutIcon.setColorFilter(disabledColor, PorterDuff.Mode.SRC_IN);
         itempo.setIcon(grayedOutIcon);
+
+     /*   ImageView trashImageView = findViewById(R.id.trash);
+        trashImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
+        TextView textView = findViewById(R.id.aboveListViewText);
+        ImageView imageView = findViewById(R.id.trash);
+
+        View.OnClickListener commonClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
+
+        textView.setOnClickListener(commonClickListener);
+        imageView.setOnClickListener(commonClickListener);
     }
 
 

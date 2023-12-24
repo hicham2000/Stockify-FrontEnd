@@ -62,23 +62,25 @@
             android:gravity="end"
             android:paddingEnd="20dp">
 
-            <!-- TextView -->
             <TextView
                 android:id="@+id/aboveListViewText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="@string/Emptycorbeille"
                 android:fontFamily="@font/hubballi_regular"
                 android:textSize="20sp"
                 android:textColor="@color/viderCorbeille"
-                android:padding="8dp"/>
+                android:padding="8dp"
+                android:clickable="true" />
+
             <ImageView
                 android:id="@+id/trash"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/delete"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="10dp"/>
+                android:clickable="true"
+                android:src="@drawable/delete" />
         </LinearLayout>
 
         <ListView
