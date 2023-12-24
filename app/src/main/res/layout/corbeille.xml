@@ -69,7 +69,7 @@
                 android:text="@string/Emptycorbeille"
                 android:fontFamily="@font/hubballi_regular"
                 android:textSize="20sp"
-                android:textColor="@color/viderCorbeille"
+                android:textColor="@color/vidercorbeille"
                 android:padding="8dp"
                 android:clickable="true" />
 

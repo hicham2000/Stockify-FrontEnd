@@ -19,7 +19,7 @@
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/hubballi_regular"
                     android:paddingLeft="10dp"
-                    android:text="Lait"
+                    android:text="@string/item"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:drawableLeft="@drawable/recuperer"
-                    android:backgroundTint="@color/recupererCorbeille"
+                    android:backgroundTint="@color/recuperercorbeille"
                     android:fontFamily="@font/hubballi_regular"
                     android:paddingLeft="8dp"
                     android:text="@string/recuperer"
@@ -57,7 +57,7 @@
                     android:paddingLeft="8dp"
                     android:layout_marginLeft="6dp"
                     android:text="@string/supprimer"
-                    android:backgroundTint="@color/supprimerCorbeille"
+                    android:backgroundTint="@color/supprimercorbeille"
                     android:fontFamily="@font/hubballi_regular"
                     android:textSize="20dp"
                     />
