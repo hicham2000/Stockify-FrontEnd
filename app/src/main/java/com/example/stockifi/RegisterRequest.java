@@ -1,6 +1,7 @@
 package com.example.stockifi;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class RegisterRequest implements Serializable {
 
@@ -8,6 +9,10 @@ public class RegisterRequest implements Serializable {
     private String nom;
     private String email;
     private String password;
+    private String sexe;
+    private String taille;
+    private String poids;
+    private Date dateDeNaissance;
     private String régimeSpécieux;
     private boolean modeSportif;
 
@@ -20,6 +25,10 @@ public class RegisterRequest implements Serializable {
         this.nom = nom;
         this.email = email;
         this.password = password;
+        this.sexe =  null;
+        this.taille =  null;
+        this.poids =  null;
+        this.dateDeNaissance = null;
         this.régimeSpécieux = régimeSpécieux;
         this.modeSportif = modeSportif;
     }

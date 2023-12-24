@@ -27,11 +27,16 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+import java.util.Date;
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -77,19 +82,13 @@ public class ProfilActivity extends AppCompatActivity {
     private static final String SPINNER_DATE_PER_SELECTION_KEY = "spinnerDatePerSelectionKey";
 
 
+    private TextView nomProfilView;
+    private TextView emailProfilView;
+
     private EditText editTextQuantiteCri;
-
-
-
-
-
-
-
 
     private EditText editTextPoids;
     private EditText editTextDelaiRappel;
-
-
 
 
     private EditText editTextTaille;
@@ -115,6 +114,11 @@ public class ProfilActivity extends AppCompatActivity {
     private EditText editTextPerempt;
 
     private Button buttonSupCompte ;
+    private Button LogoutButton;
+
+    private BackendManager backendManager;
+
+    private  int currentUserId;
 
 
 
@@ -151,8 +155,6 @@ public class ProfilActivity extends AppCompatActivity {
                 afficherConfirmationSuppression();
             }
         });
-
-
 
 
         Button envoyerEmailButton=findViewById(R.id.button_email);
@@ -278,9 +280,6 @@ public class ProfilActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         editTextTaille = findViewById(R.id.editTexte_taille);
 
         // Restaurer la valeur sauvegardée lors du démarrage de l'application
@@ -332,16 +331,10 @@ public class ProfilActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
         Switch yourSwitch = findViewById(R.id.switch1);
         Switch yourSwitch2 = findViewById(R.id.switch2);
         Switch yourSwitch3 = findViewById(R.id.switch3);
         Switch yourSwitch4 = findViewById(R.id.switch4);
-
-
 
 
         yourSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -519,11 +512,6 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.apply();
             }
         });
-
-
-
-
-
 
 
          spinnerGender = findViewById(R.id.spinner_gender);
@@ -805,8 +793,6 @@ public class ProfilActivity extends AppCompatActivity {
 
 
 
-
-
         pickDateButton = findViewById(R.id.date_naissance);
         date_naissace=findViewById(R.id.dateNaissance);
      
@@ -826,6 +812,70 @@ public class ProfilActivity extends AppCompatActivity {
             }
         });
 
+        nomProfilView = findViewById(R.id.nomProfil);
+        emailProfilView = findViewById(R.id.emailProfil);
+
+        LogoutButton = findViewById(R.id.button_deconne);
+
+        MyApp myApp = (MyApp) getApplication();
+
+        backendManager = new BackendManager(this);
+
+        currentUserId = myApp.getUser_id();
+
+        backendManager.getUtilisateur(currentUserId, new BackendManager.BackendResponseCallback() {
+
+            @Override
+            public void onSuccess(JSONObject response) throws JSONException {
+                String nomProfil = response.getString("nom") + " " + response.getString("prénom");
+                nomProfilView.setText(nomProfil);
+                emailProfilView.setText(response.getString("email"));
+
+                String gender = response.getString("sexe");
+                if(!gender.equals("null")) {
+                    if(gender.equals("Homme")) {
+                        spinnerRegime.setSelection(0);
+                    } else if(gender.equals("Femme")) {
+                        spinnerRegime.setSelection(1);
+                    }
+                }
+
+                String taille = response.getString("taille");
+                if(!taille.equals("null")) {
+                    editTextTaille.setText(taille);
+                    spinnerTaille.setSelection(1);
+                }
+
+                String poids = response.getString("poids");
+                System.out.println("!poids.equals(\"null\") = " + !poids.equals("null"));
+                if(!poids.equals("null")) {
+                    editTextPoids.setText(poids);
+                    spinnerPoids.setSelection(1);
+                }
+
+                String dateDeNaissance = response.getString("dateDeNaissance");
+                if(!dateDeNaissance.equals("null")) {
+                    date_naissace.setText(dateDeNaissance);
+                }
+
+            }
+
+            @Override
+            public void onError(Exception error) {
+                error.printStackTrace();
+            }
+        });
+
+        LogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myApp.setUser_id(0);
+                Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+        });
 
     }
 
@@ -872,6 +922,22 @@ public class ProfilActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Ajoutez le code pour supprimer le compte ici
                 dialogInterface.dismiss();
+                backendManager.deleteUtilisateur(currentUserId, new BackendManager.BackendResponseCallback() {
+
+                    @Override
+                    public void onSuccess(JSONObject response) throws JSONException {
+                        MyApp myApp = (MyApp) getApplication();
+                        myApp.setUser_id(0);
+                        Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        error.printStackTrace();
+                    }
+                });
             }
         });
         builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -885,10 +951,5 @@ public class ProfilActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
-
-
-
-
 
 }

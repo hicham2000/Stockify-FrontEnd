@@ -107,11 +107,6 @@
                     />
             </RelativeLayout>
 
-
-
-
-
-
             <LinearLayout
                 android:id="@+id/date_naissance"
                 android:layout_width="160dp"

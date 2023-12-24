@@ -25,7 +25,18 @@ public class BackendManager {
                 Request.Method.POST,
                 getFullUrl(ENDPOINT + "/Login"),
                 createLoginRequestBody(email, password),
-                callback::onSuccess,
+                response -> {
+                    if (response != null && response.length() > 0) {
+                        try {
+                            callback.onSuccess(response);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        // If not, handle the error
+                        callback.onError(new JSONException("Invalid JSON response"));
+                    }
+                },
                 callback::onError);
 
 
@@ -51,7 +62,11 @@ public class BackendManager {
                 createSignupRequestBody(registerRequest),
                 response -> {
                     if (response != null && response.length() > 0) {
-                        callback.onSuccess(response);
+                        try {
+                            callback.onSuccess(response);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
                     } else {
                         // If not, handle the error
                         callback.onError(new JSONException("Invalid JSON response"));
@@ -75,9 +90,47 @@ public class BackendManager {
         return jsonRequest;
     }
 
+    public void getUtilisateur(int id, BackendResponseCallback callback) {
+        String url = getFullUrl(ENDPOINT + "/Utilisateur/" + id);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void deleteUtilisateur(int id, BackendResponseCallback callback) {
+        String url = getFullUrl(ENDPOINT + "/Utilisateurs/" + id);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
 
     public interface BackendResponseCallback {
-        void onSuccess(JSONObject response);
+        void onSuccess(JSONObject response) throws JSONException;
 
         void onError(Exception error);
 

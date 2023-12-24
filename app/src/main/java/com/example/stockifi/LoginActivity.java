@@ -38,6 +38,11 @@ public class LoginActivity extends AppCompatActivity {
 
         MyApp myApp = (MyApp) getApplication();
 
+        if(myApp.getUser_id() != 0) {
+            Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
+            startActivity(intent);
+        }
+
         BackendManager backendManager = new BackendManager(this);
 
         boutonLogin.setOnClickListener(new View.OnClickListener() {
