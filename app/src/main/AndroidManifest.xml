@@ -22,7 +22,8 @@
         tools:ignore="ExtraText">
         <activity
             android:name=".Repas.ajouter_repas"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Repas.ingredients_quantity"
             android:exported="false"
@@ -65,6 +66,10 @@
             android:name=".ProfilActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".corbeille.corbeille"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
