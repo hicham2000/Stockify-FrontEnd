@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Gestion_Produit.ListeProduit"
+    android:background="@color/vert">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBar_liste_course">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_liste_course"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/recherche_produit"
+            app:menu="@menu/menu_profil"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+        android:id="@+id/androidx_window_Produit"
+        android:layout_width="match_parent"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        android:background="@color/vertTexte"
+        app:menu="@menu/menu_bottom_navigation"/>
+
+    <android.widget.SearchView
+        android:id="@+id/search_produit"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/ellipse"
+        android:layout_centerHorizontal="true"
+        android:theme="@style/SearchViewStyle"
+        android:queryHint="@string/chercherProd"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/dimenTexte"
+        android:layout_below="@+id/search_produit">
+
+        <!-- CheckBox 2 -->
+
+
+        <ListView
+            android:id="@+id/myListViewProduit"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:paddingBottom="20dp"/>
+
+
+        <Button
+            android:id="@+id/ajouter_produit_Liste_Produit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ellipse_menu"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:layout_gravity="right"
+
+            android:text="@string/produit_acheter"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

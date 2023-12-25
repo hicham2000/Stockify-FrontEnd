@@ -18,12 +18,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Stockifi"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31"
-        tools:ignore="ExtraText">
+        tools:ignore="ExtraText"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".Gestion_Produit.ListeProduit"
+            android:exported="true" />
+        <activity
+            android:name=".Gestion_Produit.AjouterProduit_ListeProduit"
+            android:exported="false" />
         <activity
             android:name=".Repas.ajouter_repas"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients_quantity"
             android:exported="false"
@@ -69,11 +76,10 @@
         <activity
             android:name=".corbeille.corbeille"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
