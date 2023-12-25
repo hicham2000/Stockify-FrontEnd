@@ -6,23 +6,30 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.icu.util.LocaleData;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Liste_Course.AjouterProduit;
 import com.example.stockifi.Liste_Course.Produit;
 import com.example.stockifi.R;
 
@@ -30,6 +37,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -38,15 +47,19 @@ public class ajouter_repas extends AppCompatActivity {
     private LinearLayout container;
     private LinearLayout peremtion;
     private TextView peremtiontext;
+    private String spinnerText = "Refrigerateur";
+    private EditText e ;
 
 
     private LinearLayout alert;
-    private TextView alerttext;
+    private TextView alerttext ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_repas);
-
+        e = findViewById(R.id.editTexte_t);
+        e.setText("");
         Intent intent = getIntent();
 
         container = findViewById(R.id.container);
@@ -101,8 +114,23 @@ public class ajouter_repas extends AppCompatActivity {
 
         queue.add(stringRequest);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedText = parent.getItemAtPosition(position).toString();
+                // Use the selectedText as needed
+                spinnerText = selectedText;// Example: Log the selected text
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle the situation where nothing is selected
+            }
+        });
+
         peremtion=findViewById(R.id.peremtion);
         peremtiontext = findViewById(R.id.peremtiontext);
+        peremtiontext.setText("");
         peremtion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +142,7 @@ public class ajouter_repas extends AppCompatActivity {
 
         alert=findViewById(R.id.alert);
         alerttext = findViewById(R.id.alertt);
+        alerttext.setText("");
         alert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,6 +158,100 @@ public class ajouter_repas extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ajouter_repas.this, ingredients.class);
                 startActivity(intent);
+            }
+        });
+
+        Button buttonvalider = findViewById(R.id.button_valider);
+        buttonvalider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                System.out.println(peremtiontext.getText());
+                System.out.println(alerttext.getText());
+                System.out.println(productList);
+                System.out.println(spinnerText);
+                System.out.println(e.getText());
+                if(peremtiontext.getText().equals("") ||
+                        alerttext.getText().equals("") ||
+                        e.getText().equals("")){
+
+                }
+                else {
+                    JSONObject jsonProduit = new JSONObject();
+                    try {
+
+                        MyApp myApp = (MyApp) getApplication();
+                        int User_id = myApp.getUser_id();
+                        int User_Stock_id = myApp.getUser_stock_id();
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
+                        jsonProduit.put("intitule", e.getText().toString().trim());
+                        jsonProduit.put("datePeremtion", peremtiontext.getText().toString().trim());
+                        jsonProduit.put("dateAlert", alerttext.getText().toString().trim());
+                        jsonProduit.put("stock",User_Stock_id);
+                        JSONArray productsArray = new JSONArray();
+                        int l=0;
+                        for (Produit product : productList) {
+                            JSONObject productObj = new JSONObject();
+                            productObj.put("id", product.getId());
+                            productObj.put("intitule", product.getIntitule());
+                            productObj.put("quantite", quantity.get(l));
+                            l++;
+                            productObj.put("uniteMesure", product.getUniteMesure());
+
+                            // Add each product JSON object to the productsArray
+                            productsArray.put(productObj);
+                        }
+                     jsonProduit.put("arraylist_of_product", productsArray);
+                      jsonProduit.put("spinnerText", spinnerText.trim());
+
+
+                        System.out.println(jsonProduit);
+                        System.out.println(productList);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    // Instantiate the RequestQueue
+                    RequestQueue queue = Volley.newRequestQueue(ajouter_repas.this);
+                    String url = "http://10.0.2.2:1111/stocks/repas";
+
+// Create a StringRequest for POST
+                    JsonObjectRequest request = new JsonObjectRequest(
+                            Request.Method.POST,
+                            url,
+                            jsonProduit,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    // Gérez la réponse du serveur en cas de succès
+                                  //  Toast.makeText(AjouterProduit.this, "Produit ajouté avec succès", Toast.LENGTH_SHORT).show();
+                                    System.out.println("yes");
+                                    Intent intent = new Intent(ajouter_repas.this, ingredients.class);
+
+                                    //  System.out.println(checked);
+                                    startActivity(intent);
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // Gérez les erreurs de réseau ou du serveur
+                                    //       Toast.makeText(AjouterProduit.this, "Erreur lors de l'ajout du produit", Toast.LENGTH_SHORT).show();
+                                    System.out.println("No");
+                                    Intent intent = new Intent(ajouter_repas.this, ingredients.class);
+
+                                    //  System.out.println(checked);
+                                    startActivity(intent);
+                                }
+                            }
+                    );
+
+// Add the request to the RequestQueue
+                    queue.add(request);
+
+                }
+
+
             }
         });
 
@@ -184,6 +307,7 @@ public class ajouter_repas extends AppCompatActivity {
         },year, month, day);
 
         dialog.show();
+
     }
 
     private void openDialogalert(){
