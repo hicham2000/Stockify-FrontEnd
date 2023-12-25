@@ -3,8 +3,13 @@ package com.example.stockifi.Liste_Course;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,6 +48,21 @@ public class ListeDeCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_de_course);
+        // Obtenez une référence à la barre d'outils
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_liste_course);
+
+// Obtenez le menu de la barre d'outils
+        Menu menu = toolbar.getMenu();
+
+// Obtenez l'élément de menu spécifique par son ID
+        MenuItem itempo = menu.findItem(R.id.poubelle);
+
+// Désactivez l'élément de menu
+        itempo.setEnabled(false);
+        SpannableString s = new SpannableString(itempo.getTitle());
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), 0, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        itempo.setTitle(s);
+
 
         search_listeCourse=findViewById(R.id.search_course);
 
@@ -326,7 +346,7 @@ public class ListeDeCourse extends AppCompatActivity {
         MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.courses);
         menuItem.setChecked(true);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_liste_course);
+
 
         // Gestionnaire de clic pour l'élément "profil1"
         toolbar.setOnMenuItemClickListener(item -> {

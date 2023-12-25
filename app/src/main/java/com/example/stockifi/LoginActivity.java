@@ -7,7 +7,13 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.stockifi.GlobalVariables.MyApp;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
@@ -27,18 +33,60 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button boutonLogin = findViewById(R.id.button_login);
         TextView to_inscription = findViewById(R.id.textViewCreateCompte);
+        TextInputEditText emailTextEdit = findViewById(R.id.email_login);
+        TextInputEditText passwordTextEdit = findViewById(R.id.password_login);
+
+        MyApp myApp = (MyApp) getApplication();
+
+        if(myApp.getUser_id() != 0) {
+            Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
+            startActivity(intent);
+        }
+
+        BackendManager backendManager = new BackendManager(this);
 
         boutonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateEmail() && validatePassword()) {
-                    // If email and password are valid, open the profile screen
-                    Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
-                    startActivity(intent);
-                    finish();
+                    String email = emailTextEdit.getText().toString();
+                    String password = passwordTextEdit.getText().toString();
+                    try {
+                        backendManager.login(email, password, new BackendManager.BackendResponseCallback() {
+                            @Override
+                            public void onSuccess(JSONObject response) {
+                                try {
+                                    int userId = response.getInt("user_id");
+                                    myApp.setUser_id(userId);
+                                    int stockId = response.getInt("stock_id");
+                                    myApp.setUser_stock_id(stockId);
+                                    System.out.println(stockId);
+                                    int listeDeCourseId = response.getInt("listeDeCourse_id");
+                                    myApp.setUser_listeCourse_id(listeDeCourseId);
+                                    System.out.println(listeDeCourseId);
+
+                                    Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+
+                            @Override
+                            public void onError(Exception error) {
+                                // Handle errors, for example, display an error message
+                                error.printStackTrace();
+                            }
+                        });
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
+
 
         TextView textViewForgottenPwd = findViewById(R.id.textViewForgottenPwd);
         textViewForgottenPwd.setOnClickListener(new View.OnClickListener() {
@@ -54,8 +102,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-
-
 
             }
         });
