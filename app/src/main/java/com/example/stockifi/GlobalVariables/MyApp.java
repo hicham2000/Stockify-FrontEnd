@@ -4,7 +4,7 @@ import android.app.Application;
 
 public class MyApp extends Application {
     private int User_id = 1;
-    private int User_stock_id = 2;
+    private int User_stock_id = 1;
 
     private  int User_listeCourse_id = 1;
 
@@ -31,4 +31,5 @@ public class MyApp extends Application {
     public void setUser_listeCourse_id(int user_listeCourse_id) {
         User_listeCourse_id = user_listeCourse_id;
     }
+
 }

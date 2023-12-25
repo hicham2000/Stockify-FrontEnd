@@ -78,6 +78,7 @@ public class ListeDeCourse extends AppCompatActivity {
                 int User_id = myApp.getUser_id();
                 int User_listeCourse_id = myApp.getUser_listeCourse_id();
                 String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+              //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
 
                 ListView listView = findViewById(R.id.myListViewCourse);
 
@@ -146,6 +147,7 @@ public class ListeDeCourse extends AppCompatActivity {
                     int User_id = myApp.getUser_id();
                     int User_listeCourse_id = myApp.getUser_listeCourse_id();
                     String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+                  //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
 
                     ListView listView = findViewById(R.id.myListViewCourse);
 
@@ -205,6 +207,7 @@ public class ListeDeCourse extends AppCompatActivity {
                     int User_id = myApp.getUser_id();
                     int User_listeCourse_id = myApp.getUser_listeCourse_id();
                     String url = "http://192.168.11.100:1111/listeCourses/"+User_listeCourse_id+"/products";
+                   // String url = "http://10.0.2.2:1111/listeCourses/"+User_listeCourse_id+"/products";
 
                     ListView listView = findViewById(R.id.myListViewCourse);
 
@@ -274,6 +277,7 @@ public class ListeDeCourse extends AppCompatActivity {
         int User_id = myApp.getUser_id();
         int User_listeCourse_id = myApp.getUser_listeCourse_id();
         String url = "http://192.168.11.100:1111/listeCourses/"+User_listeCourse_id+"/products";
+      //  String url = "http://10.0.2.2:1111/listeCourses/"+User_listeCourse_id+"/products";
 
         ListView listView = findViewById(R.id.myListViewCourse);
 

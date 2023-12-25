@@ -48,13 +48,13 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/androidx_window"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/ellipse_menu"
+
+        android:background="@color/vertTexte"
         app:menu="@menu/menu_bottom_navigation"
         app:labelVisibilityMode="auto"
         app:itemIconTint="@color/white"
@@ -112,10 +112,8 @@
                         android:layout_marginLeft="180dp"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/ellipse"
-                        android:focusableInTouchMode="false"
 
-
-                        android:inputType="numberDecimal" />
+                        />
 
 
                 </RelativeLayout>
@@ -134,25 +132,23 @@
                     android:layout_height="60dp"
                     >
                     <TextView
-                        android:layout_width="90dp"
+                        android:layout_width="110dp"
                         android:layout_height="match_parent"
-                        android:text="Nom"
+                        android:text="Categorie"
                         android:textColor="#FFFFFF"
                         android:textSize="25dp"
                         android:gravity="center"/>
 
-                    <EditText
-
-                        style="@style/EditTextStyle"
+                    <Spinner
+                        android:id="@+id/spinner_options"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:layout_marginLeft="180dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="185dp"
+
                         android:background="@drawable/ellipse"
-                        android:focusableInTouchMode="false"
-
-
-                        android:inputType="numberDecimal" />
+                        android:gravity="center"
+                    />
 
 
                 </RelativeLayout>
@@ -176,6 +172,152 @@
                 android:orientation="vertical"
                 android:padding="16dp">
             </LinearLayout>
+            <Button
+                android:id="@+id/fg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Date"
+
+
+                android:layout_marginTop="20dp"
+
+
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:text="Péremtion"
+                    android:textSize="30dp"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"/>
+
+                <LinearLayout
+                    android:id="@+id/peremtion"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/ellipse"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="15dp"
+                    android:layout_marginStart="200dp"
+
+                    android:layout_marginLeft="20dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/peremtiontext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:textColor="@color/black"
+                        android:layout_marginTop="4dp"
+
+
+
+
+                        />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/calendrier"
+                        android:layout_marginLeft="100dp"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:text="Alert"
+                    android:textSize="30dp"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"/>
+
+                <LinearLayout
+                    android:id="@+id/alert"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/ellipse"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="15dp"
+                    android:layout_marginStart="200dp"
+
+                    android:layout_marginLeft="20dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/alertt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:textColor="@color/black"
+                        android:layout_marginTop="4dp"
+
+
+
+
+                        />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/calendrier"
+                        android:layout_marginLeft="100dp"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/fgsd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Valeur Nuritionnelle"
+
+
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="60dp"
+
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="200dp">
+
+                <Button
+                    android:id="@+id/button_annuler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Annuler" />
+
+                <Button
+                    android:id="@+id/button_valider"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Valider" />
+
+            </LinearLayout>
+
+
 
 
         </LinearLayout>

@@ -7,11 +7,6 @@ import android.net.Uri;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
-import androidx.test.espresso.matcher.ViewMatchers;
-import androidx.test.platform.app.InstrumentationRegistry;
-
-import com.example.stockifi.RegisterActivity;
-import com.example.stockifi.R;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -25,9 +20,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.equalTo;
 
-public class RegisterActivityTest {
+public class RegisterActivityInstrumentedTest {
 
     @Rule
     public IntentsTestRule<RegisterActivity> activityRule = new IntentsTestRule<>(RegisterActivity.class);

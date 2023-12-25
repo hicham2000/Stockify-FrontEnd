@@ -1,0 +1,78 @@
+Index: app/src/main/java/com/example/stockifi/BackendManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.stockifi;\r\n\r\nimport android.content.Context;\r\nimport com.android.volley.Request;\r\nimport com.android.volley.RequestQueue;\r\nimport com.android.volley.toolbox.JsonObjectRequest;\r\nimport com.android.volley.toolbox.Volley;\r\n\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\npublic class BackendManager {\r\n\r\n    private static final String BASE_URL = \"https://192.168.1.60:1111\";\r\n    private static final String LOGIN_ENDPOINT = \"/api/Login\";\r\n\r\n    private final RequestQueue requestQueue;\r\n\r\n    public BackendManager(Context context) {\r\n        // Initialize the RequestQueue.\r\n        requestQueue = Volley.newRequestQueue(context.getApplicationContext());\r\n    }\r\n\r\n    public void login(String email, String password, BackendCallback callback) throws JSONException {\r\n        // Create a JSON object with the user's credentials\r\n        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(\r\n                Request.Method.POST,\r\n                getFullUrl(LOGIN_ENDPOINT),\r\n                createLoginRequestBody(email, password),\r\n                response -> {\r\n                    try {\r\n                        // Parse the JSON response\r\n                        int userId = response.getInt(\"user_id\");\r\n                        String message = response.getString(\"message\");\r\n\r\n                        // Do something with the parsed data, for example:\r\n                        callback.onSuccess(\"User ID: \" + userId + \", Message: \" + message);\r\n\r\n                    } catch (JSONException e) {\r\n                        e.printStackTrace();\r\n                        callback.onError(e);\r\n                    }\r\n                },\r\n                error -> callback.onError(error));\r\n\r\n        // Add the request to the queue\r\n        requestQueue.add(jsonObjectRequest);\r\n    }\r\n\r\n\r\n    private String getFullUrl(String endpoint) {\r\n        return BASE_URL + endpoint;\r\n    }\r\n\r\n    private JSONObject createLoginRequestBody(String email, String password) throws JSONException {\r\n        // Create a JSON object with the user's credentials\r\n        // Customize this method based on your backend API requirements\r\n        // For example:\r\n        JSONObject jsonRequest = new JSONObject();\r\n        jsonRequest.put(\"email\", email);\r\n        jsonRequest.put(\"password\", password);\r\n        return jsonRequest;\r\n    }\r\n\r\n    public interface BackendCallback {\r\n        void onSuccess(String response);\r\n\r\n        void onError(Exception error);\r\n\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/stockifi/BackendManager.java b/app/src/main/java/com/example/stockifi/BackendManager.java
+--- a/app/src/main/java/com/example/stockifi/BackendManager.java	
++++ b/app/src/main/java/com/example/stockifi/BackendManager.java	
+@@ -3,7 +3,10 @@
+ import android.content.Context;
+ import com.android.volley.Request;
+ import com.android.volley.RequestQueue;
++import com.android.volley.Response;
++import com.android.volley.VolleyError;
+ import com.android.volley.toolbox.JsonObjectRequest;
++import com.android.volley.toolbox.StringRequest;
+ import com.android.volley.toolbox.Volley;
+ 
+ import org.json.JSONException;
+@@ -12,7 +15,7 @@
+ public class BackendManager {
+ 
+     private static final String BASE_URL = "https://192.168.1.60:1111";
+-    private static final String LOGIN_ENDPOINT = "/api/Login";
++    private static final String LOGIN_ENDPOINT = "/api";
+ 
+     private final RequestQueue requestQueue;
+ 
+@@ -22,26 +25,23 @@
+     }
+ 
+     public void login(String email, String password, BackendCallback callback) throws JSONException {
+-        // Create a JSON object with the user's credentials
+         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                 Request.Method.POST,
+-                getFullUrl(LOGIN_ENDPOINT),
++                getFullUrl(LOGIN_ENDPOINT + "/Login"),
+                 createLoginRequestBody(email, password),
+-                response -> {
+-                    try {
+-                        // Parse the JSON response
+-                        int userId = response.getInt("user_id");
+-                        String message = response.getString("message");
+-
+-                        // Do something with the parsed data, for example:
+-                        callback.onSuccess("User ID: " + userId + ", Message: " + message);
+-
+-                    } catch (JSONException e) {
+-                        e.printStackTrace();
+-                        callback.onError(e);
++                new Response.Listener<JSONObject>() {
++                    @Override
++                    public void onResponse(JSONObject response) {
++                        // Do something with the parsed data
++                        callback.onSuccess(response);
+                     }
+                 },
+-                error -> callback.onError(error));
++                new Response.ErrorListener() {
++                    @Override
++                    public void onErrorResponse(VolleyError error) {
++                        callback.onError(error);
++                    }
++                });
+ 
+         // Add the request to the queue
+         requestQueue.add(jsonObjectRequest);
+@@ -63,9 +63,8 @@
+     }
+ 
+     public interface BackendCallback {
+-        void onSuccess(String response);
++        void onSuccess(JSONObject response);
+ 
+         void onError(Exception error);
+-
+     }
+ }

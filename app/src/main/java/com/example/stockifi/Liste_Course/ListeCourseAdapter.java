@@ -76,6 +76,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
                     int User_id = myApp.getUser_id();
                     int User_listeCourse_id = myApp.getUser_listeCourse_id();
                     String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                  //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
                     JSONObject jsonBody = new JSONObject();
                     JsonObjectRequest request = new JsonObjectRequest(
                             Request.Method.DELETE,
@@ -141,6 +142,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
                     int User_listeCourse_id = myApp.getUser_listeCourse_id();
                     produit.setCheck(!produit.getCheck());
                     String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                  //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
                     JSONObject jsonBody = new JSONObject();
 
                     try {
