@@ -24,9 +24,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Liste_Course.Produit;
 import com.example.stockifi.LoginActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
+import com.example.stockifi.Repas.CustomAdapter;
+import com.example.stockifi.Repas.ingredients;
+import com.example.stockifi.Repas.ingredients_quantity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -76,6 +80,119 @@ public class corbeille extends AppCompatActivity{
 
         textView.setOnClickListener(commonClickListener);
         imageView.setOnClickListener(commonClickListener);
+
+        Button produitsButton = findViewById(R.id.produits);
+        produitsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MyApp myApp = (MyApp) getApplication();
+                int User_id = myApp.getUser_id();
+                int User_Stock_id = myApp.getUser_stock_id();
+                String url = "http://10.0.2.2:1111/corbeille/deletedProduct/" + User_Stock_id;
+                ListView listView = findViewById(R.id.myListViewCorbeille);
+
+                ArrayList<objet> dataList = new ArrayList<>();
+
+                RequestQueue queue = Volley.newRequestQueue(corbeille.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONArray jsonResponse = new JSONArray(response);
+                                    for (int i = 0; i < jsonResponse.length(); i++) {
+                                        JSONObject jsonObject = jsonResponse.getJSONObject(i);
+                                        objet objet = new objet(jsonObject.getInt("id"));
+                                        objet.setIntitule(jsonObject.getString("intitule"));
+                                        System.out.println(objet);
+                                        String intitule = jsonObject.getString("intitule");
+                                        dataList.add(objet);
+                                    }
+
+                                    corbeilleAdapter adapter = new corbeilleAdapter(corbeille.this, dataList);
+
+                                    listView.setAdapter(adapter);
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //dataList.add("That didn't work!");
+                        corbeilleAdapter adapter = new corbeilleAdapter(corbeille.this, dataList);
+
+                        listView.setAdapter(adapter);
+
+                    }
+                });
+
+                queue.add(stringRequest);
+
+            }
+
+        });
+
+        Button repasButton = findViewById(R.id.repas);
+        repasButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MyApp myApp = (MyApp) getApplication();
+                int User_id = myApp.getUser_id();
+                int User_Stock_id = myApp.getUser_stock_id();
+                String url = "http://10.0.2.2:1111/corbeille/deletedRecipe/" + User_Stock_id;
+                ListView listView = findViewById(R.id.myListViewCorbeille);
+
+                ArrayList<objet> dataList = new ArrayList<>();
+
+                RequestQueue queue = Volley.newRequestQueue(corbeille.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONArray jsonResponse = new JSONArray(response);
+                                    for (int i = 0; i < jsonResponse.length(); i++) {
+                                        JSONObject jsonObject = jsonResponse.getJSONObject(i);
+                                        objet objet = new objet(jsonObject.getInt("id"));
+                                        objet.setIntitule(jsonObject.getString("intitule"));
+                                        System.out.println(objet);
+                                        String intitule = jsonObject.getString("intitule");
+                                        dataList.add(objet);
+                                    }
+
+                                    corbeillerepasadapter adapter = new corbeillerepasadapter(corbeille.this, dataList);
+
+                                    listView.setAdapter(adapter);
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //dataList.add("That didn't work!");
+                        corbeillerepasadapter adapter = new corbeillerepasadapter(corbeille.this, dataList);
+
+                        listView.setAdapter(adapter);
+
+                    }
+                });
+
+                queue.add(stringRequest);
+
+            }
+
+        });
+
+
+
     }
 
 
