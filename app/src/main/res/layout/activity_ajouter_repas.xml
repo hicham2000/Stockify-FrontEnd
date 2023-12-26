@@ -48,13 +48,13 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/androidx_window"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/ellipse_menu"
+
+        android:background="@color/vertTexte"
         app:menu="@menu/menu_bottom_navigation"
         app:labelVisibilityMode="auto"
         app:itemIconTint="@color/white"
@@ -198,7 +198,7 @@
                     android:gravity="center"/>
 
                 <LinearLayout
-                    android:id="@+id/date_naissance"
+                    android:id="@+id/peremtion"
                     android:layout_width="160dp"
                     android:layout_height="60dp"
                     android:orientation="horizontal"
@@ -212,7 +212,7 @@
                     >
 
                     <TextView
-                        android:id="@+id/dateNaissance"
+                        android:id="@+id/peremtiontext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 

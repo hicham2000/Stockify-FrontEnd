@@ -9,9 +9,12 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+
 public class BackendManager {
 
-    private static final String BASE_URL = "http://192.168.1.60:1111";
+    private static final String BASE_URL = "http://192.168.11.100:1111";
+  //  private static final String BASE_URL = "http://10.0.2.2:1111";
     private static final String ENDPOINT = "/api";
 
     private final RequestQueue requestQueue;
@@ -30,6 +33,8 @@ public class BackendManager {
                         try {
                             callback.onSuccess(response);
                         } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                     } else {
@@ -65,6 +70,8 @@ public class BackendManager {
                         try {
                             callback.onSuccess(response);
                         } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                     } else {
@@ -102,6 +109,8 @@ public class BackendManager {
                         callback.onSuccess(response);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
                     }
                 },
                 callback::onError);
@@ -119,7 +128,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException e) {
+                    } catch (JSONException | ParseException e) {
                         throw new RuntimeException(e);
                     }
                 },
@@ -128,9 +137,78 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
+    public void updateUtilisateur(Long id, UpdateRequest updatedUtilisateur, BackendResponseCallback callback) throws JSONException {
+        String url = getFullUrl(ENDPOINT + "/Utilisateur/" + id);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                createUpdateUtilisateurRequestBody(updatedUtilisateur),
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException | ParseException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private JSONObject createUpdateUtilisateurRequestBody(UpdateRequest updatedUtilisateur) throws JSONException {
+        JSONObject updatedUserJson = new JSONObject();
+        try {
+            if (updatedUtilisateur.getPrénom() != null) {
+                updatedUserJson.put("prenom", updatedUtilisateur.getPrénom());
+            }
+
+            if (updatedUtilisateur.getNom() != null) {
+                updatedUserJson.put("nom", updatedUtilisateur.getNom());
+            }
+
+            if (updatedUtilisateur.getEmail() != null) {
+                updatedUserJson.put("email", updatedUtilisateur.getEmail());
+            }
+
+            if (updatedUtilisateur.getPassword() != null) {
+                updatedUserJson.put("password", updatedUtilisateur.getPassword());
+            }
+
+            if (updatedUtilisateur.getRégimeSpécieux() != null) {
+                updatedUserJson.put("régimeSpécieux", updatedUtilisateur.getRégimeSpécieux());
+            }
+
+            updatedUserJson.put("modeSportif", updatedUtilisateur.isModeSportif());
+
+            if (updatedUtilisateur.getSexe() != null) {
+                updatedUserJson.put("sexe", updatedUtilisateur.getSexe());
+            }
+
+            if (updatedUtilisateur.getTaille() != null) {
+                updatedUserJson.put("taille", updatedUtilisateur.getTaille());
+            }
+
+            if (updatedUtilisateur.getPoids() != null) {
+                updatedUserJson.put("poids", updatedUtilisateur.getPoids());
+            }
+
+            if (updatedUtilisateur.getDateDeNaissance() != null) {
+                // Assume that "dateDeNaissance" is a string in the correct format
+                updatedUserJson.put("dateDeNaissance", updatedUtilisateur.getDateDeNaissance());
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return updatedUserJson;
+    }
+
+
 
     public interface BackendResponseCallback {
-        void onSuccess(JSONObject response) throws JSONException;
+        void onSuccess(JSONObject response) throws JSONException, ParseException;
 
         void onError(Exception error);
 

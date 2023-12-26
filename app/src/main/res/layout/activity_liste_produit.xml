@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/vert"
+    tools:context=".Gestion_Produit.ListeProduit"
+    android:background="@color/vert">
 
-    tools:context=".Produit.AjouterProduitRecherche">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/appBar_liste_course">
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_recherche_produit_ajouter"
+            android:id="@+id/toolbar_liste_course"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
-        android:id="@+id/androidx_window_course"
+        android:id="@+id/androidx_window_Produit"
         android:layout_width="match_parent"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
@@ -59,14 +59,14 @@
 
 
         <ListView
-            android:id="@+id/myListViewProduitGlobale"
+            android:id="@+id/myListViewProduit"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:paddingBottom="20dp"/>
 
 
         <Button
-            android:id="@+id/ajouter_produit"
+            android:id="@+id/ajouter_produit_Liste_Produit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ellipse_menu"
@@ -74,7 +74,7 @@
             android:padding="10dp"
             android:layout_gravity="right"
 
-            android:text="@string/produit_ajoute"/>
+            android:text="@string/produit_acheter"/>
 
 
 
