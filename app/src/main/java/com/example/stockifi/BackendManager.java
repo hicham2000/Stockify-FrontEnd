@@ -13,7 +13,7 @@ import java.text.ParseException;
 
 public class BackendManager {
 
-    private static final String BASE_URL = "http://192.168.11.100:1111";
+    private static final String BASE_URL = "http://100.89.24.186:1111";
   //  private static final String BASE_URL = "http://10.0.2.2:1111";
     private static final String ENDPOINT = "/api";
 
@@ -204,6 +204,44 @@ public class BackendManager {
         }
         return updatedUserJson;
     }
+
+    public void recupererUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/recupererdeletedproduct/stockId="+stockId+"/recupererProductId="+productId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException | ParseException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+    public void supprimerDefUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/supprmerdefdeletedproduct/stockId="+stockId+"/supprimerProductId="+productId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException | ParseException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
 
 
 
