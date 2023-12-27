@@ -26,7 +26,7 @@
             android:exported="true" />
         <activity
             android:name=".Gestion_Produit.AjouterProduit_ListeProduit"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Repas.ajouter_repas"
             android:exported="true"
