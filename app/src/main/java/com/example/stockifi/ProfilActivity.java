@@ -836,8 +836,6 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putString(WEIGHT_KEY, enteredWeight);
                 editor.apply();
 
-                System.out.println("editTextPoids");
-
                 try {
                     UpdateRequest updateRequest = new UpdateRequest();
 
@@ -852,8 +850,6 @@ public class ProfilActivity extends AppCompatActivity {
                     }
 
                     updateRequest.setPoids(poids);
-
-                    System.out.println("updateRequest : " + updateRequest);
 
                     backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
                         @Override
