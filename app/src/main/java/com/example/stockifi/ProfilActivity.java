@@ -135,6 +135,10 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
+        MyApp myApp = (MyApp) getApplication();
+
+        backendManager = new BackendManager(this);
+
         // Gestionnaire de clic pour l'élément "Courses"
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window);
         Menu menu = bottomNavigationView.getMenu();
@@ -763,6 +767,37 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_listepoid.edit();
                 editor.putInt(SPINNER_POIDS_SELECTION_KEY, position);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
+
+                    // Conversion de la taille si l'unité est en mètres
+                    String poids = String.valueOf(editTextPoids.getText());
+                    if (selectedTailleUnit.equals("tonne")) {
+                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 1000));
+                    } else if (selectedTailleUnit.equals("g")) {
+                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 0.001));
+                    }
+
+                    updateRequest.setPoids(poids);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @Override
@@ -816,10 +851,6 @@ public class ProfilActivity extends AppCompatActivity {
         emailProfilView = findViewById(R.id.emailProfil);
 
         LogoutButton = findViewById(R.id.button_deconne);
-
-        MyApp myApp = (MyApp) getApplication();
-
-        backendManager = new BackendManager(this);
 
         currentUserId = myApp.getUser_id();
 

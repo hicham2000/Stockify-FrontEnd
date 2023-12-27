@@ -128,6 +128,73 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
+    public void updateUtilisateur(Long id, UpdateRequest updatedUtilisateur, BackendResponseCallback callback) throws JSONException {
+        String url = getFullUrl(ENDPOINT + "/Utilisateur/" + id);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                createUpdateUtilisateurRequestBody(updatedUtilisateur),
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private JSONObject createUpdateUtilisateurRequestBody(UpdateRequest updatedUtilisateur) throws JSONException {
+        JSONObject updatedUserJson = new JSONObject();
+        try {
+            if (updatedUtilisateur.getPrénom() != null) {
+                updatedUserJson.put("prenom", updatedUtilisateur.getPrénom());
+            }
+
+            if (updatedUtilisateur.getNom() != null) {
+                updatedUserJson.put("nom", updatedUtilisateur.getNom());
+            }
+
+            if (updatedUtilisateur.getEmail() != null) {
+                updatedUserJson.put("email", updatedUtilisateur.getEmail());
+            }
+
+            if (updatedUtilisateur.getPassword() != null) {
+                updatedUserJson.put("password", updatedUtilisateur.getPassword());
+            }
+
+            if (updatedUtilisateur.getRégimeSpécieux() != null) {
+                updatedUserJson.put("régimeSpécieux", updatedUtilisateur.getRégimeSpécieux());
+            }
+
+            updatedUserJson.put("modeSportif", updatedUtilisateur.isModeSportif());
+
+            if (updatedUtilisateur.getSexe() != null) {
+                updatedUserJson.put("sexe", updatedUtilisateur.getSexe());
+            }
+
+            if (updatedUtilisateur.getTaille() != null) {
+                updatedUserJson.put("taille", updatedUtilisateur.getTaille());
+            }
+
+            if (updatedUtilisateur.getPoids() != null) {
+                updatedUserJson.put("poids", updatedUtilisateur.getPoids());
+            }
+
+            if (updatedUtilisateur.getDateDeNaissance() != null) {
+                // Assume that "dateDeNaissance" is a string in the correct format
+                updatedUserJson.put("dateDeNaissance", updatedUtilisateur.getDateDeNaissance());
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return updatedUserJson;
+    }
 
     public interface BackendResponseCallback {
         void onSuccess(JSONObject response) throws JSONException;
