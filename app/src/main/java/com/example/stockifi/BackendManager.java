@@ -196,6 +196,46 @@ public class BackendManager {
         return updatedUserJson;
     }
 
+    public void recupererUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/recupererdeletedproduct/stockId="+stockId+"/recupererProductId="+productId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException | ParseException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+    public void supprimerDefUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/supprmerdefdeletedproduct/stockId="+stockId+"/supprimerProductId="+productId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException | ParseException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+
+
     public interface BackendResponseCallback {
         void onSuccess(JSONObject response) throws JSONException;
 
