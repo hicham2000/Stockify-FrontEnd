@@ -22,16 +22,16 @@
         tools:targetApi="31">
         <activity
             android:name=".Home.AjouterCategorie"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Gestion_Produit.ListeProduit"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Gestion_Produit.AjouterProduit_ListeProduit"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Repas.ajouter_repas"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients_quantity"
@@ -39,7 +39,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Liste_Course.ModifierProduit"
             android:exported="false" />
@@ -48,7 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".Liste_Course.ListeDeCourse"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Sprint2Activity"
@@ -73,11 +73,11 @@
             android:exported="false" />
         <activity
             android:name=".ProfilActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".corbeille.corbeille"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginActivity"
