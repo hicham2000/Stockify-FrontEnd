@@ -694,6 +694,29 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_gender.edit();
                 editor.putInt(SPINNER_GENDER_SELECTION_KEY, position);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedSexe = (String) spinnerGender.getSelectedItem();
+
+                    updateRequest.setSexe(selectedSexe);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Sexe: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @Override
@@ -754,6 +777,41 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_poid.edit();
                 editor.putString(WEIGHT_KEY, enteredWeight);
                 editor.apply();
+
+                System.out.println("editTextPoids");
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedPoidsUnit = (String) spinnerPoids.getSelectedItem();
+
+                    // Conversion de la taille si l'unité est en mètres
+                    String poids = String.valueOf(editTextPoids.getText());
+                    if (selectedPoidsUnit.equals("tonne")) {
+                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 1000));
+                    } else if (selectedPoidsUnit.equals("g")) {
+                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 0.001));
+                    }
+
+                    updateRequest.setPoids(poids);
+
+                    System.out.println("updateRequest : " + updateRequest);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Poids: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -773,13 +831,13 @@ public class ProfilActivity extends AppCompatActivity {
                 try {
                     UpdateRequest updateRequest = new UpdateRequest();
 
-                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
+                    String selectedPoidsUnit = (String) spinnerPoids.getSelectedItem();
 
                     // Conversion de la taille si l'unité est en mètres
                     String poids = String.valueOf(editTextPoids.getText());
-                    if (selectedTailleUnit.equals("tonne")) {
+                    if (selectedPoidsUnit.equals("tonne")) {
                         poids = String.valueOf((int) ( Double.parseDouble(poids)* 1000));
-                    } else if (selectedTailleUnit.equals("g")) {
+                    } else if (selectedPoidsUnit.equals("g")) {
                         poids = String.valueOf((int) ( Double.parseDouble(poids)* 0.001));
                     }
 
@@ -794,7 +852,7 @@ public class ProfilActivity extends AppCompatActivity {
                         @Override
                         public void onError(Exception error) {
                             // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Poids: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (JSONException e) {
@@ -877,6 +935,8 @@ public class ProfilActivity extends AppCompatActivity {
 
         LogoutButton = findViewById(R.id.button_deconne);
 
+
+        //Récupérer tout les informations depuis le backend
         backendManager.getUtilisateur(currentUserId, new BackendManager.BackendResponseCallback() {
 
             @Override
@@ -901,7 +961,6 @@ public class ProfilActivity extends AppCompatActivity {
                 }
 
                 String poids = response.getString("poids");
-                System.out.println("!poids.equals(\"null\") = " + !poids.equals("null"));
                 if(!poids.equals("null")) {
                     editTextPoids.setText(poids);
                     spinnerPoids.setSelection(1);

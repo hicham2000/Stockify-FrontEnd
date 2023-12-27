@@ -9,6 +9,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+
 public class BackendManager {
 
     private static final String BASE_URL = "http://192.168.1.60:1111";
@@ -206,7 +208,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException | ParseException e) {
+                    } catch (JSONException e) {
                         callback.onError(e);
                     }
                 },
@@ -224,7 +226,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException | ParseException e) {
+                    } catch (JSONException e) {
                         callback.onError(e);
                     }
                 },
