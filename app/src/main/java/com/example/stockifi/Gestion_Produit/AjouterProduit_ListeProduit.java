@@ -6,15 +6,26 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.R;
-import com.example.stockifi.Repas.ajouter_repas;
-import com.example.stockifi.Repas.ingredients;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -32,6 +43,7 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
 
         peremtion=findViewById(R.id.peremtionDateProduit);
         peremtiontext = findViewById(R.id.peremtiontextproduit);
+
 
         ImageView toolbarBackButton = findViewById(R.id.toolbar_back_button_ajout);
 
@@ -80,6 +92,82 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button buttonValiderProd = findViewById(R.id.button_validerProd);
+        EditText intitule = findViewById(R.id.editTexte_t);
+        EditText quantite = findViewById(R.id.quant_ajoutModif);
+        EditText prix = findViewById(R.id.Prix_produit);
+        TextView peremption = findViewById(R.id.peremtiontextproduit);
+        TextView alerte = findViewById(R.id.alertetextproduit);
+        EditText critique = findViewById(R.id.quantiteCritique);
+
+        Spinner uniteDeMesure = findViewById(R.id.spinner_poid_ajoutModif1);
+
+        // Créer un ArrayAdapter en utilisant les éléments du tableau défini dans les ressources
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.poids,
+                android.R.layout.simple_spinner_item
+        );
+
+        // Spécifier le layout à utiliser lorsque la liste des choix apparaît
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Appliquer l'adaptateur au Spinner
+        uniteDeMesure.setAdapter(adapter);
+
+
+        MyApp myApp = (MyApp) getApplication();
+        int stockId = myApp.getUser_stock_id();
+        buttonValiderProd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Call the method to send the POST request
+                RequestQueue queue = Volley.newRequestQueue(AjouterProduit_ListeProduit.this);
+                String url = "http://10.0.2.2:1111/stocks/"+stockId+"/products";
+
+                // Example data to send in the request body
+                JSONObject requestProduits = new JSONObject();
+                try {
+                    // Set the properties based on your Produit entity
+                    requestProduits.put("intitule", intitule.getText().toString());
+                    requestProduits.put("quantite", quantite.getText().toString());
+                    requestProduits.put("uniteDeMesure", uniteDeMesure.getSelectedItem().toString());
+                    requestProduits.put("dateExpiration", peremption.getText().toString());
+                    requestProduits.put("prix", prix.getText().toString());
+                    requestProduits.put("dateAlerte", alerte.getText().toString());
+                    requestProduits.put("quantiteCritique", critique.getText().toString());
+                    System.out.println(requestProduits);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                // Make sure to replace this with your actual parameters
+                JsonObjectRequest ajouterProduit = new JsonObjectRequest(Request.Method.POST,
+                        url,
+                        requestProduits,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Handle the response from the server
+                                // You might want to parse and process the response JSON here
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle errors here
+                        // You might want to display an error message to the user
+                    }
+                });
+
+                // Add the request to the RequestQueue.
+                queue.add(ajouterProduit);
+
+            }
+
+        });
+
     }
 
     private void openDialogPeremstion(){
