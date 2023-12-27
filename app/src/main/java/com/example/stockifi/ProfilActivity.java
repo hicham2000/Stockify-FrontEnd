@@ -11,10 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,11 +35,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -139,6 +134,10 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+        MyApp myApp = (MyApp) getApplication();
+
+        currentUserId = myApp.getUser_id();
 
         backendManager = new BackendManager(this);
 
@@ -315,41 +314,10 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putString(TAILLE_KEY, enteredValue);
                 editor.apply();
-
-                try {
-                    UpdateRequest updateRequest = new UpdateRequest();
-
-                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
-
-                    // Conversion de la taille si l'unité est en mètres
-                    String taille = enteredValue;
-                    if (selectedTailleUnit.equals("m")) {
-                        taille = String.valueOf((int) ( Double.parseDouble(taille)* 100));
-                    }
-
-                    updateRequest.setTaille(taille);
-
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
             }
         });
 
-
-        // AppBarLayout appBarLayout = findViewById(R.id.appBar);
+       // AppBarLayout appBarLayout = findViewById(R.id.appBar);
         MaterialToolbar toolbar = findViewById(R.id.toolbar); // Assurez-vous que le R.id.toolbar correspond à votre MaterialToolbar
 
         // Ajoutez ceci pour afficher le bouton de retour (optionnel)
@@ -358,11 +326,14 @@ public class ProfilActivity extends AppCompatActivity {
         // Gestionnaire d'événements du menu
 
 
-        editTextTaille.setOnClickListener(new View.OnClickListener() {
+
+        final EditText editText = findViewById(R.id.editTexte_taille);
+
+        editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editTextTaille.setFocusableInTouchMode(true);
-                editTextTaille.requestFocus();
+                editText.setFocusableInTouchMode(true);
+                editText.requestFocus();
             }
         });
 
@@ -401,27 +372,6 @@ public class ProfilActivity extends AppCompatActivity {
                         : getResources().getColor(R.color.white);
 
                 yourSwitch.getThumbDrawable().setTint(thumbColor);
-
-                try {
-                    UpdateRequest updateRequest = new UpdateRequest();
-
-                    updateRequest.setModeSportif(isChecked);
-
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Mode Sportif: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
             }
         });
 
@@ -748,13 +698,10 @@ public class ProfilActivity extends AppCompatActivity {
                 try {
                     UpdateRequest updateRequest = new UpdateRequest();
 
-                    // Obtenez la valeur sélectionnée dans le Spinner
-                    String selectedGender = (String) parentView.getItemAtPosition(position);
+                    String selectedSexe = (String) spinnerGender.getSelectedItem();
 
-                    // Mettez à jour le champ "sexe" de l'objet UpdateRequest
-                    updateRequest.setSexe(selectedGender);
+                    updateRequest.setSexe(selectedSexe);
 
-                    // Appelez la méthode de mise à jour de l'utilisateur dans BackendManager
                     backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
                         @Override
                         public void onSuccess(JSONObject response) {
@@ -764,7 +711,7 @@ public class ProfilActivity extends AppCompatActivity {
                         @Override
                         public void onError(Exception error) {
                             // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Genre: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Sexe: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (JSONException e) {
@@ -777,7 +724,6 @@ public class ProfilActivity extends AppCompatActivity {
                 // Ne rien faire ici
             }
         });
-
 
 
         SharedPreferences sharedPreferences_taille = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -794,7 +740,6 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_taille.edit();
                 editor.putInt(SPINNER_SELECTION_KEY, position);
                 editor.apply();
-
             }
 
             @Override
@@ -833,20 +778,24 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putString(WEIGHT_KEY, enteredWeight);
                 editor.apply();
 
+                System.out.println("editTextPoids");
+
                 try {
                     UpdateRequest updateRequest = new UpdateRequest();
 
-                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
+                    String selectedPoidsUnit = (String) spinnerPoids.getSelectedItem();
 
                     // Conversion de la taille si l'unité est en mètres
-                    String poids = enteredWeight;
-                    if (selectedTailleUnit.equals("tonne")) {
+                    String poids = String.valueOf(editTextPoids.getText());
+                    if (selectedPoidsUnit.equals("tonne")) {
                         poids = String.valueOf((int) ( Double.parseDouble(poids)* 1000));
-                    } else if (selectedTailleUnit.equals("g")) {
+                    } else if (selectedPoidsUnit.equals("g")) {
                         poids = String.valueOf((int) ( Double.parseDouble(poids)* 0.001));
                     }
 
                     updateRequest.setPoids(poids);
+
+                    System.out.println("updateRequest : " + updateRequest);
 
                     backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
                         @Override
@@ -857,7 +806,7 @@ public class ProfilActivity extends AppCompatActivity {
                         @Override
                         public void onError(Exception error) {
                             // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Poids: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (JSONException e) {
@@ -878,6 +827,37 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_listepoid.edit();
                 editor.putInt(SPINNER_POIDS_SELECTION_KEY, position);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedPoidsUnit = (String) spinnerPoids.getSelectedItem();
+
+                    // Conversion de la taille si l'unité est en mètres
+                    String poids = String.valueOf(editTextPoids.getText());
+                    if (selectedPoidsUnit.equals("tonne")) {
+                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 1000));
+                    } else if (selectedPoidsUnit.equals("g")) {
+                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 0.001));
+                    }
+
+                    updateRequest.setPoids(poids);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Poids: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @Override
@@ -898,6 +878,29 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_regime.edit();
                 editor.putInt(SPINNER_REGIME_SELECTION_KEY, position);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedRegime = (String) spinnerRegime.getSelectedItem();
+
+                    updateRequest.setRégimeSpécieux(selectedRegime);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Régime Spécieux: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @Override
@@ -932,14 +935,12 @@ public class ProfilActivity extends AppCompatActivity {
 
         LogoutButton = findViewById(R.id.button_deconne);
 
-        MyApp myApp = (MyApp) getApplication();
 
-        currentUserId = myApp.getUser_id();
-
+        //Récupérer tout les informations depuis le backend
         backendManager.getUtilisateur(currentUserId, new BackendManager.BackendResponseCallback() {
 
             @Override
-            public void onSuccess(JSONObject response) throws JSONException, ParseException {
+            public void onSuccess(JSONObject response) throws JSONException {
                 String nomProfil = response.getString("nom") + " " + response.getString("prénom");
                 nomProfilView.setText(nomProfil);
                 emailProfilView.setText(response.getString("email"));
@@ -967,13 +968,7 @@ public class ProfilActivity extends AppCompatActivity {
 
                 String dateDeNaissance = response.getString("dateDeNaissance");
                 if(!dateDeNaissance.equals("null")) {
-                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-                    String formattedDate = outputFormat.format(inputFormat.parse(dateDeNaissance));
-
-                    date_naissace.setText(formattedDate);
-                    sharedPreferences_date.getString(SELECTED_DATE_KEY, formattedDate);
+                    date_naissace.setText(dateDeNaissance);
                 }
 
             }
@@ -1004,39 +999,19 @@ public class ProfilActivity extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog dialog = new DatePickerDialog(this, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dialog=new DatePickerDialog(this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                String selectedDate = String.format(Locale.getDefault(), "%02d/%02d/%04d", day, month + 1, year);
+
+                String selectedDate = "       " + String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
                 date_naissace.setText(selectedDate);
 
                 // Sauvegarder la date sélectionnée
                 SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putString(SELECTED_DATE_KEY, selectedDate);
                 editor.apply();
-
-                try {
-                    UpdateRequest updateRequest = new UpdateRequest();
-                    updateRequest.setDateDeNaissance(String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, day));
-
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Date de Naissance: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
             }
-        }, year, month, day);
-
+        },year, month, day);
 
         dialog.show();
     }
@@ -1066,7 +1041,6 @@ public class ProfilActivity extends AppCompatActivity {
                     public void onSuccess(JSONObject response) throws JSONException {
                         MyApp myApp = (MyApp) getApplication();
                         myApp.setUser_id(0);
-
                         Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();

@@ -13,8 +13,12 @@ import java.text.ParseException;
 
 public class BackendManager {
 
+
     //private static final String BASE_URL = "http://100.89.24.186:1111";
     private static final String BASE_URL = "http://10.0.2.2:1111";
+
+    //private static final String BASE_URL = "http://192.168.1.60:1111";
+
     private static final String ENDPOINT = "/api";
 
     private final RequestQueue requestQueue;
@@ -33,8 +37,6 @@ public class BackendManager {
                         try {
                             callback.onSuccess(response);
                         } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                     } else {
@@ -70,8 +72,6 @@ public class BackendManager {
                         try {
                             callback.onSuccess(response);
                         } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                     } else {
@@ -109,8 +109,6 @@ public class BackendManager {
                         callback.onSuccess(response);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
                     }
                 },
                 callback::onError);
@@ -128,7 +126,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException | ParseException e) {
+                    } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
                 },
@@ -147,7 +145,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException | ParseException e) {
+                    } catch (JSONException e) {
                         callback.onError(e);
                     }
                 },
@@ -215,7 +213,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException | ParseException e) {
+                    } catch (JSONException e) {
                         callback.onError(e);
                     }
                 },
@@ -233,7 +231,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException | ParseException e) {
+                    } catch (JSONException e) {
                         callback.onError(e);
                     }
                 },
@@ -246,7 +244,7 @@ public class BackendManager {
 
 
     public interface BackendResponseCallback {
-        void onSuccess(JSONObject response) throws JSONException, ParseException;
+        void onSuccess(JSONObject response) throws JSONException;
 
         void onError(Exception error);
 
