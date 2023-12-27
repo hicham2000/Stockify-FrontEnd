@@ -137,6 +137,8 @@ public class ProfilActivity extends AppCompatActivity {
 
         MyApp myApp = (MyApp) getApplication();
 
+        currentUserId = myApp.getUser_id();
+
         backendManager = new BackendManager(this);
 
         // Gestionnaire de clic pour l'élément "Courses"
@@ -818,6 +820,29 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_regime.edit();
                 editor.putInt(SPINNER_REGIME_SELECTION_KEY, position);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedRegime = (String) spinnerRegime.getSelectedItem();
+
+                    updateRequest.setRégimeSpécieux(selectedRegime);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Régime Spécieux: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @Override
@@ -851,8 +876,6 @@ public class ProfilActivity extends AppCompatActivity {
         emailProfilView = findViewById(R.id.emailProfil);
 
         LogoutButton = findViewById(R.id.button_deconne);
-
-        currentUserId = myApp.getUser_id();
 
         backendManager.getUtilisateur(currentUserId, new BackendManager.BackendResponseCallback() {
 
