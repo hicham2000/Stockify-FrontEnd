@@ -73,18 +73,19 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
                     backendManager.recupererUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
                         @Override
                         public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
+                            data.remove(position);
+                            notifyDataSetChanged();
                         }
 
                         @Override
                         public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
                             Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             }
         });
+
         buttonSupp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,12 +96,14 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
                     backendManager.supprimerDefUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
                         @Override
                         public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
+                            if (position >= 0 && position < data.size()) {
+                                data.remove(position);
+                                notifyDataSetChanged();
+                            }
                         }
 
                         @Override
                         public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
                             Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
