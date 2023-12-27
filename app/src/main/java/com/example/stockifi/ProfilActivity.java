@@ -381,6 +381,28 @@ public class ProfilActivity extends AppCompatActivity {
                         : getResources().getColor(R.color.white);
 
                 yourSwitch.getThumbDrawable().setTint(thumbColor);
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    updateRequest.setModeSportif(isChecked);
+
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Mode Sportif: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -388,21 +410,6 @@ public class ProfilActivity extends AppCompatActivity {
         boolean savedSwitchState = sharedPreferences_switch1.getBoolean(SWITCH_STATE_KEY, false); // false est la valeur par défaut
         yourSwitch.setChecked(savedSwitchState);
 
-        // Ajouter un écouteur pour le changement d'état du Switch
-        yourSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Sauvegarder le nouvel état automatiquement
-                SharedPreferences.Editor editor = sharedPreferences_switch1.edit();
-                editor.putBoolean(SWITCH_STATE_KEY, isChecked);
-                editor.apply();
-                int thumbColor = isChecked
-                        ? getResources().getColor(R.color.switch_thumb_checked_color)
-                        : getResources().getColor(R.color.white);
-
-                yourSwitch.getThumbDrawable().setTint(thumbColor);
-            }
-        });
 
         yourSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
