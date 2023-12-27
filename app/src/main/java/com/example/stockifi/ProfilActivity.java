@@ -314,6 +314,35 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putString(TAILLE_KEY, enteredValue);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
+
+                    // Conversion de la taille si l'unité est en mètres
+                    String taille = String.valueOf(editTextTaille.getText());
+                    if (selectedTailleUnit.equals("m")) {
+                        taille = String.valueOf((int) ( Double.parseDouble(taille)* 100));
+                    }
+
+                    updateRequest.setTaille(taille);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -740,6 +769,35 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_taille.edit();
                 editor.putInt(SPINNER_SELECTION_KEY, position);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
+
+                    // Conversion de la taille si l'unité est en mètres
+                    String taille = String.valueOf(editTextTaille.getText());
+                    if (selectedTailleUnit.equals("m")) {
+                        taille = String.valueOf((int) ( Double.parseDouble(taille)* 100));
+                    }
+
+                    updateRequest.setTaille(taille);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @Override
