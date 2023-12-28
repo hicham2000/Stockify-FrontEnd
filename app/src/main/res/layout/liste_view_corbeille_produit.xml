@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/itemlistview"
     >
 
         <LinearLayout
@@ -12,8 +12,8 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/checkBoxP"
+                <TextView
+                    android:id="@+id/textViewP"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -21,7 +21,8 @@
                     android:paddingLeft="10dp"
                     android:text="@string/item"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:layout_marginTop="10dp"/>
 
                 <ImageView
                     android:id="@+id/ellipseP"
@@ -29,8 +30,10 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="47dp"
-                    android:src="@drawable/ellipsep" />
+                    android:src="@drawable/ellipsep"
+                    android:layout_marginTop="2dp"/>
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/linearoutProduit"
@@ -38,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
+            android:layout_marginTop="5dp"
             >
 
 

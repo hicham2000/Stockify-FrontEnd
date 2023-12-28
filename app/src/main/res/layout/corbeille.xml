@@ -35,26 +35,13 @@
         android:background="@color/vertTexte"
         app:menu="@menu/menu_bottom_navigation"/>
 
-    <android.widget.SearchView
-        android:id="@+id/search_corbeille"
-        android:backgroundTint="@color/vertTexte"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/ellipse"
-        android:layout_centerHorizontal="true"
-        android:theme="@style/SearchViewStyle"
-        android:queryHint="@string/chercherProd"
-        />
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/dimenTexte"
-        android:layout_below="@+id/search_corbeille">
+        android:layout_marginTop="60dp"
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,9 +102,12 @@
         <ListView
             android:id="@+id/myListViewCorbeille"
             android:layout_width="match_parent"
-            android:layout_height="415dp"
+            android:layout_height="460dp"
             android:dividerHeight="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
 
 
 

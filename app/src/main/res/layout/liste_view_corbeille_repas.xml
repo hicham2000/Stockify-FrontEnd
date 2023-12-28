@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@android:color/white"
-
+    android:background="@drawable/itemlistview"
     >
 
         <LinearLayout
@@ -14,11 +13,12 @@
             android:orientation="horizontal"
             >
 
-                <CheckBox
-                    android:id="@+id/checkBoxrepas"
+                <TextView
+                    android:id="@+id/textViewR"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/hubballi_regular"
                     android:paddingLeft="10dp"
                     android:text="@string/item"
@@ -31,14 +31,16 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="47dp"
-                    android:src="@drawable/ellipser" />
+                    android:src="@drawable/ellipser"
+                    android:layout_marginTop="2dp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
 
 
                 <Button

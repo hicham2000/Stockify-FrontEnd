@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,60 +55,60 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.liste_view_corbeille_produit, parent, false);
         }
 
-        CheckBox checkBox = convertView.findViewById(R.id.checkBoxP);
+
+        TextView textViewP = convertView.findViewById(R.id.textViewP);
         Button buttonRecup=convertView.findViewById(R.id.recuperer);
         Button buttonSupp=convertView.findViewById(R.id.supprimer);
         LinearLayout linearoutProduit=convertView.findViewById(R.id.linearoutProduit);
 
-        checkBox.setChecked(checkedPositions.get(position));
-        checkBox.setText(data.get(position).getIntitule());
+        textViewP.setText(data.get(position).getIntitule());
 
 
         buttonRecup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkBox.isChecked()) {
-                    int productId = data.get(position).getId();
-                    int stockId = myApp.getUser_stock_id();
 
-                    backendManager.recupererUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            data.remove(position);
-                            notifyDataSetChanged();
-                        }
+                int productId = data.get(position).getId();
+                int stockId = myApp.getUser_stock_id();
 
-                        @Override
-                        public void onError(Exception error) {
-                            Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                backendManager.recupererUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        data.remove(position);
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 
         buttonSupp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkBox.isChecked()) {
-                    int productId = data.get(position).getId();
-                    int stockId = myApp.getUser_stock_id();
 
-                    backendManager.supprimerDefUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            if (position >= 0 && position < data.size()) {
-                                data.remove(position);
-                                notifyDataSetChanged();
-                            }
-                        }
+                int productId = data.get(position).getId();
+                int stockId = myApp.getUser_stock_id();
 
-                        @Override
-                        public void onError(Exception error) {
-                            Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                backendManager.supprimerDefUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        if (position >= 0 && position < data.size()) {
+                            data.remove(position);
+                            notifyDataSetChanged();
                         }
-                    });
-                }
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 

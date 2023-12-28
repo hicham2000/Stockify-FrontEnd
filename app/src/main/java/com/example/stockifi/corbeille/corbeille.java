@@ -215,7 +215,49 @@ public class corbeille extends AppCompatActivity{
         // Handle the actions when OK button is clicked
         buttonOk.setOnClickListener(v -> {
             // Check the state of checkboxes and perform actions accordingly
-            if (checkBoxProducts.isChecked()) {
+
+            if (checkBoxProducts.isChecked() && checkBoxRecipes.isChecked()) {
+                MyApp myApp = (MyApp) getApplication();
+                int User_Stock_id = myApp.getUser_stock_id();
+                String url = "http://10.0.2.2:1111/corbeille/vidercorbeille/" + User_Stock_id;
+
+                RequestQueue queue = Volley.newRequestQueue(corbeille.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(corbeille.this, "Error deleting the whole corbeille", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                queue.add(stringRequest);
+            }
+            else if (checkBoxRecipes.isChecked()) {
+                MyApp myApp = (MyApp) getApplication();
+                int User_Stock_id = myApp.getUser_stock_id();
+                String url = "http://10.0.2.2:1111/corbeille/viderrepas/" + User_Stock_id;
+
+                RequestQueue queue = Volley.newRequestQueue(corbeille.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(corbeille.this, "Error deleting recipes", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                queue.add(stringRequest);            }
+            else if (checkBoxProducts.isChecked()) {
                 MyApp myApp = (MyApp) getApplication();
                 int User_Stock_id = myApp.getUser_stock_id();
                 String url = "http://10.0.2.2:1111/corbeille/viderproduits/" + User_Stock_id;
@@ -225,23 +267,16 @@ public class corbeille extends AppCompatActivity{
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                // Display the response message from the server in a Toast
                                 Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Handle the error response
                         Toast.makeText(corbeille.this, "Error deleting products", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 queue.add(stringRequest);
-            }
-
-
-            if (checkBoxRecipes.isChecked()) {
-                //clearRecipeList();
             }
 
             // Dismiss the dialog

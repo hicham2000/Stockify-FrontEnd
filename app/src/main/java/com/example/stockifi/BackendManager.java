@@ -239,6 +239,24 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
+    public void supprimerDefUnRepasFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/supprmerdefdeletedrecipe/stockId="+stockId+"/supprimerRepasId="+productId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
 
 
 
