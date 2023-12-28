@@ -35,6 +35,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -119,6 +121,7 @@ public class ProfilActivity extends AppCompatActivity {
     private BackendManager backendManager;
 
     private  int currentUserId;
+    private int stockUserId;
 
 
 
@@ -138,6 +141,7 @@ public class ProfilActivity extends AppCompatActivity {
         MyApp myApp = (MyApp) getApplication();
 
         currentUserId = myApp.getUser_id();
+        stockUserId = myApp.getUser_stock_id();
 
         backendManager = new BackendManager(this);
 
@@ -283,6 +287,33 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_quantite.edit();
                 editor.putString(QUANTITE_CRI_KEY, enteredQuantiteCri);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String input_value = String.valueOf(editTextQuantiteCri.getText());
+                    if(input_value.isEmpty()) {
+                        input_value = "0";
+                    }
+
+                    int selectedQuantiteCri = Integer.parseInt(input_value);
+
+
+                    backendManager.updateQuantiteCritiqueParDefautStock((long) stockUserId, selectedQuantiteCri, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Quantite Critique par Défaut: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -314,6 +345,35 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putString(TAILLE_KEY, enteredValue);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
+
+                    // Conversion de la taille si l'unité est en mètres
+                    String taille = String.valueOf(editTextTaille.getText());
+                    if (selectedTailleUnit.equals("m")) {
+                        taille = String.valueOf((int) ( Double.parseDouble(taille)* 100));
+                    }
+
+                    updateRequest.setTaille(taille);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -352,6 +412,28 @@ public class ProfilActivity extends AppCompatActivity {
                         : getResources().getColor(R.color.white);
 
                 yourSwitch.getThumbDrawable().setTint(thumbColor);
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    updateRequest.setModeSportif(isChecked);
+
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Mode Sportif: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -359,21 +441,6 @@ public class ProfilActivity extends AppCompatActivity {
         boolean savedSwitchState = sharedPreferences_switch1.getBoolean(SWITCH_STATE_KEY, false); // false est la valeur par défaut
         yourSwitch.setChecked(savedSwitchState);
 
-        // Ajouter un écouteur pour le changement d'état du Switch
-        yourSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Sauvegarder le nouvel état automatiquement
-                SharedPreferences.Editor editor = sharedPreferences_switch1.edit();
-                editor.putBoolean(SWITCH_STATE_KEY, isChecked);
-                editor.apply();
-                int thumbColor = isChecked
-                        ? getResources().getColor(R.color.switch_thumb_checked_color)
-                        : getResources().getColor(R.color.white);
-
-                yourSwitch.getThumbDrawable().setTint(thumbColor);
-            }
-        });
 
         yourSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -740,6 +807,35 @@ public class ProfilActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences_taille.edit();
                 editor.putInt(SPINNER_SELECTION_KEY, position);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
+
+                    // Conversion de la taille si l'unité est en mètres
+                    String taille = String.valueOf(editTextTaille.getText());
+                    if (selectedTailleUnit.equals("m")) {
+                        taille = String.valueOf((int) ( Double.parseDouble(taille)* 100));
+                    }
+
+                    updateRequest.setTaille(taille);
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @Override
@@ -778,8 +874,6 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putString(WEIGHT_KEY, enteredWeight);
                 editor.apply();
 
-                System.out.println("editTextPoids");
-
                 try {
                     UpdateRequest updateRequest = new UpdateRequest();
 
@@ -794,8 +888,6 @@ public class ProfilActivity extends AppCompatActivity {
                     }
 
                     updateRequest.setPoids(poids);
-
-                    System.out.println("updateRequest : " + updateRequest);
 
                     backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
                         @Override
@@ -936,7 +1028,7 @@ public class ProfilActivity extends AppCompatActivity {
         LogoutButton = findViewById(R.id.button_deconne);
 
 
-        //Récupérer tout les informations depuis le backend
+        //Récupérer tout les informations depuis le backend d'Utilisateur
         backendManager.getUtilisateur(currentUserId, new BackendManager.BackendResponseCallback() {
 
             @Override
@@ -967,9 +1059,26 @@ public class ProfilActivity extends AppCompatActivity {
                 }
 
                 String dateDeNaissance = response.getString("dateDeNaissance");
-                if(!dateDeNaissance.equals("null")) {
-                    date_naissace.setText(dateDeNaissance);
+                OffsetDateTime offsetDateTime = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    offsetDateTime = OffsetDateTime.parse(dateDeNaissance, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
                 }
+
+                // Define the desired output format
+                DateTimeFormatter outputFormatter = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    // Format the OffsetDateTime to the desired output format
+                    dateDeNaissance = offsetDateTime.format(outputFormatter);
+
+                    if(!dateDeNaissance.equals("null")) {
+                        date_naissace.setText(dateDeNaissance);
+                    }
+                }
+
+
+
+
 
             }
 
@@ -978,6 +1087,30 @@ public class ProfilActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
+
+
+        //Récupérer tout les informations depuis le backend du Stock d'Utilisateur
+        try {
+            backendManager.getStock((long) stockUserId, new BackendManager.BackendResponseCallback() {
+
+                @Override
+                public void onSuccess(JSONObject response) throws JSONException {
+                    String quantiteCritiqueParDefaut = response.getString("quantiteCritiqueParDefaut");
+
+                    if(!quantiteCritiqueParDefaut.equals("null")) {
+                        editTextQuantiteCri.setText(quantiteCritiqueParDefaut);
+                    }
+
+                }
+
+                @Override
+                public void onError(Exception error) {
+                    error.printStackTrace();
+                }
+            });
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
         LogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1003,13 +1136,37 @@ public class ProfilActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                String selectedDate = "       " + String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
+                String selectedDate = "       " + String.valueOf(day) + "/" + String.valueOf(month + 1) + "/" + String.valueOf(year);
                 date_naissace.setText(selectedDate);
 
                 // Sauvegarder la date sélectionnée
                 SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putString(SELECTED_DATE_KEY, selectedDate);
                 editor.apply();
+
+                try {
+                    UpdateRequest updateRequest = new UpdateRequest();
+
+                    String dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+
+                    updateRequest.setDateDeNaissance(dateDeNaissance);
+
+
+                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            // Traitez le succès ici si nécessaire
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            // Traitez l'erreur ici si nécessaire
+                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Date De Naissance: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         },year, month, day);
 

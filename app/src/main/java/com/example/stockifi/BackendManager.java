@@ -203,6 +203,44 @@ public class BackendManager {
         return updatedUserJson;
     }
 
+    public void updateQuantiteCritiqueParDefautStock(Long stockid, int quantiteCritiqueParDefautStock, BackendResponseCallback callback) throws JSONException {
+        String url = getFullUrl("/stocks/"+stockid+"/" + quantiteCritiqueParDefautStock);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getStock(Long stockid, BackendResponseCallback callback) throws JSONException {
+        String url = getFullUrl("/stocks/"+stockid);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
     public void recupererUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
         String url = getFullUrl( "/corbeille/recupererdeletedproduct/stockId="+stockId+"/recupererProductId="+productId);
 
