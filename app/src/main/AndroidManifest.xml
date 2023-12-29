@@ -76,6 +76,10 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".recettes.RecettesRecommendeActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".corbeille.corbeille"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
