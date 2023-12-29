@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.recettes.RecettesRecommendeActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -147,12 +148,19 @@ public class ProfilActivity extends AppCompatActivity {
 
         // Gestionnaire de clic pour l'élément "Courses"
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window);
-        Menu menu = bottomNavigationView.getMenu();
+        Menu navBar = bottomNavigationView.getMenu();
 
 
         // Gestionnaire de clic pour l'élément "Courses"
-        menu.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
+        navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ProfilActivity.this, ListeDeCourse.class);
+            startActivity(intent);
+
+            return true;
+        });
+
+        navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(ProfilActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
 
             return true;

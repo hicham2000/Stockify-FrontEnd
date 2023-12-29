@@ -18,8 +18,8 @@
     <color name ="vidercorbeille">#FFA6A1</color>
     <color name ="supprimercorbeille">#DD5252</color>
     <color name ="recuperercorbeille">#5A8C7A</color>
-
-
+    <color name="checkedColor">#7AAD45</color>
+    <color name="normalColor">#BFFFFFFF</color>
 
 
 </resources>

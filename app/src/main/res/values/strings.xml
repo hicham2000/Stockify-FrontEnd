@@ -12,6 +12,7 @@
     <string name="description_regime"> Description regime </string>
     <string name="ingredient"> Ingrédients </string>
     <string name="chercherProd">Chercher un produit</string>
+    <string name="chercherRecettesRecommende">Rechercher Recette</string>
 
     <string name="inscrire">S\'inscrire</string>
     <string-array name="regimes">
@@ -132,6 +133,7 @@ la quantite critique</string>
     <string name="text_inscr">Inscription de l\'utilisateur</string>
     <string name="texte_poli">Politique de confidentialité</string>
     <string name="utilisa_texte">Utilisation de l\'application</string>
+    <string name="recette_title">Recettes</string>
 
     <string name="titre_desc">Description de l\'application</string>
 
@@ -208,5 +210,11 @@ la quantite critique</string>
         <item>Congélateur</item>
         <item>garde-manger</item>
     </string-array>
+
+    <!-- Recettes strings -->'
+
+    <string name="recette_button_all">Tous</string>
+    <string name="recette_button_favoris">Favoris</string>
+    <string name="recette_button_filtre">Filtre</string>
 
 </resources>
