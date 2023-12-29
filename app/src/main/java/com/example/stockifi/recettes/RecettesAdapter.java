@@ -25,6 +25,10 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
         this.recetteList = recetteList;
     }
 
+    public void setRecetteList(List<RecetteModel> recetteList) {
+        this.recetteList = recetteList;
+    }
+
     @NonNull
     @Override
     public RecetteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,7 +43,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
         holder.checkBoxFavoris.setChecked(recette.isFavoris());
         holder.textViewMinutes.setText(String.valueOf(recette.getDuration()) + " min");
         holder.textViewRecetteName.setText(recette.getRecetteName());
-        holder.textViewNbrIngredientsManquantes.setText(String.valueOf(recette.getIngredientsMissing()) + " ingredient manquant");
+        holder.textViewNbrIngredientsManquantes.setText(String.valueOf(recette.getIngredientsMissing()) + " ingrédients manquants");
 
         // Async Process
         String imageUrl = recette.getImageUrl();
@@ -84,6 +88,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
             textViewMinutes = itemView.findViewById(R.id.text_view_min);
             textViewRecetteName = itemView.findViewById(R.id.text_view_recette_name);
             textViewNbrIngredientsManquantes = itemView.findViewById(R.id.text_view_nbr_ingredients_manquantes);
+
         }
     }
 

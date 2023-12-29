@@ -24,8 +24,8 @@
                 android:id="@+id/recette_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-                <!--android:src="@drawable/recette_image" />-->
+                android:scaleType="centerCrop"
+                android:src="@drawable/recette_image" />
 
         </androidx.cardview.widget.CardView>
 
@@ -65,6 +65,7 @@
         android:id="@+id/text_view_recette_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="top|center_vertical"
         android:gravity="center"
         android:padding="10dp"
         android:text="Oeuf aux dindes"
@@ -77,9 +78,10 @@
         android:id="@+id/text_view_nbr_ingredients_manquantes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="bottom|center_vertical"
         android:gravity="center"
         android:padding="10dp"
-        android:text="0 ingredient manquant"
+        android:text="0 ingredients manquants"
         android:textAlignment="center"
         android:textAppearance="@style/nbr_ingredients_manquantes_style"
         android:textStyle="bold" />

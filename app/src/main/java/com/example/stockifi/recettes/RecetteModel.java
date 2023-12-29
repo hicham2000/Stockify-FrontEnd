@@ -16,6 +16,14 @@ public class RecetteModel {
         this.isFavoris = isFavoris;
     }
 
+    public RecetteModel(RecetteModel recette) {
+        this.imageUrl = recette.getImageUrl();
+        this.recetteName = recette.getRecetteName();
+        this.duration = recette.getDuration();
+        this.ingredientsMissing = recette.getIngredientsMissing();
+        this.isFavoris = recette.isFavoris();
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -38,5 +46,16 @@ public class RecetteModel {
 
     public void setFavoris(boolean isFavoris){
         this.isFavoris = isFavoris;
+    }
+
+    @Override
+    public String toString() {
+        return "RecetteModel{" +
+                "imageUrl='" + imageUrl + '\'' +
+                ", recetteName='" + recetteName + '\'' +
+                ", duration=" + duration +
+                ", ingredientsMissing=" + ingredientsMissing +
+                ", favoris=" + isFavoris +
+                '}';
     }
 }
