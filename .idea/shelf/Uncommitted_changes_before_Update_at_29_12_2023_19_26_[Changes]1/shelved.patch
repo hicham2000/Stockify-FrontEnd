@@ -1,0 +1,211 @@
+Index: app/src/main/res/drawable/baseline_add_circle_outline_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/baseline_add_circle_outline_24.xml b/app/src/main/res/drawable/baseline_add_circle_outline_24.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/drawable/baseline_add_circle_outline_24.xml	
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#000000"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M13,7h-2v4L7,11v2h4v4h2v-4h4v-2h-4L13,7zM12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8z"/>
++</vector>
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />\r\n    <uses-permission android:name=\"android.permission.POST_NOTIFICATIONS\" />\r\n\r\n    <application\r\n        android:name=\".GlobalVariables.MyApp\"\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.Stockifi\"\r\n        android:usesCleartextTraffic=\"true\"\r\n        tools:ignore=\"ExtraText\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".Home.AjouterCategorie\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".Gestion_Produit.ListeProduit\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Gestion_Produit.AjouterProduit_ListeProduit\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Repas.ajouter_repas\"\r\n            android:exported=\"false\"\r\n            android:windowSoftInputMode=\"adjustPan\" />\r\n        <activity\r\n            android:name=\".Repas.ingredients_quantity\"\r\n            android:exported=\"false\"\r\n            android:windowSoftInputMode=\"adjustPan\" />\r\n        <activity\r\n            android:name=\".Repas.ingredients\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Liste_Course.ModifierProduit\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Liste_Course.AjouterProduit\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Liste_Course.ListeDeCourse\"\r\n            android:exported=\"false\"\r\n            android:windowSoftInputMode=\"adjustPan\" />\r\n        <activity\r\n            android:name=\".Sprint2Activity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ProduitCardActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Produit.AjouterProduitRecherche\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ConditionUtilisationActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ResetPasswordActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".RegisterActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ChangerPassword\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ProfilActivity\"\r\n            android:exported=\"false\"\r\n            android:windowSoftInputMode=\"adjustPan\" />\r\n        <activity\r\n            android:name=\".corbeille.corbeille\"\r\n            android:exported=\"false\"\r\n            android:windowSoftInputMode=\"adjustPan\" />\r\n        <activity\r\n            android:name=\".LoginActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <meta-data\r\n            android:name=\"preloaded_fonts\"\r\n            android:resource=\"@array/preloaded_fonts\" />\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -21,6 +21,9 @@
+         tools:ignore="ExtraText"
+         tools:targetApi="31">
+         <activity
++            android:name=".Home.HomeActivity"
++            android:exported="false" />
++        <activity
+             android:name=".Home.AjouterCategorie"
+             android:exported="true" />
+         <activity
+Index: app/src/main/java/com/example/stockifi/Home/HomeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/stockifi/Home/HomeActivity.java b/app/src/main/java/com/example/stockifi/Home/HomeActivity.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/stockifi/Home/HomeActivity.java	
+@@ -0,0 +1,30 @@
++package com.example.stockifi.Home;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.os.Bundle;
++import android.view.View;
++
++import com.example.stockifi.R;
++import com.google.android.material.bottomsheet.BottomSheetDialog;
++import com.google.android.material.floatingactionbutton.FloatingActionButton;
++
++public class HomeActivity extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_home);
++        FloatingActionButton floatingButton = findViewById(R.id.floatingButton);
++        floatingButton.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                showBottomSheetDialog();
++            }
++        });
++    }
++    private void showBottomSheetDialog() {
++        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
++        //bottomSheetDialog.setContentView(R.layout.);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/drawable/baseline_add_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/baseline_add_24.xml b/app/src/main/res/drawable/baseline_add_24.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/drawable/baseline_add_24.xml	
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#000000"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
++</vector>
+Index: app/src/main/res/layout/activity_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_home.xml b/app/src/main/res/layout/activity_home.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/activity_home.xml	
+@@ -0,0 +1,110 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="@color/vert">
++
++    <androidx.appcompat.widget.Toolbar
++        android:id="@+id/toolbarStock"
++        android:layout_width="match_parent"
++        android:layout_height="?attr/actionBarSize"
++        tools:ignore="MissingConstraints">
++
++        <TextView
++            android:id="@+id/textView"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginLeft="10dp"
++            android:fontFamily="@font/jost_extrabold"
++            android:text="Stock"
++            android:textColor="@color/white"
++            android:textSize="30sp" />
++    </androidx.appcompat.widget.Toolbar>
++
++    <View
++        android:id="@+id/bottomBorder"
++        android:layout_width="match_parent"
++        android:layout_height="2dp"
++        android:background="@color/white"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteX="16dp"
++        tools:layout_editor_absoluteY="64dp" />
++
++    <com.google.android.material.floatingactionbutton.FloatingActionButton
++        android:id="@+id/floatingButton"
++        style="@style/Widget.MaterialComponents.FloatingActionButton"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginEnd="40dp"
++        android:layout_marginBottom="124dp"
++        android:clickable="true"
++        android:src="@drawable/baseline_add_24"
++        app:backgroundTint="#7AAD45"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent" />
++
++    <ScrollView
++        android:id="@+id/scrollView3"
++        android:layout_width="0dp"
++        android:layout_height="80dp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.0"
++        app:layout_constraintStart_toStartOf="parent"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteY="153dp">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal">
++
++            <Button
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_margin="10dp"
++                android:text="All"
++                android:textSize="20sp" />
++
++            <Button
++                android:layout_width="69dp"
++                android:layout_height="wrap_content"
++                android:layout_margin="10dp"
++                android:background="@drawable/baseline_add_circle_outline_24"
++                android:textSize="20sp" />
++
++        </LinearLayout>
++
++    </ScrollView>
++
++    <LinearLayout
++        android:id="@+id/list_Button"
++        android:layout_width="177dp"
++        android:layout_height="173dp"
++        android:orientation="vertical"
++        app:layout_constraintBottom_toTopOf="@+id/floatingButton"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteX="233dp">
++
++        <Button
++            android:id="@+id/button"
++            android:layout_width="171dp"
++            android:layout_height="wrap_content"
++            android:text="Ajouter Produit" />
++
++        <Button
++            android:id="@+id/button2"
++            android:layout_width="171dp"
++            android:layout_height="wrap_content"
++            android:text="Ajouter Repas" />
++
++        <Button
++            android:id="@+id/button3"
++            android:layout_width="171dp"
++            android:layout_height="wrap_content"
++            android:text="Scan" />
++    </LinearLayout>
++
++</androidx.constraintlayout.widget.ConstraintLayout>
