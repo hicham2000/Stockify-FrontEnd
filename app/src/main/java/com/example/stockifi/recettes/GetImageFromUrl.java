@@ -13,7 +13,6 @@ public class GetImageFromUrl extends AsyncTask<String, Void, Bitmap>{
     Bitmap bitmap;
     public GetImageFromUrl(ImageView img){
         this.imageView = img;
-        System.out.println("this.imageView = " + this.imageView);
     }
     @Override
     protected Bitmap doInBackground(String... url) {
