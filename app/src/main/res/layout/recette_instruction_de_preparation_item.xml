@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/recette_instruction_de_preparation_item_text_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:gravity="start|center_vertical"
+    android:textAppearance="@style/recette_nombre_ingredients_manquants"
+    android:background="@android:color/transparent"
+    android:clickable="false"
+    android:focusable="false"
+    />

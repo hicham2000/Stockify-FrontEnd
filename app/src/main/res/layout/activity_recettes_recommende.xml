@@ -27,12 +27,14 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:background="@drawable/ellipse_menu"
+        android:background="@drawable/ellipse"
         android:layout_centerHorizontal="true"
+        android:theme="@style/SearchViewStyle"
         android:queryHint="@string/chercherRecettesRecommende" />
 
     <LinearLayout
-        android:layout_marginTop="160dp"
+        android:layout_below="@+id/search_recettes_recommende"
+        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

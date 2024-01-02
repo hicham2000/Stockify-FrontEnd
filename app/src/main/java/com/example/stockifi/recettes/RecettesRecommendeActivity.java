@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,6 +47,35 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
 
     private List<RecetteModel> originalRecetteList; // Store the original list of recipes
     private List<RecetteModel> currentRecetteList; // Store the current list of recipes displayed
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profil, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.poubelle) {
+            Intent poubelleIntent = new Intent(RecettesRecommendeActivity.this, corbeille.class);
+            startActivity(poubelleIntent);
+            finish();
+            return true;
+        } else if (itemId == R.id.message) {
+            // Handle the message item click
+            // You can add your code here
+            return true;
+        } else if (itemId == R.id.profil1) {
+            Intent profilIntent = new Intent(RecettesRecommendeActivity.this, ProfilActivity.class);
+            startActivity(profilIntent);
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
 
     @Override
@@ -90,7 +120,10 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
                 true));
 
         originalRecetteList = new ArrayList<>(recetteList);
-        currentRecetteList = new ArrayList<>(originalRecetteList);
+        currentRecetteList = new ArrayList<>(recetteList.size());
+        for (RecetteModel recette : recetteList) {
+            currentRecetteList.add(recette.clone()); // Create a copy
+        }
 
         RecettesAdapter recettesAdapter = new RecettesAdapter(this, recetteList);
         gridRecettesRecommende.setAdapter(recettesAdapter);
@@ -100,7 +133,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             List<RecetteModel> favorisList = new ArrayList<>();
             for (RecetteModel recette : originalRecetteList) {
                 if (recette.isFavoris()) {
-                    favorisList.add(new RecetteModel(recette)); // Create a copy
+                    favorisList.add(recette); // Create a copy
                 }
             }
 
@@ -108,7 +141,6 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             currentRecetteList = new ArrayList<>(favorisList);
             recettesAdapter.setRecetteList(currentRecetteList);
             recettesAdapter.notifyDataSetChanged();
-            System.out.println("Favoris button: currentRecetteList => " + currentRecetteList);
 
             btnFavoris.setBackgroundResource(R.drawable.ellipse_menu);
 
@@ -120,9 +152,9 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         btnTous.setOnClickListener(v -> {
             // Update the RecyclerView with the original unfiltered list
             currentRecetteList = new ArrayList<>(originalRecetteList);
+
             recettesAdapter.setRecetteList(currentRecetteList);
             recettesAdapter.notifyDataSetChanged();
-            System.out.println("Tous button : currentRecetteList => "+ currentRecetteList);
 
             btnTous.setBackgroundResource(R.drawable.ellipse_menu);
 
@@ -136,31 +168,15 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
 
             btnTous.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
             btnFavoris.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+
+            Intent intent = new Intent(RecettesRecommendeActivity.this, RecettesRecommendeFiltreActivity.class);
+            startActivity(intent);
         });
 
 
 
 
         //-------------------------
-
-        Menu appBar = toolbarAppReccettesRecommende.getMenu();
-        appBar.findItem(R.id.poubelle).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecettesRecommendeActivity.this, corbeille.class);
-            startActivity(intent);
-
-            return true;
-        });
-
-        appBar.findItem(R.id.message).setOnMenuItemClickListener(item -> {
-
-            return true;
-        });
-
-        appBar.findItem(R.id.profil1).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecettesRecommendeActivity.this, ProfilActivity.class);
-            startActivity(intent);
-            return true;
-        });
 
         // Set up the BottomNavigationView
 
@@ -169,14 +185,11 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, ListeDeCourse.class);
             startActivity(intent);
-
+            finish();
             return true;
         });
 
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecettesRecommendeActivity.this, RecettesRecommendeActivity.class);
-            startActivity(intent);
-
             return true;
         });
 
