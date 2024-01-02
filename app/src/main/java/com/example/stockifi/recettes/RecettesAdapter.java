@@ -1,6 +1,9 @@
 package com.example.stockifi.recettes;
 
+import static androidx.test.InstrumentationRegistry.getContext;
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.stockifi.R;
+import com.example.stockifi.corbeille.corbeille;
 import com.example.stockifi.recettes.RecetteModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.RecetteViewHolder> {
@@ -26,7 +31,10 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
     }
 
     public void setRecetteList(List<RecetteModel> recetteList) {
-        this.recetteList = recetteList;
+        this.recetteList = new ArrayList<>(this.recetteList.size());
+        for (RecetteModel recette : recetteList){
+            this.recetteList.add(recette.clone());
+        }
     }
 
     @NonNull
@@ -39,7 +47,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
 
     @Override
     public void onBindViewHolder(@NonNull RecetteViewHolder holder, int position) {
-        RecetteModel recette = recetteList.get(position);
+        RecetteModel recette = this.recetteList.get(position);
         holder.checkBoxFavoris.setChecked(recette.isFavoris());
         holder.textViewMinutes.setText(String.valueOf(recette.getDuration()) + " min");
         holder.textViewRecetteName.setText(recette.getRecetteName());
@@ -50,13 +58,15 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
         // Assuming you have a method to load the image asynchronously
         loadImageAsync(holder.recetteImageView, imageUrl);
 
-        // Change background color based on checked state
+        // Change background drawable based on checked state
         int backgroundDrawable = recette.isFavoris() ?
                 R.drawable.heart_vector_checked :
                 R.drawable.heart_vector_normal;
         holder.checkBoxFavoris.setBackgroundResource(backgroundDrawable);
-        holder.checkBoxFavoris.setChecked(recette.isFavoris());
 
+        // Set checked state change listener
+        holder.checkBoxFavoris.setOnCheckedChangeListener(null); // Remove previous listener to avoid callback conflicts
+        holder.checkBoxFavoris.setChecked(recette.isFavoris());
         holder.checkBoxFavoris.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // Update background drawable when checked state changes
             int newBackgroundDrawable = isChecked ?
@@ -67,7 +77,18 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
             // You may also want to update the checked state in your data model
             recette.setFavoris(isChecked);
         });
+
+        holder.recetteImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), RecetteActivity.class);
+                // Replace put with putExtra
+                intent.putExtra("Recette", recette);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -75,11 +96,11 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
     }
 
     public static class RecetteViewHolder extends RecyclerView.ViewHolder {
-        public ImageView recetteImageView;
-        public CheckBox checkBoxFavoris;
-        public TextView textViewMinutes;
-        public TextView textViewRecetteName;
-        public TextView textViewNbrIngredientsManquantes;
+        ImageView recetteImageView;
+        CheckBox checkBoxFavoris;
+        TextView textViewMinutes;
+        TextView textViewRecetteName;
+        TextView textViewNbrIngredientsManquantes;
 
         public RecetteViewHolder(@NonNull View itemView) {
             super(itemView);

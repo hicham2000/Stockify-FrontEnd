@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
+    android:textSize="12sp"
+    android:text="Sans lactose"
+    />

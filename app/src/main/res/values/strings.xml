@@ -217,4 +217,21 @@ la quantite critique</string>
     <string name="recette_button_favoris">Favoris</string>
     <string name="recette_button_filtre">Filtre</string>
 
+    <!-- Recette layout strings -->
+    <string name="recette_nom">Omellette</string>
+    <string name="recette_nombre_ingredients_manquants">1 ingredient manquant</string>
+    <string name="recette_portion">Portion</string>
+    <string name="recette_button_portion_minus">-</string>
+    <string name="recette_button_portion_plus">+</string>
+    <string name="recette_image_description">Description of the recette image</string>
+    <string name="recette_ingredients_dropdownButton">Ingredients</string>
+    <string name="recette_instrucion_de_preparation_dropdownButton">Instruciton de preparation</string>
+    <string name="recette_valeurs_nutritionnelles_dropdownButton">Valeurs Nutritionnelles</string>
+    <string name="recette_similaires_header">Recettes Similaires</string>
+    <string name="recette_recommende_filtre_title">Filtre</string>
+    <string name="recette_recommende_filtre_regime_speciaux_header">Regime Speciaux</string>
+    <string name="recette_recommende_filtre_temps_de_preparation_header">Temps de préparation</string>
+    <string name="recette_recommende_filtre_select_produit_header">Sélectionner un produit</string>
+    <string name="recette_recommende_filtre_annuler_button">Annuler</string>
+    <string name="recette_recommende_filtre_appliquer_button">Appliquer</string>
 </resources>

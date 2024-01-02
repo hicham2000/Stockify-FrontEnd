@@ -142,6 +142,11 @@ public class ProfilActivity extends AppCompatActivity {
         MyApp myApp = (MyApp) getApplication();
 
         currentUserId = myApp.getUser_id();
+
+        if(currentUserId < 0) {
+            Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
         stockUserId = myApp.getUser_stock_id();
 
         backendManager = new BackendManager(this);
@@ -1123,7 +1128,7 @@ public class ProfilActivity extends AppCompatActivity {
         LogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myApp.setUser_id(0);
+                myApp.setUser_id(-1);
                 Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
