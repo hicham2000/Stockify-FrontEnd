@@ -160,6 +160,10 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         annulerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                regimeSpeciauxadapter.setClickCount(0);
+                regimeSpeciauxadapter.setSelectedRegimes(new ArrayList<String>());
+                regimeSpeciauxadapter.notifyDataSetChanged();
+
 
             }
         });
