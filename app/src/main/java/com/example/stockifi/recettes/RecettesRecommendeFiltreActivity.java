@@ -157,6 +157,13 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
             }
         });
 
+        annulerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         /* ------------------------------------------------------------------------------------------ */
         Menu appBar = toolbarAppReccette.getMenu();
         appBar.findItem(R.id.poubelle).setOnMenuItemClickListener(item -> {
