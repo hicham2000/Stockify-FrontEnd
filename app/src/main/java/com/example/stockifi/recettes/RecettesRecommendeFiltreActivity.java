@@ -27,6 +27,7 @@ import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,6 +136,26 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         List<String> produitsSelectionnesList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
         ProduitsSelectionneAdapter produitsSelectionneAdapter = new ProduitsSelectionneAdapter(produitsSelectionnesList);
         produitsSelectionneRecyclerView.setAdapter(produitsSelectionneAdapter);
+
+
+        appliquerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterValues = new FilterValues();
+
+                // Mettez à jour les valeurs de filterValues avec les sélections actuelles
+                filterValues.setSelectedRegimes(regimeSpeciauxadapter.getSelectedRegimes());
+                filterValues.setTempsDePreparation(tempsDePreparationSeekBar.getProgress());
+                filterValues.setSelectedProduits(produitsSelectionneAdapter.getSelectedProduits());
+
+                // Convertir filterValues en JSON
+                Gson gson = new Gson();
+                String filterValuesJson = gson.toJson(filterValues);
+
+                System.out.println("filterValuesJson => " + filterValuesJson);
+
+            }
+        });
 
         /* ------------------------------------------------------------------------------------------ */
         Menu appBar = toolbarAppReccette.getMenu();
