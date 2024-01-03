@@ -75,6 +75,10 @@ public class RegimeSpeciauxAdapter extends RecyclerView.Adapter<RegimeSpeciauxAd
         this.clickCount = clickCount;
     }
 
+    public void setSelectedRegimes(List<String> selectedRegimes) {
+        this.selectedRegimes = selectedRegimes;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         Button RegimeSpecialbutton;
 
