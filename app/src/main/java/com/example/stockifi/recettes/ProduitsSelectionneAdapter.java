@@ -63,6 +63,11 @@ public class ProduitsSelectionneAdapter extends RecyclerView.Adapter<ProduitsSel
         return produitsList.size();
     }
 
+    public List<String> getSelectedProduits() {
+        return produitsList;
+    }
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout produitSelectionneLinearLayout;
         Chip produitSelectionneChip;

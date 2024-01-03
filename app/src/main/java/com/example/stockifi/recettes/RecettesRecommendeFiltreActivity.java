@@ -44,6 +44,8 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
     private Button annulerButton;
     private Button appliquerButton;
 
+    private FilterValues filterValues;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_profil, menu);
