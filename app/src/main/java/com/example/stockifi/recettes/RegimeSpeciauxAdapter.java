@@ -71,6 +71,10 @@ public class RegimeSpeciauxAdapter extends RecyclerView.Adapter<RegimeSpeciauxAd
         return regimeList.size();
     }
 
+    public void setClickCount(int clickCount) {
+        this.clickCount = clickCount;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         Button RegimeSpecialbutton;
 
