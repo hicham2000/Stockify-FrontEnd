@@ -18,12 +18,12 @@ public class RegimeSpeciauxAdapter extends RecyclerView.Adapter<RegimeSpeciauxAd
 
     private final List<String> regimeList;
     private int clickCount;
-    private List<String> clickedItems;
+    private List<String> selectedRegimes;
 
     public RegimeSpeciauxAdapter(List<String> regimeList) {
         this.regimeList = regimeList;
         this.clickCount = 0;
-        this.clickedItems = new ArrayList<>();
+        this.selectedRegimes = new ArrayList<String>();
     }
 
     @NonNull
@@ -49,21 +49,22 @@ public class RegimeSpeciauxAdapter extends RecyclerView.Adapter<RegimeSpeciauxAd
                     holder.RegimeSpecialbutton.setTextColor(v.getResources().getColor(android.R.color.black));
                     // Store the clicked item text
                     String clickedItemText = holder.RegimeSpecialbutton.getText().toString();
-                    clickedItems.add(clickedItemText);
+                    selectedRegimes.add(clickedItemText);
                 } else {
                     // Even clicks, change text color to white
                     holder.RegimeSpecialbutton.setTextColor(v.getResources().getColor(android.R.color.white));
                 }
-
-                System.out.println("clicked buttons : " + getClickedItems());
             }
         });
     }
 
     // Method to get the clicked items
-    public List<String> getClickedItems() {
-        return clickedItems;
+
+    public List<String> getSelectedRegimes() {
+        return selectedRegimes;
     }
+
+
 
     @Override
     public int getItemCount() {
