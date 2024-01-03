@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ProduitsSelectionneAdapter extends RecyclerView.Adapter<ProduitsSelectionneAdapter.ViewHolder> {
 
-    private final List<String> produitsList;
+    private List<String> produitsList;
 
     public ProduitsSelectionneAdapter(List<String> produitsList) {
         this.produitsList = produitsList;
@@ -65,6 +65,10 @@ public class ProduitsSelectionneAdapter extends RecyclerView.Adapter<ProduitsSel
 
     public List<String> getSelectedProduits() {
         return produitsList;
+    }
+
+    public void setSelectedProduits(List<String> produitsList) {
+        this.produitsList = produitsList;
     }
 
 
