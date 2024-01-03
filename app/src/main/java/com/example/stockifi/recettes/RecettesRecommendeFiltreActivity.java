@@ -164,6 +164,8 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
                 regimeSpeciauxadapter.setSelectedRegimes(new ArrayList<String>());
                 regimeSpeciauxadapter.notifyDataSetChanged();
 
+                produitsSelectionneAdapter.setSelectedProduits(new ArrayList<String>());
+                produitsSelectionneAdapter.notifyDataSetChanged();
 
             }
         });
