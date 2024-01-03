@@ -13,20 +13,34 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.corbeille.corbeille;
-import com.google.android.material.chip.Chip;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.Chip;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
 
+    private MaterialToolbar toolbarAppReccette;
+    private BottomNavigationView bottomNavigationView;
+    private RecyclerView regimeSpeciauxRecyclerView;
     private SeekBar tempsDePreparationSeekBar;
     private TextView tempsDePreparationTextView;
     private AppCompatButton recetteButtonPortionPlus;
-    private Chip produitSelectionneChip;
+    private RecyclerView produitsSelectionneRecyclerView;
     private Button annulerButton;
     private Button appliquerButton;
 
@@ -64,12 +78,22 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recettes_recommende_filtre);
 
+        toolbarAppReccette = findViewById(R.id.toolbar_recette);
+        bottomNavigationView = findViewById(R.id.androidx_window_recette_recommende_filtre);
+
         tempsDePreparationSeekBar = findViewById(R.id.temps_de_preparation_seekBar);
         tempsDePreparationTextView = findViewById(R.id.temps_de_preparation_textView);
         recetteButtonPortionPlus = findViewById(R.id.recette_Button_portion_plus);
-        produitSelectionneChip = findViewById(R.id.produit_selectionne_chip);
+        produitsSelectionneRecyclerView = findViewById(R.id.produits_selectionne);
         annulerButton = findViewById(R.id.recette_recommende_filtre_annuler_button);
         appliquerButton = findViewById(R.id.recette_recommende_filtre_appliquer_button);
+        regimeSpeciauxRecyclerView = findViewById(R.id.regime_speciaux_recycler_view);
+
+        // Set up the RecyclerView
+        regimeSpeciauxRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        List<String> regimeList = new ArrayList<String>(Arrays.asList("Vegetable", "Sans Lactose", "Sans Porc", "Sans Alcool"));
+        RegimeSpeciauxAdapter regimeSpeciauxadapter = new RegimeSpeciauxAdapter(regimeList);
+        regimeSpeciauxRecyclerView.setAdapter(regimeSpeciauxadapter);
 
         // Add your logic and event listeners here
         // Example:
@@ -77,7 +101,7 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // Handle seek bar progress change
-                tempsDePreparationTextView.setText(progress + " min");
+                tempsDePreparationTextView.setText(String.valueOf(progress) + " min");
             }
 
             @Override
@@ -87,7 +111,7 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // Handle when user stops tracking touch on seek bar
+                // Handle when the user stops tracking touch on the seek bar
             }
         });
 
@@ -98,10 +122,40 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
             }
         });
 
-        // Add event listeners for other buttons as needed
+        // Assuming produitsSelectionneRecyclerView is your RecyclerView
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this);
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        flexboxLayoutManager.setAlignItems(AlignItems.STRETCH);
 
-        // Set up BottomNavigationView
-        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_recette_recommende_filtre);
+        produitsSelectionneRecyclerView.setLayoutManager(flexboxLayoutManager);
+
+        List<String> produitsSelectionnesList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
+        ProduitsSelectionneAdapter produitsSelectionneAdapter = new ProduitsSelectionneAdapter(produitsSelectionnesList);
+        produitsSelectionneRecyclerView.setAdapter(produitsSelectionneAdapter);
+
+        /* ------------------------------------------------------------------------------------------ */
+        Menu appBar = toolbarAppReccette.getMenu();
+        appBar.findItem(R.id.poubelle).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, corbeille.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+        appBar.findItem(R.id.message).setOnMenuItemClickListener(item -> {
+            return true;
+        });
+
+        appBar.findItem(R.id.profil1).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, ProfilActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+        // Set up the BottomNavigationView
+
         Menu navBar = bottomNavigationView.getMenu();
 
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
@@ -112,9 +166,10 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         });
 
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, ListeDeCourse.class);
+            Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
             finish();
+
             return true;
         });
     }
