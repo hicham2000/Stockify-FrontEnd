@@ -1,7 +1,5 @@
 package com.example.stockifi.recettes;
 
-import static androidx.test.InstrumentationRegistry.getContext;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,11 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.stockifi.BackendManager;
 import com.example.stockifi.R;
-import com.example.stockifi.corbeille.corbeille;
-import com.example.stockifi.recettes.RecetteModel;
 
 import java.util.ArrayList;
 import java.util.List;

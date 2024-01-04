@@ -6,6 +6,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.recettes.RecetteModel;
+import com.example.stockifi.recettes.RecettesRecommendeesAsyncTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -299,23 +300,10 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void recupererRecettesRecommendees(long userId, BackendResponseCallback callback){
-        String url = getFullUrl(ENDPOINT + "/recommendations/Recettes/" + userId);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        callback.onError(e);
-                    }
-                },
-                callback::onError);
-
-        requestQueue.add(jsonObjectRequest);
+    public void recupererRecettesRecommendees(long userId, BackendResponseCallback callback) {
+        new RecettesRecommendeesAsyncTask(BASE_URL, callback, requestQueue, ENDPOINT).execute(userId);
     }
+
 
     public interface BackendResponseCallback {
         void onSuccess(JSONObject response) throws JSONException;
