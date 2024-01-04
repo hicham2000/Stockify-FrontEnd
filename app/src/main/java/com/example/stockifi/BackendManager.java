@@ -304,7 +304,7 @@ public class BackendManager {
         new RecettesRecommendeesAsyncTask(BASE_URL, callback, requestQueue, ENDPOINT).execute(userId);
     }
 
-    public void ajouterRecetteAuFavoris(long userId,long recetteId, BackendResponseCallback callback){
+    public void ajouterRecetteAuFavoris(long userId, long recetteId, BackendResponseCallback callback){
         String url = getFullUrl( "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(

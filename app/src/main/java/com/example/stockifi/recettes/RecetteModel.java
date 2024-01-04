@@ -75,6 +75,12 @@ public class RecetteModel implements Serializable, Cloneable{
             e.printStackTrace();
         }
     }
+
+    public Long getId() {
+        return id;
+    }
+
+
     public String getImageUrl() {
         return imageUrl;
     }
