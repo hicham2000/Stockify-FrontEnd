@@ -5,19 +5,22 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.recettes.RecetteModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BackendManager {
 
 
     //private static final String BASE_URL = "http://100.89.18.54:1111";
-    //private static final String BASE_URL = "http://10.0.2.2:1111";
+    private static final String BASE_URL = "http://10.0.2.2:1111";
 
-    private static final String BASE_URL = "http://192.168.3.27:1111";
+    //private static final String BASE_URL = "http://192.168.3.27:1111";
 
     private static final String ENDPOINT = "/api";
 
@@ -295,8 +298,6 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
-
-
 
 
     public interface BackendResponseCallback {
