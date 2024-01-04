@@ -323,6 +323,24 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
+    public void supprimerRecetteDeFavoris(long userId,long recetteId, BackendResponseCallback callback){
+        String url = getFullUrl( "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
 
 
     public interface BackendResponseCallback {
