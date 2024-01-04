@@ -299,7 +299,25 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
+    public void recupererRecettesRecommendees(long userId, BackendResponseCallback callback){
+        String url = getFullUrl(ENDPOINT + "/recommendations/Recettes/" + userId);
 
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+
+        requestQueue.add(jsonObjectRequest);
+    }
     public interface BackendResponseCallback {
         void onSuccess(JSONObject response) throws JSONException;
 
