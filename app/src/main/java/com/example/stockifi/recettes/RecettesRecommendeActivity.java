@@ -28,6 +28,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,8 +87,8 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recettes_recommende);
 
-        int currentUser_id = 1;//myApp.getUser_id();
-        //backendManager = new BackendManager(this);
+        int currentUser_id = myApp.getUser_id();
+        backendManager = new BackendManager(this);
 
         toolbarAppReccettesRecommende = findViewById(R.id.toolbar_recettes_recommende);
         gridRecettesRecommende = findViewById(R.id.grid_recettes_recommende);
@@ -102,30 +106,9 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         gridRecettesRecommende.setLayoutManager(layoutManager);
 
-        List<RecetteModel> recetteList = new ArrayList<RecetteModel>();
-
-        recetteList.add(new RecetteModel(
-                "https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/38/YUeirxMLQaeE1h3v3qnM_229%20berry%20blue%20frzn%20dess.jpg",
-                "Low-Fat Berry Blue Frozen Dessert",
-                1485,
-                25,
-                false));
 
 
-        recetteList.add(new RecetteModel(
-                "https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/39/picM9Mhnw.jpg",
-                "Biryani",
-                265,
-                1,
-                true));
-
-        originalRecetteList = new ArrayList<>(recetteList);
-        currentRecetteList = new ArrayList<>(recetteList.size());
-        for (RecetteModel recette : recetteList) {
-            currentRecetteList.add(recette.clone()); // Create a copy
-        }
-
-        RecettesAdapter recettesAdapter = new RecettesAdapter(this, recetteList);
+        RecettesAdapter recettesAdapter = new RecettesAdapter(this, originalRecetteList);
         gridRecettesRecommende.setAdapter(recettesAdapter);
 
         btnFavoris.setOnClickListener(v -> {
