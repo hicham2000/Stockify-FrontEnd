@@ -8,12 +8,18 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.stockifi.BackendManager;
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +27,15 @@ import java.util.List;
 public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.RecetteViewHolder> {
     private List<RecetteModel> recetteList;
     private Context context;
+    private BackendManager backendManager;
+    private MyApp myApp;
 
-    public RecettesAdapter(Context context, List<RecetteModel> recetteList) {
+    // Constructor
+    public RecettesAdapter(Context context, List<RecetteModel> recetteList, BackendManager backendManager, MyApp myApp) {
         this.context = context;
         this.recetteList = recetteList;
+        this.backendManager = backendManager;
+        this.myApp = myApp;
     }
 
     public void setRecetteList(List<RecetteModel> recetteList) {
@@ -67,6 +78,28 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
                     R.drawable.heart_vector_checked :
                     R.drawable.heart_vector_normal;
             holder.checkBoxFavoris.setBackgroundResource(newBackgroundDrawable);
+
+            if(isChecked) {
+
+                int currentUser_id = 1; //myApp.getUser_id();
+                Long recetteId = recette.getId();
+
+               backendManager.ajouterRecetteAuFavoris((long) currentUser_id, (long) recetteId, new BackendManager.BackendResponseCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) throws JSONException {
+                        Toast.makeText(context, "recette ajouté au Favoris avec succes", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        // Handle the error and show a Toast message
+                        String errorMessage = "Error retrieving recommended recipes: " + error.getMessage();
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+
 
             // You may also want to update the checked state in your data model
             recette.setFavoris(isChecked);

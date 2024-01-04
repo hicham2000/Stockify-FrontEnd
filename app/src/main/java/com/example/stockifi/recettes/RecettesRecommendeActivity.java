@@ -123,7 +123,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
                         originalRecetteList.add(recette);
                         System.out.println("originalRecetteList => " + originalRecetteList);
 
-                        RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList);
+                        RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
                         gridRecettesRecommende.setAdapter(recettesAdapter);
                     }
                 }
