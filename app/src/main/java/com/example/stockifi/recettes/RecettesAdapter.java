@@ -97,6 +97,23 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
                         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 });
+            } else {
+                int currentUser_id = 1; //myApp.getUser_id();
+                Long recetteId = recette.getId();
+
+                backendManager.supprimerRecetteDeFavoris((long) currentUser_id, (long) recetteId, new BackendManager.BackendResponseCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) throws JSONException {
+                        Toast.makeText(context, "recette ajouté au Favoris avec succes", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        // Handle the error and show a Toast message
+                        String errorMessage = "Error retrieving recommended recipes: " + error.getMessage();
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
 
