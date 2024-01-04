@@ -2,6 +2,7 @@ package com.example.stockifi.recettes;
 
 import static androidx.test.InstrumentationRegistry.getContext;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -38,6 +39,9 @@ import java.util.List;
 
 public class RecettesRecommendeActivity extends AppCompatActivity {
 
+    private RecettesAdapter recettesAdapter;
+
+    private Context context = this;
     private RecyclerView gridRecettesRecommende;
     private MaterialToolbar toolbarAppReccettesRecommende;
     private ImageView imageViewFilter;
@@ -89,7 +93,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recettes_recommende);
 
         int currentUser_id = 1;//myApp.getUser_id();
-        backendManager = new BackendManager(this);
+        backendManager = new BackendManager(context);
 
         toolbarAppReccettesRecommende = findViewById(R.id.toolbar_recettes_recommende);
         gridRecettesRecommende = findViewById(R.id.grid_recettes_recommende);
@@ -118,6 +122,9 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
                         RecetteModel recette = new RecetteModel(recetteObject);
                         originalRecetteList.add(recette);
                         System.out.println("originalRecetteList => " + originalRecetteList);
+
+                        RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList);
+                        gridRecettesRecommende.setAdapter(recettesAdapter);
                     }
                 }
             }
@@ -129,9 +136,6 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
                 Toast.makeText(RecettesRecommendeActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
-
-        RecettesAdapter recettesAdapter = new RecettesAdapter(this, originalRecetteList);
-        gridRecettesRecommende.setAdapter(recettesAdapter);
 
         btnFavoris.setOnClickListener(v -> {
             // Filter the list to show only recipes with isFavoris == true
