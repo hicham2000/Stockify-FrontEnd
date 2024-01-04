@@ -305,7 +305,7 @@ public class BackendManager {
     }
 
     public void ajouterRecetteAuFavoris(long userId,long recetteId, BackendResponseCallback callback){
-        String url = getFullUrl( "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId;
+        String url = getFullUrl( "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
@@ -324,7 +324,7 @@ public class BackendManager {
     }
 
     public void supprimerRecetteDeFavoris(long userId,long recetteId, BackendResponseCallback callback){
-        String url = getFullUrl( "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId;
+        String url = getFullUrl( "/Utilisateurs/" + userId + "/recetteFavoris/"+ recetteId);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.DELETE,
