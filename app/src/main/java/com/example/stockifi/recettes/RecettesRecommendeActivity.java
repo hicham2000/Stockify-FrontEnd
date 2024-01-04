@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +50,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
 
     private BackendManager backendManager;
 
-    private List<RecetteModel> originalRecetteList; // Store the original list of recipes
+    private List<RecetteModel> originalRecetteList = new ArrayList<RecetteModel>(); // Store the original list of recipes
     private List<RecetteModel> currentRecetteList; // Store the current list of recipes displayed
 
     @Override
@@ -87,7 +88,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recettes_recommende);
 
-        int currentUser_id = myApp.getUser_id();
+        int currentUser_id = 1;//myApp.getUser_id();
         backendManager = new BackendManager(this);
 
         toolbarAppReccettesRecommende = findViewById(R.id.toolbar_recettes_recommende);
@@ -106,7 +107,28 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         gridRecettesRecommende.setLayoutManager(layoutManager);
 
+        backendManager.recupererRecettesRecommendees(currentUser_id, new BackendManager.BackendResponseCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws JSONException {
+                System.out.println("response => " + response);
+                JSONArray recettesArray = response.getJSONArray("recettes");
+                if (recettesArray.length() > 0) {
+                    for(int i = 0; i < recettesArray.length(); i++){
+                        JSONObject recetteObject = recettesArray.getJSONObject(i);
+                        RecetteModel recette = new RecetteModel(recetteObject);
+                        originalRecetteList.add(recette);
+                        System.out.println("originalRecetteList => " + originalRecetteList);
+                    }
+                }
+            }
 
+            @Override
+            public void onError(Exception error) {
+                // Handle the error and show a Toast message
+                String errorMessage = "Error retrieving recommended recipes: " + error.getMessage();
+                Toast.makeText(RecettesRecommendeActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         RecettesAdapter recettesAdapter = new RecettesAdapter(this, originalRecetteList);
         gridRecettesRecommende.setAdapter(recettesAdapter);

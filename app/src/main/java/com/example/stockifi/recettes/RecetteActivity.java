@@ -181,7 +181,7 @@ public class RecetteActivity extends AppCompatActivity {
 
 
         //Recette Similaires, Recycler view
-        List<RecetteModel> recetteSimilairesList = new ArrayList<RecetteModel>();
+        /*List<RecetteModel> recetteSimilairesList = new ArrayList<RecetteModel>();
 
         recetteSimilairesList.add(new RecetteModel(
                 "https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/38/YUeirxMLQaeE1h3v3qnM_229%20berry%20blue%20frzn%20dess.jpg",
@@ -212,7 +212,7 @@ public class RecetteActivity extends AppCompatActivity {
         recettesSimilairesAdapter = new RecettesSimilairesAdapter(this, recetteSimilairesList);
 
         // Set the adapter to your RecyclerView
-        recyclerSimilaires.setAdapter(recettesSimilairesAdapter);
+        recyclerSimilaires.setAdapter(recettesSimilairesAdapter);*/
 
 
         /* ------------------------------------------------------------------------------------------ */
