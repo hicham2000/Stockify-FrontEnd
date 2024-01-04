@@ -31,10 +31,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
     }
 
     public void setRecetteList(List<RecetteModel> recetteList) {
-        this.recetteList = new ArrayList<>(this.recetteList.size());
-        for (RecetteModel recette : recetteList){
-            this.recetteList.add(recette.clone());
-        }
+        this.recetteList = new ArrayList<>(this.recetteList);
     }
 
     @NonNull

@@ -301,7 +301,6 @@ public class BackendManager {
 
     public void recupererRecettesRecommendees(long userId, BackendResponseCallback callback){
         String url = getFullUrl(ENDPOINT + "/recommendations/Recettes/" + userId);
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -315,9 +314,9 @@ public class BackendManager {
                 },
                 callback::onError);
 
-
         requestQueue.add(jsonObjectRequest);
     }
+
     public interface BackendResponseCallback {
         void onSuccess(JSONObject response) throws JSONException;
 
