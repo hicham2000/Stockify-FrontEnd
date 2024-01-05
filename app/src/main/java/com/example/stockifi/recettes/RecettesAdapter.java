@@ -2,6 +2,7 @@ package com.example.stockifi.recettes;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.RecetteViewHolder> {
+    private final String TAG = getClass().getSimpleName();
     private List<RecetteModel> recetteList;
     private Context context;
     private BackendManager backendManager;
@@ -73,6 +75,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
         holder.checkBoxFavoris.setOnCheckedChangeListener(null); // Remove previous listener to avoid callback conflicts
         holder.checkBoxFavoris.setChecked(recette.isFavoris());
         holder.checkBoxFavoris.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Log.d(TAG, "checkBoxFavoris Clicked!, isChecked: " + isChecked);
             // Update background drawable when checked state changes
             int newBackgroundDrawable = isChecked ?
                     R.drawable.heart_vector_checked :
