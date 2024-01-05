@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -49,6 +50,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
     private Button btnFavoris;
     private Button btnFiltre;
     private BottomNavigationView bottomNavigationView;
+    private ProgressBar loadingProgressBar;
 
     private MyApp myApp = (MyApp) getApplication();
 
@@ -95,6 +97,8 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         int currentUser_id = 1;//myApp.getUser_id();
         backendManager = new BackendManager(context);
 
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
+
         toolbarAppReccettesRecommende = findViewById(R.id.toolbar_recettes_recommende);
         gridRecettesRecommende = findViewById(R.id.grid_recettes_recommende);
         imageViewFilter = findViewById(R.id.imageViewFilter);
@@ -111,34 +115,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         gridRecettesRecommende.setLayoutManager(layoutManager);
 
-        recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
-        gridRecettesRecommende.setAdapter(recettesAdapter);
-        System.out.println("out: originalRecetteList => " + originalRecetteList.hashCode());
-
-        backendManager.recupererRecettesRecommendees(currentUser_id, new BackendManager.BackendResponseCallback() {
-            @Override
-            public void onSuccess(JSONObject response) throws JSONException {
-                JSONArray recettesArray = response.getJSONArray("recettes");
-                if (recettesArray.length() > 0) {
-                    for(int i = 0; i < recettesArray.length(); i++){
-                        JSONObject recetteObject = recettesArray.getJSONObject(i);
-                        RecetteModel recette = new RecetteModel(recetteObject);
-                        System.out.println("recette.ImageUrl => " + recette.getImageUrl());
-                        originalRecetteList.add(recette);
-                    }
-                }
-                System.out.println("inside: originalRecetteList => " + originalRecetteList.hashCode());
-                recettesAdapter.setRecetteList(originalRecetteList);
-                recettesAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onError(Exception error) {
-                // Handle the error and show a Toast message
-                String errorMessage = "Error retrieving recommended recipes: " + error.getMessage();
-                Toast.makeText(RecettesRecommendeActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-            }
-        });
+        loadData();
 
         btnFavoris.setOnClickListener(v -> {
             // Filter the list to show only recipes with isFavoris == true
@@ -186,8 +163,6 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         });
 
 
-
-
         //-------------------------
 
         // Set up the BottomNavigationView
@@ -205,5 +180,38 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             return true;
         });
 
+    }
+
+    private void loadData() {
+        // Show the loading bar
+        loadingProgressBar.setVisibility(View.VISIBLE);
+
+        int currentUser_id = 1;//myApp.getUser_id();
+
+        // Perform data retrieval
+        backendManager.recupererRecettesRecommendees(currentUser_id, new BackendManager.BackendResponseCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws JSONException {
+                loadingProgressBar.setVisibility(View.GONE);
+                JSONArray recettesArray = response.getJSONArray("recettes");
+                if (recettesArray.length() > 0) {
+                    for(int i = 0; i < recettesArray.length(); i++){
+                        JSONObject recetteObject = recettesArray.getJSONObject(i);
+                        RecetteModel recette = new RecetteModel(recetteObject);
+                        originalRecetteList.add(recette);
+                    }
+                }
+
+                recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
+                gridRecettesRecommende.setAdapter(recettesAdapter);
+            }
+
+            @Override
+            public void onError(Exception error) {
+                loadingProgressBar.setVisibility(View.GONE);
+                String errorMessage = "Error retrieving recommended recipes: " + error.getMessage();
+                Toast.makeText(RecettesRecommendeActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
