@@ -364,6 +364,32 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
+    public void recupererRecettesSimilaires(long userId, long recetteId, @NonNull BackendResponseCallback callback) {
+        String url = getFullUrl(ENDPOINT + "/recommendations/RecettesSimilaires/" + recetteId + "?user_id=" + userId);
+
+        int timeout = 10000;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                timeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+
+        requestQueue.add(jsonObjectRequest);
+    }
 
     public void ajouterRecetteAuFavoris(long userId, long recetteId, BackendResponseCallback callback){
         String url = getFullUrl( ENDPOINT + "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId);
