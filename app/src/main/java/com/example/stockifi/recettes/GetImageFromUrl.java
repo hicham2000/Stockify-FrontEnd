@@ -2,6 +2,7 @@ package com.example.stockifi.recettes;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.widget.ImageView;
 import android.os.AsyncTask;
 

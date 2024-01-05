@@ -1,19 +1,15 @@
 package com.example.stockifi;
 
 import android.content.Context;
+
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.stockifi.recettes.RecetteModel;
-import com.example.stockifi.recettes.RecettesRecommendeesAsyncTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BackendManager {
 
@@ -301,7 +297,30 @@ public class BackendManager {
     }
 
     public void recupererRecettesRecommendees(long userId, BackendResponseCallback callback) {
-        new RecettesRecommendeesAsyncTask(BASE_URL, callback, requestQueue, ENDPOINT).execute(userId);
+        String url = "http://10.0.2.2:1111/api/recommendations/Recettes/1";//getFullUrl(endpoint + "/recommendations/Recettes/" + userId);
+
+        int timeout = 10000;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                timeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+
+        requestQueue.add(jsonObjectRequest);
     }
 
     public void ajouterRecetteAuFavoris(long userId, long recetteId, BackendResponseCallback callback){
