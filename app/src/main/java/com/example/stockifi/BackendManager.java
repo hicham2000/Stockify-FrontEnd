@@ -297,7 +297,7 @@ public class BackendManager {
     }
 
     public void recupererRecettesRecommendees(long userId, BackendResponseCallback callback) {
-        String url = "http://10.0.2.2:1111/api/recommendations/Recettes/1";//getFullUrl(endpoint + "/recommendations/Recettes/" + userId);
+        String url = getFullUrl(ENDPOINT + "/recommendations/Recettes/" + userId);
 
         int timeout = 10000;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
