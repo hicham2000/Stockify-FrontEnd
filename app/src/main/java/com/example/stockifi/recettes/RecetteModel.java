@@ -1,7 +1,5 @@
 package com.example.stockifi.recettes;
 
-import com.android.volley.toolbox.JsonObjectRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +15,7 @@ public class RecetteModel implements Serializable, Cloneable{
     private String description;
     private int duration;
     private int ingredientsMissing;
+    private int quantiteEnStock;
     private List<IngredientInfo> ingredientsList = new ArrayList<>();
     private ValeurNutritionnel valeurNutritionnel;
     private boolean isFavoris;
@@ -44,6 +43,7 @@ public class RecetteModel implements Serializable, Cloneable{
             this.recetteName = recetteObject.getString("intitule");
             this.description = recetteObject.getString("description");
             this.duration = recetteObject.getInt("dureeTotal");
+            this.quantiteEnStock = recetteObject.getInt("quantiteEnStock");
             this.imageUrl = recetteObject.getString("imageUrl");
             this.ingredientsMissing = recetteObject.getInt("nombreIngredientsManquantes");
             this.isFavoris = recetteObject.getBoolean("favoris");
