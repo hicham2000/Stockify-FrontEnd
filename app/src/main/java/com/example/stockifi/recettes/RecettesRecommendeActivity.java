@@ -20,6 +20,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,11 +37,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RecettesRecommendeActivity extends AppCompatActivity {
+    private final String TAG = getClass().getSimpleName();
 
     private SearchView searchRecettesRecommendees;
-    private RecettesAdapter recettesAdapter;
     private Context context = this;
     private RecyclerView gridRecettesRecommende;
     private MaterialToolbar toolbarAppReccettesRecommende;
@@ -54,8 +57,8 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
 
     private BackendManager backendManager;
 
-    private List<RecetteModel> originalRecetteList = new ArrayList<RecetteModel>(); // Store the original list of recipes
-    private List<RecetteModel> currentRecetteList; // Store the current list of recipes displayed
+    private List<RecetteModel> originalRecetteList = new ArrayList<RecetteModel>();
+    private List<RecetteModel> favorisRecetteList = new ArrayList<RecetteModel>() ;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,19 +118,22 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         gridRecettesRecommende.setLayoutManager(layoutManager);
 
         btnFavoris.setOnClickListener(v -> {
-            // Filter the list to show only recipes with isFavoris == true
-            List<RecetteModel> favorisList = new ArrayList<>();
+            RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
+            gridRecettesRecommende.setAdapter(recettesAdapter);
+
+            favorisRecetteList = new ArrayList<RecetteModel>();
             for (RecetteModel recette : originalRecetteList) {
                 if (recette.isFavoris()) {
-                    favorisList.add(recette); // Create a copy
+                    favorisRecetteList.add(recette); // Create a copy
                 }
             }
-
-            // Update the RecyclerView with the filtered list
-            currentRecetteList = new ArrayList<>(favorisList);
-            recettesAdapter.setRecetteList(currentRecetteList);
+            gridRecettesRecommende.setAdapter(recettesAdapter);
+            recettesAdapter.setRecetteList(favorisRecetteList);
             recettesAdapter.notifyDataSetChanged();
 
+            Log.d(TAG, "favorisRecetteList: " + favorisRecetteList.stream().map(RecetteModel::hashCode).collect(Collectors.toList()));
+
+            favorisRecetteList = new ArrayList<RecetteModel>();
             btnFavoris.setBackgroundResource(R.drawable.ellipse_menu);
 
             btnTous.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
@@ -136,11 +142,13 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         });
 
         btnTous.setOnClickListener(v -> {
-            // Update the RecyclerView with the original unfiltered list
-            currentRecetteList = new ArrayList<>(originalRecetteList);
+            RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
+            gridRecettesRecommende.setAdapter(recettesAdapter);
 
-            recettesAdapter.setRecetteList(currentRecetteList);
+            recettesAdapter.setRecetteList(originalRecetteList);
             recettesAdapter.notifyDataSetChanged();
+
+            Log.d(TAG, "originalRecetteList: " + originalRecetteList.stream().map(RecetteModel::hashCode).collect(Collectors.toList()));
 
             btnTous.setBackgroundResource(R.drawable.ellipse_menu);
 
@@ -204,14 +212,20 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
                 }
             }
         }
+
+        RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
+        gridRecettesRecommende.setAdapter(recettesAdapter);
         recettesAdapter.setRecetteList(searchedRecettes);
         recettesAdapter.notifyDataSetChanged();
     }
 
 
     private void loadData() {
+        originalRecetteList = new ArrayList<RecetteModel>();
+
         // Show the loading bar
         loadingProgressBar.setVisibility(View.VISIBLE);
+        gridRecettesRecommende.setVisibility(View.GONE);
 
         int currentUser_id = 1;//myApp.getUser_id();
 
@@ -219,7 +233,6 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         backendManager.recupererRecettesRecommendees(currentUser_id, new BackendManager.BackendResponseCallback() {
             @Override
             public void onSuccess(JSONObject response) throws JSONException {
-                loadingProgressBar.setVisibility(View.GONE);
                 JSONArray recettesArray = response.getJSONArray("recettes");
                 if (recettesArray.length() > 0) {
                     for(int i = 0; i < recettesArray.length(); i++){
@@ -227,10 +240,15 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
                         RecetteModel recette = new RecetteModel(recetteObject);
                         originalRecetteList.add(recette);
                     }
+
+                    RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
+                    gridRecettesRecommende.setAdapter(recettesAdapter);
+                    recettesAdapter.setRecetteList(originalRecetteList);
                 }
 
-                recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
-                gridRecettesRecommende.setAdapter(recettesAdapter);
+
+                loadingProgressBar.setVisibility(View.GONE);
+                gridRecettesRecommende.setVisibility(View.VISIBLE);
             }
 
             @Override
