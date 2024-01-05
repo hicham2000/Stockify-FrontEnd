@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/appBarAjout">
+        android:id="@+id/appBarAjout_info">
 
         <androidx.appcompat.widget.Toolbar
 
@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize">
 
             <ImageView
-                android:id="@+id/toolbar_back_button_ajout"
+                android:id="@+id/toolbar_back_button_ajout_info"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/fleche"
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@string/ajout_prod"
+                android:text="@string/info_prod"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_below="@+id/appBarAjout">
+        android:layout_below="@+id/appBarAjout_info">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,7 +62,7 @@
 
             <ImageView
                 android:background="@drawable/rond_image"
-                android:id="@+id/imageProfil"
+                android:id="@+id/imageProfil_info"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/profil"
@@ -89,16 +89,12 @@
                     android:textSize="@dimen/dimenTexte"
                     />
 
-                <EditText
-                    android:id="@+id/editTexte_t"
-                    style="@style/EditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ellipse"
-
+                <TextView
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="Stock Info"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/dimenTexte"
                     />
 
             </LinearLayout>
@@ -123,7 +119,7 @@
                     />
 
                 <EditText
-                    android:id="@+id/quant_ajoutModif"
+                    android:id="@+id/quant_ajoutModif_info"
                     android:layout_width="120dp"
                     android:layout_height="40dp"
 
@@ -150,7 +146,7 @@
 
 
 
-                        android:id="@+id/spinner_poid_ajoutModif1"
+                        android:id="@+id/spinner_poid_ajoutModif1_info"
                         android:layout_width="100dp"
                         android:layout_height="60dp"
                         android:padding="4dp"
@@ -199,7 +195,7 @@
 
 
 
-                        android:id="@+id/spinner_categorie"
+                        android:id="@+id/spinner_categorie_info"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:padding="10dp"
@@ -235,7 +231,7 @@
                     />
 
                 <EditText
-                    android:id="@+id/Prix_produit"
+                    android:id="@+id/Prix_produit_info"
                     android:layout_width="120dp"
                     android:layout_height="40dp"
 
@@ -285,7 +281,7 @@
                     />
 
                 <LinearLayout
-                    android:id="@+id/peremtionDateProduit"
+                    android:id="@+id/peremtionDateProduit_info"
                     android:layout_width="160dp"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
@@ -299,7 +295,7 @@
                     >
 
                     <TextView
-                        android:id="@+id/peremtiontextproduit"
+                        android:id="@+id/peremtiontextproduit_info"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
 
@@ -341,7 +337,7 @@
                     />
 
                 <LinearLayout
-                    android:id="@+id/AlerteProd"
+                    android:id="@+id/AlerteProd_info"
                     android:layout_width="160dp"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
@@ -355,7 +351,7 @@
                     >
 
                     <TextView
-                        android:id="@+id/alertetextproduit"
+                        android:id="@+id/alertetextproduit_info"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
 
@@ -399,7 +395,7 @@
                     />
 
                 <EditText
-                    android:id="@+id/quantiteCritique"
+                    android:id="@+id/quantiteCritique_info"
                     android:layout_width="120dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
@@ -413,34 +409,7 @@
 
                     android:background="@drawable/ellipse"/>
 
-                <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
 
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-
-                    android:background="@drawable/ellipse"
-                    >
-
-
-                    <Spinner
-
-
-
-                        android:id="@+id/spinnerquantitecriti"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:padding="4dp"
-
-                        style="@style/EditTextStyle"
-                        android:entries="@array/poids"
-
-
-                        />
-
-
-                </RelativeLayout>
             </LinearLayout>
 
 
@@ -457,7 +426,7 @@
                 android:layout_marginBottom="200dp">
 
                 <Button
-                    android:id="@+id/button_annulerprod"
+                    android:id="@+id/button_annulerprod_info"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
 
@@ -465,7 +434,7 @@
                     android:textColor="@color/black"/>
 
                 <Button
-                    android:id="@+id/button_validerProd"
+                    android:id="@+id/button_validerProd_info"
                     android:layout_width="140dp"
                     android:layout_marginLeft="20dp"
                     android:layout_height="wrap_content"

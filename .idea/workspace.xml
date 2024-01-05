@@ -10,7 +10,17 @@
           <theme>@style/Theme.Stockifi</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_changer_password.xml">
+        <config>
+          <theme>@style/Theme.Stockifi</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_informations_produit_stock.xml">
+        <config>
+          <theme>@style/Theme.Stockifi</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
         <config>
           <theme>@style/Theme.Stockifi</theme>
         </config>
@@ -25,6 +35,26 @@
           <theme>@style/Theme.Stockifi</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_profil.xml">
+        <config>
+          <theme>@style/Theme.Stockifi</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/corbeille.xml">
+        <config>
+          <theme>@style/Theme.Stockifi</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/liste_produit_globale.xml">
+        <config>
+          <theme>@style/Theme.Stockifi</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/liste_view_corbeille_produit.xml">
+        <config>
+          <theme>@style/Theme.Stockifi</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
@@ -32,13 +62,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1870b888-81c8-4aaf-9207-e56bd77a6174" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Gestion_Produit/InformationsProduitStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Gestion_Produit/ModifierProduitStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_informations_produit_stock.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifier_produit_stock.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ajouter_produit_liste_produit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ajouter_produit_liste_produit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_informations_produit_stock.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_informations_produit_stock.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifier_produit_stock.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifier_produit_stock.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +168,7 @@
       <recent name="com.example.stockifi.Gestion_Produit" />
     </key>
   </component>
-  <component name="RunManager" selected="Android App.ModifierProduitStock">
+  <component name="RunManager" selected="Android App.Stockify">
     <configuration name="AjouterProduit" type="AndroidRunConfigurationType" factoryName="Android App" temporary="true">
       <module name="Stockify.app.main" />
       <option name="DEPLOY" value="true" />

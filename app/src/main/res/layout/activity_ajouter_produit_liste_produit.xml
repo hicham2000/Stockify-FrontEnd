@@ -413,34 +413,6 @@
 
                     android:background="@drawable/ellipse"/>
 
-                <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-
-                    android:background="@drawable/ellipse"
-                    >
-
-
-                    <Spinner
-
-
-
-                        android:id="@+id/spinnerquantitecriti"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:padding="4dp"
-
-                        style="@style/EditTextStyle"
-                        android:entries="@array/poids"
-
-
-                        />
-
-
-                </RelativeLayout>
             </LinearLayout>
 
 

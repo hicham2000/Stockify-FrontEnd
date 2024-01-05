@@ -208,5 +208,7 @@ la quantite critique</string>
         <item>Congélateur</item>
         <item>garde-manger</item>
     </string-array>
+    <string name="modif_prod">Modifier Produit</string>
+    <string name="info_prod">Information Produit</string>
 
 </resources>
