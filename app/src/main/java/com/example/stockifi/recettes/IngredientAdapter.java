@@ -16,12 +16,13 @@ import com.example.stockifi.Liste_Course.AjouterProduit;
 import com.example.stockifi.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder> {
     private Context context;
-    private ArrayList<String> ingredients;
+    private List<RecetteModel.IngredientInfo> ingredients;
 
-    public IngredientAdapter(Context context, ArrayList<String> ingredients) {
+    public IngredientAdapter(Context context, List<RecetteModel.IngredientInfo> ingredients) {
         this.context = context;
         this.ingredients = ingredients;
     }
@@ -36,10 +37,13 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
 
     @Override
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
-        String ingredient = this.ingredients.get(position);
-        holder.ingredientTextView.setText(ingredient);
+        RecetteModel.IngredientInfo ingredient = this.ingredients.get(position);
 
-        if (position == 1) {
+        holder.ingredientTextView.setText(String.valueOf(ingredient.getQuantity())
+                + " " +
+                ingredient.getIntitule());
+
+        if (!ingredient.isEnough()) {
             holder.ingredientValidImageView.setVisibility(View.GONE);
             holder.ingredientNotValidImageView.setVisibility(View.VISIBLE);
             holder.AddIngredientImageButton.setVisibility(View.VISIBLE);
