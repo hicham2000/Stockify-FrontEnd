@@ -111,22 +111,25 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         gridRecettesRecommende.setLayoutManager(layoutManager);
 
+        recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
+        gridRecettesRecommende.setAdapter(recettesAdapter);
+        System.out.println("out: originalRecetteList => " + originalRecetteList.hashCode());
+
         backendManager.recupererRecettesRecommendees(currentUser_id, new BackendManager.BackendResponseCallback() {
             @Override
             public void onSuccess(JSONObject response) throws JSONException {
-                System.out.println("response => " + response);
                 JSONArray recettesArray = response.getJSONArray("recettes");
                 if (recettesArray.length() > 0) {
                     for(int i = 0; i < recettesArray.length(); i++){
                         JSONObject recetteObject = recettesArray.getJSONObject(i);
                         RecetteModel recette = new RecetteModel(recetteObject);
+                        System.out.println("recette.ImageUrl => " + recette.getImageUrl());
                         originalRecetteList.add(recette);
-                        System.out.println("originalRecetteList => " + originalRecetteList);
-
-                        RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
-                        gridRecettesRecommende.setAdapter(recettesAdapter);
                     }
                 }
+                System.out.println("inside: originalRecetteList => " + originalRecetteList.hashCode());
+                recettesAdapter.setRecetteList(originalRecetteList);
+                recettesAdapter.notifyDataSetChanged();
             }
 
             @Override

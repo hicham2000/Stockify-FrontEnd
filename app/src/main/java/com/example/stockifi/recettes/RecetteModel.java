@@ -80,7 +80,6 @@ public class RecetteModel implements Serializable, Cloneable{
         return id;
     }
 
-
     public String getImageUrl() {
         return imageUrl;
     }
