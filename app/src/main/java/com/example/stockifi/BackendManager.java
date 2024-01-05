@@ -2,6 +2,8 @@ package com.example.stockifi;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -296,7 +298,7 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void recupererRecettesRecommendees(long userId, BackendResponseCallback callback) {
+    public void recupererRecettesRecommendees(long userId, @NonNull BackendResponseCallback callback) {
         String url = getFullUrl(ENDPOINT + "/recommendations/Recettes/" + userId);
 
         int timeout = 10000;
@@ -324,7 +326,7 @@ public class BackendManager {
     }
 
     public void ajouterRecetteAuFavoris(long userId, long recetteId, BackendResponseCallback callback){
-        String url = getFullUrl( "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId);
+        String url = getFullUrl( ENDPOINT + "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
@@ -343,7 +345,7 @@ public class BackendManager {
     }
 
     public void supprimerRecetteDeFavoris(long userId,long recetteId, BackendResponseCallback callback){
-        String url = getFullUrl( "/Utilisateurs/" + userId + "/recetteFavoris/"+ recetteId);
+        String url = getFullUrl( ENDPOINT + "/Utilisateurs/" + userId + "/recetteFavoris/"+ recetteId);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.DELETE,

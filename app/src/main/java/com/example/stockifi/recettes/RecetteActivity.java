@@ -1,5 +1,6 @@
 package com.example.stockifi.recettes;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -92,6 +93,7 @@ public class RecetteActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
     }
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +118,7 @@ public class RecetteActivity extends AppCompatActivity {
 
         if (recetteIntent.hasExtra("Recette")) {
             recette = (RecetteModel) recetteIntent.getSerializableExtra("Recette");
+            assert recette != null;
             loadImageAsync(recetteImageView, recette.getImageUrl());
             recetteNomTextView.setText(recette.getRecetteName());
             recetteIngredientsManquantsTextView.setText(recette.getIngredientsMissing() + " ingrédients manquants");
