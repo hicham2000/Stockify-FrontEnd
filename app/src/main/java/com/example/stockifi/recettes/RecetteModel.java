@@ -88,6 +88,10 @@ public class RecetteModel implements Serializable, Cloneable{
         return recetteName;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public int getDuration() {
         return duration;
     }
