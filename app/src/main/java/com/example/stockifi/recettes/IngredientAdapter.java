@@ -39,9 +39,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
         RecetteModel.IngredientInfo ingredient = this.ingredients.get(position);
 
-        holder.ingredientTextView.setText(String.valueOf(ingredient.getQuantity())
-                + " " +
-                ingredient.getIntitule());
+        holder.ingredientTextView.setText(String.valueOf(ingredient.getQuantity()) + " " + ingredient.getIntitule());
 
         if (!ingredient.isEnough()) {
             holder.ingredientValidImageView.setVisibility(View.GONE);
