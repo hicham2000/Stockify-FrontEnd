@@ -167,17 +167,27 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        imageViewFilter.setOnClickListener(v -> {
+
+            btnFiltre.setBackgroundResource(R.drawable.ellipse_menu);
+
+            btnTous.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+            btnFavoris.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+
+            Intent intent = new Intent(RecettesRecommendeActivity.this, RecettesRecommendeFiltreActivity.class);
+            startActivity(intent);
+        });
+
         //-------------------------
         searchRecettesRecommendees.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                searchRecettes(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //searchRecettes(newText);
+                searchRecettes(newText);
                 return true;
             }
         });
