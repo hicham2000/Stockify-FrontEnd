@@ -1,6 +1,7 @@
 package com.example.stockifi.recettes;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,11 +31,16 @@ import com.example.stockifi.corbeille.corbeille;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class RecetteActivity extends AppCompatActivity {
+    private Context context = this;
     private MaterialToolbar toolbarAppReccette;
     private BottomNavigationView bottomNavigationView;
 
@@ -56,6 +63,8 @@ public class RecetteActivity extends AppCompatActivity {
     private InstructionDePreparationAdapter instructionsDePreparationAdapter ;
     private ArrayAdapter<String> valeursNutritionnellesAdapter;
 
+    private RecyclerView recyclerSimilaires;
+
     private TextView carbohydrateTextView;
     private TextView energieTextView;
     private TextView fibreTextView;
@@ -63,8 +72,7 @@ public class RecetteActivity extends AppCompatActivity {
     private TextView proteieTextView;
     private TextView sucreTextView;
 
-    private RecettesSimilairesAdapter recettesSimilairesAdapter;
-    private RecyclerView recyclerSimilaires;
+    private List<RecetteModel> recettesSimilairesList;
 
     private RecetteModel recette;
     private MyApp myApp = (MyApp) getApplication();
@@ -110,7 +118,7 @@ public class RecetteActivity extends AppCompatActivity {
         Intent recetteIntent = getIntent();
 
         int currentUser_id = 1;//myApp.getUser_id();
-        //backendManager = new BackendManager(this);
+        backendManager = new BackendManager(this);
 
         toolbarAppReccette = findViewById(R.id.toolbar_recette);
         bottomNavigationView = findViewById(R.id.androidx_window_recette);
@@ -280,5 +288,35 @@ public class RecetteActivity extends AppCompatActivity {
 
     private void loadImageAsync(ImageView imageView, String imageUrl) {
         new GetImageFromUrl(imageView).execute(imageUrl);
+    }
+
+    private void loadData() throws JSONException {
+        recettesSimilairesList = new ArrayList<>();
+        int currentUser_id = 1;//myApp.getUser_id();
+        long recetteId = recette.getId();
+
+        backendManager.recupererRecettesSimilaires((long) currentUser_id, recetteId, new BackendManager.BackendResponseCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws JSONException {
+                JSONArray recettesArray = response.getJSONArray("recettes");
+                if (recettesArray.length() > 0) {
+                    for(int i = 0; i < recettesArray.length(); i++){
+                        JSONObject recetteObject = recettesArray.getJSONObject(i);
+                        RecetteModel recette = new RecetteModel(recetteObject);
+                        recettesSimilairesList.add(recette);
+                    }
+
+                    RecettesSimilairesAdapter recettesSimilairesAdapter = new RecettesSimilairesAdapter(context, recettesSimilairesList);;
+                    recyclerSimilaires.setAdapter(recettesSimilairesAdapter);
+                }
+
+            }
+
+            @Override
+            public void onError(Exception error) {
+                String errorMessage = "Error retrieving similares recipes: " + error.getMessage();
+                Toast.makeText(RecetteActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

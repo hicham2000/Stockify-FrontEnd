@@ -247,6 +247,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
 
         int currentUser_id = 1;//myApp.getUser_id();
 
+
         Intent intent = getIntent();
         if(intent.hasExtra("filterValuesJson")) {
             String filterValuesJson = (String) intent.getSerializableExtra("filterValuesJson");
