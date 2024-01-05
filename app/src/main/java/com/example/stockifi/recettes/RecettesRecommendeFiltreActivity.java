@@ -143,16 +143,16 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 filterValues = new FilterValues();
 
-                // Mettez à jour les valeurs de filterValues avec les sélections actuelles
                 filterValues.setSelectedRegimes(regimeSpeciauxadapter.getSelectedRegimes());
                 filterValues.setTempsDePreparation(tempsDePreparationSeekBar.getProgress());
                 filterValues.setSelectedProduits(produitsSelectionneAdapter.getSelectedProduits());
 
-                // Convertir filterValues en JSON
                 Gson gson = new Gson();
                 String filterValuesJson = gson.toJson(filterValues);
 
-                System.out.println("filterValuesJson => " + filterValuesJson);
+                Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, RecettesRecommendeActivity.class);
+                intent.putExtra("filterValuesJson", filterValuesJson);
+                startActivity(intent);
 
             }
         });

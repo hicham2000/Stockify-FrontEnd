@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.stockifi.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class InstructionDePreparationAdapter extends RecyclerView.Adapter<InstructionDePreparationAdapter.InstructionDePreparationViewHolder> {
     private Context context;
-    private ArrayList<String> instructionsDePreparation;
+    private List<String> instructionsDePreparation;
 
-    public InstructionDePreparationAdapter(Context context, ArrayList<String> instructions) {
+    public InstructionDePreparationAdapter(Context context, List<String> instructions) {
         this.context = context;
         this.instructionsDePreparation = instructions;
     }

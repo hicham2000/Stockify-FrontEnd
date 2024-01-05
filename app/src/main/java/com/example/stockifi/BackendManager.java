@@ -1,6 +1,7 @@
 package com.example.stockifi;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -13,6 +14,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Map;
 
 public class BackendManager {
@@ -352,6 +355,10 @@ public class BackendManager {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
+
+        byte[] body = (byte[]) jsonObjectRequest.getBody();
+
+        Log.d("BackendManager", "Request Body => " + new String(body));
 
 
         requestQueue.add(jsonObjectRequest);

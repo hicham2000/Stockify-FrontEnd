@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
@@ -35,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -207,7 +211,11 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             return true;
         });
 
-        loadData();
+        try {
+            loadData();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -230,7 +238,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
     }
 
 
-    private void loadData() {
+    private void loadData() throws JSONException {
         originalRecetteList = new ArrayList<RecetteModel>();
 
         // Show the loading bar
@@ -239,34 +247,83 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
 
         int currentUser_id = 1;//myApp.getUser_id();
 
-        // Perform data retrieval
-        backendManager.recupererRecettesRecommendees(currentUser_id, new BackendManager.BackendResponseCallback() {
-            @Override
-            public void onSuccess(JSONObject response) throws JSONException {
-                JSONArray recettesArray = response.getJSONArray("recettes");
-                if (recettesArray.length() > 0) {
-                    for(int i = 0; i < recettesArray.length(); i++){
-                        JSONObject recetteObject = recettesArray.getJSONObject(i);
-                        RecetteModel recette = new RecetteModel(recetteObject);
-                        originalRecetteList.add(recette);
+        Intent intent = getIntent();
+        if(intent.hasExtra("filterValuesJson")) {
+            String filterValuesJson = (String) intent.getSerializableExtra("filterValuesJson");
+            backendManager.recupererRecettesRecommendeesFiltrees(currentUser_id, filterValuesJson, new BackendManager.BackendResponseCallback() {
+                @Override
+                public void onSuccess(JSONObject response) throws JSONException {
+                    JSONArray recettesArray = response.getJSONArray("recettes");
+                    if (recettesArray.length() > 0) {
+                        for(int i = 0; i < recettesArray.length(); i++){
+                            JSONObject recetteObject = recettesArray.getJSONObject(i);
+                            RecetteModel recette = new RecetteModel(recetteObject);
+                            originalRecetteList.add(recette);
+                        }
+
+                        RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
+                        gridRecettesRecommende.setAdapter(recettesAdapter);
+                        recettesAdapter.setRecetteList(originalRecetteList);
                     }
 
-                    RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
-                    gridRecettesRecommende.setAdapter(recettesAdapter);
-                    recettesAdapter.setRecetteList(originalRecetteList);
+                    loadingProgressBar.setVisibility(View.GONE);
+                    gridRecettesRecommende.setVisibility(View.VISIBLE);
                 }
 
+                @Override
+                public void onError(Exception error) {
+                    error.printStackTrace();
+                    loadingProgressBar.setVisibility(View.GONE);
 
-                loadingProgressBar.setVisibility(View.GONE);
-                gridRecettesRecommende.setVisibility(View.VISIBLE);
-            }
+                    if (error instanceof VolleyError) {
+                        VolleyError volleyError = (VolleyError) error;
 
-            @Override
-            public void onError(Exception error) {
-                loadingProgressBar.setVisibility(View.GONE);
-                String errorMessage = "Error retrieving recommended recipes: " + error.getMessage();
-                Toast.makeText(RecettesRecommendeActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-            }
-        });
+                        // Get the error response
+                        NetworkResponse networkResponse = volleyError.networkResponse;
+                        if (networkResponse != null && networkResponse.data != null) {
+                            try {
+                                String errorResponse = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
+                                Log.e("ErrorResponse", errorResponse);
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    String errorMessage = "Error retrieving recommended recipes: " + error.getMessage();
+                    Toast.makeText(RecettesRecommendeActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } else {
+            backendManager.recupererRecettesRecommendees(currentUser_id, new BackendManager.BackendResponseCallback() {
+                @Override
+                public void onSuccess(JSONObject response) throws JSONException {
+                    JSONArray recettesArray = response.getJSONArray("recettes");
+                    if (recettesArray.length() > 0) {
+                        for(int i = 0; i < recettesArray.length(); i++){
+                            JSONObject recetteObject = recettesArray.getJSONObject(i);
+                            RecetteModel recette = new RecetteModel(recetteObject);
+                            originalRecetteList.add(recette);
+                        }
+
+                        RecettesAdapter recettesAdapter = new RecettesAdapter(context, originalRecetteList, backendManager, myApp);
+                        gridRecettesRecommende.setAdapter(recettesAdapter);
+                        recettesAdapter.setRecetteList(originalRecetteList);
+                    }
+
+
+                    loadingProgressBar.setVisibility(View.GONE);
+                    gridRecettesRecommende.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onError(Exception error) {
+                    loadingProgressBar.setVisibility(View.GONE);
+                    String errorMessage = "Error retrieving recommended recipes: " + error.getMessage();
+                    Toast.makeText(RecettesRecommendeActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

@@ -168,6 +168,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/recette_carbohydrate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center_vertical"
@@ -192,6 +193,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/recette_energie"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center_vertical"
@@ -216,6 +218,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/recette_fibre"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center_vertical"
@@ -240,6 +243,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/recette_lipide"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center_vertical"
@@ -264,6 +268,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/recette_protein"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center_vertical"
@@ -288,6 +293,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/recette_sucre"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center_vertical"

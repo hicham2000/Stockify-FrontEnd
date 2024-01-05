@@ -17,6 +17,7 @@ public class RecetteModel implements Serializable, Cloneable{
     private int ingredientsMissing;
     private int quantiteEnStock;
     private List<IngredientInfo> ingredientsList = new ArrayList<>();
+    private List<String> instructionDePreparation = new ArrayList<>();
     private ValeurNutritionnel valeurNutritionnel;
     private boolean isFavoris;
 
@@ -28,6 +29,34 @@ public class RecetteModel implements Serializable, Cloneable{
         private double enegie;
         private double sucre;
         private double fibre;
+
+        public Long getId() {
+            return id;
+        }
+
+        public double getCarbohydrate() {
+            return carbohydrate;
+        }
+
+        public double getEnegie() {
+            return enegie;
+        }
+
+        public double getFibre() {
+            return fibre;
+        }
+
+        public double getLipide() {
+            return lipide;
+        }
+
+        public double getProteine() {
+            return proteine;
+        }
+
+        public double getSucre() {
+            return sucre;
+        }
     }
 
     public static class IngredientInfo implements Serializable {
@@ -35,6 +64,19 @@ public class RecetteModel implements Serializable, Cloneable{
         private String intitule;
         private Double quantity;
         private boolean isEnough;
+
+        public Long getId() {
+            return id;
+        }
+        public String getIntitule() {
+            return intitule;
+        }
+        public Double getQuantity() {
+            return quantity;
+        }
+        public boolean isEnough(){
+            return isEnough;
+        }
     }
 
     public RecetteModel(JSONObject recetteObject) {
@@ -58,6 +100,13 @@ public class RecetteModel implements Serializable, Cloneable{
                 ingredientInfo.quantity = ingredientObject.getDouble("quantity");
                 ingredientInfo.isEnough = ingredientObject.getBoolean("enough");
                 this.ingredientsList.add(ingredientInfo);
+            }
+
+            JSONArray instructionsArray = recetteObject.getJSONArray("instructionsList");
+
+            for (int i = 0; i < instructionsArray.length(); i++) {
+                String instruction = instructionsArray.getString(i);
+                this.instructionDePreparation.add(instruction);
             }
 
             // Extract nutritional values
@@ -109,6 +158,18 @@ public class RecetteModel implements Serializable, Cloneable{
 
     public int getIngredientsMissing() {
         return ingredientsMissing;
+    }
+
+    public List<IngredientInfo> getIngredientsList() {
+        return ingredientsList;
+    }
+
+    public List<String> getInstructionDePreparation() {
+        return instructionDePreparation;
+    }
+
+    public ValeurNutritionnel getValeurNutritionnel() {
+        return valeurNutritionnel;
     }
 
     public boolean isFavoris() {
