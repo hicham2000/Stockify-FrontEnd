@@ -20,6 +20,7 @@
     <color name ="recuperercorbeille">#5A8C7A</color>
     <color name="checkedColor">@color/vertTexte</color>
     <color name="normalColor">#BFFFFFFF</color>
+    <color name="blueProgressBar">#0B2E85</color>
 
 
 </resources>

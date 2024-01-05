@@ -21,7 +21,7 @@ public class RecetteModel implements Serializable, Cloneable{
     private ValeurNutritionnel valeurNutritionnel;
     private boolean isFavoris;
 
-    public static class ValeurNutritionnel {
+    public static class ValeurNutritionnel implements Serializable {
         private Long id;
         private double proteine;
         private double carbohydrate;
@@ -31,7 +31,7 @@ public class RecetteModel implements Serializable, Cloneable{
         private double fibre;
     }
 
-    public static class IngredientInfo {
+    public static class IngredientInfo implements Serializable {
         private Long id;
         private String intitule;
         private Double quantity;

@@ -39,7 +39,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
     }
 
     public void setRecetteList(List<RecetteModel> recetteList) {
-        this.recetteList = new ArrayList<>(this.recetteList);
+        this.recetteList = recetteList;
     }
 
     @NonNull
@@ -116,19 +116,17 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
                 });
             }
 
-
-
-            // You may also want to update the checked state in your data model
             recette.setFavoris(isChecked);
         });
 
         holder.recetteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), RecetteActivity.class);
+                Intent intent = new Intent(context, RecetteActivity.class);
                 // Replace put with putExtra
+                System.out.println("recette => " + recette);
                 intent.putExtra("Recette", recette);
-                v.getContext().startActivity(intent);
+                context.startActivity(intent);
             }
         });
     }

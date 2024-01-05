@@ -1,25 +1,22 @@
 package com.example.stockifi.recettes;
 
-import static androidx.test.InstrumentationRegistry.getContext;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.core.content.ContextCompat;
 
 
 import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
-import com.example.stockifi.LoginActivity;
 import com.example.stockifi.ProfilActivity;
-import com.example.stockifi.recettes.RecettesAdapter;
 import com.example.stockifi.R;
 import com.example.stockifi.corbeille.corbeille;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -40,8 +38,8 @@ import java.util.List;
 
 public class RecettesRecommendeActivity extends AppCompatActivity {
 
+    private SearchView searchRecettesRecommendees;
     private RecettesAdapter recettesAdapter;
-
     private Context context = this;
     private RecyclerView gridRecettesRecommende;
     private MaterialToolbar toolbarAppReccettesRecommende;
@@ -88,7 +86,6 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +95,8 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         backendManager = new BackendManager(context);
 
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
+
+        searchRecettesRecommendees = findViewById(R.id.search_recettes_recommende);
 
         toolbarAppReccettesRecommende = findViewById(R.id.toolbar_recettes_recommende);
         gridRecettesRecommende = findViewById(R.id.grid_recettes_recommende);
@@ -114,8 +113,6 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         // Set up the RecyclerView
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         gridRecettesRecommende.setLayoutManager(layoutManager);
-
-        loadData();
 
         btnFavoris.setOnClickListener(v -> {
             // Filter the list to show only recipes with isFavoris == true
@@ -162,8 +159,20 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
         //-------------------------
+        searchRecettesRecommendees.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchRecettes(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //searchRecettes(newText);
+                return true;
+            }
+        });
 
         // Set up the BottomNavigationView
 
@@ -180,7 +189,25 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             return true;
         });
 
+        loadData();
+
     }
+
+    private void searchRecettes(String query) {
+        List<RecetteModel> searchedRecettes = new ArrayList<>();
+        if(query.isEmpty()) {
+            searchedRecettes = originalRecetteList;
+        } else {
+            for (RecetteModel recette : originalRecetteList) {
+                if (recette.getRecetteName().toLowerCase().contains(query.toLowerCase())) {
+                    searchedRecettes.add(recette);
+                }
+            }
+        }
+        recettesAdapter.setRecetteList(searchedRecettes);
+        recettesAdapter.notifyDataSetChanged();
+    }
+
 
     private void loadData() {
         // Show the loading bar
