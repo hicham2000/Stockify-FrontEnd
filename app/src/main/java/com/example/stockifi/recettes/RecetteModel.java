@@ -99,6 +99,10 @@ public class RecetteModel implements Serializable, Cloneable{
         return duration;
     }
 
+    public void setQuantiteEnStock(int quantiteEnStock) {
+        this.quantiteEnStock = quantiteEnStock;
+    }
+
     public int getQuantiteEnStock() {
         return quantiteEnStock;
     }
