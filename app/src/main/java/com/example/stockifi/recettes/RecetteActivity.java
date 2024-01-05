@@ -118,7 +118,6 @@ public class RecetteActivity extends AppCompatActivity {
 
         if (recetteIntent.hasExtra("Recette")) {
             recette = (RecetteModel) recetteIntent.getSerializableExtra("Recette");
-            assert recette != null;
             loadImageAsync(recetteImageView, recette.getImageUrl());
             recetteNomTextView.setText(recette.getRecetteName());
             recetteIngredientsManquantsTextView.setText(recette.getIngredientsMissing() + " ingrédients manquants");
