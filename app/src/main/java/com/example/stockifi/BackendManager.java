@@ -327,9 +327,11 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void recupererRecettesRecommendeesFiltrees(long userId, String filterValuesJson, @NonNull BackendResponseCallback callback) {
+    public void recupererRecettesRecommendeesFiltrees(long userId, String filterValuesJson, @NonNull BackendResponseCallback callback) throws JSONException {
         String url = getFullUrl(ENDPOINT + "/recommendations/RecettesFiltred/" + userId);
-        JSONObject request = new JSONObject();
+        JSONObject request = new JSONObject(filterValuesJson);
+
+        System.out.println("request => " + request);
 
         int timeout = 10000;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
