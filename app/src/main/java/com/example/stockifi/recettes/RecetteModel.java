@@ -88,12 +88,19 @@ public class RecetteModel implements Serializable, Cloneable{
         return recetteName;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
     public String getDescription() {
         return description;
     }
 
     public int getDuration() {
         return duration;
+    }
+
+    public int getQuantiteEnStock() {
+        return quantiteEnStock;
     }
 
     public int getIngredientsMissing() {
