@@ -210,39 +210,15 @@ public class RecetteActivity extends AppCompatActivity {
             proteieTextView.setText(String.valueOf(valeurNutritionnel.getProteine()));
             sucreTextView.setText(String.valueOf(valeurNutritionnel.getSucre()));
 
-                //Recette Similaires, Recycler view
-            /*List<RecetteModel> recetteSimilairesList = new ArrayList<RecetteModel>();
-
-            recetteSimilairesList.add(new RecetteModel(
-                    "https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/38/YUeirxMLQaeE1h3v3qnM_229%20berry%20blue%20frzn%20dess.jpg",
-                    "Low-Fat Berry Blue Frozen Dessert",
-                    1485,
-                    25,
-                    false));
-
-
-            recetteSimilairesList.add(new RecetteModel(
-                    "https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/39/picM9Mhnw.jpg",
-                    "Biryani",
-                    265,
-                    1,
-                    true));
-
-            recetteSimilairesList.add(new RecetteModel(
-                    "https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/38/YUeirxMLQaeE1h3v3qnM_229%20berry%20blue%20frzn%20dess.jpg",
-                    "Low-Fat Berry Blue Frozen Dessert",
-                    1485,
-                    25,
-                    false));
 
             // Initialize your RecyclerView
             recyclerSimilaires = findViewById(R.id.grid_recettes_similaires);
 
-            // Initialize the adapter
-            recettesSimilairesAdapter = new RecettesSimilairesAdapter(this, recetteSimilairesList);
-
-            // Set the adapter to your RecyclerView
-            recyclerSimilaires.setAdapter(recettesSimilairesAdapter);*/
+            try {
+                loadData();
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         /* ------------------------------------------------------------------------------------------ */
