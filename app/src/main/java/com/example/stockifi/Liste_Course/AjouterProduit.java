@@ -34,6 +34,7 @@ public class AjouterProduit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_produit);
 
+
         ajouterProduitButton = findViewById(R.id.ajoutbasedonnes);
 
 

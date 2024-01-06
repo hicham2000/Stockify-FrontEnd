@@ -56,6 +56,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
             public void onClick(View v) {
                 // Handle the button click, for example, navigate to AjouterProduit activity
                 Intent intent = new Intent(context, AjouterProduit.class);
+                intent.putExtra("ingredient", ingredient);
                 context.startActivity(intent);
             }
         });
