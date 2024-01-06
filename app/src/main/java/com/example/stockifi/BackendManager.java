@@ -23,7 +23,7 @@ public class BackendManager {
 
     //private static final String BASE_URL = "http://100.89.18.54:1111";
     private static final String BASE_URL = "http://10.0.2.2:1111";
-
+    //private static final String BASE_URL = "http://192.168.1.60:1111";
     //private static final String BASE_URL = "http://192.168.3.27:1111";
 
     private static final String ENDPOINT = "/api";
@@ -338,7 +338,7 @@ public class BackendManager {
 
         int timeout = 10000;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
+                Request.Method.POST,
                 url,
                 request,
                 response -> {
