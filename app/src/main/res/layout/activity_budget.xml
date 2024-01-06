@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vert"
+
+    tools:context=".budget.budgetActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBar_budget">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_budget"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/budgetActivity_budget"
+            app:menu="@menu/menu_profil"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+        android:id="@+id/androidx_window_course"
+        android:layout_width="match_parent"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/vertTexte"
+        app:menu="@menu/menu_bottom_navigation"/>
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/dimenTexte"
+        >
+
+
+        <TextView
+            android:id="@+id/aboveListViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/budgetActivity_mois"
+            android:fontFamily="@font/hubballi_regular"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:padding="8dp"
+            android:layout_marginTop="70dp"
+            android:layout_gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="70dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/montant_consomme"
+                android:padding="16dp"
+                android:text="@string/budgetActivity_pourcentage_consomme"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="24dp"/>
+
+            <Space
+                android:layout_width="75dp"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/montant_gaspille"
+                android:padding="16dp"
+                android:text="@string/budgetActivity_pourcentage_gaspille"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="24dp"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/montant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/budgetActivity_montant_total"
+            android:fontFamily="@font/hubballi_regular"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:padding="8dp"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/little_montant_consomme"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"/>
+
+            <Space
+                android:layout_width="15dp"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/budgetActivity_montant_consomme"
+                android:textSize="25sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/vertTexte"/>
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/budgetActivity_dh_consomme"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="35dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/little_montant_gaspille"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"/>
+
+            <Space
+                android:layout_width="15dp"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/budgetActivity_montant_gaspille"
+                android:textSize="25sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/budgetActivity_red_gaspille"/>
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/budgetActivity_dh_gaspille"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
