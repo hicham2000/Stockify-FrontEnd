@@ -266,6 +266,23 @@ public class RecetteActivity extends AppCompatActivity {
         recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngredientManquants) + " ingrédients manquants");
     }
 
+    private void updateNutritionalValues(double[] nutritionalValues, int portion) {
+        TextView[] valueTextViews = {
+                carbohydrateTextView,
+                energieTextView,
+                fibreTextView,
+                lipideTextView,
+                proteieTextView,
+                sucreTextView
+        };
+
+        for (int i = 0; i < nutritionalValues.length; i++) {
+            double value = nutritionalValues[i] * portion;
+            String formattedValue = formatDoubleValue(value);
+            valueTextViews[i].setText(formattedValue);
+        }
+    }
+
     private String formatDoubleValue(double value) {
         return (value - (int) value == 0) ? String.valueOf((int) value) : String.valueOf(round(value, 2));
     }
