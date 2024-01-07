@@ -160,7 +160,8 @@ public class RecetteActivity extends AppCompatActivity {
             portionMinusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    int portion = Integer.parseInt(portionTextView.getText().toString());
+                    portionTextView.setText(String.valueOf(portion - 1));
                 }
             });
 
