@@ -160,56 +160,14 @@ public class RecetteActivity extends AppCompatActivity {
             portionMinusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int portion = Integer.parseInt(portionTextView.getText().toString());
-                    if(portion <= 1 ){
-                        return;
-                    }
-                    portion = portion - 1;
 
-                    portionTextView.setText(String.valueOf(portion));
-                    int nombreIngrédientManquants = recette.getIngredientsMissing() * portion;
-                    recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngrédientManquants) + " ingrédients manquants");
-
-                    double qntCarbohydrate = valeurNutritionnel.getCarbohydrate();
-                    double qntEnegie = valeurNutritionnel.getEnegie();
-                    double qntFibre = valeurNutritionnel.getFibre();
-                    double qntLipide = valeurNutritionnel.getLipide();
-                    double qntProteine = valeurNutritionnel.getProteine();
-                    double qntSucre = valeurNutritionnel.getSucre();
-
-                    carbohydrateTextView.setText(String.valueOf(round(qntCarbohydrate * portion, 2)));
-                    energieTextView.setText(String.valueOf(round(qntEnegie * portion, 2)));
-                    fibreTextView.setText(String.valueOf(round(qntFibre * portion, 2)));
-                    lipideTextView.setText(String.valueOf(round(qntLipide * portion, 2)));
-                    proteieTextView.setText(String.valueOf(round(qntProteine * portion, 2)));
-                    sucreTextView.setText(String.valueOf(round(qntSucre * portion, 2)));
                 }
             });
 
             portionPlusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int portion = Integer.parseInt(portionTextView.getText().toString());
-                    portion = portion + 1;
 
-                    portionTextView.setText(String.valueOf(portion));
-
-                    int nombreIngrédientManquants = recette.getIngredientsMissing() * portion;
-                    recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngrédientManquants) + " ingrédients manquants");
-
-                    double qntCarbohydrate = valeurNutritionnel.getCarbohydrate();
-                    double qntEnegie = valeurNutritionnel.getEnegie();
-                    double qntFibre = valeurNutritionnel.getFibre();
-                    double qntLipide = valeurNutritionnel.getLipide();
-                    double qntProteine = valeurNutritionnel.getProteine();
-                    double qntSucre = valeurNutritionnel.getSucre();
-
-                    carbohydrateTextView.setText(String.valueOf(round(qntCarbohydrate * portion, 2)));
-                    energieTextView.setText(String.valueOf(round(qntEnegie * portion, 2)));
-                    fibreTextView.setText(String.valueOf(round(qntFibre * portion, 2)));
-                    lipideTextView.setText(String.valueOf(round(qntLipide * portion, 2)));
-                    proteieTextView.setText(String.valueOf(round(qntProteine * portion, 2)));
-                    sucreTextView.setText(String.valueOf(round(qntSucre * portion, 2)));
                 }
             });
 
@@ -301,15 +259,6 @@ public class RecetteActivity extends AppCompatActivity {
 
             return true;
         });
-    }
-
-    private Double round(Double val, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-        if(places == 0) {
-            return (double) Math.round(val);
-        }
-        int tmp = (int) Math.pow(10, places);
-        return ((double) Math.round(val * tmp) / tmp);
     }
 
 
