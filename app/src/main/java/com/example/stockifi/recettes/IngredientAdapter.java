@@ -81,4 +81,8 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
             AddIngredientImageButton = itemView.findViewById(R.id.imageButton_add_ingredient);
         }
     }
+
+    private String formatDoubleValue(double value) {
+        return (value - (int) value == 0) ? String.valueOf((int) value) : String.valueOf(round(value, 2));
+    }
 }

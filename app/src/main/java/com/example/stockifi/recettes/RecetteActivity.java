@@ -166,7 +166,6 @@ public class RecetteActivity extends AppCompatActivity {
                     }
                     portion -= 1;
 
-
                     double[] nutritionalValues = {
                             valeurNutritionnel.getCarbohydrate(),
                             valeurNutritionnel.getEnegie(),
