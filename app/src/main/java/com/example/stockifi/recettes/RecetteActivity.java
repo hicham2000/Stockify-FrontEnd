@@ -161,7 +161,12 @@ public class RecetteActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int portion = Integer.parseInt(portionTextView.getText().toString());
-                    portionTextView.setText(String.valueOf(portion - 1));
+                    if(portion > 1 ){
+                        portionTextView.setText(String.valueOf(portion - 1));
+                    }
+
+                    int nombreIngrédientManquants = recette.getIngredientsMissing() * portion;
+                    recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngrédientManquants) + " ingrédients manquants");
                 }
             });
 
@@ -170,6 +175,9 @@ public class RecetteActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     int portion = Integer.parseInt(portionTextView.getText().toString());
                     portionTextView.setText(String.valueOf(portion + 1));
+
+                    int nombreIngrédientManquants = recette.getIngredientsMissing() * portion;
+                    recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngrédientManquants) + " ingrédients manquants");
                 }
             });
 
