@@ -266,6 +266,10 @@ public class RecetteActivity extends AppCompatActivity {
         recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngredientManquants) + " ingrédients manquants");
     }
 
+    private String formatDoubleValue(double value) {
+        return (value - (int) value == 0) ? String.valueOf((int) value) : String.valueOf(round(value, 2));
+    }
+
 
     private void loadImageAsync(ImageView imageView, String imageUrl) {
         new GetImageFromUrl(imageView).execute(imageUrl);
