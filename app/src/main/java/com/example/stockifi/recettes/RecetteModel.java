@@ -74,9 +74,11 @@ public class RecetteModel implements Serializable, Cloneable{
         public Double getQuantity() {
             return quantity;
         }
+        public void setQuantity(Double quantity){ this.quantity = quantity;}
         public boolean isEnough(){
             return isEnough;
         }
+        public void setIsEnough(boolean isEnough){ this.isEnough = isEnough;}
     }
 
     public RecetteModel(JSONObject recetteObject) {

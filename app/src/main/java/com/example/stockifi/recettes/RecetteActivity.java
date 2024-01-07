@@ -199,6 +199,7 @@ public class RecetteActivity extends AppCompatActivity {
                     portionTextView.setText(String.valueOf(portion));
                     updateIngredientsManquants(portion);
                     updateNutritionalValues(nutritionalValues, portion);
+
                 }
             });
 
