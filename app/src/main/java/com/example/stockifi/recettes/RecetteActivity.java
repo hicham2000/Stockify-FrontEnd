@@ -161,7 +161,11 @@ public class RecetteActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int portion = Integer.parseInt(portionTextView.getText().toString());
+                    if(portion <= 1) {
+                        return;
+                    }
                     portion -= 1;
+
 
                     double[] nutritionalValues = {
                             valeurNutritionnel.getCarbohydrate(),
