@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RecetteActivity extends AppCompatActivity {
     private Context context = this;
@@ -59,6 +60,7 @@ public class RecetteActivity extends AppCompatActivity {
     private RecyclerView ingredientsListView;
     private RecyclerView instructionsDePreparationListView;
 
+    private List<Double> originalIngredientsQuantities = new ArrayList<Double>();
     private IngredientAdapter ingredientsAdapter;
     private InstructionDePreparationAdapter instructionsDePreparationAdapter ;
     private ArrayAdapter<String> valeursNutritionnellesAdapter;
@@ -153,6 +155,10 @@ public class RecetteActivity extends AppCompatActivity {
             recetteIngredientsManquantsTextView.setText(String.valueOf(recette.getIngredientsMissing()) + " ingrédients manquants");
 
             List<RecetteModel.IngredientInfo> dataIngredients = recette.getIngredientsList();
+            originalIngredientsQuantities = dataIngredients
+                                            .stream()
+                                            .map(RecetteModel.IngredientInfo::getQuantity)
+                                            .collect(Collectors.toList());
             List<String> dataInstructions = recette.getInstructionDePreparation();
             RecetteModel.ValeurNutritionnel valeurNutritionnel = recette.getValeurNutritionnel();
 
@@ -177,7 +183,11 @@ public class RecetteActivity extends AppCompatActivity {
 
                     portionTextView.setText(String.valueOf(portion));
                     updateIngredientsManquants(portion);
+                    updateIngredientsQuantitiesValues(dataIngredients, portion);
                     updateNutritionalValues(nutritionalValues, portion);
+
+                    IngredientAdapter ingredientAdapter = new IngredientAdapter(context, dataIngredients);
+                    ingredientsListView.setAdapter(ingredientAdapter);
                 }
             });
 
@@ -302,9 +312,9 @@ public class RecetteActivity extends AppCompatActivity {
     }
 
     private void updateIngredientsQuantitiesValues(List<RecetteModel.IngredientInfo> dataIngredients, int portion) {
-        for (RecetteModel.IngredientInfo dataIngredient : dataIngredients) {
-            double value = dataIngredient.getQuantity() * portion;
-            dataIngredient.setQuantity(value);
+        for (int i=0; i<dataIngredients.size();i++) {
+            double value = originalIngredientsQuantities.get(i) * portion;
+            dataIngredients.get(i).setQuantity(value);
         }
     }
     private void updateNutritionalValues(double[] nutritionalValues, int portion) {
