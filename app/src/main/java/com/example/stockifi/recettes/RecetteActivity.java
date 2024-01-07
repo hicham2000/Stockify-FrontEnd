@@ -161,12 +161,27 @@ public class RecetteActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int portion = Integer.parseInt(portionTextView.getText().toString());
-                    if(portion > 1 ){
-                        portionTextView.setText(String.valueOf(portion - 1));
+                    if(portion <= 1 ){
+                        return;
                     }
+                    portion = portion - 1;
 
+                    portionTextView.setText(String.valueOf(portion));
                     int nombreIngrédientManquants = recette.getIngredientsMissing() * portion;
                     recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngrédientManquants) + " ingrédients manquants");
+
+                    double qntCarbohydrate = valeurNutritionnel.getCarbohydrate();
+                    double qntEnegie = valeurNutritionnel.getEnegie();
+                    double qntFibre = valeurNutritionnel.getFibre();
+                    double qntLipide = valeurNutritionnel.getLipide();
+                    double qntProteine = valeurNutritionnel.getProteine();
+                    double qntSucre = valeurNutritionnel.getSucre();
+                    carbohydrateTextView.setText(String.valueOf(qntCarbohydrate * portion));
+                    energieTextView.setText(String.valueOf(qntEnegie * portion));
+                    fibreTextView.setText(String.valueOf(qntFibre * portion));
+                    lipideTextView.setText(String.valueOf(qntLipide * portion));
+                    proteieTextView.setText(String.valueOf(qntProteine * portion));
+                    sucreTextView.setText(String.valueOf(qntSucre * portion));
                 }
             });
 
@@ -174,10 +189,26 @@ public class RecetteActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int portion = Integer.parseInt(portionTextView.getText().toString());
-                    portionTextView.setText(String.valueOf(portion + 1));
+                    portion = portion + 1;
+
+                    portionTextView.setText(String.valueOf(portion));
 
                     int nombreIngrédientManquants = recette.getIngredientsMissing() * portion;
                     recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngrédientManquants) + " ingrédients manquants");
+
+                    double qntCarbohydrate = valeurNutritionnel.getCarbohydrate();
+                    double qntEnegie = valeurNutritionnel.getEnegie();
+                    double qntFibre = valeurNutritionnel.getFibre();
+                    double qntLipide = valeurNutritionnel.getLipide();
+                    double qntProteine = valeurNutritionnel.getProteine();
+                    double qntSucre = valeurNutritionnel.getSucre();
+
+                    carbohydrateTextView.setText(String.valueOf(qntCarbohydrate * portion));
+                    energieTextView.setText(String.valueOf(qntEnegie * portion));
+                    fibreTextView.setText(String.valueOf(qntFibre * portion));
+                    lipideTextView.setText(String.valueOf(qntLipide * portion));
+                    proteieTextView.setText(String.valueOf(qntProteine * portion));
+                    sucreTextView.setText(String.valueOf(qntSucre * portion));
                 }
             });
 
