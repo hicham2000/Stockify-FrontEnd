@@ -149,7 +149,7 @@ public class RecetteActivity extends AppCompatActivity {
             recette = (RecetteModel) recetteIntent.getSerializableExtra("Recette");
             loadImageAsync(recetteImageView, recette.getImageUrl());
             recetteNomTextView.setText(recette.getRecetteName());
-            portionTextView.setText(String.valueOf(recette.getQuantiteEnStock()));
+            portionTextView.setText(String.valueOf("1"));
             recetteIngredientsManquantsTextView.setText(String.valueOf(recette.getIngredientsMissing()) + " ingrédients manquants");
 
             List<RecetteModel.IngredientInfo> dataIngredients = recette.getIngredientsList();
@@ -160,14 +160,15 @@ public class RecetteActivity extends AppCompatActivity {
             portionMinusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Handle portion minus button click
+
                 }
             });
 
             portionPlusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Handle portion plus button click
+                    int portion = Integer.parseInt(portionTextView.getText().toString());
+                    portionTextView.setText(String.valueOf(portion + 1));
                 }
             });
 
