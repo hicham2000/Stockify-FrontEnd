@@ -39,7 +39,11 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
         RecetteModel.IngredientInfo ingredient = this.ingredients.get(position);
 
+<<<<<<< HEAD
         holder.ingredientTextView.setText(formatDoubleValue(ingredient.getQuantity()) + " " + ingredient.getIntitule());
+=======
+        holder.ingredientTextView.setText(String.valueOf(ingredient.getQuantity()) + " " + ingredient.getIntitule());
+>>>>>>> f34f376904b4630703a60502ff304a26fd79bbf6
 
         if (!ingredient.isEnough()) {
             holder.ingredientValidImageView.setVisibility(View.GONE);
@@ -81,6 +85,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
             AddIngredientImageButton = itemView.findViewById(R.id.imageButton_add_ingredient);
         }
     }
+<<<<<<< HEAD
 
     private String formatDoubleValue(double value) {
         return (value - (int) value == 0) ? String.valueOf((int) value) : String.valueOf(round(value, 2));
@@ -94,4 +99,6 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
         int tmp = (int) Math.pow(10, places);
         return (double) ((double)Math.round(val * tmp) / tmp);
     }
+=======
+>>>>>>> f34f376904b4630703a60502ff304a26fd79bbf6
 }
