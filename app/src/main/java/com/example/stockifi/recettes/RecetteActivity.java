@@ -160,14 +160,42 @@ public class RecetteActivity extends AppCompatActivity {
             portionMinusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int portion = Integer.parseInt(portionTextView.getText().toString());
+                    portion -= 1;
 
+                    double[] nutritionalValues = {
+                            valeurNutritionnel.getCarbohydrate(),
+                            valeurNutritionnel.getEnegie(),
+                            valeurNutritionnel.getFibre(),
+                            valeurNutritionnel.getLipide(),
+                            valeurNutritionnel.getProteine(),
+                            valeurNutritionnel.getSucre()
+                    };
+
+                    portionTextView.setText(String.valueOf(portion));
+                    updateIngredientsManquants(portion);
+                    updateNutritionalValues(nutritionalValues, portion);
                 }
             });
 
             portionPlusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int portion = Integer.parseInt(portionTextView.getText().toString());
+                    portion += 1;
 
+                    double[] nutritionalValues = {
+                            valeurNutritionnel.getCarbohydrate(),
+                            valeurNutritionnel.getEnegie(),
+                            valeurNutritionnel.getFibre(),
+                            valeurNutritionnel.getLipide(),
+                            valeurNutritionnel.getProteine(),
+                            valeurNutritionnel.getSucre()
+                    };
+
+                    portionTextView.setText(String.valueOf(portion));
+                    updateIngredientsManquants(portion);
+                    updateNutritionalValues(nutritionalValues, portion);
                 }
             });
 
@@ -285,6 +313,15 @@ public class RecetteActivity extends AppCompatActivity {
 
     private String formatDoubleValue(double value) {
         return (value - (int) value == 0) ? String.valueOf((int) value) : String.valueOf(round(value, 2));
+    }
+
+    private double round(double val, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        if(places == 0) {
+            return (double) Math.round(val);
+        }
+        int tmp = (int) Math.pow(10, places);
+        return (double) ((double)Math.round(val * tmp) / tmp);
     }
 
 
