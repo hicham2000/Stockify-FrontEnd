@@ -261,6 +261,11 @@ public class RecetteActivity extends AppCompatActivity {
         });
     }
 
+    private void updateIngredientsManquants(int portion) {
+        int nombreIngredientManquants = recette.getIngredientsMissing() * portion;
+        recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngredientManquants) + " ingrédients manquants");
+    }
+
 
     private void loadImageAsync(ImageView imageView, String imageUrl) {
         new GetImageFromUrl(imageView).execute(imageUrl);
