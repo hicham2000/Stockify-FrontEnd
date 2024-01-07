@@ -198,8 +198,11 @@ public class RecetteActivity extends AppCompatActivity {
 
                     portionTextView.setText(String.valueOf(portion));
                     updateIngredientsManquants(portion);
+                    updateIngredientsQuantitiesValues(dataIngredients, portion);
                     updateNutritionalValues(nutritionalValues, portion);
 
+                    IngredientAdapter ingredientAdapter = new IngredientAdapter(context, dataIngredients);
+                    ingredientsListView.setAdapter(ingredientAdapter);
                 }
             });
 
@@ -303,7 +306,6 @@ public class RecetteActivity extends AppCompatActivity {
             double value = dataIngredient.getQuantity() * portion;
             dataIngredient.setQuantity(value);
         }
-        ingredientsAdapter.notifyDataSetChanged();
     }
     private void updateNutritionalValues(double[] nutritionalValues, int portion) {
         TextView[] valueTextViews = {
