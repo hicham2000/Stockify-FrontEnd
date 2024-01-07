@@ -298,6 +298,13 @@ public class RecetteActivity extends AppCompatActivity {
         recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngredientManquants) + " ingrédients manquants");
     }
 
+    private void updateIngredientsQuantitiesValues(List<RecetteModel.IngredientInfo> dataIngredients, int portion) {
+        for (RecetteModel.IngredientInfo dataIngredient : dataIngredients) {
+            double value = dataIngredient.getQuantity() * portion;
+            dataIngredient.setQuantity(value);
+        }
+        ingredientsAdapter.notifyDataSetChanged();
+    }
     private void updateNutritionalValues(double[] nutritionalValues, int portion) {
         TextView[] valueTextViews = {
                 carbohydrateTextView,
