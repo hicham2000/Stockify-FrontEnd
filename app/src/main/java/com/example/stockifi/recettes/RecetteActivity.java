@@ -176,6 +176,7 @@ public class RecetteActivity extends AppCompatActivity {
                     double qntLipide = valeurNutritionnel.getLipide();
                     double qntProteine = valeurNutritionnel.getProteine();
                     double qntSucre = valeurNutritionnel.getSucre();
+
                     carbohydrateTextView.setText(String.valueOf(qntCarbohydrate * portion));
                     energieTextView.setText(String.valueOf(qntEnegie * portion));
                     fibreTextView.setText(String.valueOf(qntFibre * portion));
@@ -300,6 +301,15 @@ public class RecetteActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+    private Double round(Double val, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        if(places == 0) {
+            return (double) Math.round(val);
+        }
+        int tmp = (int) Math.pow(10, places);
+        return ((double) Math.round(val * tmp) / tmp);
     }
 
 
