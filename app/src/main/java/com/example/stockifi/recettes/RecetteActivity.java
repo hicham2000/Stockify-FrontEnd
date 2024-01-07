@@ -177,12 +177,12 @@ public class RecetteActivity extends AppCompatActivity {
                     double qntProteine = valeurNutritionnel.getProteine();
                     double qntSucre = valeurNutritionnel.getSucre();
 
-                    carbohydrateTextView.setText(String.valueOf(qntCarbohydrate * portion));
-                    energieTextView.setText(String.valueOf(qntEnegie * portion));
-                    fibreTextView.setText(String.valueOf(qntFibre * portion));
-                    lipideTextView.setText(String.valueOf(qntLipide * portion));
-                    proteieTextView.setText(String.valueOf(qntProteine * portion));
-                    sucreTextView.setText(String.valueOf(qntSucre * portion));
+                    carbohydrateTextView.setText(String.valueOf(round(qntCarbohydrate * portion, 2)));
+                    energieTextView.setText(String.valueOf(round(qntEnegie * portion, 2)));
+                    fibreTextView.setText(String.valueOf(round(qntFibre * portion, 2)));
+                    lipideTextView.setText(String.valueOf(round(qntLipide * portion, 2)));
+                    proteieTextView.setText(String.valueOf(round(qntProteine * portion, 2)));
+                    sucreTextView.setText(String.valueOf(round(qntSucre * portion, 2)));
                 }
             });
 
@@ -204,12 +204,12 @@ public class RecetteActivity extends AppCompatActivity {
                     double qntProteine = valeurNutritionnel.getProteine();
                     double qntSucre = valeurNutritionnel.getSucre();
 
-                    carbohydrateTextView.setText(String.valueOf(qntCarbohydrate * portion));
-                    energieTextView.setText(String.valueOf(qntEnegie * portion));
-                    fibreTextView.setText(String.valueOf(qntFibre * portion));
-                    lipideTextView.setText(String.valueOf(qntLipide * portion));
-                    proteieTextView.setText(String.valueOf(qntProteine * portion));
-                    sucreTextView.setText(String.valueOf(qntSucre * portion));
+                    carbohydrateTextView.setText(String.valueOf(round(qntCarbohydrate * portion, 2)));
+                    energieTextView.setText(String.valueOf(round(qntEnegie * portion, 2)));
+                    fibreTextView.setText(String.valueOf(round(qntFibre * portion, 2)));
+                    lipideTextView.setText(String.valueOf(round(qntLipide * portion, 2)));
+                    proteieTextView.setText(String.valueOf(round(qntProteine * portion, 2)));
+                    sucreTextView.setText(String.valueOf(round(qntSucre * portion, 2)));
                 }
             });
 
