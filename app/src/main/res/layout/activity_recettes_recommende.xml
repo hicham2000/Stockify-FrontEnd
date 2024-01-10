@@ -104,7 +104,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:indeterminate="true"
-            android:indeterminateTint="@color/blueProgressBar"/>
+            android:indeterminateTint="@color/ProgressBarColor"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/grid_recettes_recommende"

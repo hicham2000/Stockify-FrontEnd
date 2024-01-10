@@ -19,7 +19,7 @@
                 android:useLevel="true">
                 <gradient
                     android:endColor="@android:color/transparent"
-                    android:startColor="@color/blueProgressBar"
+                    android:startColor="@color/ProgressBarColor"
                     android:type="sweep" />
             </shape>
         </rotate>
