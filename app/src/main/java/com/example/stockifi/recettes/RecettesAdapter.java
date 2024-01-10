@@ -1,5 +1,6 @@
 package com.example.stockifi.recettes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -52,6 +53,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
         return new RecetteViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecetteViewHolder holder, int position) {
         RecetteModel recette = this.recetteList.get(position);

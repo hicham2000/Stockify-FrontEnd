@@ -149,9 +149,10 @@ public class RecetteActivity extends AppCompatActivity {
 
         if (recetteIntent.hasExtra("Recette")) {
             recette = (RecetteModel) recetteIntent.getSerializableExtra("Recette");
+            assert recette != null;
             loadImageAsync(recetteImageView, recette.getImageUrl());
             recetteNomTextView.setText(recette.getRecetteName());
-            portionTextView.setText(String.valueOf("1"));
+            portionTextView.setText("1");
             recetteIngredientsManquantsTextView.setText(String.valueOf(recette.getIngredientsMissing()) + " ingrédients manquants");
 
             List<RecetteModel.IngredientInfo> dataIngredients = recette.getIngredientsList();
@@ -159,7 +160,6 @@ public class RecetteActivity extends AppCompatActivity {
                                             .stream()
                                             .map(RecetteModel.IngredientInfo::getQuantity)
                                             .collect(Collectors.toList());
-            portionTextView.setText(String.valueOf(recette.getQuantiteEnStock()));
             recetteIngredientsManquantsTextView.setText(String.valueOf(recette.getIngredientsMissing()) + " ingrédients manquants");
 
 
@@ -273,8 +273,12 @@ public class RecetteActivity extends AppCompatActivity {
             floatingButtonAjouterRecetteAuStock.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Ajoutez ici le code que vous souhaitez exécuter lorsque la floating button est cliquée
                     ajouterRecetteAuStock();
+//                    try {
+//                        ajouterRecetteAuStock();
+//                    } catch (JSONException e) {
+//                        throw new RuntimeException(e);
+//                    }
                 }
             });
         }
