@@ -22,10 +22,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <ScrollView
-        android:layout_above="@+id/androidx_window_recette"
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/androidx_window_recette"
         android:layout_below="@+id/appBar_recette"
         android:layout_marginTop="5dp">
 
@@ -124,13 +126,13 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/recette_instructions_de_preparation_dropdownButton"
+                style="@style/recette_nombre_ingredients_manquants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:background="@drawable/recette_dropdownbutton_notclicked_background"
                 android:gravity="start|center_vertical"
-                style="@style/recette_nombre_ingredients_manquants"
                 android:text="@string/recette_instrucion_de_preparation_dropdownButton" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -144,13 +146,13 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/recette_valeurs_nutritionnelles_dropdownButton"
+                style="@style/recette_nombre_ingredients_manquants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:background="@drawable/recette_dropdownbutton_notclicked_background"
                 android:gravity="start|center_vertical"
-                style="@style/recette_nombre_ingredients_manquants"
                 android:text="@string/recette_valeurs_nutritionnelles_dropdownButton" />
 
             <LinearLayout
@@ -336,7 +338,23 @@
                 tools:listitem="@layout/recette_similaire_item" />
 
         </LinearLayout>
+
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_button_ajouter_recette_au_stock"
+        style="@style/recette_nombre_ingredients_manquants"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/vertTexte"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/floating_button_pour_l_ajout_de_recette_au_stock"
+        app:tint="@color/white" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/androidx_window_recette"

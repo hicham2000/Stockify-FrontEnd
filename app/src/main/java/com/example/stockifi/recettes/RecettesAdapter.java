@@ -127,7 +127,6 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
             public void onClick(View v) {
                 Intent intent = new Intent(context, RecetteActivity.class);
                 // Replace put with putExtra
-                System.out.println("recette => " + recette);
                 intent.putExtra("Recette", recette);
                 context.startActivity(intent);
             }

@@ -4,17 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,18 +26,16 @@ import com.example.stockifi.R;
 import com.example.stockifi.corbeille.corbeille;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.stream.Collectors;
-=======
->>>>>>> f34f376904b4630703a60502ff304a26fd79bbf6
+
 
 public class RecetteActivity extends AppCompatActivity {
     private Context context = this;
@@ -63,10 +57,8 @@ public class RecetteActivity extends AppCompatActivity {
     private RecyclerView ingredientsListView;
     private RecyclerView instructionsDePreparationListView;
 
-<<<<<<< HEAD
     private List<Double> originalIngredientsQuantities = new ArrayList<Double>();
-=======
->>>>>>> f34f376904b4630703a60502ff304a26fd79bbf6
+
     private IngredientAdapter ingredientsAdapter;
     private InstructionDePreparationAdapter instructionsDePreparationAdapter ;
     private ArrayAdapter<String> valeursNutritionnellesAdapter;
@@ -83,6 +75,8 @@ public class RecetteActivity extends AppCompatActivity {
     private List<RecetteModel> recettesSimilairesList;
 
     private RecetteModel recette;
+
+    private FloatingActionButton floatingButtonAjouterRecetteAuStock;
     private MyApp myApp = (MyApp) getApplication();
 
     private BackendManager backendManager;
@@ -157,7 +151,6 @@ public class RecetteActivity extends AppCompatActivity {
             recette = (RecetteModel) recetteIntent.getSerializableExtra("Recette");
             loadImageAsync(recetteImageView, recette.getImageUrl());
             recetteNomTextView.setText(recette.getRecetteName());
-<<<<<<< HEAD
             portionTextView.setText(String.valueOf("1"));
             recetteIngredientsManquantsTextView.setText(String.valueOf(recette.getIngredientsMissing()) + " ingrédients manquants");
 
@@ -166,12 +159,10 @@ public class RecetteActivity extends AppCompatActivity {
                                             .stream()
                                             .map(RecetteModel.IngredientInfo::getQuantity)
                                             .collect(Collectors.toList());
-=======
             portionTextView.setText(String.valueOf(recette.getQuantiteEnStock()));
             recetteIngredientsManquantsTextView.setText(String.valueOf(recette.getIngredientsMissing()) + " ingrédients manquants");
 
-            List<RecetteModel.IngredientInfo> dataIngredients = recette.getIngredientsList();
->>>>>>> f34f376904b4630703a60502ff304a26fd79bbf6
+
             List<String> dataInstructions = recette.getInstructionDePreparation();
             RecetteModel.ValeurNutritionnel valeurNutritionnel = recette.getValeurNutritionnel();
 
@@ -179,7 +170,6 @@ public class RecetteActivity extends AppCompatActivity {
             portionMinusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-<<<<<<< HEAD
                     int portion = Integer.parseInt(portionTextView.getText().toString());
                     if(portion <= 1) {
                         return;
@@ -202,16 +192,12 @@ public class RecetteActivity extends AppCompatActivity {
 
                     IngredientAdapter ingredientAdapter = new IngredientAdapter(context, dataIngredients);
                     ingredientsListView.setAdapter(ingredientAdapter);
-=======
-                    // Handle portion minus button click
->>>>>>> f34f376904b4630703a60502ff304a26fd79bbf6
                 }
             });
 
             portionPlusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-<<<<<<< HEAD
                     int portion = Integer.parseInt(portionTextView.getText().toString());
                     portion += 1;
 
@@ -231,9 +217,6 @@ public class RecetteActivity extends AppCompatActivity {
 
                     IngredientAdapter ingredientAdapter = new IngredientAdapter(context, dataIngredients);
                     ingredientsListView.setAdapter(ingredientAdapter);
-=======
-                    // Handle portion plus button click
->>>>>>> f34f376904b4630703a60502ff304a26fd79bbf6
                 }
             });
 
@@ -285,6 +268,9 @@ public class RecetteActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
+
+            floatingButtonAjouterRecetteAuStock = findViewById(R.id.floating_button_ajouter_recette_au_stock);
+
         }
 
         /* ------------------------------------------------------------------------------------------ */
@@ -327,7 +313,6 @@ public class RecetteActivity extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
     private void updateIngredientsManquants(int portion) {
         int nombreIngredientManquants = recette.getIngredientsMissing() * portion;
         recetteIngredientsManquantsTextView.setText(String.valueOf(nombreIngredientManquants) + " ingrédients manquants");
@@ -369,9 +354,6 @@ public class RecetteActivity extends AppCompatActivity {
         return (double) ((double)Math.round(val * tmp) / tmp);
     }
 
-=======
->>>>>>> f34f376904b4630703a60502ff304a26fd79bbf6
-
     private void loadImageAsync(ImageView imageView, String imageUrl) {
         new GetImageFromUrl(imageView).execute(imageUrl);
     }
@@ -405,4 +387,6 @@ public class RecetteActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
