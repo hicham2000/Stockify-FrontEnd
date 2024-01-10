@@ -270,7 +270,13 @@ public class RecetteActivity extends AppCompatActivity {
             }
 
             floatingButtonAjouterRecetteAuStock = findViewById(R.id.floating_button_ajouter_recette_au_stock);
-
+            floatingButtonAjouterRecetteAuStock.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Ajoutez ici le code que vous souhaitez exécuter lorsque la floating button est cliquée
+                    ajouterRecetteAuStock();
+                }
+            });
         }
 
         /* ------------------------------------------------------------------------------------------ */
@@ -388,5 +394,9 @@ public class RecetteActivity extends AppCompatActivity {
         });
     }
 
-
+    private void ajouterRecetteAuStock() {
+        // Ajoutez ici la logique pour ajouter la recette au stock
+        // Vous pouvez afficher un message, effectuer des opérations en arrière-plan, etc.
+        Toast.makeText(RecetteActivity.this, "Recette ajoutée au stock", Toast.LENGTH_SHORT).show();
+    }
 }
