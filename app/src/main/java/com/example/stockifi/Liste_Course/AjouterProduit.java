@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 public class AjouterProduit extends AppCompatActivity {
 
+    private static final String BASE_URL = "192.168.11.100:1111";
+
     Button ajouterProduitButton;
 
     @Override
@@ -79,19 +81,15 @@ public class AjouterProduit extends AppCompatActivity {
                 String quantiteProduit = editTextQuantite.getText().toString();
                 String poidsProduit = spinnerPoidAjout.getSelectedItem().toString();
 
-                // Créez un objet Produit avec les données récupérées
-                //    Produit produit = new Produit(nomProduit, quantiteProduit, poidsProduit);
 
-                // Appelez votre service Spring en utilisant Volley
                 MyApp myApp = (MyApp) getApplication();
                 RequestQueue queue = Volley.newRequestQueue(AjouterProduit.this);
                 int User_id = myApp.getUser_id();
                 int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products";
+                String url = "http://"+BASE_URL+"/listeCourses/" + User_listeCourse_id + "/products";
                // String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products";
 
-                // Remplacez {courseId} par la valeur réelle du courseId
-                //  url = url.replace("{courseId}", String.valueOf(courseId));
+
 
                 JSONObject jsonProduit = new JSONObject();
                 try {

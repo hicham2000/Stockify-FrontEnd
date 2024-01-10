@@ -2,7 +2,9 @@ package com.example.stockifi.Liste_Course;
 
 import static java.security.AccessController.getContext;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
 
     private ArrayList<Produit> data;
     private ArrayList<Boolean> checkedPositions;
+    private static final String BASE_URL = "192.168.11.100:1111";
 
     public ListeCourseAdapter(Context context, ArrayList<Produit> data) {
         super(context, 0, data);
@@ -75,7 +78,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
                     RequestQueue queue = Volley.newRequestQueue(ListeCourseAdapter.this.getContext());
                     int User_id = myApp.getUser_id();
                     int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                    String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                    String url = "http://"+BASE_URL+"/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
                   //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
                     JSONObject jsonBody = new JSONObject();
                     JsonObjectRequest request = new JsonObjectRequest(
@@ -133,55 +136,206 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkedPositions.set(position, !checkedPositions.get(position));
-                Produit produit = getItem(position);
-                if (produit != null) {
-                    MyApp myApp = (MyApp) (MyApp) getContext().getApplicationContext();
-                    RequestQueue queue = Volley.newRequestQueue(ListeCourseAdapter.this.getContext());
-                    int User_id = myApp.getUser_id();
-                    int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                    produit.setCheck(!produit.getCheck());
-                    String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
-                  //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
-                    JSONObject jsonBody = new JSONObject();
+             //   boolean isChecked = checkedPositions.get(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Confirmation");
+                if (data.get(position).getCheck()==false) {
+                    // If the checkbox is not checked and the user clicks to check it
+                    builder.setMessage("Vous voulez ajouter le produit acheter a votre stock?");
+                    builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User clicked "Oui," perform the action
 
-                    try {
+                            // Your existing code to toggle the checkbox and update the server
+                            checkedPositions.set(position, !checkedPositions.get(position));
+                            Produit produit = getItem(position);
+                            if (produit != null) {
+                                MyApp myApp = (MyApp) (MyApp) getContext().getApplicationContext();
+                                RequestQueue queue = Volley.newRequestQueue(ListeCourseAdapter.this.getContext());
+                                int User_id = myApp.getUser_id();
+                                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                                int User_stock_id = myApp.getUser_stock_id();
+                                produit.setCheck(!produit.getCheck());
+                                String url = "http://"+BASE_URL+"/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                                String url_stock = "http://"+BASE_URL+"/stocks/" + User_stock_id + "/products";
 
-                            jsonBody.put("quantite", produit.getQuantite());
-                            jsonBody.put("intitule", produit.getIntitule());
-                            jsonBody.put("uniteDeMesure", produit.getUniteMesure());
-                            jsonBody.put("etat", produit.getCheck());
+                                //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                                JSONObject jsonBody = new JSONObject();
+                                JSONObject jsonBodyStock = new JSONObject();
+                                try {
+                                    jsonBody.put("quantite", produit.getQuantite());
+                                    jsonBody.put("intitule", produit.getIntitule());
+                                    jsonBody.put("uniteDeMesure", produit.getUniteMesure());
+                                    jsonBody.put("etat", true);
 
-
-
-                        // Ajoutez d'autres champs si nécessaire
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    JsonObjectRequest request = new JsonObjectRequest(
-                            Request.Method.PUT,
-                            url,
-                            jsonBody,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
-                                    //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                    // Ajoutez d'autres champs si nécessaire
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // Gérez les erreurs de la requête ici
-                                    //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                                try {
+                                    jsonBodyStock.put("id_produitCourse",produit.getId());
+                                    jsonBodyStock.put("quantite", produit.getQuantite());
+                                    jsonBodyStock.put("intitule", produit.getIntitule());
+                                    jsonBodyStock.put("uniteDeMesure", produit.getUniteMesure());
+
+
+                                    // Ajoutez d'autres champs si nécessaire
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
+
+                                JsonObjectRequest request = new JsonObjectRequest(
+                                        Request.Method.PUT,
+                                        url,
+                                        jsonBody,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                // Gérez les erreurs de la requête ici
+                                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                );
+                                JsonObjectRequest requestStock = new JsonObjectRequest(
+                                        Request.Method.POST,
+                                        url_stock,
+                                        jsonBodyStock,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                // Gérez les erreurs de la requête ici
+                                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                );
+                                queue.add(requestStock);
+                                queue.add(request);
+                                notifyDataSetChanged();
                             }
-                    );
+                        }
+                    });
+                    builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User clicked "Non," do nothing or handle as needed
+                            checkedPositions.set(position,false);
+                            checkBox.setChecked(checkedPositions.get(position));
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                } else {
+                    // If the checkbox is checked and the user clicks to uncheck it
+                    builder.setMessage("Vous voulez enlever le produit de votre stock?");
+                    builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User clicked "Oui," perform the action
 
-                    queue.add(request);
-                    notifyDataSetChanged();
+                            // Your existing code to toggle the checkbox and update the server
+                            checkedPositions.set(position, !checkedPositions.get(position));
+                            Produit produit = getItem(position);
+                            if (produit != null) {
+                                MyApp myApp = (MyApp) (MyApp) getContext().getApplicationContext();
+                                RequestQueue queue = Volley.newRequestQueue(ListeCourseAdapter.this.getContext());
+                                int User_id = myApp.getUser_id();
+                                int User_stock_id = myApp.getUser_stock_id();
+                                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                                produit.setCheck(!produit.getCheck());
+                                String url = "http://"+BASE_URL+"/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                                String urlStock = "http://"+BASE_URL+"/stocks/" + User_stock_id + "/products/"+produit.getId()+"/delete-course";
+                                //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                                JSONObject jsonBody = new JSONObject();
+
+                                try {
+                                    jsonBody.put("quantite", produit.getQuantite());
+                                    jsonBody.put("intitule", produit.getIntitule());
+                                    jsonBody.put("uniteDeMesure", produit.getUniteMesure());
+                                    jsonBody.put("etat", false);
+
+                                    // Ajoutez d'autres champs si nécessaire
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                JSONObject jsonBodyStock = new JSONObject();
+                                JsonObjectRequest requestStock = new JsonObjectRequest(
+                                        Request.Method.DELETE,
+                                        urlStock,
+                                        jsonBodyStock,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+//                                    Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                // Gérez les erreurs de la requête ici
+                                                //                                  Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        }
+                                );
+
+
+
+                                JsonObjectRequest request = new JsonObjectRequest(
+                                        Request.Method.PUT,
+                                        url,
+                                        jsonBody,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                // Gérez les erreurs de la requête ici
+                                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                );
+                                queue.add(requestStock);
+                                queue.add(request);
+                                notifyDataSetChanged();
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User clicked "Non," do nothing or handle as needed
+                            checkedPositions.set(position,true);
+                            checkBox.setChecked(checkedPositions.get(position));
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
+
+
             }
         });
 
