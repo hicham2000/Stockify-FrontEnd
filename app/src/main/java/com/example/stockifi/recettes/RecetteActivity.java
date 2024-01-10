@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,11 +35,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
 public class RecetteActivity extends AppCompatActivity {
     private Context context = this;
+    private static final String TAG = RecetteActivity.class.getSimpleName();
     private MaterialToolbar toolbarAppReccette;
     private BottomNavigationView bottomNavigationView;
 
@@ -274,11 +277,6 @@ public class RecetteActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     ajouterRecetteAuStock();
-//                    try {
-//                        ajouterRecetteAuStock();
-//                    } catch (JSONException e) {
-//                        throw new RuntimeException(e);
-//                    }
                 }
             });
         }
@@ -399,8 +397,22 @@ public class RecetteActivity extends AppCompatActivity {
     }
 
     private void ajouterRecetteAuStock() {
-        // Ajoutez ici la logique pour ajouter la recette au stock
-        // Vous pouvez afficher un message, effectuer des opérations en arrière-plan, etc.
-        Toast.makeText(RecetteActivity.this, "Recette ajoutée au stock", Toast.LENGTH_SHORT).show();
+        int currentStock_id = 1;//myApp.getStock_id();
+        long recetteId = recette.getId();
+
+        backendManager.ajouterRecetteAuStock((long) currentStock_id, recetteId, new BackendManager.BackendResponseCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws JSONException {
+                Toast.makeText(RecetteActivity.this, "Recette a bien ajoutée au stock", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onError(Exception error) {
+                Log.e(TAG, Objects.requireNonNull(error.getMessage()));
+                String errorMessage = "Erreur lors d'ajout de Recetteau Stock: " + error.getMessage();
+                Toast.makeText(RecetteActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

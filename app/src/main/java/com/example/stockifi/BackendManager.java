@@ -430,6 +430,24 @@ public class BackendManager {
     }
 
 
+    public void ajouterRecetteAuStock(long stockId, long recetteId, BackendResponseCallback callback){
+        String url = getFullUrl( "/stocks/"+stockId+"/recipes/"+recetteId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
 
     public interface BackendResponseCallback {
         void onSuccess(JSONObject response) throws JSONException;
