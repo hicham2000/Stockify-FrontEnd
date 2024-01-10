@@ -255,12 +255,12 @@ public class RecetteActivity extends AppCompatActivity {
                 valeursNutritionnellesLayout.setVisibility(visibility);
             });
 
-            carbohydrateTextView.setText(String.valueOf(valeurNutritionnel.getCarbohydrate()));
-            energieTextView.setText(String.valueOf(valeurNutritionnel.getEnegie()));
-            fibreTextView.setText(String.valueOf(valeurNutritionnel.getFibre()));
-            lipideTextView.setText(String.valueOf(valeurNutritionnel.getLipide()));
-            proteieTextView.setText(String.valueOf(valeurNutritionnel.getProteine()));
-            sucreTextView.setText(String.valueOf(valeurNutritionnel.getSucre()));
+            carbohydrateTextView.setText(String.valueOf(valeurNutritionnel.getCarbohydrate()) + " g");
+            energieTextView.setText(String.valueOf(valeurNutritionnel.getEnegie()) + " cal");
+            fibreTextView.setText(String.valueOf(valeurNutritionnel.getFibre()) + " g");
+            lipideTextView.setText(String.valueOf(valeurNutritionnel.getLipide()) + " g");
+            proteieTextView.setText(String.valueOf(valeurNutritionnel.getProteine()) + " g");
+            sucreTextView.setText(String.valueOf(valeurNutritionnel.getSucre()) + " g");
 
 
             // Initialize your RecyclerView
