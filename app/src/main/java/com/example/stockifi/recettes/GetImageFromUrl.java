@@ -1,7 +1,10 @@
 package com.example.stockifi.recettes;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
@@ -56,7 +59,12 @@ public class GetImageFromUrl extends AsyncTask<String, Void, Bitmap> {
     }
 
     private boolean isInternetConnected() {
-
-        return true;
+        Context context = imageView.getContext();
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+            return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        }
+        return false;
     }
 }
