@@ -15,6 +15,10 @@
     <color name="switch_thumb_checked_color">#00FF00</color> <!-- Couleur du pouce lorsque le switch est activé -->
     <color name ="yes_button_card">#00AF12</color>
     <color name ="non_button_card">#E03131</color>
+
+
+    <color name ="budgetActivity_red_gaspille">#B01D1D</color>
+
     <color name ="vidercorbeille">#FFA6A1</color>
     <color name ="supprimercorbeille">#DD5252</color>
     <color name ="recuperercorbeille">#5A8C7A</color>

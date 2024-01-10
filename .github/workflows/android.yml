@@ -35,7 +35,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew clean build
 
     - name: Verify with Gradle
       run: ./gradlew check
@@ -75,8 +75,8 @@ jobs:
     - name: Archive Release AABs
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: aab-release
-        path: app/build/outputs/bundle/release/
+       name: aab-release
+       path: app/build/outputs/bundle/release/
 
 
 

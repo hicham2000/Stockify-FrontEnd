@@ -199,6 +199,24 @@ la quantite critique</string>
     <string name="recuperer">Récupérer</string>
     <string name="supprimer"> Supprimer</string>
     <string name="item"> Lait</string>
+    <string name="produits">Produits</string>
+    <string name="repas">Repas</string>
+    <!-- budget's strings -->
+
+    <string name="budgetActivity_budget">Budget</string>
+    <string name="budgetActivity_mois">JUILLET</string>
+    <string name="budgetActivity_pourcentage_consomme">80%</string>
+    <string name="budgetActivity_pourcentage_gaspille">20%</string>
+    <string name="budgetActivity_montant_total">Montant Total</string>
+    <string name="budgetActivity_montant_consomme">Montant Consomé</string>
+    <string name="budgetActivity_montant_gaspille">Montant Gaspillé</string>
+    <string name="budgetActivity_dh_gaspille">400 DH</string>
+    <string name="budgetActivity_dh_consomme">1600 DH</string>
+
+
+
+
+
 
 
     <string-array name="options_array">
@@ -206,6 +224,7 @@ la quantite critique</string>
         <item>Congélateur</item>
         <item>garde-manger</item>
     </string-array>
-
+    <string name="modif_prod">Modifier Produit</string>
+    <string name="info_prod">Information Produit</string>
 
 </resources>

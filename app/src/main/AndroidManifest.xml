@@ -12,6 +12,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -20,7 +21,18 @@
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Gestion_Produit.InformationsProduitStock"
+            android:exported="false" />
+        <activity
+            android:name=".Gestion_Produit.ModifierProduitStock"
+            android:exported="true" />
+        <activity
+            android:name=".Home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Home.AjouterCategorie"
+            android:exported="true" />
         <activity
             android:name=".Gestion_Produit.ListeProduit"
             android:exported="true" />
@@ -29,7 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".Repas.ajouter_repas"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients_quantity"
@@ -37,13 +49,13 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Liste_Course.ModifierProduit"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Liste_Course.AjouterProduit"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Liste_Course.ListeDeCourse"
             android:exported="true"
@@ -71,7 +83,7 @@
             android:exported="false" />
         <activity
             android:name=".ProfilActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".corbeille.corbeille"

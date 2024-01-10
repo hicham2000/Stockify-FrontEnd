@@ -35,25 +35,13 @@
         android:background="@color/vertTexte"
         app:menu="@menu/menu_bottom_navigation"/>
 
-    <android.widget.SearchView
-        android:id="@+id/search_corbeille"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/ellipse"
-        android:layout_centerHorizontal="true"
-        android:theme="@style/SearchViewStyle"
-        android:queryHint="@string/chercherProd"
-        />
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/dimenTexte"
-        android:layout_below="@+id/search_corbeille">
+        android:layout_marginTop="60dp"
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,12 +70,45 @@
                 android:clickable="true"
                 android:src="@drawable/delete" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingEnd="20dp">
+
+            <Button
+                android:layout_width="141dp"
+                android:id="@+id/produits"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/hubballi_regular"
+                android:paddingLeft="8dp"
+                android:text="@string/produits"
+                android:textSize="20dp" />
+
+            <Button
+                android:layout_width="141dp"
+                android:id="@+id/repas"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/repas"
+                android:fontFamily="@font/hubballi_regular"
+                android:textSize="20dp"
+                />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/myListViewCorbeille"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:paddingBottom="20dp"/>
+            android:layout_height="460dp"
+            android:dividerHeight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+
 
 
 
