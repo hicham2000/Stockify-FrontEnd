@@ -427,7 +427,6 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
-
     public void ajouterRecetteAuStock(long stockId, long recetteId, BackendResponseCallback callback){
         String url = getFullUrl( "/stocks/"+stockId+"/recipes/"+recetteId);
 
@@ -443,6 +442,34 @@ public class BackendManager {
                     }
                 },
                 callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+    public void recupererIngredients(@NonNull BackendResponseCallback callback) {
+        String url = getFullUrl(ENDPOINT + "/Ingredients");
+
+        int timeout = 10000;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                timeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
 
         requestQueue.add(jsonObjectRequest);
     }
