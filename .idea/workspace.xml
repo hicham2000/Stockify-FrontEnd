@@ -62,20 +62,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa75372b-f15a-45a5-9efb-8f5dc9b9318b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_23_12_2023_18_34_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_23_12_2023_18_34__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_23_12_2023_22_42_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_23_12_2023_22_42__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/BackendManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/BackendManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Liste_Course/AjouterProduit.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Liste_Course/AjouterProduit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Liste_Course/ListeCourseAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Liste_Course/ListeCourseAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Liste_Course/ModifierProduit.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/Liste_Course/ModifierProduit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/GlobalVariables/MyApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/GlobalVariables/MyApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/ProfilActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/ProfilActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_liste_de_course.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_liste_de_course.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profil.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profil.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_bottom_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_bottom_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +156,8 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.17",
     "project.structure.side.proportion": "0.2",
-    "recommended.upgrade.do.not.ask.for.project": "true"
+    "recommended.upgrade.do.not.ask.for.project": "true",
+    "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
   <component name="PsdUISettings">
@@ -609,12 +601,23 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1870b888-81c8-4aaf-9207-e56bd77a6174" name="Changes" comment="" />
+      <changelist id="fa75372b-f15a-45a5-9efb-8f5dc9b9318b" name="Changes" comment="" />
       <created>1704019874453</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704019874453</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

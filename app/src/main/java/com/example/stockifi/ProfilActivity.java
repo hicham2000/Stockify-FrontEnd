@@ -1,5 +1,7 @@
 package com.example.stockifi;
 
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -28,18 +30,28 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -84,7 +96,7 @@ public class ProfilActivity extends AppCompatActivity {
 
     private static final String SPINNER_DATE_PER_SELECTION_KEY = "spinnerDatePerSelectionKey";
 
-
+    private static final String BASE_URL = "192.168.11.100:1111";
     private TextView nomProfilView;
     private TextView emailProfilView;
 
@@ -139,26 +151,32 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
-
         MyApp myApp = (MyApp) getApplication();
 
         currentUserId = myApp.getUser_id();
-        stockUserId = myApp.getUser_stock_id();
 
+        if(currentUserId < 0) {
+            Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+        stockUserId = myApp.getUser_stock_id();
 
         backendManager = new BackendManager(this);
 
         // Gestionnaire de clic pour l'élément "Courses"
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_profil);
-        Menu menu = bottomNavigationView.getMenu();
+        Menu navBar = bottomNavigationView.getMenu();
+
 
         // Gestionnaire de clic pour l'élément "Courses"
-        menu.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
+        navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ProfilActivity.this, ListeDeCourse.class);
             startActivity(intent);
 
             return true;
         });
+
+
 
         buttonSupCompte = findViewById(R.id.button_supCompte);
         buttonSupCompte.setOnClickListener(new View.OnClickListener() {
@@ -171,32 +189,32 @@ public class ProfilActivity extends AppCompatActivity {
 
         Button envoyerEmailButton=findViewById(R.id.button_email);
         envoyerEmailButton.setOnClickListener(new View.OnClickListener() {
-                                                  private void envoyerEmailReclamation() {
-                                                      // Adresse e-mail du destinataire (modifiable selon vos besoins)
-                                                      String destinataire = "mehdi@gmail.com";
+            private void envoyerEmailReclamation() {
+                // Adresse e-mail du destinataire (modifiable selon vos besoins)
+                String destinataire = "mehdi@gmail.com";
 
-                                                      // Sujet du courriel (modifiable selon vos besoins)
-                                                      String sujet = "Réclamation";
+                // Sujet du courriel (modifiable selon vos besoins)
+                String sujet = "Réclamation";
 
-                                                      // Message du courriel (modifiable selon vos besoins)
-                                                      String message = "Bonjour, je souhaite déposer une réclamation.";
+                // Message du courriel (modifiable selon vos besoins)
+                String message = "Bonjour, je souhaite déposer une réclamation.";
 
-                                                      // Créer une intention pour envoyer un e-mail via Gmail
-                                                      Intent intent = new Intent(Intent.ACTION_SENDTO);
-                                                      intent.setData(Uri.parse("mailto:" + destinataire));
-                                                      intent.putExtra(Intent.EXTRA_SUBJECT, sujet);
-                                                      intent.putExtra(Intent.EXTRA_TEXT, message);
+                // Créer une intention pour envoyer un e-mail via Gmail
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + destinataire));
+                intent.putExtra(Intent.EXTRA_SUBJECT, sujet);
+                intent.putExtra(Intent.EXTRA_TEXT, message);
 
-                                                      // Vérifier si l'appareil dispose d'une application de messagerie capable de gérer cette intention
-                                                      if (intent.resolveActivity(getPackageManager()) != null) {
-                                                          startActivity(intent);
-                                                      }
-                                                  }
+                // Vérifier si l'appareil dispose d'une application de messagerie capable de gérer cette intention
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
             @Override
             public void onClick(View view) {
                 envoyerEmailReclamation();
             }
-                                              });
+        });
 
         editTextPerempt = findViewById(R.id.perempt);
 
@@ -348,38 +366,65 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putString(TAILLE_KEY, enteredValue);
                 editor.apply();
 
-                try {
-                    UpdateRequest updateRequest = new UpdateRequest();
+                // try {
+                //   UpdateRequest updateRequest = new UpdateRequest();
 
-                    String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
+                String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
 
-                    // Conversion de la taille si l'unité est en mètres
-                    String taille = String.valueOf(editTextTaille.getText());
-                    if (selectedTailleUnit.equals("m")) {
-                        taille = String.valueOf((int) ( Double.parseDouble(taille)* 100));
-                    }
-
-                    updateRequest.setTaille(taille);
-
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                // Conversion de la taille si l'unité est en mètres
+                String taille = String.valueOf(editTextTaille.getText());
+                if (selectedTailleUnit.equals("m")) {
+                    taille = String.valueOf((int) (Double.parseDouble(taille) * 100));
                 }
+
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+                int User_id = myApp.getUser_id();
+                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                //  String selectedSexe = spinnerGender.getSelectedItem().toString();
+
+                String url = "http://" + BASE_URL + "/api/Utilisateur/" + User_id + "/taille/"+taille;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                JSONObject jsonBody = new JSONObject();
+
+
+                try {
+
+                   jsonBody.put("taille", taille);
+
+                    // Ajoutez d'autres champs si nécessaire
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(request);
             }
         });
 
-       // AppBarLayout appBarLayout = findViewById(R.id.appBar);
+        // AppBarLayout appBarLayout = findViewById(R.id.appBar);
         MaterialToolbar toolbar = findViewById(R.id.toolbar); // Assurez-vous que le R.id.toolbar correspond à votre MaterialToolbar
 
         // Ajoutez ceci pour afficher le bouton de retour (optionnel)
@@ -415,27 +460,48 @@ public class ProfilActivity extends AppCompatActivity {
 
                 yourSwitch.getThumbDrawable().setTint(thumbColor);
 
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+                int User_id = myApp.getUser_id();
+
+
+                String url = "http://"+ BASE_URL +"/api/Utilisateur/" + User_id +"/sportif/"+ isChecked ;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                JSONObject jsonBody = new JSONObject();
+
+
                 try {
-                    UpdateRequest updateRequest = new UpdateRequest();
+                    jsonBody.put("modeSportif",isChecked );
 
-                    updateRequest.setModeSportif(isChecked);
-
-
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Mode Sportif: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    // Ajoutez d'autres champs si nécessaire
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
+
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(request);
             }
         });
 
@@ -487,6 +553,51 @@ public class ProfilActivity extends AppCompatActivity {
                         : getResources().getColor(R.color.white);
 
                 yourSwitch3.getThumbDrawable().setTint(thumbColor);
+
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+                int User_id = myApp.getUser_id();
+
+
+                String url = "http://"+ BASE_URL +"/api/Utilisateur/" + User_id +"/alerte/"+ isChecked ;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                JSONObject jsonBody = new JSONObject();
+
+
+                try {
+                    jsonBody.put("alertedateexpi",isChecked );
+
+                    // Ajoutez d'autres champs si nécessaire
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(request);
+
+
             }
         });
 
@@ -495,22 +606,7 @@ public class ProfilActivity extends AppCompatActivity {
         yourSwitch3.setChecked(savedSwitch3State);
 
         // Ajouter un écouteur pour le changement d'état du Switch
-        yourSwitch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Sauvegarder le nouvel état automatiquement
-                SharedPreferences.Editor editor = sharedPreferences_switch3.edit();
-                editor.putBoolean(SWITCH3_STATE_KEY, isChecked);
-                editor.apply();
 
-                // Mettez à jour la couleur du pouce en fonction de l'état du switch
-                int thumbColor = isChecked
-                        ? getResources().getColor(R.color.switch_thumb_checked_color)
-                        : getResources().getColor(R.color.white);
-
-                yourSwitch3.getThumbDrawable().setTint(thumbColor);
-            }
-        });
 
         yourSwitch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -521,6 +617,50 @@ public class ProfilActivity extends AppCompatActivity {
                         : getResources().getColor(R.color.white);
 
                 yourSwitch4.getThumbDrawable().setTint(thumbColor);
+
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+                int User_id = myApp.getUser_id();
+
+
+                String url = "http://"+ BASE_URL +"/api/Utilisateur/" + User_id +"/alertePeremp/"+ isChecked ;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                JSONObject jsonBody = new JSONObject();
+
+
+                try {
+                    jsonBody.put("alerteproduitfinis",isChecked );
+
+                    // Ajoutez d'autres champs si nécessaire
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(request);
+
             }
         });
 
@@ -529,22 +669,22 @@ public class ProfilActivity extends AppCompatActivity {
         yourSwitch4.setChecked(savedSwitch4State);
 
         // Ajouter un écouteur pour le changement d'état du Switch
-        yourSwitch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    //    yourSwitch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      //      @Override
+        //    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Sauvegarder le nouvel état automatiquement
-                SharedPreferences.Editor editor = sharedPreferences_switch4.edit();
-                editor.putBoolean(SWITCH4_STATE_KEY, isChecked);
-                editor.apply();
+      //          SharedPreferences.Editor editor = sharedPreferences_switch4.edit();
+      //          editor.putBoolean(SWITCH4_STATE_KEY, isChecked);
+      //          editor.apply();
 
                 // Mettez à jour la couleur du pouce en fonction de l'état du switch
-                int thumbColor = isChecked
-                        ? getResources().getColor(R.color.switch_thumb_checked_color)
-                        : getResources().getColor(R.color.white);
+      //          int thumbColor = isChecked
+      //                  ? getResources().getColor(R.color.switch_thumb_checked_color)
+      //                  : getResources().getColor(R.color.white);
 
-                yourSwitch4.getThumbDrawable().setTint(thumbColor);
-            }
-        });
+        //        yourSwitch4.getThumbDrawable().setTint(thumbColor);
+      //      }
+     //   });
 
 
         TextView changePass=findViewById(R.id.change_pass);
@@ -565,7 +705,7 @@ public class ProfilActivity extends AppCompatActivity {
             // Faire quelque chose en fonction de la sélection
             if (selectedRadioButton != null) {
                 String selectedText = selectedRadioButton.getText().toString();
-              //  showToast("Unité sélectionnée : " + selectedText);
+                //  showToast("Unité sélectionnée : " + selectedText);
             }
         });
 
@@ -589,14 +729,14 @@ public class ProfilActivity extends AppCompatActivity {
         });
 
 
-         spinnerGender = findViewById(R.id.spinner_gender);
-         spinnerTaille= findViewById(R.id.spinner_taille);
-         spinnerPoids= findViewById(R.id.spinner_poids);
-         spinnerRegime= findViewById(R.id.spinner_regime);
-         spinnerDevise= findViewById(R.id.devise);
-         spinnerDate= findViewById(R.id.spinner_date);
-         spinnerQuantite= findViewById(R.id.spinner_mesure);
-         spinnerPerem= findViewById(R.id.spinner_date_per);
+        spinnerGender = findViewById(R.id.spinner_gender);
+        spinnerTaille= findViewById(R.id.spinner_taille);
+        spinnerPoids= findViewById(R.id.spinner_poids);
+        spinnerRegime= findViewById(R.id.spinner_regime);
+        spinnerDevise= findViewById(R.id.devise);
+        spinnerDate= findViewById(R.id.spinner_date);
+        spinnerQuantite= findViewById(R.id.spinner_mesure);
+        spinnerPerem= findViewById(R.id.spinner_date_per);
 
         // Définir les options pour le Spinner (ajoutez "Genre" en tant que première entrée)
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -760,32 +900,49 @@ public class ProfilActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Sauvegarder la nouvelle sélection automatiquement
-                SharedPreferences.Editor editor = sharedPreferences_gender.edit();
-                editor.putInt(SPINNER_GENDER_SELECTION_KEY, position);
-                editor.apply();
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+                int User_id = myApp.getUser_id();
+                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                String selectedSexe =  spinnerGender.getSelectedItem().toString();
+
+                String url = "http://"+ BASE_URL +"/api/Utilisateur/" + User_id +"/sexe/"+ selectedSexe ;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                JSONObject jsonBody = new JSONObject();
+
 
                 try {
-                    UpdateRequest updateRequest = new UpdateRequest();
+                    jsonBody.put("sexe",selectedSexe );
 
-                    String selectedSexe = (String) spinnerGender.getSelectedItem();
-
-                    updateRequest.setSexe(selectedSexe);
-
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Sexe: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    // Ajoutez d'autres champs si nécessaire
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
+
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(request);
             }
 
             @Override
@@ -810,34 +967,18 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putInt(SPINNER_SELECTION_KEY, position);
                 editor.apply();
 
-                try {
-                    UpdateRequest updateRequest = new UpdateRequest();
+               // try {
+                 //   UpdateRequest updateRequest = new UpdateRequest();
 
                     String selectedTailleUnit = (String) spinnerTaille.getSelectedItem();
 
                     // Conversion de la taille si l'unité est en mètres
                     String taille = String.valueOf(editTextTaille.getText());
-                    if (selectedTailleUnit.equals("m")) {
-                        taille = String.valueOf((int) ( Double.parseDouble(taille)* 100));
-                    }
+                 //   if (selectedTailleUnit.equals("m")) {
+                   //     taille = String.valueOf((int) ( Double.parseDouble(taille)* 100));
+                   // }
 
-                    updateRequest.setTaille(taille);
 
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Taille: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
             }
 
             @Override
@@ -876,36 +1017,62 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putString(WEIGHT_KEY, enteredWeight);
                 editor.apply();
 
-                try {
-                    UpdateRequest updateRequest = new UpdateRequest();
 
-                    String selectedPoidsUnit = (String) spinnerPoids.getSelectedItem();
+                //    UpdateRequest updateRequest = new UpdateRequest();
 
-                    // Conversion de la taille si l'unité est en mètres
-                    String poids = String.valueOf(editTextPoids.getText());
-                    if (selectedPoidsUnit.equals("tonne")) {
-                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 1000));
-                    } else if (selectedPoidsUnit.equals("g")) {
-                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 0.001));
-                    }
+                String selectedPoidsUnit = (String) spinnerPoids.getSelectedItem();
 
-                    updateRequest.setPoids(poids);
-
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Poids: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                // Conversion de la taille si l'unité est en mètres
+                String poids = String.valueOf(editTextPoids.getText());
+                if (selectedPoidsUnit.equals("tonne")) {
+                    poids = String.valueOf((int) (Double.parseDouble(poids) * 1000));
+                } else if (selectedPoidsUnit.equals("g")) {
+                    poids = String.valueOf((int) (Double.parseDouble(poids) * 0.001));
                 }
+
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+                int User_id = myApp.getUser_id();
+                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+
+
+                String url = "http://" + BASE_URL + "/api/Utilisateur/" + User_id + "/poids/" + poids;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                JSONObject jsonBody = new JSONObject();
+
+
+                try {
+                    jsonBody.put("poids", poids);
+
+                    // Ajoutez d'autres champs si nécessaire
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(request);
             }
         });
 
@@ -973,28 +1140,55 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putInt(SPINNER_REGIME_SELECTION_KEY, position);
                 editor.apply();
 
-                try {
-                    UpdateRequest updateRequest = new UpdateRequest();
+
 
                     String selectedRegime = (String) spinnerRegime.getSelectedItem();
 
-                    updateRequest.setRégimeSpécieux(selectedRegime);
+                  //  updateRequest.setRégimeSpécieux(selectedRegime);
 
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+                int User_id = myApp.getUser_id();
+                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                String selectedSexe =  spinnerGender.getSelectedItem().toString();
 
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Régime Spécieux: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                String url = "http://"+ BASE_URL +"/api/Utilisateur/" + User_id +"/regime/"+ selectedRegime ;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                JSONObject jsonBody = new JSONObject();
+
+
+                try {
+                    jsonBody.put("régimeSpécieux",selectedRegime );
+
+                    // Ajoutez d'autres champs si nécessaire
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
+
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(request);
             }
 
             @Override
@@ -1146,29 +1340,57 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putString(SELECTED_DATE_KEY, selectedDate);
                 editor.apply();
 
+
+                //     UpdateRequest updateRequest = new UpdateRequest();
+
+                String dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+
+                Date dateNais=new Date(year,month+1,day,00,00,00);
+
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+                int User_id = myApp.getUser_id();
+                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+              //  String selectedSexe = spinnerGender.getSelectedItem().toString();
+
+                String url = "http://" + BASE_URL + "/api/Utilisateur/" + User_id + "/date/"+dateNais;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                JSONObject jsonBody = new JSONObject();
+
+
                 try {
-                    UpdateRequest updateRequest = new UpdateRequest();
 
-                    String dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+                    jsonBody.put("dateDeNaissance", dateNais);
 
-                    updateRequest.setDateDeNaissance(dateDeNaissance);
-
-
-                    backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            // Traitez le succès ici si nécessaire
-                        }
-
-                        @Override
-                        public void onError(Exception error) {
-                            // Traitez l'erreur ici si nécessaire
-                            Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour du Date De Naissance: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    // Ajoutez d'autres champs si nécessaire
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
+
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(request);
             }
         },year, month, day);
 
@@ -1183,6 +1405,17 @@ public class ProfilActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private Date parseDateFromString(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        try {
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            // Gérer l'erreur de parsing selon vos besoins
+            return null;
+        }
     }
 
     private void afficherConfirmationSuppression() {
