@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,7 @@ public class RecettesSimilairesAdapter extends RecyclerView.Adapter<RecettesSimi
         holder.textViewRecetteName.setText(recette.getRecetteName());
         // Async Process
         String imageUrl = recette.getImageUrl();
-        loadImageAsync(holder.recetteImageView, imageUrl);
+        loadImageAsync(holder.recetteImageView, imageUrl, holder.loadingProgressBar);
 
         holder.recetteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,16 +65,18 @@ public class RecettesSimilairesAdapter extends RecyclerView.Adapter<RecettesSimi
 
     public class RecetteSimilaireViewHolder extends RecyclerView.ViewHolder {
         public ImageView recetteImageView;
+        public ProgressBar loadingProgressBar;
         private TextView textViewRecetteName;
 
         public RecetteSimilaireViewHolder(@NonNull View itemView) {
             super(itemView);
+            loadingProgressBar = itemView.findViewById(R.id.loadingProgressBar);
             textViewRecetteName = itemView.findViewById(R.id.text_view_recette_similaire_name);
             recetteImageView = itemView.findViewById(R.id.recette_similaire_image_view);
         }
     }
 
-    private void loadImageAsync(ImageView imageView, String imageUrl) {
-        new GetImageFromUrl(imageView).execute(imageUrl);
+    private void loadImageAsync(ImageView imageView, String imageUrl,ProgressBar loadingProgressBar) {
+        new GetImageFromUrl(imageView, loadingProgressBar).execute(imageUrl);
     }
 }

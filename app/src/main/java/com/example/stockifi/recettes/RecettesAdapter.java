@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +66,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
         // Async Process
         String imageUrl = recette.getImageUrl();
         // Assuming you have a method to load the image asynchronously
-        loadImageAsync(holder.recetteImageView, imageUrl);
+        loadImageAsync(holder.recetteImageView, imageUrl, holder.loadingProgressBar);
 
         // Change background drawable based on checked state
         int backgroundDrawable = recette.isFavoris() ?
@@ -142,6 +143,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
     }
 
     public static class RecetteViewHolder extends RecyclerView.ViewHolder {
+        ProgressBar loadingProgressBar;
         ImageView recetteImageView;
         CheckBox checkBoxFavoris;
         TextView textViewMinutes;
@@ -150,6 +152,7 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
 
         public RecetteViewHolder(@NonNull View itemView) {
             super(itemView);
+            loadingProgressBar = itemView.findViewById(R.id.loadingProgressBar);
             recetteImageView = itemView.findViewById(R.id.recette_image_view);
             checkBoxFavoris = itemView.findViewById(R.id.checkBox_favoris);
             textViewMinutes = itemView.findViewById(R.id.text_view_min);
@@ -159,8 +162,9 @@ public class RecettesAdapter extends RecyclerView.Adapter<RecettesAdapter.Recett
         }
     }
 
-    // Dummy method, replace with your actual image loading logic
-    private void loadImageAsync(ImageView imageView, String imageUrl) {
-        new GetImageFromUrl(imageView).execute(imageUrl);
+    // Modify the loadImageAsync method
+    private void loadImageAsync(ImageView imageView, String imageUrl, ProgressBar loadingProgressBar) {
+        new GetImageFromUrl(imageView, loadingProgressBar).execute(imageUrl);
     }
+
 }

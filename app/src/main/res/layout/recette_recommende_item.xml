@@ -19,6 +19,16 @@
             android:layout_margin="5dp"
             app:cardCornerRadius="35dp">
 
+            <ProgressBar
+                android:id="@+id/loadingProgressBar"
+                style="@style/CustomProgressBarStyle"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="visible"
+                android:indeterminateTint="@color/ProgressBarColor"/>
+
             <ImageView
                 android:id="@+id/recette_image_view"
                 android:layout_width="match_parent"

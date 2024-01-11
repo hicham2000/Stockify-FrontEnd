@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class RecetteActivity extends AppCompatActivity {
     private MaterialToolbar toolbarAppReccette;
     private BottomNavigationView bottomNavigationView;
 
+    private ProgressBar loadingProgressBar;
     private ImageView recetteImageView;
     private TextView recetteNomTextView;
     private TextView recetteIngredientsManquantsTextView;
@@ -114,7 +116,7 @@ public class RecetteActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "MissingInflatedId"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +132,7 @@ public class RecetteActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbarAppReccette);
 
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
         recetteImageView = findViewById(R.id.recette_image_view);
         recetteNomTextView = findViewById(R.id.recette_nom_text_view);
         recetteIngredientsManquantsTextView = findViewById(R.id.recette_text_view_nombre_ingredients_manquants);
@@ -153,7 +156,7 @@ public class RecetteActivity extends AppCompatActivity {
         if (recetteIntent.hasExtra("Recette")) {
             recette = (RecetteModel) recetteIntent.getSerializableExtra("Recette");
             assert recette != null;
-            loadImageAsync(recetteImageView, recette.getImageUrl());
+            loadImageAsync(recetteImageView, recette.getImageUrl(), loadingProgressBar);
             recetteNomTextView.setText(recette.getRecetteName());
             portionTextView.setText("1");
             recetteIngredientsManquantsTextView.setText(String.valueOf(recette.getIngredientsMissing()) + " ingrédients manquants");
@@ -362,8 +365,8 @@ public class RecetteActivity extends AppCompatActivity {
         return (double) ((double)Math.round(val * tmp) / tmp);
     }
 
-    private void loadImageAsync(ImageView imageView, String imageUrl) {
-        new GetImageFromUrl(imageView).execute(imageUrl);
+    private void loadImageAsync(ImageView imageView, String imageUrl, ProgressBar loadingProgressBar) {
+        new GetImageFromUrl(imageView, loadingProgressBar).execute(imageUrl);
     }
 
     private void loadData() throws JSONException {

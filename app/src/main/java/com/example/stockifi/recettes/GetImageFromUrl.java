@@ -7,7 +7,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,11 +19,20 @@ import java.net.URL;
 public class GetImageFromUrl extends AsyncTask<String, Void, Bitmap> {
     private static final String TAG = GetImageFromUrl.class.getSimpleName();
     private ImageView imageView;
+    ProgressBar loadingProgressBar;
     private Bitmap bitmap;
 
-    public GetImageFromUrl(ImageView img) {
+    public GetImageFromUrl(ImageView img, ProgressBar progressBar) {
         this.imageView = img;
+        this.loadingProgressBar = progressBar;
     }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        loadingProgressBar.setVisibility(View.VISIBLE);
+    }
+
 
     @Override
     protected Bitmap doInBackground(String... url) {
@@ -52,6 +63,7 @@ public class GetImageFromUrl extends AsyncTask<String, Void, Bitmap> {
         super.onPostExecute(bitmap);
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
+            loadingProgressBar.setVisibility(View.GONE);
         } else {
             // Handle the case where the image could not be fetched
             Log.e(TAG, "Error fetching image");
