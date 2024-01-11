@@ -21,7 +21,8 @@ public class BackendManager {
 
 
     //private static final String BASE_URL = "http://100.89.18.54:1111";
-    private static final String BASE_URL = "http://10.0.2.2:1111";
+   // private static final String BASE_URL = "http://10.0.2.2:1111";
+    private static final String BASE_URL = "http://192.168.11.100:1111";
     //private static final String BASE_URL = "http://192.168.1.17:1111";
     //private static final String BASE_URL = "http://192.168.3.27:1111";
 
@@ -483,7 +484,6 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
-
     public void ajouterRecetteAuStock(long stockId, long recetteId, BackendResponseCallback callback){
         String url = getFullUrl( "/stocks/"+stockId+"/recipes/"+recetteId);
 
@@ -499,6 +499,34 @@ public class BackendManager {
                     }
                 },
                 callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+    public void recupererIngredients(@NonNull BackendResponseCallback callback) {
+        String url = getFullUrl(ENDPOINT + "/Ingredients");
+
+        int timeout = 10000;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                timeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
 
         requestQueue.add(jsonObjectRequest);
     }
