@@ -1,8 +1,7 @@
 plugins {
     id("com.android.application")
-    id ("org.sonarqube") version "4.4.1.3373"
+    id("com.google.gms.google-services")
 }
-
 
 android {
     namespace = "com.example.stockifi"
@@ -57,6 +56,12 @@ dependencies {
     androidTestImplementation("androidx.test:rules:1.5.0")
     androidTestImplementation("org.hamcrest:hamcrest-library:2.2")
     implementation("com.android.volley:volley:1.2.1")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.firebase:firebase-messaging:23.4.0")
+    implementation("com.google.firebase:firebase-analytics:21.5.0")
+    implementation("org.chromium.net:cronet-common:76.3809.111")
+
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
