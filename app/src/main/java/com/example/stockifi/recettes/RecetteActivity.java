@@ -366,7 +366,7 @@ public class RecetteActivity extends AppCompatActivity {
     }
 
     private void loadImageAsync(ImageView imageView, String imageUrl, ProgressBar loadingProgressBar) {
-        new GetImageFromUrl(imageView, loadingProgressBar).execute(imageUrl);
+            new GetImageFromUrl(imageView, loadingProgressBar).execute(imageUrl);
     }
 
     private void loadData() throws JSONException {

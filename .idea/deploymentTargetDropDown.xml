@@ -2,13 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="RecetteActivity">
-        <State />
-      </entry>
       <entry key="RecettesRecommendeActivity">
-        <State />
-      </entry>
-      <entry key="Stockify">
         <State />
       </entry>
     </value>
