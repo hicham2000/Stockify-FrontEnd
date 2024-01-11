@@ -62,11 +62,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1870b888-81c8-4aaf-9207-e56bd77a6174" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ajouter_produit_liste_produit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ajouter_produit_liste_produit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_informations_produit_stock.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_informations_produit_stock.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifier_produit_stock.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifier_produit_stock.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/corbeille/corbeille.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stockifi/corbeille/corbeille.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +166,7 @@
       <recent name="com.example.stockifi.Gestion_Produit" />
     </key>
   </component>
-  <component name="RunManager" selected="Android App.Stockify">
+  <component name="RunManager" selected="Android App.corbeille">
     <configuration name="AjouterProduit" type="AndroidRunConfigurationType" factoryName="Android App" temporary="true">
       <module name="Stockify.app.main" />
       <option name="DEPLOY" value="true" />
@@ -586,9 +584,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Android App.corbeille" />
         <item itemvalue="Android App.ModifierProduitStock" />
         <item itemvalue="Android App.ListeProduit" />
-        <item itemvalue="Android App.corbeille" />
         <item itemvalue="Android App.ListeDeCourse" />
         <item itemvalue="Android App.AjouterProduit" />
       </list>
