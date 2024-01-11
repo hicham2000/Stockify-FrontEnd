@@ -2,20 +2,16 @@ package com.example.stockifi.recettes;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.stockifi.R;
-import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
 import java.util.List;
