@@ -46,6 +46,10 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
         this.data = data;
         checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), false));
     }
+    public void clearData() {
+        data.clear();
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
