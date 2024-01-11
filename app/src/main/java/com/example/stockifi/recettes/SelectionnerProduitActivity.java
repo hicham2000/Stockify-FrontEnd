@@ -27,6 +27,8 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_SELECTION = 101;
 
+    private ArrayList<String> produitsSelectionnesList = new ArrayList<String>();
+
     private MaterialToolbar toolbarAppReccette;
     private BottomNavigationView bottomNavigationView;
 
@@ -79,19 +81,9 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<String> produitsSelectionnesList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
+        produitsSelectionnesList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
         FiltreProduitsSelectionneAdapter filtreProduitsSelectionneAdapter = new FiltreProduitsSelectionneAdapter(produitsSelectionnesList);
         recyclerView.setAdapter(filtreProduitsSelectionneAdapter);
-
-        validerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("message", "hello");
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-            }
-        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -105,6 +97,16 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
                 // Handle the query text change
                 // You can use this to filter your RecyclerView data
                 return false;
+            }
+        });
+
+        validerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                resultIntent.putStringArrayListExtra("ProduitsSelectionnes", produitsSelectionnesList);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
             }
         });
 

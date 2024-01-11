@@ -35,12 +35,14 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
 
     public Context context = this;
 
+    private List<String> produitsSelectionnesList = new ArrayList<String>();
     private MaterialToolbar toolbarAppReccette;
     private BottomNavigationView bottomNavigationView;
     private RecyclerView regimeSpeciauxRecyclerView;
@@ -138,10 +140,9 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
         flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
         flexboxLayoutManager.setAlignItems(AlignItems.STRETCH);
-
         produitsSelectionneRecyclerView.setLayoutManager(flexboxLayoutManager);
 
-        List<String> produitsSelectionnesList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
+
         ProduitsSelectionneAdapter produitsSelectionneAdapter = new ProduitsSelectionneAdapter(produitsSelectionnesList);
         produitsSelectionneRecyclerView.setAdapter(produitsSelectionneAdapter);
 
@@ -222,9 +223,10 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_SELECTION && resultCode == Activity.RESULT_OK) {
-            // Handle the result from SelectionnerProduitActivity here
             assert data != null;
-            System.out.println(data.getStringExtra("message"));
+            produitsSelectionnesList = data.getStringArrayListExtra("ProduitsSelectionnes");
+            ProduitsSelectionneAdapter produitsSelectionneAdapter = new ProduitsSelectionneAdapter(produitsSelectionnesList);
+            produitsSelectionneRecyclerView.setAdapter(produitsSelectionneAdapter);
         }
     }
 
