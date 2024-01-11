@@ -706,16 +706,7 @@ public class ProfilActivity extends AppCompatActivity {
         });
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
 
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            // Récupérer le RadioButton sélectionné
-            RadioButton selectedRadioButton = findViewById(checkedId);
 
-            // Faire quelque chose en fonction de la sélection
-            if (selectedRadioButton != null) {
-                String selectedText = selectedRadioButton.getText().toString();
-                //  showToast("Unité sélectionnée : " + selectedText);
-            }
-        });
 
         radioButtonMetric = findViewById(R.id.radioButtonMetric);
         radioButtonImperial = findViewById(R.id.radioButtonImperial);
@@ -1240,6 +1231,40 @@ public class ProfilActivity extends AppCompatActivity {
                 String nomProfil = response.getString("nom") + " " + response.getString("prénom");
                 nomProfilView.setText(nomProfil);
                 emailProfilView.setText(response.getString("email"));
+
+                boolean sportif = response.getBoolean("modeSportif");
+              //  Switch genderSwitch = findViewById(R.id.genderSwitch); // Assurez-vous d'avoir un élément Switch avec l'ID genderSwitch dans votre layout XML
+
+
+                    if (sportif) {
+                        yourSwitch.setChecked(true); // Homme est activé
+                    } else  {
+                        yourSwitch.setChecked(false); // Femme est activé
+                    }
+
+
+                boolean alertedateexpi = response.getBoolean("alertedateexpi");
+                //  Switch genderSwitch = findViewById(R.id.genderSwitch); // Assurez-vous d'avoir un élément Switch avec l'ID genderSwitch dans votre layout XML
+
+
+                    if (alertedateexpi) {
+                        yourSwitch3.setChecked(true); // Homme est activé
+                    } else  {
+                        yourSwitch3.setChecked(false); // Femme est activé
+                    }
+
+
+                boolean alerteproduitfinis = response.getBoolean("alerteproduitfinis");
+                //  Switch genderSwitch = findViewById(R.id.genderSwitch); // Assurez-vous d'avoir un élément Switch avec l'ID genderSwitch dans votre layout XML
+
+
+                    if (alerteproduitfinis) {
+                        yourSwitch4.setChecked(true); // Homme est activé
+                    } else {
+                        yourSwitch4.setChecked(false); // Femme est activé
+                    }
+
+
 
                 String gender = response.getString("sexe");
                 if(!gender.equals("null")) {
