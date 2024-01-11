@@ -17,13 +17,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.stockifi.R;
 import com.google.android.material.chip.Chip;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FiltreProduitsSelectionneAdapter extends RecyclerView.Adapter<FiltreProduitsSelectionneAdapter.ViewHolder>{
     private List<String> produitsList;
+    private ArrayList<String> produitsSelectionnesList;
 
-    public FiltreProduitsSelectionneAdapter(List<String> produitsList) {
+    public FiltreProduitsSelectionneAdapter(List<String> produitsList, ArrayList<String> produitsSelectionnesList) {
         this.produitsList = produitsList;
+        this.produitsSelectionnesList = produitsSelectionnesList;
     }
 
     public void setSelectedProduits(List<String> produitsList) {
@@ -53,7 +56,9 @@ public class FiltreProduitsSelectionneAdapter extends RecyclerView.Adapter<Filtr
         holder.produitSelectionneCheckbox.setChecked(true);
         holder.produitSelectionneCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked) {
-                //System.out.println(produitName + " Checked ");
+                produitsSelectionnesList.add(produitName);
+            } else{
+                produitsSelectionnesList.remove(produitName);
             }
         });
     }

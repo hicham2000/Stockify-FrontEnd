@@ -1,6 +1,7 @@
 package com.example.stockifi.recettes;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,10 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.stockifi.BackendManager;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
@@ -19,15 +23,21 @@ import com.example.stockifi.corbeille.corbeille;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SelectionnerProduitActivity extends AppCompatActivity {
 
+    private Context context = this;
     public static final int REQUEST_CODE_SELECTION = 101;
 
     private ArrayList<String> produitsSelectionnesList = new ArrayList<String>();
+    List<String> produitsList = new ArrayList<String>();
 
     private MaterialToolbar toolbarAppReccette;
     private BottomNavigationView bottomNavigationView;
@@ -35,6 +45,8 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
     private SearchView searchView;
     private RecyclerView recyclerView;
     private Button validerButton;
+
+    private BackendManager backendManager;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,6 +82,8 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_produit_selectionner);
 
+        backendManager = new BackendManager(this);
+
         toolbarAppReccette = findViewById(R.id.toolbar_liste_produit_selectionner);
         bottomNavigationView = findViewById(R.id.androidx_window_produit_selectionner);
 
@@ -81,8 +95,8 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        produitsSelectionnesList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
-        FiltreProduitsSelectionneAdapter filtreProduitsSelectionneAdapter = new FiltreProduitsSelectionneAdapter(produitsSelectionnesList);
+        produitsList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
+        FiltreProduitsSelectionneAdapter filtreProduitsSelectionneAdapter = new FiltreProduitsSelectionneAdapter(produitsList, produitsSelectionnesList);
         recyclerView.setAdapter(filtreProduitsSelectionneAdapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -147,6 +161,40 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
             finish();
 
             return true;
+        });
+
+        /* ------------------------------------------------------------------------------------------ */
+        try {
+            loadData();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private void loadData() throws JSONException {
+        backendManager.recupererIngredients(new BackendManager.BackendResponseCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws JSONException {
+                JSONArray recettesArray = response.getJSONArray("ingredients");
+                if (recettesArray.length() > 0) {
+                    for(int i = 0; i < recettesArray.length(); i++){
+                        JSONObject recetteObject = recettesArray.getJSONObject(i);
+                        String ingredientName = recetteObject.getString("intitule");
+                        produitsList.add(ingredientName);
+                    }
+
+                    FiltreProduitsSelectionneAdapter filtreProduitsSelectionneAdapter = new FiltreProduitsSelectionneAdapter(produitsList, produitsSelectionnesList);
+                    recyclerView.setAdapter(filtreProduitsSelectionneAdapter);
+                }
+
+            }
+
+            @Override
+            public void onError(Exception error) {
+                String errorMessage = "Erreur lors du chargement du produits: " + error.getMessage();
+                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
