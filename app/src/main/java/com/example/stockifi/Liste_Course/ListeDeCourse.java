@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -25,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
@@ -40,8 +42,11 @@ import java.util.ArrayList;
 
 public class ListeDeCourse extends AppCompatActivity {
 
+    private static final String BASE_URL = "192.168.11.100:1111";
+
     Button AjouterBouton;
     SearchView search_listeCourse;
+    LinearLayout ViderListeCourse;
   //  ImageView poubelleImage = findViewById(R.id.poubelle_image);
 
     @Override
@@ -66,6 +71,53 @@ public class ListeDeCourse extends AppCompatActivity {
 
         search_listeCourse=findViewById(R.id.search_course);
 
+        ViderListeCourse=findViewById(R.id.vider_listeCourse);
+
+        ViderListeCourse.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+
+                MyApp myApp = (MyApp) getApplication();
+                RequestQueue queue = Volley.newRequestQueue(ListeDeCourse.this);
+                int User_id = myApp.getUser_id();
+                int User_listeCourse_id = myApp.getUser_listeCourse_id();
+                String url = "http://"+BASE_URL+"/listeCourses/" + User_listeCourse_id + "/products";
+                //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit.getId();
+                JSONObject jsonBody = new JSONObject();
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.DELETE,
+                        url,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+//                                    Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Gérez les erreurs de la requête ici
+                                //                                  Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                );
+
+                queue.add(request);
+                Intent intent = new Intent(ListeDeCourse.this, ListeDeCourse.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+
+            }
+        });
+
 
 
 
@@ -77,8 +129,13 @@ public class ListeDeCourse extends AppCompatActivity {
                 MyApp myApp = (MyApp) getApplication();
                 int User_id = myApp.getUser_id();
                 int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+
+                String url = "http://"+BASE_URL+"/listeCourses/"+   User_listeCourse_id + "/products/" + produit;
               //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+
+                //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+//                String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+
 
                 ListView listView = findViewById(R.id.myListViewCourse);
 
@@ -146,8 +203,13 @@ public class ListeDeCourse extends AppCompatActivity {
                     MyApp myApp = (MyApp) getApplication();
                     int User_id = myApp.getUser_id();
                     int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                    String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+
+                    String url = "http://"+BASE_URL+"/listeCourses/" + User_listeCourse_id + "/products/" + produit;
                   //  String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+
+                    //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+//                    String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + produit;
+
 
                     ListView listView = findViewById(R.id.myListViewCourse);
 
@@ -206,8 +268,13 @@ public class ListeDeCourse extends AppCompatActivity {
                     MyApp myApp = (MyApp) getApplication();
                     int User_id = myApp.getUser_id();
                     int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                    String url = "http://192.168.11.100:1111/listeCourses/"+User_listeCourse_id+"/products";
+
+                    String url = "http://"+BASE_URL+"/listeCourses/"+User_listeCourse_id+"/products";
                    // String url = "http://10.0.2.2:1111/listeCourses/"+User_listeCourse_id+"/products";
+
+                    // String url = "http://192.168.11.100:1111/listeCourses/"+User_listeCourse_id+"/products";
+//                    String url = "http://10.0.2.2:1111/listeCourses/"+User_listeCourse_id+"/products";
+
 
                     ListView listView = findViewById(R.id.myListViewCourse);
 
@@ -276,8 +343,13 @@ public class ListeDeCourse extends AppCompatActivity {
         MyApp myApp = (MyApp) getApplication();
         int User_id = myApp.getUser_id();
         int User_listeCourse_id = myApp.getUser_listeCourse_id();
-        String url = "http://192.168.11.100:1111/listeCourses/"+User_listeCourse_id+"/products";
+
+        String url = "http://"+BASE_URL+"/listeCourses/"+User_listeCourse_id+"/products";
       //  String url = "http://10.0.2.2:1111/listeCourses/"+User_listeCourse_id+"/products";
+
+        // String url = "http://192.168.11.100:1111/listeCourses/"+User_listeCourse_id+"/products";
+//        String url = "http://10.0.2.2:1111/listeCourses/"+User_listeCourse_id+"/products";
+
 
         ListView listView = findViewById(R.id.myListViewCourse);
 

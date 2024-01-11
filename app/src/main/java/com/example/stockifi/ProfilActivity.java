@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -152,7 +153,7 @@ public class ProfilActivity extends AppCompatActivity {
         backendManager = new BackendManager(this);
 
         // Gestionnaire de clic pour l'élément "Courses"
-        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_profil);
         Menu navBar = bottomNavigationView.getMenu();
 
 
@@ -1128,7 +1129,7 @@ public class ProfilActivity extends AppCompatActivity {
         LogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myApp.setUser_id(-1);
+                myApp.setUser_id(0);
                 Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

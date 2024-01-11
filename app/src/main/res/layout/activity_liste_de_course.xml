@@ -47,13 +47,38 @@
         />
 
 
+    <LinearLayout
+        android:id="@+id/vider_listeCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dimenTexte"
+        android:layout_below="@+id/search_course">
+
+        <ImageView
+            android:id="@+id/supprim"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:src="@drawable/poubelle"
+
+            android:layout_marginLeft="200dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vider liste de Course"
+            android:textColor="@color/vertTexte"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/dimenTexte"
-            android:layout_below="@+id/search_course">
+            android:layout_below="@+id/vider_listeCourse">
 
             <!-- CheckBox 2 -->
 
@@ -61,7 +86,7 @@
             <ListView
                 android:id="@+id/myListViewCourse"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="220dp"
                 android:paddingBottom="20dp"/>
 
 

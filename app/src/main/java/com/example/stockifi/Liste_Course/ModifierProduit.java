@@ -28,6 +28,7 @@ import java.util.Arrays;
 
 public class ModifierProduit extends AppCompatActivity {
 
+    private static final String BASE_URL = "192.168.11.100:1111";
     EditText nom;
     EditText quantite;
 
@@ -112,8 +113,13 @@ public class ModifierProduit extends AppCompatActivity {
                                                      RequestQueue queue = Volley.newRequestQueue(ModifierProduit.this);
                                                      int User_id = myApp.getUser_id();
                                                      int User_listeCourse_id = myApp.getUser_listeCourse_id();
-                                                     String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                                                     String url = "http://"+BASE_URL+"/listeCourses/" + User_listeCourse_id + "/products/" + id;
                                                   //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
+                                                     //String url = "http://192.168.11.100:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+                                                  //   String url = "http://10.0.2.2:1111/listeCourses/" + User_listeCourse_id + "/products/" + id;
+
                                                      JSONObject jsonBody = new JSONObject();
 
                                                      try {

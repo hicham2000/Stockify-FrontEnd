@@ -41,7 +41,7 @@ public class ListeproduitAdapter extends ArrayAdapter<ProduitALaListe> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), AjouterProduit_ListeProduit.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
             }
         });
