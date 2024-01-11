@@ -92,7 +92,7 @@ public class corbeille extends AppCompatActivity{
                 MyApp myApp = (MyApp) getApplication();
                 int User_id = myApp.getUser_id();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://10.0.2.2:1111/corbeille/deletedProduct/"+ User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/deletedProduct/git "+ User_Stock_id;
                 ListView listView = findViewById(R.id.myListViewCorbeille);
 
                 ArrayList<objet> dataList = new ArrayList<>();

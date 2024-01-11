@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -138,17 +139,18 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
+
         MyApp myApp = (MyApp) getApplication();
 
         currentUserId = myApp.getUser_id();
         stockUserId = myApp.getUser_stock_id();
 
+
         backendManager = new BackendManager(this);
 
         // Gestionnaire de clic pour l'élément "Courses"
-        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_profil);
         Menu menu = bottomNavigationView.getMenu();
-
 
         // Gestionnaire de clic pour l'élément "Courses"
         menu.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
@@ -1005,7 +1007,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         pickDateButton = findViewById(R.id.date_naissance);
         date_naissace=findViewById(R.id.dateNaissance);
-     
+
 
         // Mettez à jour le TextView avec la date actuelle
 

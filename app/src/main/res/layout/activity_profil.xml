@@ -28,7 +28,7 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/androidx_window"
+        android:id="@+id/androidx_window_profil"
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
@@ -39,7 +39,10 @@
         app:labelVisibilityMode="auto"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        app:itemBackground="@null"/>
+        app:itemBackground="@null"
+
+
+        />
 
 <ScrollView
     android:layout_width="match_parent"
