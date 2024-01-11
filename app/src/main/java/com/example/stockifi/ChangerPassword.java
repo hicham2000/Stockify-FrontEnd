@@ -31,7 +31,6 @@ public class ChangerPassword extends AppCompatActivity {
     TextInputLayout textInputLayoutpass_conf;
 
     Button submitButton;
-    String currentUserPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,33 +63,19 @@ public class ChangerPassword extends AppCompatActivity {
 
         submitButton = findViewById(R.id.button_email);
 
-        int currentUserId = myApp.getUser_id();
-
-        backendManager.getUtilisateur(currentUserId, new BackendManager.BackendResponseCallback() {
-            @Override
-            public void onSuccess(JSONObject response) throws JSONException {
-                currentUserPassword = response.getString("password");
-                System.out.println("currentUserPassword = " + currentUserPassword);
-            }
-
-            @Override
-            public void onError(Exception error) {
-                // Traitez l'erreur ici si nécessaire
-                Toast.makeText(getApplicationContext(), "Erreur lors de la récupération du Mot de passe courant: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if(validateInput()) {
-                    UpdateRequest updateRequest = new UpdateRequest();
+                    try {
+                        int currentUserId = myApp.getUser_id();
+                        UpdateRequest updateRequest = new UpdateRequest();
 
-                    String new_password = textInputLayoutpass_nouv.getEditText().getText().toString().trim();
-                    updateRequest.setPassword(new_password);
+                        String new_password = textInputLayoutpass_nouv.getEditText().getText().toString().trim();
 
-                    try{
+                        updateRequest.setPassword(new_password);
+
                         backendManager.updateUtilisateur((long) currentUserId, updateRequest, new BackendManager.BackendResponseCallback() {
                             @Override
                             public void onSuccess(JSONObject response) {
@@ -139,6 +124,8 @@ public class ChangerPassword extends AppCompatActivity {
 
         boolean isValid = true;
 
+        System.out.println("textInputLayoutpass_conf === " + textInputLayoutpass_conf);
+
         if (current_password.isEmpty()){
             textInputLayoutpass_courant.setError("Cette champ ne doit pas etre vide");
             isValid = false;
@@ -150,12 +137,6 @@ public class ChangerPassword extends AppCompatActivity {
             isValid = false;
         } else if(!new_password.equals(conf_password)){
             textInputLayoutpass_conf.setError("Cette champ ne correspond pas à Nouveau Mot de Passe");
-            isValid = false;
-        } else if(currentUserPassword.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Le Mot de passe n'est pas bien récupérer", Toast.LENGTH_SHORT).show();
-            isValid = false;
-        }else if(!current_password.equals(currentUserPassword)) {
-            textInputLayoutpass_courant.setError("entrer le bon mot de passe");
             isValid = false;
         }
 

@@ -12,7 +12,8 @@
     <string name="description_regime"> Description regime </string>
     <string name="ingredient"> Ingrédients </string>
     <string name="chercherProd">Chercher un produit</string>
-
+    <string name="msg_token_fmt">Your message with token: %s</string>
+    <string name="default_notification_channel_id">default_channel_id</string>
     <string name="inscrire">S\'inscrire</string>
     <string-array name="regimes">
         <item>Regimes specieux</item>

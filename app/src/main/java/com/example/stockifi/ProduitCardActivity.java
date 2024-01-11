@@ -13,6 +13,7 @@ import cards.Card;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
@@ -23,8 +24,15 @@ import android.graphics.drawable.Drawable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.google.firebase.FirebaseApp;
+import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import com.google.android.gms.tasks.Task;
+import android.widget.Toast;
+import notifications.Notification;
 
 public class ProduitCardActivity extends AppCompatActivity {
+    private static final String TAG = "Issa";
 
     private FrameLayout cardContainer;
     private List<Card> cardList;
@@ -34,6 +42,8 @@ public class ProduitCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produit_card);
         cardContainer = findViewById(R.id.cardContainer);
+
+
         cardList = loadCardsFromJson();
 
 

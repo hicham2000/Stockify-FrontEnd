@@ -13,15 +13,12 @@ import java.text.ParseException;
 
 public class BackendManager {
 
-
-    //private static final String BASE_URL = "http://100.89.24.186:1111";
-    private static final String BASE_URL = "http://10.0.2.2:1111";
-
-    //private static final String BASE_URL = "http://192.168.1.60:1111";
-
+    private static final String BASE_URL = "http://192.168.11.100:1111";
+  //  private static final String BASE_URL = "http://10.0.2.2:1111";
     private static final String ENDPOINT = "/api";
 
     private final RequestQueue requestQueue;
+
 
     public BackendManager(Context context) {
         requestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -37,6 +34,8 @@ public class BackendManager {
                         try {
                             callback.onSuccess(response);
                         } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                     } else {
@@ -72,6 +71,8 @@ public class BackendManager {
                         try {
                             callback.onSuccess(response);
                         } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                     } else {
@@ -109,6 +110,8 @@ public class BackendManager {
                         callback.onSuccess(response);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
                     }
                 },
                 callback::onError);
@@ -126,7 +129,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException e) {
+                    } catch (JSONException | ParseException e) {
                         throw new RuntimeException(e);
                     }
                 },
@@ -145,7 +148,7 @@ public class BackendManager {
                 response -> {
                     try {
                         callback.onSuccess(response);
-                    } catch (JSONException e) {
+                    } catch (JSONException | ParseException e) {
                         callback.onError(e);
                     }
                 },
@@ -203,104 +206,10 @@ public class BackendManager {
         return updatedUserJson;
     }
 
-    public void updateQuantiteCritiqueParDefautStock(Long stockid, int quantiteCritiqueParDefautStock, BackendResponseCallback callback) throws JSONException {
-        String url = getFullUrl("/stocks/"+stockid+"/" + quantiteCritiqueParDefautStock);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.PUT,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        callback.onError(e);
-                    }
-                },
-                callback::onError);
-
-        requestQueue.add(jsonObjectRequest);
-    }
-
-    public void getStock(Long stockid, BackendResponseCallback callback) throws JSONException {
-        String url = getFullUrl("/stocks/"+stockid);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        callback.onError(e);
-                    }
-                },
-                callback::onError);
-
-        requestQueue.add(jsonObjectRequest);
-    }
-
-    public void recupererUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
-        String url = getFullUrl( "/corbeille/recupererdeletedproduct/stockId="+stockId+"/recupererProductId="+productId);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.PUT,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        callback.onError(e);
-                    }
-                },
-                callback::onError);
-
-        requestQueue.add(jsonObjectRequest);
-    }
-    public void supprimerDefUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
-        String url = getFullUrl( "/corbeille/supprmerdefdeletedproduct/stockId="+stockId+"/supprimerProductId="+productId);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.DELETE,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        callback.onError(e);
-                    }
-                },
-                callback::onError);
-
-        requestQueue.add(jsonObjectRequest);
-    }
-    public void supprimerDefUnRepasFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
-        String url = getFullUrl( "/corbeille/supprmerdefdeletedrecipe/stockId="+stockId+"/supprimerRepasId="+productId);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.DELETE,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        callback.onError(e);
-                    }
-                },
-                callback::onError);
-
-        requestQueue.add(jsonObjectRequest);
-    }
-
-
 
 
     public interface BackendResponseCallback {
-        void onSuccess(JSONObject response) throws JSONException;
+        void onSuccess(JSONObject response) throws JSONException, ParseException;
 
         void onError(Exception error);
 

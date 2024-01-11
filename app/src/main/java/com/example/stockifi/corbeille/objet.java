@@ -2,15 +2,11 @@ package com.example.stockifi.corbeille;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.stockifi.GlobalVariables.MyApp;
-
 public class objet implements Parcelable {
     private int id;
     private String intitule;
 
     private Boolean check;
-
-    private int stock_id;
 
     public int getId() {
         return id;
@@ -28,19 +24,10 @@ public class objet implements Parcelable {
         this.intitule = intitule;
     }
 
-    public int getStockId() {
-        return stock_id;
-    }
-
-    public void setStockId(int stock_id) {
-        this.stock_id = stock_id;
-    }
-
-    public objet(int id, String intitule, boolean check, int stock_id) {
+    public objet(int id, String intitule, boolean check) {
         this.id = id;
         this.intitule = intitule;
         this.check=check;
-        this.stock_id = stock_id;
     }
     public objet(int id){
         this.id = id;

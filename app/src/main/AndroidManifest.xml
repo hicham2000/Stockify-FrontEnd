@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:hardwareAccelerated="true"
         android:name=".GlobalVariables.MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,20 +21,22 @@
         tools:ignore="ExtraText"
         tools:targetApi="31">
         <activity
-            android:name=".Home.HomeActivity"
+            android:name=".NotificationActivity"
             android:exported="false" />
-        <activity
-            android:name=".Home.AjouterCategorie"
-            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
         <activity
             android:name=".Gestion_Produit.ListeProduit"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Gestion_Produit.AjouterProduit_ListeProduit"
             android:exported="false" />
         <activity
             android:name=".Repas.ajouter_repas"
-            android:exported="false"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients_quantity"
@@ -43,7 +44,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Liste_Course.ModifierProduit"
             android:exported="false" />
@@ -52,14 +53,14 @@
             android:exported="false" />
         <activity
             android:name=".Liste_Course.ListeDeCourse"
-            android:exported="false"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Sprint2Activity"
             android:exported="false" />
         <activity
-            android:name=".ProduitCardActivity"
-            android:exported="false" />
+            android:name=".LoginActivity"
+            android:exported="true" />
         <activity
             android:name=".Produit.AjouterProduitRecherche"
             android:exported="false" />
@@ -77,14 +78,14 @@
             android:exported="false" />
         <activity
             android:name=".ProfilActivity"
-            android:exported="false"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".corbeille.corbeille"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ProduitCardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -92,6 +93,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".NotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="preloaded_fonts"
