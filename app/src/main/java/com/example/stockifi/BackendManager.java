@@ -267,6 +267,24 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
+    public void supprimerDefPermanentlyUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/supprimerdefPermanentdeletedproduct/stockId="+stockId+"/supprimerPrmProductId="+productId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
     public void supprimerDefUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
         String url = getFullUrl( "/corbeille/supprmerdefdeletedproduct/stockId="+stockId+"/supprimerProductId="+productId);
 
@@ -430,7 +448,6 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
-
     public void ajouterRecetteAuStock(long stockId, long recetteId, BackendResponseCallback callback){
         String url = getFullUrl( "/stocks/"+stockId+"/recipes/"+recetteId);
 
@@ -446,6 +463,34 @@ public class BackendManager {
                     }
                 },
                 callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+    public void recupererIngredients(@NonNull BackendResponseCallback callback) {
+        String url = getFullUrl(ENDPOINT + "/Ingredients");
+
+        int timeout = 10000;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                timeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
 
         requestQueue.add(jsonObjectRequest);
     }

@@ -255,4 +255,6 @@ la quantite critique</string>
     <string name="recette_recommende_filtre_appliquer_button">Appliquer</string>
     <string name="ajouter_recette_au_stock_floating_button_text">Ajouter Repas au stock</string>
     <string name="floating_button_pour_l_ajout_de_recette_au_stock">Floating button pour l\'ajout de recette au stock</string>
+    <string name="SelectionnerProduitFiltre_text">Selectionner Produit</string>
+    <string name="SelectionnerProduitFiltre_valider_text">Valider Votre Choix</string>
 </resources>

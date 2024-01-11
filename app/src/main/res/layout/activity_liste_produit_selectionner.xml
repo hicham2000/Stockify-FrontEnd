@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vert"
+    tools:context=".recettes.SelectionnerProduitActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_liste_produit_selectionner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_liste_produit_selectionner"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/SelectionnerProduitFiltre_text"
+            app:menu="@menu/menu_profil"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <android.widget.SearchView
+        android:id="@+id/search_produit_selectionner"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/ellipse"
+        android:layout_centerHorizontal="true"
+        android:theme="@style/SearchViewStyle"
+        android:queryHint="@string/chercherProd" />
+
+    <LinearLayout
+        android:layout_below="@+id/search_produit_selectionner"
+        android:layout_above="@+id/androidx_window_produit_selectionner"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_produit_selecionner"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_margin="20dp"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/recette_produit_selectionne_item" />
+
+        <Button
+            android:id="@+id/valider_produit_list_produit_selectionner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/ellipse_menu"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:text="@string/SelectionnerProduitFiltre_valider_text"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/androidx_window_produit_selectionner"
+        android:layout_width="match_parent"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/vertTexte"
+        app:menu="@menu/menu_bottom_navigation" />
+
+</RelativeLayout>
