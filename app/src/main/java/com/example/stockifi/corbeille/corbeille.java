@@ -55,6 +55,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 public class corbeille extends AppCompatActivity{
+    private corbeilleAdapter adapter;
+    private corbeillerepasadapter adapterRepas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +116,7 @@ public class corbeille extends AppCompatActivity{
                                         dataList.add(objet);
                                     }
 
-                                    corbeilleAdapter adapter = new corbeilleAdapter(corbeille.this, dataList);
+                                    adapter = new corbeilleAdapter(corbeille.this, dataList);
 
                                     listView.setAdapter(adapter);
 
@@ -128,7 +131,7 @@ public class corbeille extends AppCompatActivity{
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //dataList.add("That didn't work!");
-                        corbeilleAdapter adapter = new corbeilleAdapter(corbeille.this, dataList);
+                        adapter = new corbeilleAdapter(corbeille.this, dataList);
 
                         listView.setAdapter(adapter);
 
@@ -168,7 +171,7 @@ public class corbeille extends AppCompatActivity{
                                         dataList.add(objet);
                                     }
 
-                                    corbeillerepasadapter adapter = new corbeillerepasadapter(corbeille.this, dataList);
+                                    adapterRepas = new corbeillerepasadapter(corbeille.this, dataList);
 
                                     listView.setAdapter(adapter);
 
@@ -183,7 +186,7 @@ public class corbeille extends AppCompatActivity{
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //dataList.add("That didn't work!");
-                        corbeillerepasadapter adapter = new corbeillerepasadapter(corbeille.this, dataList);
+                        adapterRepas = new corbeillerepasadapter(corbeille.this, dataList);
 
                         listView.setAdapter(adapter);
 
@@ -227,6 +230,9 @@ public class corbeille extends AppCompatActivity{
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
+                                adapterRepas.clearData();
+                                adapter.clearData();
+
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -248,6 +254,7 @@ public class corbeille extends AppCompatActivity{
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
+                                adapterRepas.clearData();
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -268,6 +275,8 @@ public class corbeille extends AppCompatActivity{
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
+                                // Notify the adapter to remove all cells after successful deletion
+                                adapter.clearData();
                             }
                         }, new Response.ErrorListener() {
                     @Override
