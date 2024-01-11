@@ -50,7 +50,15 @@
 
 
 
-
+    <TextView
+        android:id="@+id/errormessage"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text=""
+        android:gravity="center"
+        android:textColor="#FF0000"
+        android:textSize="20dp"
+        android:layout_marginTop="60dp"/>
 
 
     <LinearLayout
@@ -63,11 +71,14 @@
         >
 
 
+
         <ListView
             android:id="@+id/myListViewingredientquantity"
             android:layout_width="match_parent"
-            android:layout_height="510dp"
+            android:layout_height="470dp"
             android:paddingBottom="20dp"
+            android:layout_marginTop="60dp"
+
             />
 
 

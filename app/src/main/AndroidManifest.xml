@@ -49,7 +49,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Liste_Course.ModifierProduit"
             android:exported="true" />
