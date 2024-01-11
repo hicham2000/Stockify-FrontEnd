@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimenTexte">22dp</dimen>
+    <dimen name="enHaut">30dp</dimen>
+    <dimen name="rond">80dp</dimen>
+    <dimen name="image">50dp</dimen>
+    <dimen name="paddin_left_text">10dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name ="spacing_between_inputs">22dp</dimen>
+</resources>

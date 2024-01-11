@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vert">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarStock"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/jost_extrabold"
+            android:text="Stock"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:id="@+id/bottomBorder"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="64dp" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="153dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="All"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_width="69dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/baseline_add_circle_outline_24"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/list_Button"
+        android:layout_width="177dp"
+        android:layout_height="173dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="233dp"
+        tools:layout_editor_absoluteY="378dp">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:text="Ajouter Produit" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:text="Ajouter Repas" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:text="Scan" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/plusimg"
+        tools:layout_editor_absoluteX="315dp"
+        tools:layout_editor_absoluteY="569dp"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/xred_button"
+        tools:layout_editor_absoluteX="315dp"
+        tools:layout_editor_absoluteY="569dp"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/ic_radio_button_unchecked.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <solid android:color="#FFFFFF" /> <!-- Couleur de la coche non cochée (blanc dans cet exemple) -->
+    <stroke android:color="#000000" android:width="2dp" /> <!-- Bordure de la coche non cochée -->
+</shape>

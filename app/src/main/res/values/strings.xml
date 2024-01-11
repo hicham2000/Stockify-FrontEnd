@@ -1,3 +1,257 @@
 <resources>
     <string name="app_name">stockifi</string>
+
+    <string name="nom_champ">Nom</string>
+    <string name="prenom_champ">Prénom</string>
+    <string name="email_champ">Email</string>
+    <string name="password_champ">Password</string>
+    <string name="confirm_password_champ">Confirm password</string>
+    <string name="regime_specieux_champ">Regimes specieux</string>
+    <string name="accepter">Accepter</string>
+    <string name="conditions_utilisation"> les condition d\'utilisation </string>
+    <string name="description_regime"> Description regime </string>
+    <string name="ingredient"> Ingrédients </string>
+    <string name="chercherProd">Chercher un produit</string>
+    <string name="chercherRecettesRecommende">Rechercher Recette</string>
+
+    <string name="inscrire">S\'inscrire</string>
+    <string-array name="regimes">
+        <item>Regimes specieux</item>
+        <item>Sans</item>
+        <item>Vegan</item>
+        <item>Sans Gluten</item>
+    </string-array>
+
+    <string name="title_activity_register">RegisterActivity</string>
+
+
+    <string-array name="genre">
+        <item>Homme</item>
+        <item>Femme</item>
+    </string-array>
+    <string-array name="taille">
+        <item>m</item>
+        <item>cm</item>
+    </string-array>
+
+    <string-array name="poids">
+        <item>tonne</item>
+        <item>Kg</item>
+        <item>g</item>
+        <item>L</item>
+        <item>cl</item>
+        <item>ml</item>
+    </string-array>
+
+    <string-array name="regime_speciaux">
+        <item>Végan</item>
+        <item>Végétarisme</item>
+    </string-array>
+
+    <string-array name="devise">
+        <item>Devise</item>
+
+    </string-array>
+
+    <string-array name="date">
+        <item>annee</item>
+        <item>mois</item>
+        <item>jours</item>
+
+    </string-array>
+
+    <string-array name="mesure">
+        <item>gramme(s)</item>
+        <item>kilogramme(s)</item>
+        <item>once(s)</item>
+        <item>livre(s)</item>
+        <item>cuillère(s) à soupe</item>
+        <item>cuillère(s) à café</item>
+        <item>tasse(s)</item>
+        <item>verre(s)</item>
+        <item>pièce(s)</item>
+        <item>paquet(s)</item>
+        <item>botte(s)</item>
+        <item>boîte(s)</item>
+
+
+    </string-array>
+
+
+    <string name="date">Date de naissance</string>
+    <string name="password"><u>Changer mot de passe</u></string>
+    <string name="reussite">Reussite/Information</string>
+    <string name="produit_en_cuisine">Produit en cuisine</string>
+    <string name="Kg_jetes">Kg jetes</string>
+    <string name="economies">Economies</string>
+    <string name="regime_speciaux">Regimes speciaux et Intolerences</string>
+    <string name="affichage_quantites">Affichage des quantites</string>
+    <string name="device">Devise Par defaut</string>
+    <string name="Personnalisation">Personnalisation</string>
+    <string name="mode_sportif">Mode Sportif</string>
+    <string name="device2">Ajout automatique des produit
+    a la corbeille en cas de peremption</string>
+    <string name="notification">Notification</string>
+    <string name="notification1">Alerte des dates expirations</string>
+    <string name="notification2">Alerte quand les produits atteignent
+la quantite critique</string>
+    <string name="delai">Delai du rappel par defaut</string>
+    <string name="quantite">Quantite Critique par Defaut</string>
+    <string name="peremption">Delai de Peremption par Defaut</string>
+    <string name="inst_face_twi">Suivez-nous pour participer à des concours, gagner des prix, obtenir des conseils et bien plus</string>
+    <string name="quest_demand">Questions/Demandes</string>
+    <string name="condi_util">Conditions d\'utilisation</string>
+    <string name="consulter">Consulter </string>
+    <string name="cond_utili">les conditions d\'utilisation</string>
+    <string name="cont">Contactez-nous pour toute demande</string>
+    <string name="changer_pass">Changer Mot de Passe</string>
+    <string name="mot_de_passe_courant">Mot de Passe Courant</string>
+    <string name="nouv_mot_passe">Nouveau Mot de Passe</string>
+    <string name="conf_pass">Confirmation du Mot de Passe</string>
+    <string name="stock">Stock</string>
+    <string name="Recette">Recette</string>
+    <string name="Budget">Budget</string>
+    <string name="Courses">Courses</string>
+    <string name="Profil">Profil</string>
+    <string name="liste_course">Liste de Course</string>
+    <string name="produit_acheter">+  Nouveau Produit a acheter</string>
+    <string name="ajout_prod">Ajouter Produit</string>
+    <string name="Ajouter_produit"> +  Ajouter</string>
+    <string name="sauvegarder">Sauvegarder</string>
+    <string name="modifier_prod">Modifier Produit</string>
+    <string name="TitleApp">Stockify</string>
+    <string name="login">exemple@email.com</string>
+    <string name="LoginPassword">password</string>
+    <string name="seConnecterBtn">se connecter</string>
+    <string name="récupererBtn">Enregistrer</string>
+    <string name="pwdoublié">Mot de passe oublié ?</string>
+    <string name="nocompte">Vous n\'avez pas de compte ?</string>
+    <string name="createcompte">S\'inscrire</string>
+    <string name="resetpasswordBtn">Récupérer</string>
+    <string name="resetpasswordHeader">Récupérer mot de passe</string>
+    <string name="text_cond_utili">Description de l\'application</string>
+    <string name="text_inscr">Inscription de l\'utilisateur</string>
+    <string name="texte_poli">Politique de confidentialité</string>
+    <string name="utilisa_texte">Utilisation de l\'application</string>
+    <string name="recette_title">Recettes</string>
+
+    <string name="titre_desc">Description de l\'application</string>
+
+    <string name="text_inscrip">Pour utiliser certaines fonctionnalités de l\'application, vous pouvez être amené à vous inscrire pour un compte. Vous acceptez de fournir des informations précises et complètes lors du processus d\'inscription. Vous êtes responsable de maintenir la confidentialité de vos informations de compte et de toutes les activités qui se déroulent sous votre compte.</string>
+
+    <string name="texte_polit">Votre utilisation de l\'application est également importante pour nous. Actuellement, notre application ne dispose pas d\'une Politique de confidentialité formelle. Nous travaillons à en élaborer une qui reflète nos engagements envers la protection de vos informations. Restez informé des mises à jour futures. En attendant, n\'hésitez pas à nous contacter pour toute question concernant vos données.</string>
+
+
+    <string name="desc">L\'application est conçue pour vous aider à gérer et suivre vos produits et vos repas, y compris, mais sans s\'y limiter, la gestion des stocks, la planification des repas et la création de listes de courses.
+    </string>
+    <string name="uti_acc">Vous acceptez d\'utiliser l\'application en conformité avec toutes les lois et réglementations applicables. Vous n\'utiliserez pas l\'application à des fins illégales ou nuisibles, y compris, mais sans s\'y limiter :
+</string>
+    <string name="conte">Contenu de l\'utilisateur
+</string>
+    <string name="conte_texte">En utilisant l\'application, vous pouvez avoir la possibilité de soumettre et de partager du contenu, y compris du texte, des images et d\'autres matériaux. Vous êtes seul responsable du contenu que vous soumettez, et vous acceptez de ne pas soumettre de contenu qui est :
+</string>
+    <!-- Point a -->
+    <string name="violation_a">
+        a/Transmettre tout matériel non autorisé ou nuisible.
+    </string>
+
+    <!-- Point b -->
+    <string name="violation_b">
+        b/Tenter d\'accéder de manière non autorisée à l\'application ou aux comptes d\'autres utilisateurs.
+    </string>
+
+    <!-- Point c -->
+    <string name="violation_c">
+        c/Perturber le fonctionnement de l\'application.
+    </string>
+
+    <!-- Point d -->
+    <string name="violation_d">
+        d/Enfreindre les droits de propriété intellectuelle de tout tiers.
+    </string>
+    <!-- Description de l'application -->
+
+    <!-- Point a -->
+    <string name="violation_aa">
+        a/Faux ou trompeur.
+    </string>
+
+    <!-- Point b -->
+    <string name="violation_bb">
+        b/Porte atteinte aux droits de propriété intellectuelle d\'autres personnes.
+    </string>
+
+    <!-- Point c -->
+    <string name="violation_cc">
+        c/Offensant, diffamatoire ou nuisible pour autrui.
+    </string>
+
+    <!-- Réservation du droit de suppression ou restriction d'accès -->
+    <string name="right_to_restrict">
+        Nous nous réservons le droit de supprimer ou de restreindre l\'accès à tout contenu qui enfreint ces termes.
+    </string>
+    <string name="no">J\'en ai pas</string>
+    <string name="yes">J\'en ai </string>
+    <string name="recherche_produit">Rechercher Produit</string>
+    <string name="produit_ajoute">Nouveau Produit a ajouter</string>
+
+    <!-- Corbeille's strings -->
+    <string name="corbeille">Corbeille</string>
+    <string name="Emptycorbeille">Vider la Corbeille</string>
+    <string name="recuperer">Récupérer</string>
+    <string name="supprimer"> Supprimer</string>
+    <string name="item"> Lait</string>
+    <string name="produits">Produits</string>
+    <string name="repas">Repas</string>
+    <!-- budget's strings -->
+
+    <string name="budgetActivity_budget">Budget</string>
+    <string name="budgetActivity_mois">JUILLET</string>
+    <string name="budgetActivity_pourcentage_consomme">80%</string>
+    <string name="budgetActivity_pourcentage_gaspille">20%</string>
+    <string name="budgetActivity_montant_total">Montant Total</string>
+    <string name="budgetActivity_montant_consomme">Montant Consomé</string>
+    <string name="budgetActivity_montant_gaspille">Montant Gaspillé</string>
+    <string name="budgetActivity_dh_gaspille">400 DH</string>
+    <string name="budgetActivity_dh_consomme">1600 DH</string>
+
+
+
+
+
+
+
+    <string-array name="options_array">
+        <item>Réfrigérateur</item>
+        <item>Congélateur</item>
+        <item>garde-manger</item>
+    </string-array>
+    <string name="modif_prod">Modifier Produit</string>
+    <string name="info_prod">Information Produit</string>
+
+    <!-- Recettes strings -->'
+
+    <string name="recette_button_all">Tous</string>
+    <string name="recette_button_favoris">Favoris</string>
+    <string name="recette_button_filtre">Filtre</string>
+
+    <!-- Recette layout strings -->
+    <string name="recette_nom">Omellette</string>
+    <string name="recette_nombre_ingredients_manquants">1 ingredient manquant</string>
+    <string name="recette_portion">Portion</string>
+    <string name="recette_button_portion_minus">-</string>
+    <string name="recette_button_portion_plus">+</string>
+    <string name="recette_image_description">Description of the recette image</string>
+    <string name="recette_ingredients_dropdownButton">Ingredients</string>
+    <string name="recette_instrucion_de_preparation_dropdownButton">Instruciton de preparation</string>
+    <string name="recette_valeurs_nutritionnelles_dropdownButton">Valeurs Nutritionnelles</string>
+    <string name="recette_similaires_header">Recettes Similaires</string>
+    <string name="recette_recommende_filtre_title">Filtre</string>
+    <string name="recette_recommende_filtre_regime_speciaux_header">Regime Speciaux</string>
+    <string name="recette_recommende_filtre_temps_de_preparation_header">Temps de préparation</string>
+    <string name="recette_recommende_filtre_select_produit_header">Sélectionner un produit</string>
+    <string name="recette_recommende_filtre_annuler_button">Annuler</string>
+    <string name="recette_recommende_filtre_appliquer_button">Appliquer</string>
+    <string name="ajouter_recette_au_stock_floating_button_text">Ajouter Repas au stock</string>
+    <string name="floating_button_pour_l_ajout_de_recette_au_stock">Floating button pour l\'ajout de recette au stock</string>
 </resources>

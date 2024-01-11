@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/poubelle"
+        android:icon="@drawable/poubelle_blanc"
+        android:title="poubelle"
+        app:showAsAction="always"
+
+
+        />
+    <item
+        android:id="@+id/message"
+        android:icon="@drawable/message"
+        android:title="message"
+        app:showAsAction="always"
+
+      />
+    <item
+        android:id="@+id/profil1"
+        android:icon="@drawable/profil_menu"
+        android:title="profil"
+        app:showAsAction="always"
+        />
+</menu>
