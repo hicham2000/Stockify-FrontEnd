@@ -19,6 +19,10 @@ import com.example.stockifi.corbeille.corbeille;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SelectionnerProduitActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_SELECTION = 101;
@@ -75,9 +79,9 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Set up the adapter for your RecyclerView (replace with your own adapter)
-        // RecyclerView.Adapter<YourAdapterType> adapter = new YourAdapterType();
-        // recyclerView.setAdapter(adapter);
+        List<String> produitsSelectionnesList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
+        FiltreProduitsSelectionneAdapter filtreProduitsSelectionneAdapter = new FiltreProduitsSelectionneAdapter(produitsSelectionnesList);
+        recyclerView.setAdapter(filtreProduitsSelectionneAdapter);
 
         validerButton.setOnClickListener(new View.OnClickListener() {
             @Override
