@@ -12,6 +12,7 @@
     <string name="description_regime"> Description regime </string>
     <string name="ingredient"> Ingrédients </string>
     <string name="chercherProd">Chercher un produit</string>
+    <string name="chercherRecettesRecommende">Rechercher Recette</string>
 
     <string name="inscrire">S\'inscrire</string>
     <string-array name="regimes">
@@ -132,6 +133,7 @@ la quantite critique</string>
     <string name="text_inscr">Inscription de l\'utilisateur</string>
     <string name="texte_poli">Politique de confidentialité</string>
     <string name="utilisa_texte">Utilisation de l\'application</string>
+    <string name="recette_title">Recettes</string>
 
     <string name="titre_desc">Description de l\'application</string>
 
@@ -227,4 +229,29 @@ la quantite critique</string>
     <string name="modif_prod">Modifier Produit</string>
     <string name="info_prod">Information Produit</string>
 
+    <!-- Recettes strings -->'
+
+    <string name="recette_button_all">Tous</string>
+    <string name="recette_button_favoris">Favoris</string>
+    <string name="recette_button_filtre">Filtre</string>
+
+    <!-- Recette layout strings -->
+    <string name="recette_nom">Omellette</string>
+    <string name="recette_nombre_ingredients_manquants">1 ingredient manquant</string>
+    <string name="recette_portion">Portion</string>
+    <string name="recette_button_portion_minus">-</string>
+    <string name="recette_button_portion_plus">+</string>
+    <string name="recette_image_description">Description of the recette image</string>
+    <string name="recette_ingredients_dropdownButton">Ingredients</string>
+    <string name="recette_instrucion_de_preparation_dropdownButton">Instruciton de preparation</string>
+    <string name="recette_valeurs_nutritionnelles_dropdownButton">Valeurs Nutritionnelles</string>
+    <string name="recette_similaires_header">Recettes Similaires</string>
+    <string name="recette_recommende_filtre_title">Filtre</string>
+    <string name="recette_recommende_filtre_regime_speciaux_header">Regime Speciaux</string>
+    <string name="recette_recommende_filtre_temps_de_preparation_header">Temps de préparation</string>
+    <string name="recette_recommende_filtre_select_produit_header">Sélectionner un produit</string>
+    <string name="recette_recommende_filtre_annuler_button">Annuler</string>
+    <string name="recette_recommende_filtre_appliquer_button">Appliquer</string>
+    <string name="ajouter_recette_au_stock_floating_button_text">Ajouter Repas au stock</string>
+    <string name="floating_button_pour_l_ajout_de_recette_au_stock">Floating button pour l\'ajout de recette au stock</string>
 </resources>

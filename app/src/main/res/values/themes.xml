@@ -40,4 +40,5 @@
     <style name="edit">
         <item name="android:background">@color/white</item> <!-- Remplacez #00FF00 par le code couleur de votre choix (vert dans cet exemple) -->
     </style>
+
 </resources>

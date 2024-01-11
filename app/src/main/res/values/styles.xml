@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Recettes styles -->
+    <style name="recette_button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="minute_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="nbr_ingredients_manquantes_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="recette_name_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <!-- Recette layout styles -->
+    <style name="recette_nom">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/checkedColor</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="recette_nombre_ingredients_manquants">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+    <style name="recette_portion">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/checkedColor</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="recette_portion_button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/recette_portion_button_rounded</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:textColor">@color/vertTexte</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="recette_dropdownbutton">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="recette_similaires_header">
+        <item name="android:textSize">23sp</item>
+        <item name="android:textColor">#7AAD45</item>
+    </style>
+
+    <style name="Theme.ProgressBar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/ProgressBarColor</item>
+        <item name="colorPrimaryVariant">@android:color/transparent</item>
+        <item name="colorOnPrimary">@android:color/transparent</item>
+        <item name="colorSecondary">@color/ProgressBarColor</item>
+        <item name="colorSecondaryVariant">@android:color/transparent</item>
+        <item name="colorOnSecondary">@android:color/transparent</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="CustomProgressBarStyle">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/custom_progress_bar</item>
+    </style>
+
+
+</resources>

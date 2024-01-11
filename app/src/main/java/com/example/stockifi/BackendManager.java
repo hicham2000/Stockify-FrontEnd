@@ -1,6 +1,9 @@
 package com.example.stockifi;
 
 import android.content.Context;
+import android.util.Log;
+import androidx.annotation.NonNull;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -9,21 +12,17 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Map;
 
 public class BackendManager {
 
 
-    private static final String BASE_URL = "http://192.168.11.100:1111";
-    //private static final String BASE_URL = "http://10.0.2.2:1111";
-
-
-
-    //private static final String BASE_URL = "http://100.89.24.186:1111";
- //   private static final String BASE_URL = "http://10.0.2.2:1111";
-
-    //private static final String BASE_URL = "http://192.168.1.60:1111";
-
+    //private static final String BASE_URL = "http://100.89.18.54:1111";
+    private static final String BASE_URL = "http://10.0.2.2:1111";
+    //private static final String BASE_URL = "http://192.168.1.17:1111";
+    //private static final String BASE_URL = "http://192.168.3.27:1111";
 
     private static final String ENDPOINT = "/api";
 
@@ -302,8 +301,151 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
+    public void recupererRecettesRecommendees(long userId, @NonNull BackendResponseCallback callback) {
+        String url = getFullUrl(ENDPOINT + "/recommendations/Recettes/" + userId);
+
+        int timeout = 10000;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                timeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
 
 
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void recupererRecettesRecommendeesFiltrees(long userId, String filterValuesJson, @NonNull BackendResponseCallback callback) throws JSONException {
+        String url = getFullUrl(ENDPOINT + "/recommendations/RecettesFiltred/" + userId);
+        JSONObject request = new JSONObject(filterValuesJson);
+
+        System.out.println("request => " + request);
+
+        int timeout = 10000;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                request,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                timeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        byte[] body = (byte[]) jsonObjectRequest.getBody();
+
+        Log.d("BackendManager", "Request Body => " + new String(body));
+
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void recupererRecettesSimilaires(long userId, long recetteId, @NonNull BackendResponseCallback callback) {
+        String url = getFullUrl(ENDPOINT + "/recommendations/RecettesSimilaires/" + recetteId + "?user_id=" + userId);
+
+        int timeout = 10000;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                timeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void ajouterRecetteAuFavoris(long userId, long recetteId, BackendResponseCallback callback){
+        String url = getFullUrl( ENDPOINT + "/Utilisateur/"+userId+"/recetteFavoris/"+recetteId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void supprimerRecetteDeFavoris(long userId,long recetteId, BackendResponseCallback callback){
+        String url = getFullUrl( ENDPOINT + "/Utilisateurs/" + userId + "/recetteFavoris/"+ recetteId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+    public void ajouterRecetteAuStock(long stockId, long recetteId, BackendResponseCallback callback){
+        String url = getFullUrl( "/stocks/"+stockId+"/recipes/"+recetteId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
 
     public interface BackendResponseCallback {
         void onSuccess(JSONObject response) throws JSONException;
