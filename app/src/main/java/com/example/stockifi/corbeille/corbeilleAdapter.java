@@ -46,6 +46,10 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
         this.data = data;
         checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), false));
     }
+    public void clearData() {
+        data.clear();
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -94,6 +98,30 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
                 int productId = data.get(position).getId();
                 int stockId = myApp.getUser_stock_id();
 
+                backendManager.supprimerDefPermanentlyUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        if (position >= 0 && position < data.size()) {
+                            data.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du Permanent: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+        /*buttonSupp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int productId = data.get(position).getId();
+                int stockId = myApp.getUser_stock_id();
+
                 backendManager.supprimerDefUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
@@ -110,7 +138,7 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
                 });
 
             }
-        });
+        });*/
 
 
         return convertView;

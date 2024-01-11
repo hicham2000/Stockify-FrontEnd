@@ -19,10 +19,12 @@ import java.util.Map;
 public class BackendManager {
 
 
+
     //private static final String BASE_URL = "http://100.89.18.54:1111";
     private static final String BASE_URL = "http://10.0.2.2:1111";
     //private static final String BASE_URL = "http://192.168.1.17:1111";
     //private static final String BASE_URL = "http://192.168.3.27:1111";
+
 
     private static final String ENDPOINT = "/api";
 
@@ -248,6 +250,24 @@ public class BackendManager {
 
     public void recupererUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
         String url = getFullUrl( "/corbeille/recupererdeletedproduct/stockId="+stockId+"/recupererProductId="+productId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+    public void supprimerDefPermanentlyUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/supprimerdefPermanentdeletedproduct/stockId="+stockId+"/supprimerPrmProductId="+productId);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.PUT,
