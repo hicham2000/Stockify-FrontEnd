@@ -20,8 +20,8 @@ public class BackendManager {
 
 
     //private static final String BASE_URL = "http://100.89.18.54:1111";
-    //private static final String BASE_URL = "http://10.0.2.2:1111";
-    private static final String BASE_URL = "http://192.168.1.17:1111";
+    private static final String BASE_URL = "http://10.0.2.2:1111";
+    //private static final String BASE_URL = "http://192.168.1.17:1111";
     //private static final String BASE_URL = "http://192.168.3.27:1111";
 
     private static final String ENDPOINT = "/api";
