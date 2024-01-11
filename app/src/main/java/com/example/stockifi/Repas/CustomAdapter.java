@@ -65,7 +65,31 @@ public class CustomAdapter extends ArrayAdapter<Produit> implements Serializable
         return convertView;
     }
 
+    public void setRadioButtonsToFalseExceptABC(ArrayList<Produit> checked) {
+        this.checkedPosition = checked;
+        for (int i = 0; i < checkedPositions.size(); i++) {
+            checkedPositions.set(i, false);
+        }
+
+        for (int i = 0; i < Data.size(); i++) {
+            for (int j=0 ; j<checked.size();j++){
+                if (Data.get(i).getIntitule().equals(checked.get(j).getIntitule())) {
+                    int position = getPosition(Data.get(i));
+                    if (position != -1) {
+                        checkedPositions.set(position, true);
+                    }
+                    break;
+                }
+            }
+
+        }
+
+        notifyDataSetChanged();
+    }
+
     public ArrayList<Produit> getCheckedPositions() {
         return checkedPosition;
     }
+
+    public ArrayList<Boolean> getP() {return  checkedPositions;}
 }

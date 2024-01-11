@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SearchView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,6 +32,9 @@ import java.util.List;
 
 public class ingredients extends AppCompatActivity {
     private RadioGroup radioGroup;
+    public ArrayList<Produit> dataList;
+    SearchView search_listeCourse;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +46,9 @@ public class ingredients extends AppCompatActivity {
         int User_Stock_id = myApp.getUser_stock_id();
         String url = "http://10.0.2.2:1111/stocks/"+User_Stock_id+"/products";
 
-        ListView listView = findViewById(R.id.myListViewingredient);
+        listView = findViewById(R.id.myListViewingredient);
 
-        ArrayList<Produit> dataList = new ArrayList<>();
+        dataList = new ArrayList<>();
 
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -64,16 +68,17 @@ public class ingredients extends AppCompatActivity {
                                 dataList.add(produit);
                             }
 
-                            CustomAdapter adapter = new CustomAdapter(ingredients.this, dataList);
+                            final CustomAdapter[] adapter = {new CustomAdapter(ingredients.this, dataList)};
 
-                            listView.setAdapter(adapter);
+                            listView.setAdapter(adapter[0]);
+
                             Button nextButton = findViewById(R.id.ajouteringredients);
 
 
                             nextButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    ArrayList<Produit> checked = adapter.getCheckedPositions();
+                                    ArrayList<Produit> checked = adapter[0].getCheckedPositions();
 
 
 
@@ -83,6 +88,42 @@ public class ingredients extends AppCompatActivity {
                                       //  System.out.println(checked);
                                         startActivity(intent);
                                     }
+                                }
+                            });
+
+
+                            search_listeCourse = findViewById(R.id.searchingredient);
+
+                            search_listeCourse.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String s) {
+                                    String produit = search_listeCourse.getQuery().toString();
+                                    // Handle the submitted query
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onQueryTextChange(String newText) {
+                                    ArrayList<Produit> checked = adapter[0].getCheckedPositions();
+
+
+
+
+
+                                    String produit = search_listeCourse.getQuery().toString();
+                                    System.out.println(produit);
+                                    ArrayList<Produit> p = new ArrayList<>();
+                                    dataList.stream()
+                                            .filter(a -> a.getIntitule().toLowerCase().contains(produit.toLowerCase()))
+                                            .forEach(p::add);
+                                    adapter[0] = new CustomAdapter(ingredients.this, p);
+                                    ListView listView = findViewById(R.id.myListViewingredient);
+                                    listView.setAdapter(adapter[0]);
+                                    adapter[0].setRadioButtonsToFalseExceptABC(checked);
+
+
+
+                                    return false;
                                 }
                             });
 
@@ -112,5 +153,13 @@ public class ingredients extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
 
 }
+
+
