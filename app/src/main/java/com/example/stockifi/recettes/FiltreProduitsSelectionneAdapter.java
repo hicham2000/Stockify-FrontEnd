@@ -55,13 +55,11 @@ public class FiltreProduitsSelectionneAdapter extends RecyclerView.Adapter<Filtr
         holder.produitSelectionneCheckbox.setOnCheckedChangeListener(null);
         holder.produitSelectionneCheckbox.setChecked(false);
         holder.produitSelectionneCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            System.out.println("isChecked => " + isChecked);
             if(isChecked) {
                 produitsSelectionnesList.add(produitName);
             } else{
                 produitsSelectionnesList.remove(produitName);
             }
-            System.out.println("produitsSelectionnesList => " + produitsSelectionnesList);
         });
     }
 

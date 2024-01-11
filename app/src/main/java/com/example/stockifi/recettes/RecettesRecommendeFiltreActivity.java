@@ -5,6 +5,7 @@ import static com.example.stockifi.recettes.SelectionnerProduitActivity.REQUEST_
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +32,7 @@ import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -99,6 +101,14 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         annulerButton = findViewById(R.id.recette_recommende_filtre_annuler_button);
         appliquerButton = findViewById(R.id.recette_recommende_filtre_appliquer_button);
         regimeSpeciauxRecyclerView = findViewById(R.id.regime_speciaux_recycler_view);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String produitsSelectionnesListJson = sharedPreferences.getString("produitsSelectionnesList", "");
+
+        if (!produitsSelectionnesListJson.isEmpty()) {
+            Gson gson = new Gson();
+            produitsSelectionnesList = gson.fromJson(produitsSelectionnesListJson, new TypeToken<List<String>>() {}.getType());
+        }
 
         // Set up the RecyclerView
         regimeSpeciauxRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
@@ -225,7 +235,16 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SELECTION && resultCode == Activity.RESULT_OK) {
             assert data != null;
             produitsSelectionnesList = data.getStringArrayListExtra("ProduitsSelectionnes");
-            System.out.println("produitsSelectionnesList => " + produitsSelectionnesList);
+
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            Gson gson = new Gson();
+            String produitsSelectionnesListJson = gson.toJson(produitsSelectionnesList);
+
+            editor.putString("produitsSelectionnesList", produitsSelectionnesListJson);
+            editor.apply();
+
             ProduitsSelectionneAdapter produitsSelectionneAdapter = new ProduitsSelectionneAdapter(produitsSelectionnesList);
             produitsSelectionneRecyclerView.setAdapter(produitsSelectionneAdapter);
         }
