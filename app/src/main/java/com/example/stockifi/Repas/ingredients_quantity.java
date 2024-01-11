@@ -26,11 +26,13 @@ public class ingredients_quantity extends AppCompatActivity {
 
     private Spinner spinnerDate;
     private ArrayList<String> quantity = new ArrayList<>();
+    TextView t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients_quantity);
         Intent intent = getIntent();
+        t = findViewById(R.id.errormessage);
 
             ArrayList<Produit> productList =intent.getParcelableArrayListExtra("selectedItems");
 
@@ -78,6 +80,7 @@ public class ingredients_quantity extends AppCompatActivity {
         displayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                t.setText("");
 
                 // Function to display content of all EditText fields
                 LinearLayout rootView = findViewById(R.id.ingredientscontent); // Replace with your root layout ID
@@ -101,11 +104,19 @@ public class ingredients_quantity extends AppCompatActivity {
 
                 }
 
+
                 if(quantity.size() == productList.size() ){
                     for (int i =0 ; i<quantity.size() ; i++){
                         Double asfd = Double.parseDouble(quantity.get(i));
 
                         if (asfd >  productList.get(i).getQuantite() || asfd == 0){
+                            if (asfd == 0){
+
+                                t.setText("Donner une quantité à tous les produits.");
+                            }
+                            else {
+                                t.setText("Vous avez uniquement "+productList.get(i).getQuantite() + " " +productList.get(i).getUniteMesure()+" de "+productList.get(i).getIntitule()+ " dans le stock");
+                            }
 
                             break;
                         }

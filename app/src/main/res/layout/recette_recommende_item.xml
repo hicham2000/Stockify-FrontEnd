@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="125dp"
+            android:layout_height="110dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="35dp">
+
+            <ProgressBar
+                android:id="@+id/loadingProgressBar"
+                style="@style/CustomProgressBarStyle"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="visible"
+                android:indeterminateTint="@color/ProgressBarColor"/>
+
+            <ImageView
+                android:id="@+id/recette_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+<!--                android:src="@drawable/recette_image" />-->
+
+        </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/checkBox_favoris"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/heart_vector_normal"
+                android:buttonTint="@android:color/transparent"
+                android:padding="8dp" />
+
+            <TextView
+                android:id="@+id/text_view_min"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ellipse_recette_duration"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="2000 min"
+                android:textAppearance="@style/minute_style" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_recette_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|center_vertical"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Oeuf aux dindes"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/recette_name_style"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_nbr_ingredients_manquantes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|center_vertical"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="0 ingredients manquants"
+        android:textAlignment="center"
+        android:textAppearance="@style/nbr_ingredients_manquantes_style"
+        android:textStyle="bold" />
+
+</LinearLayout>

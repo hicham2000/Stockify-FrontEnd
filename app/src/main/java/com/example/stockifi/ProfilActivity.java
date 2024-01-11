@@ -39,6 +39,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 
+import com.example.stockifi.recettes.RecettesRecommendeActivity;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -176,6 +178,12 @@ public class ProfilActivity extends AppCompatActivity {
             return true;
         });
 
+        navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(ProfilActivity.this, RecettesRecommendeActivity.class);
+            startActivity(intent);
+
+            return true;
+        });
 
 
         buttonSupCompte = findViewById(R.id.button_supCompte);
@@ -1201,7 +1209,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         pickDateButton = findViewById(R.id.date_naissance);
         date_naissace=findViewById(R.id.dateNaissance);
-
+     
 
         // Mettez à jour le TextView avec la date actuelle
 

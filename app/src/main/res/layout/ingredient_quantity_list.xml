@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:shadowColor="@color/white"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:text="0"
         android:backgroundTint="@color/white"
         style="@style/EditTextStyle"

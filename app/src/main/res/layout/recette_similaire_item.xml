@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="75dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:cardCornerRadius="35dp">
+
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            style="@style/CustomProgressBarStyle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="visible"
+            android:indeterminateTint="@color/ProgressBarColor"/>
+
+        <ImageView
+            android:id="@+id/recette_similaire_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/text_view_recette_similaire_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="Oeuf aux dindes"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/recette_name_style"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -78,6 +78,15 @@ jobs:
        name: aab-release
        path: app/build/outputs/bundle/release/
 
+  
+  push:
+    needs: build
+    if: ${{ needs.build.result == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
 
 
 

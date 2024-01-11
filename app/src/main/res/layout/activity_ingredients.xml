@@ -47,8 +47,6 @@ android:background="@color/vert">
         android:layout_marginTop="80dp"
         android:background="@drawable/ellipse_menu"
         android:layout_centerHorizontal="true"
-
-
         />
 
 

@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
+import com.example.stockifi.recettes.RecetteModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,12 +37,19 @@ public class AjouterProduit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_produit);
 
+
         ajouterProduitButton = findViewById(R.id.ajoutbasedonnes);
+        EditText editTextNom = findViewById(R.id.editTexte_nomProduit);
+        EditText editTextQuantite = findViewById(R.id.quant_ajouterProduit);
 
+        Intent AjouterProduitIntent = getIntent();
+        if(AjouterProduitIntent.hasExtra("ingredient")){
+            RecetteModel.IngredientInfo ingredientInfo = (RecetteModel.IngredientInfo) AjouterProduitIntent.getSerializableExtra("ingredient");
 
-
-
-
+            assert ingredientInfo != null;
+            editTextNom.setText(ingredientInfo.getIntitule());
+            editTextQuantite.setText(String.valueOf(ingredientInfo.getQuantity()));
+        }
         ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_ajout);
 
         // Ajoutez un écouteur de clic à l'ImageView
@@ -73,9 +81,6 @@ public class AjouterProduit extends AppCompatActivity {
         ajouterProduitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editTextNom = findViewById(R.id.editTexte_nomProduit);
-                EditText editTextQuantite = findViewById(R.id.quant_ajouterProduit);
-
 
                 String nomProduit = editTextNom.getText().toString();
                 String quantiteProduit = editTextQuantite.getText().toString();
