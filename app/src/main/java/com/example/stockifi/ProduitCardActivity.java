@@ -9,17 +9,14 @@ import android.widget.TextView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Button;
-import cards.Card;
+import com.example.stockifi.cards.Card;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
+
 import java.io.InputStream;
 import android.util.Log;
-import androidx.core.content.ContextCompat;
-import android.graphics.drawable.Drawable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

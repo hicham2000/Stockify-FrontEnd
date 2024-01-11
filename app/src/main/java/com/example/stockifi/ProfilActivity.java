@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.recettes.RecettesRecommendeActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -139,22 +140,33 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
-
         MyApp myApp = (MyApp) getApplication();
 
         currentUserId = myApp.getUser_id();
-        stockUserId = myApp.getUser_stock_id();
 
+        if(currentUserId < 0) {
+            Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+        stockUserId = myApp.getUser_stock_id();
 
         backendManager = new BackendManager(this);
 
         // Gestionnaire de clic pour l'élément "Courses"
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_profil);
-        Menu menu = bottomNavigationView.getMenu();
+        Menu navBar = bottomNavigationView.getMenu();
+
 
         // Gestionnaire de clic pour l'élément "Courses"
-        menu.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
+        navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ProfilActivity.this, ListeDeCourse.class);
+            startActivity(intent);
+
+            return true;
+        });
+
+        navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(ProfilActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
 
             return true;
@@ -1007,7 +1019,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         pickDateButton = findViewById(R.id.date_naissance);
         date_naissace=findViewById(R.id.dateNaissance);
-
+     
 
         // Mettez à jour le TextView avec la date actuelle
 

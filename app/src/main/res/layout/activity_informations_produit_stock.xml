@@ -100,11 +100,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="389dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
 
                 >
 
@@ -118,47 +118,20 @@
 
                     />
 
-                <EditText
-                    android:id="@+id/quant_ajoutModif_info"
-                    android:layout_width="120dp"
-                    android:layout_height="40dp"
+                <TextView
+                    android:layout_width="144dp"
+                    android:layout_height="match_parent"
+                    android:text="Stock Info"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/dimenTexte" />
+                <TextView
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="Stock Info"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/dimenTexte"
+                    />
 
-                    android:paddingLeft="10dp"
-                    style="@style/EditTextStyle"
-                    android:inputType="numberDecimal"
-
-                    android:gravity="center"
-                    android:layout_marginLeft="10dp"
-
-                    android:background="@drawable/ellipse"/>
-
-                <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-
-                    android:layout_marginLeft="10dp"
-
-                    android:background="@drawable/ellipse"
-                    >
-
-
-                    <Spinner
-
-
-
-                        android:id="@+id/spinner_poid_ajoutModif1_info"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:padding="4dp"
-
-                        style="@style/EditTextStyle"
-                        android:entries="@array/poids"
-
-
-                        />
-
-
-                </RelativeLayout>
             </LinearLayout>
 
 
@@ -181,32 +154,13 @@
                     />
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-
-                    android:layout_marginLeft="6dp"
-                    android:background="@drawable/ellipse"
-                    android:layout_marginRight="10dp"
-                    >
-
-
-                    <Spinner
-
-
-
-                        android:id="@+id/spinner_categorie_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:padding="10dp"
-                        style="@style/EditTextStyle"
-                        android:entries="@array/poids"
-
-
-                        />
-
-
-                </RelativeLayout>
+                <TextView
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="Stock Info"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/dimenTexte"
+                    />
 
 
 
@@ -230,19 +184,13 @@
 
                     />
 
-                <EditText
-                    android:id="@+id/Prix_produit_info"
-                    android:layout_width="120dp"
-                    android:layout_height="40dp"
-
-                    android:paddingLeft="10dp"
-                    style="@style/EditTextStyle"
-                    android:inputType="numberDecimal"
-
-                    android:gravity="center"
-                    android:layout_marginLeft="10dp"
-
-                    android:background="@drawable/ellipse"/>
+                <TextView
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="Stock Info"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/dimenTexte"
+                    />
 
 
 
@@ -270,50 +218,23 @@
                 android:layout_marginLeft="15dp"
 
                 >
+
                 <TextView
-                    android:layout_width="102dp"
+                    android:layout_width="154dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
                     android:text="Péremtion"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/dimenTexte"
 
 
                     />
 
-                <LinearLayout
-                    android:id="@+id/peremtionDateProduit_info"
-                    android:layout_width="160dp"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal"
-                    android:background="@drawable/ellipse"
-
-
-
-
-
-                    android:layout_marginLeft="10dp"
-                    >
-
-                    <TextView
-                        android:id="@+id/peremtiontextproduit_info"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-
-                        android:textColor="@color/black"
-                        android:layout_marginTop="10dp"
-
-
-
-
-                        />
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/calendrier"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginTop="10dp"/>
-
-                </LinearLayout>
+                <TextView
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="Stock Info"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/dimenTexte" />
 
 
             </LinearLayout>
@@ -336,40 +257,13 @@
 
                     />
 
-                <LinearLayout
-                    android:id="@+id/AlerteProd_info"
-                    android:layout_width="160dp"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal"
-                    android:background="@drawable/ellipse"
-
-
-
-
-
-                    android:layout_marginLeft="10dp"
-                    >
-
-                    <TextView
-                        android:id="@+id/alertetextproduit_info"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-
-                        android:textColor="@color/black"
-                        android:layout_marginTop="10dp"
-
-
-
-
-                        />
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/calendrier"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginTop="10dp"/>
-
-                </LinearLayout>
+                <TextView
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="Stock Info"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/dimenTexte"
+                    />
 
 
             </LinearLayout>
@@ -394,20 +288,13 @@
 
                     />
 
-                <EditText
-                    android:id="@+id/quantiteCritique_info"
-                    android:layout_width="120dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-
-                    android:paddingLeft="10dp"
-                    style="@style/EditTextStyle"
-                    android:inputType="numberDecimal"
-
-                    android:gravity="center"
-                    android:layout_marginLeft="10dp"
-
-                    android:background="@drawable/ellipse"/>
+                <TextView
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:text="Stock Info"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/dimenTexte"
+                    />
 
 
             </LinearLayout>
@@ -426,23 +313,13 @@
                 android:layout_marginBottom="200dp">
 
                 <Button
-                    android:id="@+id/button_annulerprod_info"
+                    android:id="@+id/button_modifier_info"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-
-                    android:text="Annuler"
-                    android:textColor="@color/black"/>
-
-                <Button
-                    android:id="@+id/button_validerProd_info"
-                    android:layout_width="140dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_height="wrap_content"
-                    android:text="Valider" />
+                    android:text="Modifier" />
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>

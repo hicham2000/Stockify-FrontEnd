@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent">
+    <TextView
+        android:id="@+id/text_view_recette_ingredient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="start|center_vertical"
+        android:padding="10dp"
+        android:textAppearance="@style/recette_nombre_ingredients_manquants"
+        android:background="@android:color/transparent"
+        android:clickable="false"
+        android:focusable="false"
+        android:text="4 blueberries" />
+
+    <ImageView
+        android:id="@+id/image_view_ingredient_valide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:src="@drawable/ingredient_valide" />
+
+    <ImageView
+        android:id="@+id/image_button_ingredient_non_valide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ingredient_non_valide"
+        android:padding="10dp"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <ImageButton
+        android:id="@+id/imageButton_add_ingredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/button_add_ingredient_img"
+        android:background="@android:color/transparent"
+        android:layout_gravity="end|center_vertical"
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true" />
+</LinearLayout>

@@ -49,7 +49,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Repas.ingredients"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Liste_Course.ModifierProduit"
             android:exported="true" />
@@ -84,6 +84,18 @@
         <activity
             android:name=".ProfilActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".recettes.RecettesRecommendeActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".recettes.RecettesRecommendeFiltreActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".recettes.RecetteActivity"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".corbeille.corbeille"

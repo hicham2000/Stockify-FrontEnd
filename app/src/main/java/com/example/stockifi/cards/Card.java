@@ -1,4 +1,4 @@
-package cards;
+package com.example.stockifi.cards;
 public class Card{
 
         private String imageUrl;
