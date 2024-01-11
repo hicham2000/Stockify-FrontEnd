@@ -1,5 +1,9 @@
 package com.example.stockifi.recettes;
 
+import static com.example.stockifi.recettes.SelectionnerProduitActivity.REQUEST_CODE_SELECTION;
+
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,12 +39,14 @@ import java.util.List;
 
 public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
 
+    public Context context = this;
+
     private MaterialToolbar toolbarAppReccette;
     private BottomNavigationView bottomNavigationView;
     private RecyclerView regimeSpeciauxRecyclerView;
     private SeekBar tempsDePreparationSeekBar;
     private TextView tempsDePreparationTextView;
-    private AppCompatButton recetteButtonPortionPlus;
+    private AppCompatButton recetteButtonAjouterProduit;
     private RecyclerView produitsSelectionneRecyclerView;
     private Button annulerButton;
     private Button appliquerButton;
@@ -86,7 +92,7 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
 
         tempsDePreparationSeekBar = findViewById(R.id.temps_de_preparation_seekBar);
         tempsDePreparationTextView = findViewById(R.id.temps_de_preparation_textView);
-        recetteButtonPortionPlus = findViewById(R.id.recette_Button_portion_plus);
+        recetteButtonAjouterProduit = findViewById(R.id.recette_Button_add_produit);
         produitsSelectionneRecyclerView = findViewById(R.id.produits_selectionne);
         annulerButton = findViewById(R.id.recette_recommende_filtre_annuler_button);
         appliquerButton = findViewById(R.id.recette_recommende_filtre_appliquer_button);
@@ -118,10 +124,12 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
             }
         });
 
-        recetteButtonPortionPlus.setOnClickListener(new View.OnClickListener() {
+        recetteButtonAjouterProduit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle recette button portion plus click
+                Intent intent = new Intent(context, SelectionnerProduitActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_SELECTION);
+
             }
         });
 
@@ -209,4 +217,15 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
             return true;
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SELECTION && resultCode == Activity.RESULT_OK) {
+            // Handle the result from SelectionnerProduitActivity here
+            assert data != null;
+            System.out.println(data.getStringExtra("message"));
+        }
+    }
+
 }

@@ -98,6 +98,10 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".recettes.SelectionnerProduitActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".corbeille.corbeille"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
