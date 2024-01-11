@@ -101,15 +101,13 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Handle the query submission
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Handle the query text change
-                // You can use this to filter your RecyclerView data
-                return false;
+                searchIngredient(newText);
+                return true;
             }
         });
 
@@ -195,5 +193,26 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    private void searchIngredient(String query) {
+        List<String> searchedIngredients = new ArrayList<>();
+        if(query.isEmpty()) {
+            searchedIngredients = produitsList;
+        } else {
+            for (String ingredient : produitsList) {
+                if (ingredient.toLowerCase().contains(query.toLowerCase())) {
+                    searchedIngredients.add(ingredient);
+                }
+            }
+        }
+
+        FiltreProduitsSelectionneAdapter filtreProduitsSelectionneAdapter = new FiltreProduitsSelectionneAdapter(produitsList, produitsSelectionnesList);
+        recyclerView.setAdapter(filtreProduitsSelectionneAdapter);
+        filtreProduitsSelectionneAdapter.setSelectedProduits(searchedIngredients);
+        filtreProduitsSelectionneAdapter.notifyDataSetChanged();
+
+
     }
 }
