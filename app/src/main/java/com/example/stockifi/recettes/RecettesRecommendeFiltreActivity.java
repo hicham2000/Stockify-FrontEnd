@@ -225,6 +225,7 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SELECTION && resultCode == Activity.RESULT_OK) {
             assert data != null;
             produitsSelectionnesList = data.getStringArrayListExtra("ProduitsSelectionnes");
+            System.out.println("produitsSelectionnesList => " + produitsSelectionnesList);
             ProduitsSelectionneAdapter produitsSelectionneAdapter = new ProduitsSelectionneAdapter(produitsSelectionnesList);
             produitsSelectionneRecyclerView.setAdapter(produitsSelectionneAdapter);
         }

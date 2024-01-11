@@ -118,6 +118,7 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent resultIntent = new Intent();
+                System.out.println("produitsSelectionnesList => " + produitsSelectionnesList);
                 resultIntent.putStringArrayListExtra("ProduitsSelectionnes", produitsSelectionnesList);
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
