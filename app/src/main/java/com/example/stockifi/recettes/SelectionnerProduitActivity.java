@@ -95,7 +95,6 @@ public class SelectionnerProduitActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        produitsList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
         FiltreProduitsSelectionneAdapter filtreProduitsSelectionneAdapter = new FiltreProduitsSelectionneAdapter(produitsList, produitsSelectionnesList);
         recyclerView.setAdapter(filtreProduitsSelectionneAdapter);
 
