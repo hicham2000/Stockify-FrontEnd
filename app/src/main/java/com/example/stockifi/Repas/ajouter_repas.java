@@ -197,12 +197,14 @@ public class ajouter_repas extends AppCompatActivity {
                             productObj.put("quantite", quantity.get(l));
                             l++;
                             productObj.put("uniteMesure", product.getUniteMesure());
+                            System.out.println(product.getUniteMesure());
 
                             // Add each product JSON object to the productsArray
                             productsArray.put(productObj);
                         }
                      jsonProduit.put("arraylist_of_product", productsArray);
                       jsonProduit.put("spinnerText", spinnerText.trim());
+
 
 
                         System.out.println(jsonProduit);
