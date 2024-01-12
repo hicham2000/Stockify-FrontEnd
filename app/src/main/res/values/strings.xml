@@ -216,11 +216,6 @@ la quantite critique</string>
     <string name="budgetActivity_dh_consomme">1600 DH</string>
 
 
-
-
-
-
-
     <string-array name="options_array">
         <item>Réfrigérateur</item>
         <item>Congélateur</item>
