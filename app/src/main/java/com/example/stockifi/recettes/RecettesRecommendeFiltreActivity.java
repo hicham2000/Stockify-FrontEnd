@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -63,6 +64,8 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
@@ -91,7 +94,20 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recettes_recommende_filtre);
 
-        toolbarAppReccette = findViewById(R.id.toolbar_recette);
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_buttonRe);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
+
+      //  toolbarAppReccette = findViewById(R.id.toolbar_recette);
         bottomNavigationView = findViewById(R.id.androidx_window_recette_recommende_filtre);
 
         tempsDePreparationSeekBar = findViewById(R.id.temps_de_preparation_seekBar);
@@ -190,24 +206,24 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         });
 
         /* ------------------------------------------------------------------------------------------ */
-        Menu appBar = toolbarAppReccette.getMenu();
-        appBar.findItem(R.id.poubelle).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, corbeille.class);
-            startActivity(intent);
-            finish();
-            return true;
-        });
+     //   Menu appBar = toolbarAppReccette.getMenu();
+     //   appBar.findItem(R.id.poubelle).setOnMenuItemClickListener(item -> {
+     //       Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, corbeille.class);
+     //       startActivity(intent);
+     //       finish();
+     //       return true;
+     //   });
 
-        appBar.findItem(R.id.message).setOnMenuItemClickListener(item -> {
-            return true;
-        });
+      //  appBar.findItem(R.id.message).setOnMenuItemClickListener(item -> {
+      //      return true;
+    //    });
 
-        appBar.findItem(R.id.profil1).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, ProfilActivity.class);
-            startActivity(intent);
-            finish();
-            return true;
-        });
+    //    appBar.findItem(R.id.profil1).setOnMenuItemClickListener(item -> {
+    //        Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, ProfilActivity.class);
+    //        startActivity(intent);
+    //        finish();
+     //       return true;
+   //     });
 
         // Set up the BottomNavigationView
 
