@@ -68,7 +68,7 @@ public class ModifierProduitStock extends AppCompatActivity {
         EditText Prix = findViewById(R.id.Prix_produit_modif);
         EditText QteC = findViewById(R.id.quantiteCritique_modif);
         EditText Qte = findViewById(R.id.quant_ajoutModif_modif);
-        int produitId = 4;
+        int produitId = 3;
 
         String url = "http://10.0.2.2:1111/stocks/productid/" + produitId;
         RequestQueue queue1 = Volley.newRequestQueue(this);
@@ -114,8 +114,62 @@ public class ModifierProduitStock extends AppCompatActivity {
 
         queue1.add(stringRequest);
 
-        
+        Button buttonValiderProd = findViewById(R.id.button_validerProd_modif);
+        Button buttonModifierProd = findViewById(R.id.button_validerProd_modif);
+
+        MyApp myApp = (MyApp) getApplication();
+        int stockId = myApp.getUser_stock_id();
+
+
+        buttonModifierProd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+                // Call the method to send the POST request
+                RequestQueue queue = Volley.newRequestQueue(ModifierProduitStock.this);
+                String url = "http://10.0.2.2:1111/stocks/" + stockId + "/products/" + produitId;
+
+                // Example data to send in the request body
+                JSONObject request = new JSONObject();
+                try {
+                    // Set the properties based on your Produit entity
+                    request.put("intitule", nom.getText().toString());
+                    request.put("quantite", Qte.getText().toString());
+                    request.put("uniteDeMesure", Mesure.getSelectedItem().toString());
+                    //request.put("dateExpiration", peremption.getText().toString());
+                    request.put("prix", Prix.getText().toString());
+                    //request.put("dateAlerte", Alerte.getText().toString());
+                    request.put("quantiteCritique", QteC.getText().toString());
+                    System.out.println(request);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                // Make sure to replace this with your actual parameters
+                JsonObjectRequest modifierProduit = new JsonObjectRequest(Request.Method.PUT,
+                        url,
+                        request,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Handle the response from the server
+                                // You might want to parse and process the response JSON here
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle errors here
+                        // You might want to display an error message to the user
+                    }
+                });
+
+                // Add the request to the RequestQueue.
+                queue.add(modifierProduit);
+
+            }
+        });
+        }
     }
 
-}
+
 
