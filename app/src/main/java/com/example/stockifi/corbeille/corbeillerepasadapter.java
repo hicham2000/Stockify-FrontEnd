@@ -56,14 +56,14 @@ public class corbeillerepasadapter extends ArrayAdapter<objet> {
 
         textViewR.setText(data.get(position).getIntitule());
 
-        buttonRecup.setOnClickListener(new View.OnClickListener() {
+        /*buttonRecup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //int repasId = data.get(position).getId();
                 //int stockId = myApp.getUser_stock_id();
 
-               /* backendManager.recupererUnProduitFromCorbeille((long) stockId, (long) repasId, new BackendManager.BackendResponseCallback() {
+                backendManager.recupererUnProduitFromCorbeille((long) stockId, (long) repasId, new BackendManager.BackendResponseCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
                         // Traitez le succès ici si nécessaire
@@ -74,17 +74,63 @@ public class corbeillerepasadapter extends ArrayAdapter<objet> {
                         // Traitez l'erreur ici si nécessaire
                         Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });*/
+                });
+            }
+        });*/
+        buttonRecup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int repasId = data.get(position).getId();
+                int stockId = myApp.getUser_stock_id();
+                backendManager.recupererDeletedRepasFromCorbeille((long) stockId, (long) repasId, new BackendManager.BackendResponseCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        data.remove(position);
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
+
+        /*buttonSupp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int repasId = data.get(position).getId();
+                int stockId = myApp.getUser_stock_id();
+
+                backendManager.supprimerDefUnRepasFromCorbeille((long) stockId, (long) repasId, new BackendManager.BackendResponseCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        if (position >= 0 && position < data.size()) {
+                            data.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du isDelete: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });*/
         buttonSupp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int productId = data.get(position).getId();
+                int repasId = data.get(position).getId();
                 int stockId = myApp.getUser_stock_id();
 
-                backendManager.supprimerDefUnRepasFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
+                backendManager.supprimerDefPermanentlyUnRepasFromCorbeille((long) stockId, (long) repasId, new BackendManager.BackendResponseCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
                         if (position >= 0 && position < data.size()) {

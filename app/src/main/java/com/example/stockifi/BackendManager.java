@@ -321,6 +321,42 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
+    public void supprimerDefPermanentlyUnRepasFromCorbeille(long stockId,long repasId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/supprimerdefPermanentdeletedrepas/stockId="+stockId+"/supprimerPrmRecipetId="+repasId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+    public void recupererDeletedRepasFromCorbeille(long stockId, long recupererRepasId, BackendResponseCallback callback) {
+        String url = getFullUrl("/corbeille/recupererdeletedrepas/stockId=" + stockId + "/recupererRepasId=" + recupererRepasId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
 
     public void recupererRecettesRecommendees(long userId, @NonNull BackendResponseCallback callback) {
         String url = getFullUrl(ENDPOINT + "/recommendations/Recettes/" + userId);

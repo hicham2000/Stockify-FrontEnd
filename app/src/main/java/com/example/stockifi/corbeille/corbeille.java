@@ -173,7 +173,7 @@ public class corbeille extends AppCompatActivity{
 
                                     adapterRepas = new corbeillerepasadapter(corbeille.this, dataList);
 
-                                    listView.setAdapter(adapter);
+                                    listView.setAdapter(adapterRepas);
 
                                 } catch (JSONException e) {
                                     throw new RuntimeException(e);
@@ -188,7 +188,7 @@ public class corbeille extends AppCompatActivity{
                         //dataList.add("That didn't work!");
                         adapterRepas = new corbeillerepasadapter(corbeille.this, dataList);
 
-                        listView.setAdapter(adapter);
+                        listView.setAdapter(adapterRepas);
 
                     }
                 });
