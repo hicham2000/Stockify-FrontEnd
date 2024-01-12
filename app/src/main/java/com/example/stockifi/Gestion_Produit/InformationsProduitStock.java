@@ -41,9 +41,9 @@ public class InformationsProduitStock extends AppCompatActivity {
 
         int produitId = 4;
 
-        String url1 = "http://10.0.2.2:1111/stocks/productid/" + produitId;
+        String url = "http://10.0.2.2:1111/stocks/productid/" + produitId;
         RequestQueue queue1 = Volley.newRequestQueue(this);
-        StringRequest stringRequest1 = new StringRequest(Request.Method.GET, url1,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -83,7 +83,7 @@ public class InformationsProduitStock extends AppCompatActivity {
             }
         });
 
-        queue1.add(stringRequest1);
+        queue1.add(stringRequest);
 
     }
 
