@@ -7,14 +7,18 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
+import androidx.annotation.NonNull;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
+import com.example.stockifi.notification.Notification;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.util.Log;
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,8 +39,17 @@ public class LoginActivity extends AppCompatActivity {
         TextView to_inscription = findViewById(R.id.textViewCreateCompte);
         TextInputEditText emailTextEdit = findViewById(R.id.email_login);
         TextInputEditText passwordTextEdit = findViewById(R.id.password_login);
-
         MyApp myApp = (MyApp) getApplication();
+
+        // notification instantiation
+
+
+
+
+
+
+
+
 
         if(myApp.getUser_id() != 0) {
             Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
@@ -51,17 +64,35 @@ public class LoginActivity extends AppCompatActivity {
                 if (validateEmail() && validatePassword()) {
                     String email = emailTextEdit.getText().toString();
                     String password = passwordTextEdit.getText().toString();
+                    Notification notif = new Notification();
                     try {
                         backendManager.login(email, password, new BackendManager.BackendResponseCallback() {
                             @Override
                             public void onSuccess(JSONObject response) {
                                 try {
+                                    String TAG = "Notif";
                                     int userId = response.getInt("user_id");
                                     myApp.setUser_id(userId);
                                     int stockId = response.getInt("stock_id");
                                     myApp.setUser_stock_id(stockId);
                                     int listeDeCourseId = response.getInt("listeDeCourse_id");
                                     myApp.setUser_listeCourse_id(listeDeCourseId);
+                                    Notification notif = new Notification();
+                                    FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<String> task) {
+                                                    if (!task.isSuccessful()) {
+                                                        Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                                                        return;
+                                                    }
+
+                                                    String token = task.getResult();
+                                                    myApp.setNotiftoken(token);
+                                                    Log.d(TAG, "token: "+token);
+                                                    notif.sendNotificationToken(getApplicationContext() , token ,  userId);
+
+                                                }
+                                            });
 
                                     Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
                                     startActivity(intent);

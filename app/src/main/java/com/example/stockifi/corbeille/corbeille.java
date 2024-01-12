@@ -95,7 +95,7 @@ public class corbeille extends AppCompatActivity{
                 MyApp myApp = (MyApp) getApplication();
                 int User_id = myApp.getUser_id();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://10.0.2.2:1111/corbeille/deletedProduct/git "+ User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/deletedProduct/ "+ User_Stock_id;
                 ListView listView = findViewById(R.id.myListViewCorbeille);
 
                 ArrayList<objet> dataList = new ArrayList<>();
@@ -173,7 +173,7 @@ public class corbeille extends AppCompatActivity{
 
                                     adapterRepas = new corbeillerepasadapter(corbeille.this, dataList);
 
-                                    listView.setAdapter(adapter);
+                                    listView.setAdapter(adapterRepas);
 
                                 } catch (JSONException e) {
                                     throw new RuntimeException(e);
@@ -188,7 +188,7 @@ public class corbeille extends AppCompatActivity{
                         //dataList.add("That didn't work!");
                         adapterRepas = new corbeillerepasadapter(corbeille.this, dataList);
 
-                        listView.setAdapter(adapter);
+                        listView.setAdapter(adapterRepas);
 
                     }
                 });

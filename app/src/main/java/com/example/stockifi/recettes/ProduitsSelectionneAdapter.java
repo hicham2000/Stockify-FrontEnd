@@ -48,9 +48,6 @@ public class ProduitsSelectionneAdapter extends RecyclerView.Adapter<ProduitsSel
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                holder.produitSelectionneLinearLayout.setVisibility(View.GONE);
-//                System.out.println(holder.produitSelectionneChip.getText() + " Clicked !");
-//                System.out.println(holder.produitSelectionneLinearLayout.getVisibility());
                 produitsList.remove(produit);
                 notifyDataSetChanged();
 
