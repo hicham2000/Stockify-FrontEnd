@@ -29,7 +29,7 @@
             android:exported="true" />
         <activity
             android:name=".Gestion_Produit.InformationsProduitStock"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Gestion_Produit.ModifierProduitStock"
             android:exported="true" />
