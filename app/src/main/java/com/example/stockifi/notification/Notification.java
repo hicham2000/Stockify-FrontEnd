@@ -12,13 +12,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 public class Notification {
 
+    private static final String BASE_URL = "http://192.168.11.100:1111";
     private int id;
     private int type;
     private String title;
     private String body;
 
     public void sendNotificationToken(Context context , String token ,int  userId){
-        String url = "http://10.0.2.2/api/users/" + userId + "/updateFcmToken";
+        String url = "http://192.168.11.100:1111/api/users/" + userId + "/updateFcmToken";
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("token", token);

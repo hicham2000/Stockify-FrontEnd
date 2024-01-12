@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:text="profile1@gmail.com"
             android:textColor="@color/vertTexte"
-            android:textSize="@dimen/enHaut"
+            android:textSize="20dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             />
@@ -275,9 +275,10 @@
            >
 
            <TextView
+               android:id="@+id/produitencuisine"
                android:layout_width="@dimen/rond"
                android:layout_height="@dimen/rond"
-               android:text="50"
+
 
 
                android:textColor="@color/vertTexte"
@@ -287,6 +288,7 @@
                android:background="@drawable/sphere"/>
 
            <TextView
+               android:id="@+id/produitjetes"
                android:layout_width="@dimen/rond"
                android:layout_height="@dimen/rond"
                android:text="0,0"
@@ -371,7 +373,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/dimenTexte"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/enHaut"
+            android:layout_marginTop="25dp"
             android:text="@string/regime_speciaux"
             android:textColor="@color/vertTexte"/>
 
@@ -396,73 +398,7 @@
             />
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimenTexte"
-           android:layout_marginLeft="15dp"
-            android:layout_marginTop="@dimen/enHaut"
-            android:text="@string/affichage_quantites"
-            android:textColor="@color/vertTexte"/>
 
-        <!-- res/layout/activity_main.xml -->
-        <!-- res/layout/activity_main.xml -->
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="@dimen/enHaut"
-            android:layout_marginTop="@dimen/enHaut"
-            android:backgroundTint="@color/white">
-
-            <RadioButton
-                android:id="@+id/radioButtonMetric"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/vertTexte"
-                android:backgroundTint="@color/white"
-
-                android:text="Métrique"/>
-
-            <RadioButton
-                android:id="@+id/radioButtonImperial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/vertTexte"
-                android:text="Impérial"
-                android:shadowColor="@color/vertTexte"
-                android:backgroundTint="@color/white"
-                />
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimenTexte"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="@dimen/enHaut"
-            android:text="@string/device"
-            android:textColor="@color/vertTexte"/>
-
-        <RelativeLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ellipse"
-            android:layout_marginTop="@dimen/enHaut"
-            android:layout_gravity="center">
-
-        <Spinner
-            android:id="@+id/devise"
-
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_gravity="center"
-
-            android:entries="@array/devise"
-            />
-        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -503,9 +439,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
             android:orientation="horizontal">
 
 
@@ -597,8 +534,8 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:textSize="@dimen/dimenTexte"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="@dimen/enHaut"
@@ -607,10 +544,11 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
 
            <EditText
@@ -697,18 +635,17 @@
         </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimenTexte"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="@dimen/enHaut"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+        android:visibility="invisible"
             android:text="@string/peremption"
             android:textColor="@color/vertTexte"/>
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -765,18 +702,21 @@
         android:layout_marginLeft="50dp">
 
         <ImageView
+            android:id="@+id/facebookImageView"
             android:layout_width="@dimen/image"
             android:layout_height="@dimen/image"
             android:src="@drawable/facebook"
             android:layout_marginRight="60dp"/>
 
         <ImageView
+            android:id="@+id/instagramImageView"
             android:layout_width="@dimen/image"
             android:layout_height="@dimen/image"
             android:src="@drawable/instagram"
             android:layout_marginRight="60dp"/>
 
         <ImageView
+            android:id="@+id/twitterImageView"
             android:layout_width="@dimen/image"
             android:layout_height="@dimen/image"
             android:src="@drawable/twitter"/>

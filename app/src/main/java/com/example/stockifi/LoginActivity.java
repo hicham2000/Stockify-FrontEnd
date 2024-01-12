@@ -23,13 +23,13 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    "(?=.*[a-zA-Z])" +      // any letter
-                    "(?=.*[@#$%^&+=])" +    // at least 1 special character
-                    "(?=\\S+$)" +           // no white spaces
-                    ".{4,}" +               // at least 4 characters
-                    "$");
+  //  private static final Pattern PASSWORD_PATTERN =
+    //        Pattern.compile("^" +
+      //              "(?=.*[a-zA-Z])" +      // any letter
+        //            "(?=.*[@#$%^&+=])" +    // at least 1 special character
+          //          "(?=\\S+$)" +           // no white spaces
+            //        ".{4,}" +               // at least 4 characters
+              //      "$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,9 +167,9 @@ public class LoginActivity extends AppCompatActivity {
         if (passwordInput.isEmpty()) {
             textInputLayoutPassword.setError("Password field can't be empty");
             return false;
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            textInputLayoutPassword.setError("Password must be at least 4 characters long and include at least one letter, one special character (@, #, $, %, ^, &, +), and no white spaces.");
-            return false;
+  //      } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+    //        textInputLayoutPassword.setError("Password must be at least 4 characters long and include at least one letter, one special character (@, #, $, %, ^, &, +), and no white spaces.");
+      //      return false;
         } else {
             textInputLayoutPassword.setError(null);
             return true;
