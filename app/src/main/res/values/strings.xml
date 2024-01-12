@@ -204,6 +204,9 @@ la quantite critique</string>
     <string name="item"> Lait</string>
     <string name="produits">Produits</string>
     <string name="repas">Repas</string>
+    <string name="corbeilleActivity_dialog_title">Restaurer le produit</string>
+    <string name="corbeilleActivity_dialog_input_hint">Entrez la nouvelle quantité</string>
+
     <!-- budget's strings -->
 
     <string name="budgetActivity_budget">Budget</string>
