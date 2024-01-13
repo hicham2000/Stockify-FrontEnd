@@ -1,6 +1,7 @@
 package com.example.stockifi.corbeille;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -94,7 +96,7 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
 
             }
         });*/
-        buttonRecup.setOnClickListener(new View.OnClickListener() {
+        /*buttonRecup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Show a dialog box to get the new quantity
@@ -145,6 +147,61 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
                 });
 
                 builder.show();
+            }
+        });*/
+        buttonRecup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.corbeille_quantity_custom_alert_dialog);
+
+                TextView customDialogTitle = dialog.findViewById(R.id.customDialogTitle);
+                EditText customDialogInput = dialog.findViewById(R.id.customDialogInput);
+                Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
+                Button buttonOk = dialog.findViewById(R.id.buttonOk);
+
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                layoutParams.copyFrom(dialog.getWindow().getAttributes());
+                layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+                dialog.getWindow().setAttributes(layoutParams);
+
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                buttonOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String newQuantityStr = customDialogInput.getText().toString();
+                        if (!newQuantityStr.isEmpty()) {
+                            double newQuantity = Double.parseDouble(newQuantityStr);
+
+                            int productId = data.get(position).getId();
+                            int stockId = myApp.getUser_stock_id();
+
+                            backendManager.restoreProductFromCorbeille((long) stockId, (long) productId, newQuantity, new BackendManager.BackendResponseCallback() {
+                                @Override
+                                public void onSuccess(JSONObject response) {
+                                    data.remove(position);
+                                    notifyDataSetChanged();
+                                    dialog.dismiss(); // Dismiss the dialog after success
+                                }
+
+                                @Override
+                                public void onError(Exception error) {
+                                    Toast.makeText(getContext().getApplicationContext(), "Error during product restoration: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Toast.makeText(getContext().getApplicationContext(), "Please enter a valid quantity", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                dialog.show();
             }
         });
 
