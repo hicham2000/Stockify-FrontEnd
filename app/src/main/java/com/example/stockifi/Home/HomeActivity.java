@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
                 linearLayout.setVisibility(View.INVISIBLE);
             }
         });
-        String[] itemsName = {"Mehdi", "Mehdi", "Mehdi"};
+        String[] itemsName = {"Mehdi", "Mehdi", "Mehdi", "Mehdi"};
         int[] image = {R.drawable.instagram, R.drawable.instagram, R.drawable.instagram, R.drawable.instagram};
         GridAdapter gridAdapter = new GridAdapter(HomeActivity.this, itemsName, image);
         binding.gridV.setAdapter(gridAdapter);
