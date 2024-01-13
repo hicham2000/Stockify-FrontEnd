@@ -46,7 +46,7 @@ public class ListeProduit extends AppCompatActivity {
             }
         });
 
-        /*list_produit=findViewById(R.id.myListViewProduit);
+        list_produit=findViewById(R.id.myListViewProduit);
 
         ArrayList<ProduitALaListe> objets=new ArrayList<>();
         objets.add(new ProduitALaListe(R.drawable.profil,"lait"));
@@ -76,7 +76,7 @@ public class ListeProduit extends AppCompatActivity {
                                 String imageUrl = jsonObject.getString("imageUrl");
                                 String mesure = jsonObject.getString("uniteDeMesure");
 
-                                dataList.add(new Produit(id,intitule,imageUrl,mesure));
+                                dataList.add(new Produit(id,intitule,mesure,imageUrl));
                             }
 
                             ListeCourseAdapter adapter = new ListeCourseAdapter(ListeProduit.this, dataList);
@@ -110,7 +110,7 @@ public class ListeProduit extends AppCompatActivity {
 
         });
 
-        queue.add(stringRequest);*/
+        queue.add(stringRequest);
 
 
     }

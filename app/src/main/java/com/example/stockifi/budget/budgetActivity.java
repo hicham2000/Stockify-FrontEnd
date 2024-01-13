@@ -40,20 +40,30 @@ import java.util.Locale;
 
 public class budgetActivity extends AppCompatActivity {
 
+    TextView montantTotalTextView;
+    TextView montantConsommeTextView;
+    TextView montantGaspilleTextView;
+    TextView pourcentageConsommeTextView ;
+    TextView pourcentageGaspilleTextView ;
+
+    MaterialToolbar toolbar ;
+
+
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_budget);
+         toolbar = findViewById(R.id.toolbar_budget);
 
 
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.poubelle) {
                 Intent poubelleIntent = new Intent(budgetActivity.this, corbeille.class);
                 startActivity(poubelleIntent);
-           //     finish();
+                //     finish();
                 return true;
             } else if (item.getItemId() == R.id.message) {
                 // Handle the message item click
@@ -62,13 +72,13 @@ public class budgetActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.profil1) {
                 Intent profilIntent = new Intent(budgetActivity.this, ProfilActivity.class);
                 startActivity(profilIntent);
-             //   finish();
+                //   finish();
                 return true;
             }
             return false;
         });
 
-       BottomNavigationView bottomNavigationView=findViewById(R.id.androidx_window_budget);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_budget);
         Menu navBar = bottomNavigationView.getMenu();
 
         MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.budget);
@@ -77,7 +87,7 @@ public class budgetActivity extends AppCompatActivity {
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, ListeDeCourse.class);
             startActivity(intent);
-       //     finish();
+            //    finish();
             return true;
         });
 
@@ -89,74 +99,63 @@ public class budgetActivity extends AppCompatActivity {
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, HomeActivity.class);
             startActivity(intent);
-         //   finish();
+            //   finish();
             return true;
         });
 
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
-           // finish();
+            // finish();
             return true;
         });
 
-        fetchConsoamtion();
-    }
-    public void fetchConsoamtion() {
-        String apiUrl = "http://localhost:1111/stocks/1/budget";
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl, new Response.Listener<String>() {
+
+
+         montantTotalTextView = findViewById(R.id.montant_total);
+         montantConsommeTextView = findViewById(R.id.montant_consomme);
+         montantGaspilleTextView = findViewById(R.id.montant_gaspille);
+         pourcentageConsommeTextView = findViewById(R.id.pourcentage_consomme);
+         pourcentageGaspilleTextView = findViewById(R.id.pourcentage_gaspille);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String apiUrl = "http://10.0.2.2:1111/stocks/1/budget";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                List<Double> budget = new ArrayList<>();
-                // Assuming your response is a comma-separated string of doubles
-                String[] values = response.split(",");
+                String responseFix = response.replaceAll("\\[|\\]", "");
+                String[] values = responseFix.split(",");
 
-                for (String value : values) {
-                    budget.add(Double.parseDouble(value));
-                }
-                updateUIWithBudgetData(budget);
-                System.out.println(budget);
+                Double totalBudget = Double.parseDouble(values[2]);
+                Double priceOfWastedProducts = Double.parseDouble(values[0]);
+                Double priceOfNonWastedProducts = Double.parseDouble(values[1]);
+                Double percentageSpentOnWasted = Double.parseDouble(values[3]);
+                Double percentageSpentOnNonWasted = Double.parseDouble(values[4]);
+
+
+
+                // Update TextViews with formatted values
+                montantTotalTextView.setText(String.format("%.2f",totalBudget));
+                montantConsommeTextView.setText( String.format("%.2f",priceOfNonWastedProducts));
+                montantGaspilleTextView.setText(String.format("%.2f",priceOfWastedProducts));
+                pourcentageConsommeTextView.setText(String.format("%.2f",percentageSpentOnNonWasted ) + "%");
+                pourcentageGaspilleTextView.setText(String.format("%.2f",percentageSpentOnWasted  ) + "%");
+
 
             }
-            }, new Response.ErrorListener() {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
         });
+
+        queue.add(stringRequest);
+
+
     }
-    private void updateUIWithBudgetData(List<Double> budget) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // Assuming budget has at least 5 values as per your server response
-                if (budget.size() >= 5) {
-                    // Find TextViews in your layout
-                    TextView montantTotalTextView = findViewById(R.id.montant);
-                    TextView montantConsommeTextView = findViewById(R.id.montant_consomme);
-                    TextView montantGaspilleTextView = findViewById(R.id.montant_gaspille);
-                    TextView pourcentageConsommeTextView = findViewById(R.id.pourcentage_consomme);
-                    TextView pourcentageGaspilleTextView = findViewById(R.id.pourcentage_gaspille);
 
-                    double totalBudget = budget.get(0);
-                    double priceOfWastedProducts = budget.get(1);
-                    double priceOfNonWastedProducts = budget.get(2);
-
-                    // Update TextViews with formatted values
-                    montantTotalTextView.setText(String.format(Locale.getDefault(), "%.2f", totalBudget));
-                    montantConsommeTextView.setText(String.format(Locale.getDefault(), "%.2f", priceOfNonWastedProducts));
-                    montantGaspilleTextView.setText(String.format(Locale.getDefault(), "%.2f", priceOfWastedProducts));
-
-                    double percentageSpentOnWasted = (priceOfWastedProducts / totalBudget) * 100;
-                    double percentageSpentOnNonWasted = (priceOfNonWastedProducts / totalBudget) * 100;
-
-                    pourcentageConsommeTextView.setText(String.format(Locale.getDefault(), "%.2f", percentageSpentOnNonWasted));
-                    pourcentageGaspilleTextView.setText(String.format(Locale.getDefault(), "%.2f", percentageSpentOnWasted));
-                }
-            }
-        });
-    }
 
 }
 
