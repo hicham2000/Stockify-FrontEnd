@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Liste_Course.ModifierProduit;
 import com.example.stockifi.R;
 
 import org.json.JSONException;
@@ -237,6 +238,18 @@ public class ModifierProduitStock extends AppCompatActivity {
             }
         });
 
+        Button valider = findViewById(R.id.button_validerProd_modif);
+        valider.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(ModifierProduitStock.this, InformationsProduitStock.class);
+                startActivity(intent);
+
+
+            }
+        });
+
 
     }
     private void openDialogPeremstion () {
@@ -276,6 +289,8 @@ public class ModifierProduitStock extends AppCompatActivity {
 
         dialog.show();
     }
+
+
 }
 
 
