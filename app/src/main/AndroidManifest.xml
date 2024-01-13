@@ -53,6 +53,12 @@
             android:name=".Repas.ingredients_quantity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".budget.budgetActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".Repas.ingredients"
             android:exported="true" />
@@ -109,6 +115,10 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".corbeille.corbeille"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".budget.budgetActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity

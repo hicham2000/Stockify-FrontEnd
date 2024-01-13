@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,8 +20,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
+import com.example.stockifi.budget.budgetActivity;
+import com.example.stockifi.corbeille.corbeille;
 import com.example.stockifi.databinding.ActivityHomeBinding;
+import com.example.stockifi.recettes.RecettesRecommendeActivity;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonObject;
@@ -39,6 +48,59 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayout linearLayout = findViewById(R.id.list_Button);
         ImageView plusImageView = findViewById(R.id.plusImageView);
         ImageView xredImageView = findViewById(R.id.xImageView);
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window);
+        Menu navBar = bottomNavigationView.getMenu();
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbarStock);
+
+        // Sélectionner l'élément "Courses"
+
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.profil1) {
+                // L'utilisateur a cliqué sur "profil1"
+                Intent intent = new Intent(HomeActivity.this, ProfilActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            if (item.getItemId() == R.id.poubelle) {
+                // L'utilisateur a cliqué sur "profil1"
+                Intent intent = new Intent(HomeActivity.this, corbeille.class);
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        });
+
+
+
+        navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
+
+            Intent intent = new Intent(HomeActivity.this, ListeDeCourse.class);
+            startActivity(intent);
+
+            return true;
+        });
+
+        navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(HomeActivity.this, budgetActivity.class);
+            startActivity(intent);
+
+            return true;
+        });
+
+        navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
+
+            return true;
+        });
+
+        navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(HomeActivity.this, RecettesRecommendeActivity.class);
+            startActivity(intent);
+
+            return true;
+        });
 
         plusImageView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -112,7 +112,8 @@ public class ProfilActivity extends AppCompatActivity {
 
     private static final String SPINNER_DATE_PER_SELECTION_KEY = "spinnerDatePerSelectionKey";
 
-    private static final String BASE_URL = "10.0.2.2:1111";
+  //  private static final String BASE_URL = "10.0.2.2:1111";
+  private static final String BASE_URL = "192.168.11.100:1111";
     private TextView nomProfilView;
     private TextView emailProfilView;
 
@@ -248,6 +249,19 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_profil);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
 
         MyApp myApp = (MyApp) getApplication();
 
@@ -506,7 +520,6 @@ public class ProfilActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // Après que le texte a changé
 
                 // Sauvegarder la nouvelle valeur automatiquement
                 String enteredValue = editable.toString();
@@ -1432,10 +1445,11 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putString(SELECTED_DATE_KEY, selectedDate);
                 editor.apply();
                 String dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+
                 if(String.valueOf(day).length() == 1){
                     dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-0" + String.valueOf(day);
                 }
-                if(String.valueOf(day).length() == 1){
+                if(String.valueOf(month).length() == 1){
                     dateDeNaissance = String.valueOf(year) + "-0" + String.valueOf(month + 1) + "-0" + String.valueOf(day);
                 }
 

@@ -7,33 +7,29 @@
     tools:context=".Home.HomeActivity"
     android:background="#083D27">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarStock"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:id="@+id/appBarStock">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarStock"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Stock"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-    </androidx.appcompat.widget.Toolbar>
+            app:title="Stock"
 
-    <View
-        android:id="@+id/bottomBorder"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarStock"
-        tools:ignore="MissingConstraints" />
+            app:menu="@menu/menu_profil"
+            />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarStock2"
@@ -43,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomBorder"
+        app:layout_constraintTop_toBottomOf="@+id/appBarStock"
         tools:ignore="MissingConstraints">
 
         <android.widget.SearchView

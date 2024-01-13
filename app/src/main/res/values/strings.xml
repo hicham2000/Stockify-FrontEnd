@@ -206,6 +206,9 @@ la quantite critique</string>
     <string name="repas">Repas</string>
     <string name="corbeilleActivity_dialog_title">Restaurer le produit</string>
     <string name="corbeilleActivity_dialog_input_hint">Entrez la nouvelle quantité</string>
+    <string name="corbeilleActivity_ok_button">OK</string>
+    <string name="corbeilleActivity_cancel_button">Cancel</string>
+
 
     <!-- budget's strings -->
 
@@ -255,4 +258,6 @@ la quantite critique</string>
     <string name="floating_button_pour_l_ajout_de_recette_au_stock">Floating button pour l\'ajout de recette au stock</string>
     <string name="SelectionnerProduitFiltre_text">Selectionner Produit</string>
     <string name="SelectionnerProduitFiltre_valider_text">Valider Votre Choix</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
