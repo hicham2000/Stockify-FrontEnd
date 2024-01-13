@@ -23,13 +23,21 @@
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:layout_marginTop="10dp"/>
+                <ImageView
+                    android:id="@+id/ellipseG"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ellipseg"
+                    android:layout_marginTop="2dp"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/ellipseP"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="47dp"
+                    android:layout_marginStart="4dp"
                     android:src="@drawable/ellipsep"
                     android:layout_marginTop="2dp"/>
         </LinearLayout>
@@ -41,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7dp"
             >
 
 

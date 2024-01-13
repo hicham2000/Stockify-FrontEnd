@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,13 @@ public class corbeillerepasadapter extends ArrayAdapter<objet> {
         Button buttonSupp=convertView.findViewById(R.id.buttonsuppprepas);
 
         textViewR.setText(data.get(position).getIntitule());
+        ImageView ellipseG = convertView.findViewById(R.id.ellipseG);
+
+        if (data.get(position).getGaspille() == 1) {
+            ellipseG.setVisibility(View.VISIBLE);
+        } else {
+            ellipseG.setVisibility(View.INVISIBLE);
+        }
 
         /*buttonRecup.setOnClickListener(new View.OnClickListener() {
             @Override
