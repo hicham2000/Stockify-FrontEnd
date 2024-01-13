@@ -48,12 +48,14 @@ public class budgetActivity extends AppCompatActivity {
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar_budget);
 
+        fetchConsoamtion();
+
 
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.poubelle) {
                 Intent poubelleIntent = new Intent(budgetActivity.this, corbeille.class);
                 startActivity(poubelleIntent);
-           //     finish();
+                //     finish();
                 return true;
             } else if (item.getItemId() == R.id.message) {
                 // Handle the message item click
@@ -62,13 +64,13 @@ public class budgetActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.profil1) {
                 Intent profilIntent = new Intent(budgetActivity.this, ProfilActivity.class);
                 startActivity(profilIntent);
-             //   finish();
+                //   finish();
                 return true;
             }
             return false;
         });
 
-       BottomNavigationView bottomNavigationView=findViewById(R.id.androidx_window_budget);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_budget);
         Menu navBar = bottomNavigationView.getMenu();
 
         MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.budget);
@@ -77,7 +79,7 @@ public class budgetActivity extends AppCompatActivity {
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, ListeDeCourse.class);
             startActivity(intent);
-       //     finish();
+            //     finish();
             return true;
         });
 
@@ -89,18 +91,18 @@ public class budgetActivity extends AppCompatActivity {
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, HomeActivity.class);
             startActivity(intent);
-         //   finish();
+            //   finish();
             return true;
         });
 
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
-           // finish();
+            // finish();
             return true;
         });
 
-        fetchConsoamtion();
+
     }
     public void fetchConsoamtion() {
         String apiUrl = "http://localhost:1111/stocks/1/budget";
