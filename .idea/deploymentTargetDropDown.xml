@@ -11,6 +11,12 @@
       <entry key="ModifierProduitStock">
         <State />
       </entry>
+      <entry key="ProfilActivity">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
+      </entry>
     </value>
   </component>
 </project>

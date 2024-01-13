@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,8 +20,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
+import com.example.stockifi.budget.budgetActivity;
+import com.example.stockifi.corbeille.corbeille;
 import com.example.stockifi.databinding.ActivityHomeBinding;
+import com.example.stockifi.recettes.RecettesRecommendeActivity;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonObject;
@@ -29,26 +38,85 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HomeActivity extends AppCompatActivity {
-    ActivityHomeBinding binding, binding2;
+    ActivityHomeBinding binding;
     String apiUrl = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding2 = ActivityHomeBinding.inflate(getLayoutInflater());
-        setContentView(binding2.getRoot());
-        LinearLayout listButton = findViewById(R.id.list_Button);
+        LinearLayout linearLayout = findViewById(R.id.list_Button);
         ImageView plusImageView = findViewById(R.id.plusImageView);
-        ImageView xredImageView = findViewById(R.id.xredImageView);
+        ImageView xredImageView = findViewById(R.id.xImageView);
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window);
+        Menu navBar = bottomNavigationView.getMenu();
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbarStock);
+
+        // Sélectionner l'élément "Courses"
+
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.profil1) {
+                // L'utilisateur a cliqué sur "profil1"
+                Intent intent = new Intent(HomeActivity.this, ProfilActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            if (item.getItemId() == R.id.poubelle) {
+                // L'utilisateur a cliqué sur "profil1"
+                Intent intent = new Intent(HomeActivity.this, corbeille.class);
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        });
+
+
+
+        navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
+
+            Intent intent = new Intent(HomeActivity.this, ListeDeCourse.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+        navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(HomeActivity.this, budgetActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+        navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
+
+            return true;
+        });
+
+        navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(HomeActivity.this, RecettesRecommendeActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
 
         plusImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Rendre le LinearLayout invisible
-                listButton.setVisibility(View.INVISIBLE);
                 // Rendre l'autre ImageView visible
                 xredImageView.setVisibility(View.VISIBLE);
+                plusImageView.setVisibility(View.INVISIBLE);
+                linearLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        xredImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xredImageView.setVisibility(View.INVISIBLE);
+                plusImageView.setVisibility(View.VISIBLE);
+                linearLayout.setVisibility(View.INVISIBLE);
             }
         });
         String[] itemsName = {"Mehdi", "Mehdi", "Mehdi"};
@@ -62,9 +130,6 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "you clicked on " + itemsName[position], Toast.LENGTH_SHORT).show();
             }
         });
-        String[] itemsName2 = {"Cat1", "Cat2", "Cat3"};
-        GridCategorieAdapter gridAdapter2 = new GridCategorieAdapter(HomeActivity.this, itemsName2);
-        binding2.gridView.setAdapter(gridAdapter2);
         /*Button allButton = findViewById(R.id.all);
         allButton.setOnClickListener(new View.OnClickListener() {
             @Override

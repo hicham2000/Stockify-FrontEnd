@@ -7,6 +7,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.stockifi.Home.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -23,13 +25,13 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
-  //  private static final Pattern PASSWORD_PATTERN =
-    //        Pattern.compile("^" +
-      //              "(?=.*[a-zA-Z])" +      // any letter
-        //            "(?=.*[@#$%^&+=])" +    // at least 1 special character
-          //          "(?=\\S+$)" +           // no white spaces
-            //        ".{4,}" +               // at least 4 characters
-              //      "$");
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[a-zA-Z])" +      // any letter
+                    "(?=.*[@#$%^&+=])" +    // at least 1 special character
+                    "(?=\\S+$)" +           // no white spaces
+                    ".{4,}" +               // at least 4 characters
+                    "$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +41,12 @@ public class LoginActivity extends AppCompatActivity {
         TextView to_inscription = findViewById(R.id.textViewCreateCompte);
         TextInputEditText emailTextEdit = findViewById(R.id.email_login);
         TextInputEditText passwordTextEdit = findViewById(R.id.password_login);
+
         MyApp myApp = (MyApp) getApplication();
 
-        // notification instantiation
+        myApp.setUser_id(-1);
 
-
-
-
-
-
-
-
-
-        if(myApp.getUser_id() != 0) {
+        if(myApp.getUser_id() > 0) {
             Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
             startActivity(intent);
         }
@@ -94,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 }
                                             });
 
-                                    Intent intent = new Intent(LoginActivity.this, ProfilActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } catch (JSONException e) {
@@ -167,9 +162,9 @@ public class LoginActivity extends AppCompatActivity {
         if (passwordInput.isEmpty()) {
             textInputLayoutPassword.setError("Password field can't be empty");
             return false;
-  //      } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-    //        textInputLayoutPassword.setError("Password must be at least 4 characters long and include at least one letter, one special character (@, #, $, %, ^, &, +), and no white spaces.");
-      //      return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            textInputLayoutPassword.setError("Password must be at least 4 characters long and include at least one letter, one special character (@, #, $, %, ^, &, +), and no white spaces.");
+            return false;
         } else {
             textInputLayoutPassword.setError(null);
             return true;

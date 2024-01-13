@@ -20,11 +20,16 @@ public class BackendManager {
 
 
 
+
     //private static final String BASE_URL = "http://100.89.18.54:1111";
   //  private static final String BASE_URL = "http://10.0.2.2:1111";
     private static final String BASE_URL = "http://192.168.11.100:1111";
     //private static final String BASE_URL = "http://192.168.1.17:1111";
     //private static final String BASE_URL = "http://192.168.3.27:1111";
+
+
+    //private static final String BASE_URL = "http://192.168.11.100:1111";
+//    private static final String BASE_URL = "http://10.0.2.2:1111";
 
 
     private static final String ENDPOINT = "/api";
@@ -304,6 +309,7 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
+
     public void supprimerDefUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
         String url = getFullUrl( "/corbeille/supprmerdefdeletedproduct/stockId="+stockId+"/supprimerProductId="+productId);
 
@@ -429,10 +435,6 @@ public class BackendManager {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
-
-        byte[] body = (byte[]) jsonObjectRequest.getBody();
-
-        Log.d("BackendManager", "Request Body => " + new String(body));
 
 
         requestQueue.add(jsonObjectRequest);
