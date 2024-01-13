@@ -40,7 +40,7 @@ import java.util.Locale;
 
 public class budgetActivity extends AppCompatActivity {
 
-    String apiUrl = "";
+    String apiUrl = "http://localhost:1111/stocks/1/budget";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
