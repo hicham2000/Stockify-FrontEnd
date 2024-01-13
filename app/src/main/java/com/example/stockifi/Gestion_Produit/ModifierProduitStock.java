@@ -2,12 +2,17 @@ package com.example.stockifi.Gestion_Produit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,6 +29,8 @@ import com.example.stockifi.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 public class ModifierProduitStock extends AppCompatActivity {
 
     private int getIndex(Spinner spinner, String string) {
@@ -39,11 +46,66 @@ public class ModifierProduitStock extends AppCompatActivity {
         return s;
     }
 
+    TextView alerttext = findViewById(R.id.alertetextproduit_modif);
+
+    TextView peremtiontext = findViewById(R.id.peremtiontextproduit_modif);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_produit_stock);
 
+        LinearLayout peremtion =findViewById(R.id.peremtionDateProduit_modif);
+
+
+
+        ImageView toolbarBackButton = findViewById(R.id.toolbar_back_button_ajout_modif);
+
+        toolbarBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+
+        peremtion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Afficher le DatePickerDialog
+
+                openDialogPeremstion();
+            }
+        });
+
+        LinearLayout alert =findViewById(R.id.AlerteProd_modif);
+
+        alert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Afficher le DatePickerDialog
+
+                openDialogalert();
+            }
+        });
+
+        Button buttonannuler = findViewById(R.id.button_annulerprod_modif);
+        buttonannuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ModifierProduitStock.this, ListeProduit.class);
+                startActivity(intent);
+            }
+        });
+
+        Button buttonajouter = findViewById(R.id.button_validerProd_modif);
+        buttonannuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ModifierProduitStock.this, ListeProduit.class);
+                startActivity(intent);
+            }
+        });
 
 
         EditText nom = findViewById(R.id.editTexte_t_modif);
@@ -135,9 +197,9 @@ public class ModifierProduitStock extends AppCompatActivity {
                     request.put("intitule", nom.getText().toString());
                     request.put("quantite", Qte.getText().toString());
                     request.put("uniteDeMesure", Mesure.getSelectedItem().toString());
-                    //request.put("dateExpiration", peremption.getText().toString());
+                    request.put("dateExpiration", peremption.getText().toString());
                     request.put("prix", Prix.getText().toString());
-                    //request.put("dateAlerte", Alerte.getText().toString());
+                    request.put("dateAlerte", Alerte.getText().toString());
                     request.put("quantiteCritique", QteC.getText().toString());
                     System.out.println(request);
 
@@ -169,6 +231,43 @@ public class ModifierProduitStock extends AppCompatActivity {
             }
         });
         }
+    private void openDialogPeremstion(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog=new DatePickerDialog(this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                String selectedDate = "       " + String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
+                peremtiontext.setText(selectedDate);
+
+
+            }
+        },year, month, day);
+
+        dialog.show();
+    }
+
+    private void openDialogalert(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog=new DatePickerDialog(this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                String selectedDate = "       " + String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
+                alerttext.setText(selectedDate);
+
+
+            }
+        },year, month, day);
+
+        dialog.show();
+    }
     }
 
 
