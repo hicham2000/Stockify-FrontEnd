@@ -101,7 +101,8 @@
         android:numColumns="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="233dp" />
+        tools:layout_editor_absoluteY="233dp"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -115,7 +116,8 @@
         app:itemTextColor="@color/white"
         app:menu="@menu/menu_bottom_navigation"
         tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="651dp" />
+        tools:layout_editor_absoluteY="651dp"
+        tools:ignore="MissingConstraints" />
 
     <HorizontalScrollView
         android:layout_width="409dp"
