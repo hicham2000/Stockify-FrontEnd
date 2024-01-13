@@ -40,7 +40,7 @@ import java.util.Locale;
 
 public class budgetActivity extends AppCompatActivity {
 
-    String apiUrl = "http://localhost:1111/stocks/1/budget";
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +99,11 @@ public class budgetActivity extends AppCompatActivity {
            // finish();
             return true;
         });
+
+        fetchConsoamtion();
     }
     public void fetchConsoamtion() {
+        String apiUrl = "http://localhost:1111/stocks/1/budget";
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl, new Response.Listener<String>() {
             @Override
@@ -113,6 +116,7 @@ public class budgetActivity extends AppCompatActivity {
                     budget.add(Double.parseDouble(value));
                 }
                 updateUIWithBudgetData(budget);
+                System.out.println(budget);
 
             }
             }, new Response.ErrorListener() {
