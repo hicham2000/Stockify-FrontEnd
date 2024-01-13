@@ -111,6 +111,7 @@ public class corbeille extends AppCompatActivity{
                                         JSONObject jsonObject = jsonResponse.getJSONObject(i);
                                         objet objet = new objet(jsonObject.getInt("id"));
                                         objet.setIntitule(jsonObject.getString("intitule"));
+                                        objet.setGaspille(jsonObject.getInt("gaspille"));
                                         System.out.println(objet);
                                         String intitule = jsonObject.getString("intitule");
                                         dataList.add(objet);
@@ -166,6 +167,7 @@ public class corbeille extends AppCompatActivity{
                                         JSONObject jsonObject = jsonResponse.getJSONObject(i);
                                         objet objet = new objet(jsonObject.getInt("id"));
                                         objet.setIntitule(jsonObject.getString("intitule"));
+                                        objet.setGaspille(jsonObject.getInt("gaspille"));
                                         System.out.println(objet);
                                         String intitule = jsonObject.getString("intitule");
                                         dataList.add(objet);
