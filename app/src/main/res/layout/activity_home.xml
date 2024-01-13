@@ -33,38 +33,19 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="64dp" />
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="153dp">
+    <android.widget.SearchView
+        android:id="@+id/search_course"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ellipse"
+        android:queryHint="@string/chercherProd"
+        android:theme="@style/SearchViewStyle"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="88dp"
+        tools:ignore="MissingConstraints" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="All"
-                android:textSize="20sp" />
-
-            <Button
-                android:layout_width="69dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/baseline_add_circle_outline_24"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-
-    </ScrollView>
 
     <LinearLayout
         android:id="@+id/list_Button"
@@ -101,7 +82,8 @@
         android:src="@drawable/plusimg"
         tools:layout_editor_absoluteX="315dp"
         tools:layout_editor_absoluteY="569dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:id="@+id/plusImageView"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,6 +91,73 @@
         tools:layout_editor_absoluteX="315dp"
         tools:layout_editor_absoluteY="569dp"
         android:visibility="invisible"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:id="@+id/xredImageView"/>
+
+    <GridView
+        android:id="@+id/gridV"
+        android:layout_width="419dp"
+        android:layout_height="398dp"
+        android:numColumns="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="233dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+        android:id="@+id/androidx_window_corbeille"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/vertTexte"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/menu_bottom_navigation"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="651dp" />
+
+    <HorizontalScrollView
+        android:layout_width="409dp"
+        android:layout_height="95dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="137dp"
+        android:fillViewport="true"
+        tools:ignore="MissingConstraints">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <!--
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="20dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardBackgroundColor="@color/inscrit_button_color"
+            -->
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="All" />
+
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="512dp"
+                android:layout_height="70dp"
+                android:layout_margin="20dp"
+                android:horizontalSpacing="20dp"
+                android:numColumns="10"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="20dp" />
+
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
