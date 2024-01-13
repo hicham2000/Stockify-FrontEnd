@@ -29,26 +29,32 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HomeActivity extends AppCompatActivity {
-    ActivityHomeBinding binding, binding2;
+    ActivityHomeBinding binding;
     String apiUrl = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding2 = ActivityHomeBinding.inflate(getLayoutInflater());
-        setContentView(binding2.getRoot());
-        LinearLayout listButton = findViewById(R.id.list_Button);
+        LinearLayout linearLayout = findViewById(R.id.list_Button);
         ImageView plusImageView = findViewById(R.id.plusImageView);
-        ImageView xredImageView = findViewById(R.id.xredImageView);
+        ImageView xredImageView = findViewById(R.id.xImageView);
 
         plusImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Rendre le LinearLayout invisible
-                listButton.setVisibility(View.INVISIBLE);
                 // Rendre l'autre ImageView visible
                 xredImageView.setVisibility(View.VISIBLE);
+                plusImageView.setVisibility(View.INVISIBLE);
+                linearLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        xredImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xredImageView.setVisibility(View.INVISIBLE);
+                plusImageView.setVisibility(View.VISIBLE);
+                linearLayout.setVisibility(View.INVISIBLE);
             }
         });
         String[] itemsName = {"Mehdi", "Mehdi", "Mehdi"};
@@ -62,9 +68,6 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "you clicked on " + itemsName[position], Toast.LENGTH_SHORT).show();
             }
         });
-        String[] itemsName2 = {"Cat1", "Cat2", "Cat3"};
-        GridCategorieAdapter gridAdapter2 = new GridCategorieAdapter(HomeActivity.this, itemsName2);
-        binding2.gridView.setAdapter(gridAdapter2);
         /*Button allButton = findViewById(R.id.all);
         allButton.setOnClickListener(new View.OnClickListener() {
             @Override
