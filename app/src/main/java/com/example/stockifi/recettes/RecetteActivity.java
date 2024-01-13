@@ -64,9 +64,8 @@ public class RecetteActivity extends AppCompatActivity {
 
     private List<Double> originalIngredientsQuantities = new ArrayList<Double>();
 
-    private IngredientAdapter ingredientsAdapter;
+    private IngredientAdapter ingredientAdapter;
     private InstructionDePreparationAdapter instructionsDePreparationAdapter ;
-    private ArrayAdapter<String> valeursNutritionnellesAdapter;
 
     private RecyclerView recyclerSimilaires;
 
@@ -82,7 +81,7 @@ public class RecetteActivity extends AppCompatActivity {
     private RecetteModel recette;
 
     private FloatingActionButton floatingButtonAjouterRecetteAuStock;
-    private MyApp myApp = (MyApp) getApplication();
+    private MyApp myApp;
 
     private BackendManager backendManager;
 
@@ -124,7 +123,8 @@ public class RecetteActivity extends AppCompatActivity {
 
         Intent recetteIntent = getIntent();
 
-        int currentUser_id = 1;//myApp.getUser_id();
+        myApp = (MyApp) getApplication();
+        int currentUser_id = myApp.getUser_id();
         backendManager = new BackendManager(this);
 
         toolbarAppReccette = findViewById(R.id.toolbar_recette);
@@ -371,7 +371,8 @@ public class RecetteActivity extends AppCompatActivity {
 
     private void loadData() throws JSONException {
         recettesSimilairesList = new ArrayList<>();
-        int currentUser_id = 1;//myApp.getUser_id();
+        myApp = (MyApp) getApplication();
+        int currentUser_id = myApp.getUser_id();
         long recetteId = recette.getId();
 
         backendManager.recupererRecettesSimilaires((long) currentUser_id, recetteId, new BackendManager.BackendResponseCallback() {

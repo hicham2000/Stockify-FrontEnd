@@ -506,7 +506,6 @@ public class ProfilActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // Après que le texte a changé
 
                 // Sauvegarder la nouvelle valeur automatiquement
                 String enteredValue = editable.toString();
@@ -1432,10 +1431,11 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.putString(SELECTED_DATE_KEY, selectedDate);
                 editor.apply();
                 String dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+
                 if(String.valueOf(day).length() == 1){
                     dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-0" + String.valueOf(day);
                 }
-                if(String.valueOf(day).length() == 1){
+                if(String.valueOf(month).length() == 1){
                     dateDeNaissance = String.valueOf(year) + "-0" + String.valueOf(month + 1) + "-0" + String.valueOf(day);
                 }
 
