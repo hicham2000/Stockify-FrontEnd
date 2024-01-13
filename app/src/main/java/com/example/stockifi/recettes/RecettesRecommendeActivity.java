@@ -57,7 +57,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private ProgressBar loadingProgressBar;
 
-    private MyApp myApp = (MyApp) getApplication();
+    private MyApp myApp;
 
     private BackendManager backendManager;
 
@@ -98,7 +98,8 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recettes_recommende);
 
-        int currentUser_id = 1;//myApp.getUser_id();
+        myApp = (MyApp) getApplication();
+        int currentUser_id = myApp.getUser_id();
         backendManager = new BackendManager(context);
 
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
@@ -245,7 +246,9 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         loadingProgressBar.setVisibility(View.VISIBLE);
         gridRecettesRecommende.setVisibility(View.GONE);
 
-        int currentUser_id = 1;//myApp.getUser_id();
+        myApp = (MyApp) getApplication();
+
+        int currentUser_id = myApp.getUser_id();
 
 
         Intent intent = getIntent();
