@@ -33,6 +33,11 @@ import java.util.Calendar;
 
 public class ModifierProduitStock extends AppCompatActivity {
 
+    LinearLayout alert ;
+    LinearLayout peremtion ;
+    TextView alerttext;
+    TextView peremtiontext;
+
     private int getIndex(Spinner spinner, String string) {
         ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
 
@@ -46,16 +51,13 @@ public class ModifierProduitStock extends AppCompatActivity {
         return s;
     }
 
-    TextView alerttext = findViewById(R.id.alertetextproduit_modif);
 
-    TextView peremtiontext = findViewById(R.id.peremtiontextproduit_modif);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_produit_stock);
-
-        LinearLayout peremtion =findViewById(R.id.peremtionDateProduit_modif);
 
 
 
@@ -69,6 +71,9 @@ public class ModifierProduitStock extends AppCompatActivity {
             }
         });
 
+        peremtion=findViewById(R.id.peremtionDateProduit_modif);
+        peremtiontext = findViewById(R.id.peremtiontextproduit_modif);
+
         peremtion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,8 +83,8 @@ public class ModifierProduitStock extends AppCompatActivity {
             }
         });
 
-        LinearLayout alert =findViewById(R.id.AlerteProd_modif);
-
+        alert=findViewById(R.id.AlerteProd_modif);
+        alerttext = findViewById(R.id.alertetextproduit_modif);
         alert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,7 +190,7 @@ public class ModifierProduitStock extends AppCompatActivity {
 
         buttonModifierProd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
+            public void onClick(View v) {
                 // Call the method to send the POST request
                 RequestQueue queue = Volley.newRequestQueue(ModifierProduitStock.this);
                 String url = "http://10.0.2.2:1111/stocks/" + stockId + "/products/" + produitId;
@@ -230,13 +235,15 @@ public class ModifierProduitStock extends AppCompatActivity {
 
             }
         });
-        }
-    private void openDialogPeremstion(){
+
+
+    }
+    private void openDialogPeremstion () {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog dialog=new DatePickerDialog(this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dialog = new DatePickerDialog(this, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
@@ -245,17 +252,17 @@ public class ModifierProduitStock extends AppCompatActivity {
 
 
             }
-        },year, month, day);
+        }, year, month, day);
 
         dialog.show();
     }
 
-    private void openDialogalert(){
+    private void openDialogalert () {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog dialog=new DatePickerDialog(this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dialog = new DatePickerDialog(this, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
@@ -264,11 +271,11 @@ public class ModifierProduitStock extends AppCompatActivity {
 
 
             }
-        },year, month, day);
+        }, year, month, day);
 
         dialog.show();
     }
-    }
+}
 
 
 
