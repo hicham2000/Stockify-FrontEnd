@@ -28,8 +28,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
+import com.example.stockifi.budget.budgetActivity;
+import com.example.stockifi.recettes.RecettesRecommendeActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -416,24 +419,52 @@ public class ListeDeCourse extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_course);
-
+        Menu navBar = bottomNavigationView.getMenu();
 
         // Sélectionner l'élément "Courses"
-        MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.courses);
+        MenuItem menuItem = navBar.findItem(R.id.courses);
         menuItem.setChecked(true);
 
 
+        navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
 
-        // Gestionnaire de clic pour l'élément "profil1"
-        toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.profil1) {
-                // L'utilisateur a cliqué sur "profil1"
-                Intent intent = new Intent(ListeDeCourse.this, ProfilActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            return false;
+            return true;
         });
+
+        navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(ListeDeCourse.this, budgetActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+        navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(ListeDeCourse.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+        navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(ListeDeCourse.this, RecettesRecommendeActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+
+
+
+    // Gestionnaire de clic pour l'élément "profil1"
+        toolbar.setOnMenuItemClickListener(item -> {
+        if (item.getItemId() == R.id.profil1) {
+            // L'utilisateur a cliqué sur "profil1"
+            Intent intent = new Intent(ListeDeCourse.this, ProfilActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return false;
+    });
 
 
 

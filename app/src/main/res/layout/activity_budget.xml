@@ -24,7 +24,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
-        android:id="@+id/androidx_window_course"
+        android:id="@+id/androidx_window_budget"
         android:layout_width="match_parent"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"

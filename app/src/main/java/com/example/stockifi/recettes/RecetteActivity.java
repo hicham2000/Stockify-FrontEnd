@@ -122,6 +122,19 @@ public class RecetteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recette);
 
+        // Ajoutez un écouteur de clic à l'ImageView
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_recette);
+
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
+
         Intent recetteIntent = getIntent();
 
         int currentUser_id = 1;//myApp.getUser_id();
@@ -305,6 +318,7 @@ public class RecetteActivity extends AppCompatActivity {
         });
 
         // Set up the BottomNavigationView
+
 
         Menu navBar = bottomNavigationView.getMenu();
 

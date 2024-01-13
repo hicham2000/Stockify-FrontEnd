@@ -62,18 +62,31 @@ public class corbeille extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.corbeille);
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_corbeille);
+      //  MaterialToolbar toolbar = findViewById(R.id.toolbar_corbeille);
 
-        Menu menu = toolbar.getMenu();
-        MenuItem itempo = menu.findItem(R.id.poubelle);
+    //    Menu menu = toolbar.getMenu();
+   //     MenuItem itempo = menu.findItem(R.id.poubelle);
 
-        itempo.setEnabled(false);
+   //     itempo.setEnabled(false);
 
-        Drawable originalIcon = itempo.getIcon();
-        Drawable grayedOutIcon = originalIcon.mutate();
-        int disabledColor = getResources().getColor(android.R.color.darker_gray);
-        grayedOutIcon.setColorFilter(disabledColor, PorterDuff.Mode.SRC_IN);
-        itempo.setIcon(grayedOutIcon);
+   //     Drawable originalIcon = itempo.getIcon();
+ //       Drawable grayedOutIcon = originalIcon.mutate();
+  //      int disabledColor = getResources().getColor(android.R.color.darker_gray);
+  //      grayedOutIcon.setColorFilter(disabledColor, PorterDuff.Mode.SRC_IN);
+    //    itempo.setIcon(grayedOutIcon);
+
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_ajoutCorbe);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
 
         TextView textView = findViewById(R.id.aboveListViewText);
         ImageView imageView = findViewById(R.id.trash);
