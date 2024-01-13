@@ -32,6 +32,7 @@ import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.budget.budgetActivity;
+import com.example.stockifi.corbeille.corbeille;
 import com.example.stockifi.recettes.RecettesRecommendeActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -63,13 +64,13 @@ public class ListeDeCourse extends AppCompatActivity {
         Menu menu = toolbar.getMenu();
 
 // Obtenez l'élément de menu spécifique par son ID
-        MenuItem itempo = menu.findItem(R.id.poubelle);
+
 
 // Désactivez l'élément de menu
-        itempo.setEnabled(false);
-        SpannableString s = new SpannableString(itempo.getTitle());
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 0, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        itempo.setTitle(s);
+      //  itempo.setEnabled(false);
+      //  SpannableString s = new SpannableString(itempo.getTitle());
+        //s.setSpan(new ForegroundColorSpan(Color.GRAY), 0, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+      //  itempo.setTitle(s);
 
 
         search_listeCourse=findViewById(R.id.search_course);
@@ -434,21 +435,21 @@ public class ListeDeCourse extends AppCompatActivity {
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, budgetActivity.class);
             startActivity(intent);
-            finish();
+     //       finish();
             return true;
         });
 
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, HomeActivity.class);
             startActivity(intent);
-            finish();
+       //     finish();
             return true;
         });
 
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, RecettesRecommendeActivity.class);
             startActivity(intent);
-            finish();
+         //   finish();
             return true;
         });
 
@@ -463,6 +464,13 @@ public class ListeDeCourse extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+
+          else if (item.getItemId() == R.id.poubelle) {
+                // L'utilisateur a cliqué sur "profil1"
+                Intent intent = new Intent(ListeDeCourse.this, corbeille.class);
+                startActivity(intent);
+                return true;
+            }
         return false;
     });
 

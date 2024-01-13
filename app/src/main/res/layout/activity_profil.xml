@@ -11,8 +11,9 @@
     android:background="@color/vert">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:visibility="invisible"
+        android:layout_height="0dp"
         android:id="@+id/appBar">
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -26,12 +27,64 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/appBarProfil"
+        android:background="@color/vertTexte">
+
+        <androidx.appcompat.widget.Toolbar
+
+
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/toolbar_back_button_profil"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fleche"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/Profil"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+            <ImageView
+                android:id="@+id/item_profil"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/prof_gris"
+                android:layout_gravity="start"
+                android:layout_marginStart="200dp"
+                />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/androidx_window_profil"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
 
-        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/vertTexte"
@@ -46,7 +99,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBar"
+        android:layout_below="@+id/appBarProfil"
         android:layout_above="@+id/androidx_window_profil"
 
         >

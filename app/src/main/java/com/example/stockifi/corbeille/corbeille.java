@@ -88,6 +88,7 @@ public class corbeille extends AppCompatActivity{
             }
         });
 
+
         TextView textView = findViewById(R.id.aboveListViewText);
         ImageView imageView = findViewById(R.id.trash);
 

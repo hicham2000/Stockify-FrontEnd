@@ -69,10 +69,11 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
         android:id="@+id/androidx_window_Produit"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:visibility="invisible"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
 

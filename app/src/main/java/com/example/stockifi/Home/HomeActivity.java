@@ -79,14 +79,14 @@ public class HomeActivity extends AppCompatActivity {
 
             Intent intent = new Intent(HomeActivity.this, ListeDeCourse.class);
             startActivity(intent);
-            finish();
+
             return true;
         });
 
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, budgetActivity.class);
             startActivity(intent);
-            finish();
+
             return true;
         });
 
@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity {
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
-            finish();
+
             return true;
         });
 
@@ -119,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
                 linearLayout.setVisibility(View.INVISIBLE);
             }
         });
-        String[] itemsName = {"Mehdi", "Mehdi", "Mehdi"};
+        String[] itemsName = {"Mehdi", "Mehdi", "Mehdi", "Mehdi"};
         int[] image = {R.drawable.instagram, R.drawable.instagram, R.drawable.instagram, R.drawable.instagram};
         GridAdapter gridAdapter = new GridAdapter(HomeActivity.this, itemsName, image);
         binding.gridV.setAdapter(gridAdapter);

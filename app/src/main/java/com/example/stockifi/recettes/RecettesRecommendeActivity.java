@@ -59,7 +59,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private ProgressBar loadingProgressBar;
 
-    private MyApp myApp = (MyApp) getApplication();
+    private MyApp myApp;
 
     private BackendManager backendManager;
 
@@ -102,6 +102,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
 
 
 
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_recettes_recommende);
 
 
@@ -109,7 +110,11 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.recette);
         menuItem.setChecked(true);
 
-        int currentUser_id = 1;//myApp.getUser_id();
+      //  int currentUser_id = 1;//myApp.getUser_id();
+
+        myApp = (MyApp) getApplication();
+        int currentUser_id = myApp.getUser_id();
+
         backendManager = new BackendManager(context);
 
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
@@ -214,21 +219,21 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, ListeDeCourse.class);
             startActivity(intent);
-            finish();
+          //  finish();
             return true;
         });
 
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, budgetActivity.class);
             startActivity(intent);
-            finish();
+            //finish();
             return true;
         });
 
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, HomeActivity.class);
             startActivity(intent);
-            finish();
+            //finish();
             return true;
         });
 
@@ -270,7 +275,9 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         loadingProgressBar.setVisibility(View.VISIBLE);
         gridRecettesRecommende.setVisibility(View.GONE);
 
-        int currentUser_id = 1;//myApp.getUser_id();
+        myApp = (MyApp) getApplication();
+
+        int currentUser_id = myApp.getUser_id();
 
 
         Intent intent = getIntent();
