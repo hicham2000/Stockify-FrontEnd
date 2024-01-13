@@ -46,6 +46,8 @@ public class budgetActivity extends AppCompatActivity {
     TextView pourcentageConsommeTextView ;
     TextView pourcentageGaspilleTextView ;
 
+    MaterialToolbar toolbar ;
+
 
 
 
@@ -54,7 +56,7 @@ public class budgetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_budget);
+         toolbar = findViewById(R.id.toolbar_budget);
 
 
         toolbar.setOnMenuItemClickListener(item -> {
@@ -85,7 +87,7 @@ public class budgetActivity extends AppCompatActivity {
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, ListeDeCourse.class);
             startActivity(intent);
-            //     finish();
+            //    finish();
             return true;
         });
 
@@ -110,7 +112,7 @@ public class budgetActivity extends AppCompatActivity {
 
 
 
-         montantTotalTextView = findViewById(R.id.montant);
+         montantTotalTextView = findViewById(R.id.montant_total);
          montantConsommeTextView = findViewById(R.id.montant_consomme);
          montantGaspilleTextView = findViewById(R.id.montant_gaspille);
          pourcentageConsommeTextView = findViewById(R.id.pourcentage_consomme);
@@ -118,26 +120,27 @@ public class budgetActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String apiUrl = "http://10.0.2.2:1111/stocks/1/budget";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 String responseFix = response.replaceAll("\\[|\\]", "");
                 String[] values = responseFix.split(",");
 
-                String totalBudget = values[0];
-                String priceOfWastedProducts = values[1];
-                String priceOfNonWastedProducts = values[2];
-                String percentageSpentOnWasted = values[3];
-                String percentageSpentOnNonWasted = values[4];
+                Double totalBudget = Double.parseDouble(values[2]);
+                Double priceOfWastedProducts = Double.parseDouble(values[0]);
+                Double priceOfNonWastedProducts = Double.parseDouble(values[1]);
+                Double percentageSpentOnWasted = Double.parseDouble(values[3]);
+                Double percentageSpentOnNonWasted = Double.parseDouble(values[4]);
 
 
 
                 // Update TextViews with formatted values
-                montantTotalTextView.setText(String.format("%.2f", totalBudget));
-                montantConsommeTextView.setText(String.format("%.2f", priceOfNonWastedProducts));
-                montantGaspilleTextView.setText(String.format("%.2f", priceOfWastedProducts));
-                pourcentageConsommeTextView.setText(String.format( "%.2f", percentageSpentOnNonWasted));
-                pourcentageGaspilleTextView.setText(String.format("%.2f", percentageSpentOnWasted));
+                montantTotalTextView.setText(String.format("%.2f",totalBudget));
+                montantConsommeTextView.setText( String.format("%.2f",priceOfNonWastedProducts));
+                montantGaspilleTextView.setText(String.format("%.2f",priceOfWastedProducts));
+                pourcentageConsommeTextView.setText(String.format("%.2f",percentageSpentOnNonWasted ) + "%");
+                pourcentageGaspilleTextView.setText(String.format("%.2f",percentageSpentOnWasted  ) + "%");
 
 
             }
