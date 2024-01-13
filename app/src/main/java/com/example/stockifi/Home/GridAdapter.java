@@ -15,6 +15,8 @@ public class GridAdapter extends BaseAdapter {
     String[] itemsName;
     int[] image;
 
+
+
     public GridAdapter(Context context, String[] itemsName, int[] image) {
         this.context = context;
         this.itemsName = itemsName;
