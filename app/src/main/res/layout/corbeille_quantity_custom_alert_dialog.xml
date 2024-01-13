@@ -12,7 +12,7 @@ android:padding="16dp">
         android:text="@string/corbeilleActivity_dialog_title"
         android:fontFamily="@font/hubballi_regular"
         android:textSize="24sp"
-        android:textColor="@color/vertTexte" />
+        android:textColor="@color/vert" />
 
 
     <EditText
@@ -28,22 +28,27 @@ android:padding="16dp">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        style="?android:attr/buttonBarStyle">
 
         <Button
             android:id="@+id/buttonCancel"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:layout_marginRight="10dp"/>
+            android:text="@string/corbeilleActivity_cancel_button"
+            android:layout_marginEnd="50dp"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/buttonOk"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
-            android:text="OK" />
+            android:text="@string/corbeilleActivity_ok_button"
+            android:layout_marginStart="5dp"
+            style="?android:attr/buttonBarButtonStyle"
+            />
     </LinearLayout>
+
 
 </LinearLayout>
