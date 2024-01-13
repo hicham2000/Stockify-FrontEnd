@@ -369,10 +369,6 @@ public class BackendManager {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
 
-        byte[] body = (byte[]) jsonObjectRequest.getBody();
-
-        Log.d("BackendManager", "Request Body => " + new String(body));
-
 
         requestQueue.add(jsonObjectRequest);
     }

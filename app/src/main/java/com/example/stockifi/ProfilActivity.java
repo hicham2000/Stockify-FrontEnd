@@ -155,7 +155,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         currentUserId = myApp.getUser_id();
 
-        if(currentUserId < 0) {
+        if(currentUserId <= 0) {
             Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
             startActivity(intent);
         }
@@ -317,7 +317,6 @@ public class ProfilActivity extends AppCompatActivity {
                     }
 
                     int selectedQuantiteCri = Integer.parseInt(input_value);
-
 
                     backendManager.updateQuantiteCritiqueParDefautStock((long) stockUserId, selectedQuantiteCri, new BackendManager.BackendResponseCallback() {
                         @Override
