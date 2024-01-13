@@ -22,14 +22,20 @@
         tools:ignore="ExtraText"
         tools:targetApi="31">
         <activity
+            android:name=".Repas.UpdateRepas"
+            android:exported="true" />
+        <activity
+            android:name=".Repas.ViewRepas"
+            android:exported="true" />
+        <activity
             android:name=".Gestion_Produit.InformationsProduitStock"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Gestion_Produit.ModifierProduitStock"
             android:exported="true" />
         <activity
             android:name=".Home.HomeActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Home.AjouterCategorie"
             android:exported="true" />
@@ -38,7 +44,7 @@
             android:exported="true" />
         <activity
             android:name=".Gestion_Produit.AjouterProduit_ListeProduit"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Repas.ajouter_repas"
             android:exported="false"
@@ -65,7 +71,7 @@
             android:exported="false" />
         <activity
             android:name=".ProduitCardActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Produit.AjouterProduitRecherche"
             android:exported="false" />
@@ -118,6 +124,14 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <service
+            android:name=".NotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

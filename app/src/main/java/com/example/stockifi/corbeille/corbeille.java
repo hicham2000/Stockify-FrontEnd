@@ -173,7 +173,7 @@ public class corbeille extends AppCompatActivity{
 
                                     adapterRepas = new corbeillerepasadapter(corbeille.this, dataList);
 
-                                    listView.setAdapter(adapter);
+                                    listView.setAdapter(adapterRepas);
 
                                 } catch (JSONException e) {
                                     throw new RuntimeException(e);
@@ -188,7 +188,7 @@ public class corbeille extends AppCompatActivity{
                         //dataList.add("That didn't work!");
                         adapterRepas = new corbeillerepasadapter(corbeille.this, dataList);
 
-                        listView.setAdapter(adapter);
+                        listView.setAdapter(adapterRepas);
 
                     }
                 });
@@ -202,6 +202,7 @@ public class corbeille extends AppCompatActivity{
 
 
     }
+
     private void showDeleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -215,17 +216,15 @@ public class corbeille extends AppCompatActivity{
         builder.setView(dialogView);
         AlertDialog dialog = builder.create();
 
-        // Handle the actions when OK button is clicked
         buttonOk.setOnClickListener(v -> {
-            // Check the state of checkboxes and perform actions accordingly
 
             if (checkBoxProducts.isChecked() && checkBoxRecipes.isChecked()) {
                 MyApp myApp = (MyApp) getApplication();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://10.0.2.2:1111/corbeille/vidercorbeille/" + User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/vidercorbeille/stockId=" + User_Stock_id;
 
                 RequestQueue queue = Volley.newRequestQueue(corbeille.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
+                StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -246,10 +245,10 @@ public class corbeille extends AppCompatActivity{
             else if (checkBoxRecipes.isChecked()) {
                 MyApp myApp = (MyApp) getApplication();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://10.0.2.2:1111/corbeille/viderrepas/" + User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/viderrepas/stockId=" + User_Stock_id;
 
                 RequestQueue queue = Volley.newRequestQueue(corbeille.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
+                StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -267,15 +266,14 @@ public class corbeille extends AppCompatActivity{
             else if (checkBoxProducts.isChecked()) {
                 MyApp myApp = (MyApp) getApplication();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://10.0.2.2:1111/corbeille/viderproduits/" + User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/viderproduits/stockId=" + User_Stock_id;
 
                 RequestQueue queue = Volley.newRequestQueue(corbeille.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
+                StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
-                                // Notify the adapter to remove all cells after successful deletion
                                 adapter.clearData();
                             }
                         }, new Response.ErrorListener() {
@@ -288,16 +286,13 @@ public class corbeille extends AppCompatActivity{
                 queue.add(stringRequest);
             }
 
-            // Dismiss the dialog
             dialog.dismiss();
         });
 
-        // Handle the actions when Cancel button is clicked
         buttonCancel.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
     }
-
 
 
 

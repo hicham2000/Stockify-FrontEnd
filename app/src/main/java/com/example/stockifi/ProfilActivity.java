@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,9 +23,10 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -35,13 +37,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 
+import com.example.stockifi.recettes.RecettesRecommendeActivity;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,9 +68,13 @@ public class ProfilActivity extends AppCompatActivity {
     private static final String SWITCH3_STATE_KEY = "switch3StateKey";
 
 
+
+
     private LinearLayout pickDateButton;
     private TextView date_naissace;
 
+    private TextView produitCuisine;
+    private TextView produitGaspille;
     private int year, month, day;
     private boolean titreSelectionne = false;
 
@@ -145,17 +155,128 @@ public class ProfilActivity extends AppCompatActivity {
     }
 
 
+    private void openInstagramProfile() {
+        // Check if Instagram is installed
+        if (isInstagramInstalled()) {
+            // If installed, open the Instagram profile
+            Uri uri = Uri.parse("http://instagram.com/_u/instagram"); // Change 'instagram' to the actual username
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setPackage("com.instagram.android");
+            startActivity(intent);
+        } else {
+            // If Instagram is not installed, you can redirect to the Instagram website or handle it as needed
+            // For example:
+            Uri uri = Uri.parse("http://instagram.com/"); // Redirect to Instagram website
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
+    }
+
+    private boolean isInstagramInstalled() {
+        try {
+            // Try to get the application info of Instagram
+            getPackageManager().getApplicationInfo("com.instagram.android", 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            // If Instagram is not found, catch the exception
+            return false;
+        }
+    }
+
+    private void openTwitterProfile() {
+        // Check if Twitter is installed
+        if (isTwitterInstalled()) {
+            // If installed, open the Twitter profile
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("twitter://user?screen_name=twitter")); // Change 'twitter' to the actual username
+            startActivity(intent);
+        } else {
+            // If Twitter is not installed, you can redirect to the Twitter website or handle it as needed
+            // For example:
+            Uri uri = Uri.parse("https://twitter.com/twitter"); // Redirect to Twitter website
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
+    }
+
+    private boolean isTwitterInstalled() {
+        try {
+            // Try to get the application info of Twitter
+            getPackageManager().getApplicationInfo("com.twitter.android", 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            // If Twitter is not found, catch the exception
+            return false;
+        }
+    }
+
+    private void openFacebookProfile() {
+        // Check if Facebook is installed
+        if (isFacebookInstalled()) {
+            // If installed, open the Facebook profile
+            Uri uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/facebook"); // Change 'facebook' to the actual username or profile URL
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        } else {
+            // If Facebook is not installed, you can redirect to the Facebook website or handle it as needed
+            // For example:
+            Uri uri = Uri.parse("https://www.facebook.com/facebook"); // Redirect to Facebook website
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
+    }
+
+    private boolean isFacebookInstalled() {
+        try {
+            // Try to get the application info of Facebook
+            getPackageManager().getApplicationInfo("com.facebook.katana", 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            // If Facebook is not found, catch the exception
+            return false;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
+        ImageView facebookImageView = findViewById(R.id.facebookImageView);
+
+        facebookImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFacebookProfile();
+            }
+        });
+
+        ImageView instagramImageView = findViewById(R.id.instagramImageView);
+
+
+
+        instagramImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInstagramProfile();
+            }
+        });
+
+        ImageView twitterImageView = findViewById(R.id.twitterImageView);
+
+        twitterImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTwitterProfile();
+            }
+        });
+
+
         MyApp myApp = (MyApp) getApplication();
 
         currentUserId = myApp.getUser_id();
 
-        if(currentUserId <= 0) {
+        if(currentUserId < 0) {
             Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
             startActivity(intent);
         }
@@ -176,6 +297,12 @@ public class ProfilActivity extends AppCompatActivity {
             return true;
         });
 
+        navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(ProfilActivity.this, RecettesRecommendeActivity.class);
+            startActivity(intent);
+
+            return true;
+        });
 
 
         buttonSupCompte = findViewById(R.id.button_supCompte);
@@ -190,62 +317,77 @@ public class ProfilActivity extends AppCompatActivity {
         Button envoyerEmailButton=findViewById(R.id.button_email);
         envoyerEmailButton.setOnClickListener(new View.OnClickListener() {
             private void envoyerEmailReclamation() {
-                // Adresse e-mail du destinataire (modifiable selon vos besoins)
+
                 String destinataire = "mehdi@gmail.com";
 
-                // Sujet du courriel (modifiable selon vos besoins)
+
                 String sujet = "Réclamation";
 
-                // Message du courriel (modifiable selon vos besoins)
+
                 String message = "Bonjour, je souhaite déposer une réclamation.";
 
-                // Créer une intention pour envoyer un e-mail via Gmail
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setData(Uri.parse("mailto:" + destinataire));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{destinataire});
                 intent.putExtra(Intent.EXTRA_SUBJECT, sujet);
                 intent.putExtra(Intent.EXTRA_TEXT, message);
+                intent.setType("message/rfc822");
 
-                // Vérifier si l'appareil dispose d'une application de messagerie capable de gérer cette intention
+
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
+                } else {
+
+                    Uri gmailUri = Uri.parse("https://mail.google.com/");
+                    Intent gmailIntent = new Intent(Intent.ACTION_VIEW, gmailUri);
+                    if (gmailIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(gmailIntent);
+                    } else {
+
+                    }
                 }
             }
+
             @Override
             public void onClick(View view) {
                 envoyerEmailReclamation();
             }
         });
 
-        editTextPerempt = findViewById(R.id.perempt);
+        produitGaspille=findViewById(R.id.produitjetes);
+
+
+     //   editTextPerempt = findViewById(R.id.perempt);
 
         // Restaurer la valeur de l'EditText "perempt" lors du démarrage de l'application
-        SharedPreferences sharedPreferences_peremp = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        String savedPerempt = sharedPreferences_peremp.getString(PEREMPT_KEY, "3"); // "3" est la valeur par défaut
-        editTextPerempt.setText(savedPerempt);
+   //     SharedPreferences sharedPreferences_peremp = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+     //   String savedPerempt = sharedPreferences_peremp.getString(PEREMPT_KEY, "3"); // "3" est la valeur par défaut
+       // editTextPerempt.setText(savedPerempt);
 
         // Ajouter un TextWatcher pour détecter les changements dans l'EditText "perempt"
-        editTextPerempt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+   //     editTextPerempt.addTextChangedListener(new TextWatcher() {
+     //       @Override
+       //     public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
                 // Avant que le texte change
-            }
+         //   }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+           // @Override
+          //  public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 // Pendant que le texte change
-            }
+         //   }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
+            //@Override
+           // public void afterTextChanged(Editable editable) {
                 // Après que le texte a changé
 
                 // Sauvegarder la nouvelle valeur automatiquement
-                String enteredPerempt = editable.toString();
-                SharedPreferences.Editor editor = sharedPreferences_peremp.edit();
-                editor.putString(PEREMPT_KEY, enteredPerempt);
-                editor.apply();
-            }
-        });
+                //String enteredPerempt = editable.toString();
+              //  SharedPreferences.Editor editor = sharedPreferences_peremp.edit();
+            //    editor.putString(PEREMPT_KEY, enteredPerempt);
+          //      editor.apply();
+        //    }
+      //  });
 
 
         editTextDelaiRappel = findViewById(R.id.delai_rappel);
@@ -317,6 +459,7 @@ public class ProfilActivity extends AppCompatActivity {
                     }
 
                     int selectedQuantiteCri = Integer.parseInt(input_value);
+
 
                     backendManager.updateQuantiteCritiqueParDefautStock((long) stockUserId, selectedQuantiteCri, new BackendManager.BackendResponseCallback() {
                         @Override
@@ -691,51 +834,23 @@ public class ProfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Définissez l'Intent pour passer à l'écran de destination
+
+
                 Intent intent = new Intent(ProfilActivity.this, ChangerPassword.class);
                 startActivity(intent);
             }
         });
-        RadioGroup radioGroup = findViewById(R.id.radioGroup);
 
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            // Récupérer le RadioButton sélectionné
-            RadioButton selectedRadioButton = findViewById(checkedId);
-
-            // Faire quelque chose en fonction de la sélection
-            if (selectedRadioButton != null) {
-                String selectedText = selectedRadioButton.getText().toString();
-                //  showToast("Unité sélectionnée : " + selectedText);
-            }
-        });
-
-        radioButtonMetric = findViewById(R.id.radioButtonMetric);
-        radioButtonImperial = findViewById(R.id.radioButtonImperial);
-
-        // Restaurer la sélection du RadioGroup lors du démarrage de l'application
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        int selectedRadioButtonId = sharedPreferences.getInt(SELECTED_RADIO_BUTTON_KEY, R.id.radioButtonMetric); // radioButtonMetric est la valeur par défaut
-        radioGroup.check(selectedRadioButtonId);
-
-        // Ajouter un écouteur de sélection pour le RadioGroup
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Sauvegarder la nouvelle sélection automatiquement
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt(SELECTED_RADIO_BUTTON_KEY, checkedId);
-                editor.apply();
-            }
-        });
 
 
         spinnerGender = findViewById(R.id.spinner_gender);
         spinnerTaille= findViewById(R.id.spinner_taille);
         spinnerPoids= findViewById(R.id.spinner_poids);
         spinnerRegime= findViewById(R.id.spinner_regime);
-        spinnerDevise= findViewById(R.id.devise);
-        spinnerDate= findViewById(R.id.spinner_date);
+     //   spinnerDevise= findViewById(R.id.devise);
+    //    spinnerDate= findViewById(R.id.spinner_date);
         spinnerQuantite= findViewById(R.id.spinner_mesure);
-        spinnerPerem= findViewById(R.id.spinner_date_per);
+    //    spinnerPerem= findViewById(R.id.spinner_date_per);
 
         // Définir les options pour le Spinner (ajoutez "Genre" en tant que première entrée)
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -762,11 +877,7 @@ public class ProfilActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item
         );
 
-        ArrayAdapter<CharSequence> adapter_devise = ArrayAdapter.createFromResource(
-                this,
-                R.array.devise,
-                android.R.layout.simple_spinner_item
-        );
+
 
         ArrayAdapter<CharSequence> adapter_date = ArrayAdapter.createFromResource(
                 this,
@@ -789,7 +900,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         adapter_regime.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        adapter_devise.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+  //      adapter_devise.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         adapter_date.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -801,30 +912,30 @@ public class ProfilActivity extends AppCompatActivity {
         spinnerTaille.setAdapter(adapter_taille);
         spinnerPoids.setAdapter(adapter_poids);
         spinnerRegime.setAdapter(adapter_regime);
-        spinnerDevise.setAdapter(adapter_devise);
-        spinnerDate.setAdapter(adapter_date);
+    //    spinnerDevise.setAdapter(adapter_devise);
+    //    spinnerDate.setAdapter(adapter_date);
         spinnerQuantite.setAdapter(adapter_mesure);
-        spinnerPerem.setAdapter(adapter_date);
+     //   spinnerPerem.setAdapter(adapter_date);
 
-        SharedPreferences sharedPreferences_perem = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        int savedDatePerSelection = sharedPreferences_perem.getInt(SPINNER_DATE_PER_SELECTION_KEY, 0); // 0 est la valeur par défaut
-        spinnerPerem.setSelection(savedDatePerSelection);
+     //   SharedPreferences sharedPreferences_perem = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+  //      int savedDatePerSelection = sharedPreferences_perem.getInt(SPINNER_DATE_PER_SELECTION_KEY, 0); // 0 est la valeur par défaut
+    //    spinnerPerem.setSelection(savedDatePerSelection);
 
         // Ajouter un écouteur de sélection pour le spinner "date_per"
-        spinnerPerem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+      //  spinnerPerem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //    @Override
+      //      public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Sauvegarder la nouvelle sélection automatiquement
-                SharedPreferences.Editor editor = sharedPreferences_perem.edit();
-                editor.putInt(SPINNER_DATE_PER_SELECTION_KEY, position);
-                editor.apply();
-            }
+        //        SharedPreferences.Editor editor = sharedPreferences_perem.edit();
+          //      editor.putInt(SPINNER_DATE_PER_SELECTION_KEY, position);
+            //    editor.apply();
+          //  }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
+      //      @Override
+       //     public void onNothingSelected(AdapterView<?> parentView) {
                 // Ne rien faire ici
-            }
-        });
+        //    }
+       // });
 
         SharedPreferences sharedPreferences_mesure = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int savedMesureSelection = sharedPreferences_mesure.getInt(SPINNER_MESURE_SELECTION_KEY, 0); // 0 est la valeur par défaut
@@ -848,46 +959,46 @@ public class ProfilActivity extends AppCompatActivity {
 
 
 
-        SharedPreferences sharedPreferences_date1 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        int savedDateSelection = sharedPreferences_date1.getInt(SPINNER_DATE_SELECTION_KEY, 0); // 0 est la valeur par défaut
-        spinnerDate.setSelection(savedDateSelection);
+//        SharedPreferences sharedPreferences_date1 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+ //       int savedDateSelection = sharedPreferences_date1.getInt(SPINNER_DATE_SELECTION_KEY, 0); // 0 est la valeur par défaut
+  //      spinnerDate.setSelection(savedDateSelection);
 
         // Ajouter un écouteur de sélection pour le spinner "date"
-        spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+    //    spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      //      @Override
+        //    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Sauvegarder la nouvelle sélection automatiquement
-                SharedPreferences.Editor editor = sharedPreferences_date1.edit();
-                editor.putInt(SPINNER_DATE_SELECTION_KEY, position);
-                editor.apply();
-            }
+          //      SharedPreferences.Editor editor = sharedPreferences_date1.edit();
+         //       editor.putInt(SPINNER_DATE_SELECTION_KEY, position);
+        //        editor.apply();
+       //     }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
+         //  @Override
+      //      public void onNothingSelected(AdapterView<?> parentView) {
                 // Ne rien faire ici
-            }
-        });
+        //    }
+        //});
 
 
-        SharedPreferences sharedPreferences_device = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        int savedDeviseSelection = sharedPreferences_device.getInt(SPINNER_DEVISE_SELECTION_KEY, 0); // 0 est la valeur par défaut
-        spinnerDevise.setSelection(savedDeviseSelection);
+      //  SharedPreferences sharedPreferences_device = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+    //    int savedDeviseSelection = sharedPreferences_device.getInt(SPINNER_DEVISE_SELECTION_KEY, 0); // 0 est la valeur par défaut
+  //      spinnerDevise.setSelection(savedDeviseSelection);
 
         // Ajouter un écouteur de sélection pour le spinner "devise"
-        spinnerDevise.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+     //   spinnerDevise.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+       //     @Override
+         //   public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Sauvegarder la nouvelle sélection automatiquement
-                SharedPreferences.Editor editor = sharedPreferences_device.edit();
-                editor.putInt(SPINNER_DEVISE_SELECTION_KEY, position);
-                editor.apply();
-            }
+           //     SharedPreferences.Editor editor = sharedPreferences_device.edit();
+             //   editor.putInt(SPINNER_DEVISE_SELECTION_KEY, position);
+               // editor.apply();
+  //          }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
+          //  @Override
+        //    public void onNothingSelected(AdapterView<?> parentView) {
                 // Ne rien faire ici
-            }
-        });
+      //      }
+    //    });
 
 
         SharedPreferences sharedPreferences_gender = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -1200,7 +1311,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         pickDateButton = findViewById(R.id.date_naissance);
         date_naissace=findViewById(R.id.dateNaissance);
-
+     
 
         // Mettez à jour le TextView avec la date actuelle
 
@@ -1222,6 +1333,78 @@ public class ProfilActivity extends AppCompatActivity {
 
         LogoutButton = findViewById(R.id.button_deconne);
 
+        produitCuisine = findViewById(R.id.produitencuisine);
+
+
+        int User_id = myApp.getUser_id();
+        int User_stock_id=myApp.getUser_stock_id();
+
+        String url = "http://" + BASE_URL+"/stocks/" + User_stock_id+ "/products";
+        String url1 = "http://" + BASE_URL+"/stocks/" + User_stock_id+ "/products/gaspille";
+        RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            // Parse the JSON response
+                            JSONArray jsonResponse = new JSONArray(response);
+                            Long count= (long) jsonResponse.length();
+                            // Retrieve the values from the JSON object
+
+                            produitCuisine.setText(String.valueOf(count));
+
+
+                            // Now you can use 'id' and 'intitule' as needed
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            // Handle JSON parsing error
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error response
+                error.printStackTrace();
+            }
+        });
+
+        queue.add(stringRequest);
+
+        StringRequest stringRequest1 = new StringRequest(Request.Method.GET, url1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            // Parse the JSON response
+                            JSONArray jsonResponse = new JSONArray(response);
+                            Long count= (long) jsonResponse.length();
+                            // Retrieve the values from the JSON object
+
+                            produitGaspille.setText(String.valueOf(count));
+
+
+                            // Now you can use 'id' and 'intitule' as needed
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            // Handle JSON parsing error
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error response
+                error.printStackTrace();
+            }
+        });
+
+        queue.add(stringRequest1);
+
+
+
+
 
         //Récupérer tout les informations depuis le backend d'Utilisateur
         backendManager.getUtilisateur(currentUserId, new BackendManager.BackendResponseCallback() {
@@ -1231,6 +1414,40 @@ public class ProfilActivity extends AppCompatActivity {
                 String nomProfil = response.getString("nom") + " " + response.getString("prénom");
                 nomProfilView.setText(nomProfil);
                 emailProfilView.setText(response.getString("email"));
+
+                boolean sportif = response.getBoolean("modeSportif");
+              //  Switch genderSwitch = findViewById(R.id.genderSwitch); // Assurez-vous d'avoir un élément Switch avec l'ID genderSwitch dans votre layout XML
+
+
+                    if (sportif) {
+                        yourSwitch.setChecked(true); // Homme est activé
+                    } else  {
+                        yourSwitch.setChecked(false); // Femme est activé
+                    }
+
+
+                boolean alertedateexpi = response.getBoolean("alertedateexpi");
+                //  Switch genderSwitch = findViewById(R.id.genderSwitch); // Assurez-vous d'avoir un élément Switch avec l'ID genderSwitch dans votre layout XML
+
+
+                    if (alertedateexpi) {
+                        yourSwitch3.setChecked(true); // Homme est activé
+                    } else  {
+                        yourSwitch3.setChecked(false); // Femme est activé
+                    }
+
+
+                boolean alerteproduitfinis = response.getBoolean("alerteproduitfinis");
+                //  Switch genderSwitch = findViewById(R.id.genderSwitch); // Assurez-vous d'avoir un élément Switch avec l'ID genderSwitch dans votre layout XML
+
+
+                    if (alerteproduitfinis) {
+                        yourSwitch4.setChecked(true); // Homme est activé
+                    } else {
+                        yourSwitch4.setChecked(false); // Femme est activé
+                    }
+
+
 
                 String gender = response.getString("sexe");
                 if(!gender.equals("null")) {

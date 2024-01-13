@@ -1,6 +1,7 @@
 package com.example.stockifi;
 
 import android.content.Context;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -261,6 +262,25 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
+    public void restoreProductFromCorbeille(long stockId, long productId, double quantity, BackendResponseCallback callback) {
+        String url = getFullUrl("/corbeille/restaurerdeletedproduct/stockId=" + stockId + "/restaurerProductId=" + productId + "/quantity=" + quantity);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
     public void supprimerDefPermanentlyUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
         String url = getFullUrl( "/corbeille/supprimerdefPermanentdeletedproduct/stockId="+stockId+"/supprimerPrmProductId="+productId);
 
@@ -279,6 +299,7 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
+
     public void supprimerDefUnProduitFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
         String url = getFullUrl( "/corbeille/supprmerdefdeletedproduct/stockId="+stockId+"/supprimerProductId="+productId);
 
@@ -302,6 +323,42 @@ public class BackendManager {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.DELETE,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+    public void supprimerDefPermanentlyUnRepasFromCorbeille(long stockId,long repasId, BackendResponseCallback callback){
+        String url = getFullUrl( "/corbeille/supprimerdefPermanentdeletedrepas/stockId="+stockId+"/supprimerPrmRecipetId="+repasId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                response -> {
+                    try {
+                        callback.onSuccess(response);
+                    } catch (JSONException e) {
+                        callback.onError(e);
+                    }
+                },
+                callback::onError);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+    public void recupererDeletedRepasFromCorbeille(long stockId, long recupererRepasId, BackendResponseCallback callback) {
+        String url = getFullUrl("/corbeille/recupererdeletedrepas/stockId=" + stockId + "/recupererRepasId=" + recupererRepasId);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
                 url,
                 null,
                 response -> {
