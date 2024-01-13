@@ -135,7 +135,8 @@ public class ModifierProduitStock extends AppCompatActivity {
         EditText Prix = findViewById(R.id.Prix_produit_modif);
         EditText QteC = findViewById(R.id.quantiteCritique_modif);
         EditText Qte = findViewById(R.id.quant_ajoutModif_modif);
-        int produitId = 3;
+        Intent intent = getIntent();
+        int produitId = Integer.parseInt(intent.getStringExtra("produitid"));
 
         String url = "http://10.0.2.2:1111/stocks/productid/" + produitId;
         RequestQueue queue1 = Volley.newRequestQueue(this);
