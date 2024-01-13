@@ -199,7 +199,7 @@ la quantite critique</string>
     <!-- Corbeille's strings -->
     <string name="corbeille">Corbeille</string>
     <string name="Emptycorbeille">Vider la Corbeille</string>
-    <string name="recuperer">Récupérer</string>
+    <string name="recuperer">Restaurer</string>
     <string name="supprimer"> Supprimer</string>
     <string name="item"> Lait</string>
     <string name="produits">Produits</string>

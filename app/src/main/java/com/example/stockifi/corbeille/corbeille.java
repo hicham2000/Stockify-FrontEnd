@@ -202,7 +202,7 @@ public class corbeille extends AppCompatActivity{
 
 
     }
-    private void showDeleteDialog() {
+    /*private void showDeleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_delete_dialog, null);
@@ -215,9 +215,7 @@ public class corbeille extends AppCompatActivity{
         builder.setView(dialogView);
         AlertDialog dialog = builder.create();
 
-        // Handle the actions when OK button is clicked
         buttonOk.setOnClickListener(v -> {
-            // Check the state of checkboxes and perform actions accordingly
 
             if (checkBoxProducts.isChecked() && checkBoxRecipes.isChecked()) {
                 MyApp myApp = (MyApp) getApplication();
@@ -288,16 +286,104 @@ public class corbeille extends AppCompatActivity{
                 queue.add(stringRequest);
             }
 
-            // Dismiss the dialog
             dialog.dismiss();
         });
 
-        // Handle the actions when Cancel button is clicked
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }*/
+
+    private void showDeleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_delete_dialog, null);
+
+        CheckBox checkBoxProducts = dialogView.findViewById(R.id.checkBoxProducts);
+        CheckBox checkBoxRecipes = dialogView.findViewById(R.id.checkBoxRecipes);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonOk = dialogView.findViewById(R.id.buttonOk);
+
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+
+        buttonOk.setOnClickListener(v -> {
+
+            if (checkBoxProducts.isChecked() && checkBoxRecipes.isChecked()) {
+                MyApp myApp = (MyApp) getApplication();
+                int User_Stock_id = myApp.getUser_stock_id();
+                String url = "http://10.0.2.2:1111/corbeille/vidercorbeille/stockId=" + User_Stock_id;
+
+                RequestQueue queue = Volley.newRequestQueue(corbeille.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
+                                adapterRepas.clearData();
+                                adapter.clearData();
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(corbeille.this, "Error deleting the whole corbeille", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                queue.add(stringRequest);
+            }
+            else if (checkBoxRecipes.isChecked()) {
+                MyApp myApp = (MyApp) getApplication();
+                int User_Stock_id = myApp.getUser_stock_id();
+                String url = "http://10.0.2.2:1111/corbeille/viderrepas/stockId=" + User_Stock_id;
+
+                RequestQueue queue = Volley.newRequestQueue(corbeille.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
+                                adapterRepas.clearData();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(corbeille.this, "Error deleting recipes", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                queue.add(stringRequest);            }
+            else if (checkBoxProducts.isChecked()) {
+                MyApp myApp = (MyApp) getApplication();
+                int User_Stock_id = myApp.getUser_stock_id();
+                String url = "http://10.0.2.2:1111/corbeille/viderproduits/stockId=" + User_Stock_id;
+
+                RequestQueue queue = Volley.newRequestQueue(corbeille.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(corbeille.this, response, Toast.LENGTH_SHORT).show();
+                                adapter.clearData();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(corbeille.this, "Error deleting products", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                queue.add(stringRequest);
+            }
+
+            dialog.dismiss();
+        });
+
         buttonCancel.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
     }
-
 
 
 
