@@ -206,6 +206,9 @@ la quantite critique</string>
     <string name="repas">Repas</string>
     <string name="corbeilleActivity_dialog_title">Restaurer le produit</string>
     <string name="corbeilleActivity_dialog_input_hint">Entrez la nouvelle quantité</string>
+    <string name="corbeilleActivity_ok_button">OK</string>
+    <string name="corbeilleActivity_cancel_button">Cancel</string>
+
 
     <!-- budget's strings -->
 
