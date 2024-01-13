@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
-        android:id="@+id/appBarStock">
+        android:id="@+id/appBarStock"
+        tools:ignore="MissingConstraints">
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbarStock"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
