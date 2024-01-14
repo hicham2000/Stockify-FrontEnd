@@ -22,6 +22,18 @@
         tools:ignore="ExtraText"
         tools:targetApi="31">
         <activity
+            android:name=".MessageActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="true" />
+        <activity
             android:name=".Gestion_Produit.InformationsProduitStock"
             android:exported="false" />
         <activity
@@ -64,8 +76,6 @@
             android:name=".Sprint2Activity"
             android:exported="false" />
         <activity
-
-
             android:name=".ProduitCardActivity"
             android:exported="true" />
         <activity
@@ -104,7 +114,6 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -117,6 +126,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <service
             android:name=".NotificationService"
             android:exported="false">

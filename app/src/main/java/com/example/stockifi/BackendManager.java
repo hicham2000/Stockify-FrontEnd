@@ -102,6 +102,8 @@ public class BackendManager {
         jsonRequest.put("modeSportif", registerRequest.isModeSportif());
 
         return jsonRequest;
+
+
     }
 
     public void getUtilisateur(int id, BackendResponseCallback callback) {

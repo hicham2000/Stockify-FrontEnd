@@ -13,7 +13,7 @@
     <string name="ingredient"> Ingrédients </string>
     <string name="chercherProd">Chercher un produit</string>
     <string name="chercherRecettesRecommende">Rechercher Recette</string>
-
+    <string name="notification">Notification</string>
     <string name="inscrire">S\'inscrire</string>
     <string-array name="regimes">
         <item>Regimes specieux</item>
@@ -91,7 +91,6 @@
     <string name="mode_sportif">Mode Sportif</string>
     <string name="device2">Ajout automatique des produit
     a la corbeille en cas de peremption</string>
-    <string name="notification">Notification</string>
     <string name="notification1">Alerte des dates expirations</string>
     <string name="notification2">Alerte quand les produits atteignent
 la quantite critique</string>
@@ -214,11 +213,6 @@ la quantite critique</string>
     <string name="budgetActivity_montant_gaspille">Montant Gaspillé</string>
     <string name="budgetActivity_dh_gaspille">400 DH</string>
     <string name="budgetActivity_dh_consomme">1600 DH</string>
-
-
-
-
-
 
 
     <string-array name="options_array">
