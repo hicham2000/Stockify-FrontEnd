@@ -2,22 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AjouterProduit_ListeProduit">
-        <State />
-      </entry>
-      <entry key="InformationsProduitStock">
-        <State />
-      </entry>
-      <entry key="ListeProduit">
-        <State />
-      </entry>
-      <entry key="ModifierProduitStock">
-        <State />
-      </entry>
-      <entry key="app">
-        <State />
-      </entry>
-      <entry key="corbeille">
+      <entry key="MessageActivity">
         <State />
       </entry>
     </value>

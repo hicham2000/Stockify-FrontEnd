@@ -9,15 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.stockifi.Home.HomeActivity;
+import com.example.stockifi.notification.NotificationUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 import androidx.annotation.NonNull;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.example.stockifi.notification.Notification;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (validateEmail() && validatePassword()) {
                     String email = emailTextEdit.getText().toString();
                     String password = passwordTextEdit.getText().toString();
-                    Notification notif = new Notification();
+                    NotificationUtils notif = new NotificationUtils(getApplicationContext());
                     if(validatePassword() && validateEmail()){
                         try {
                             backendManager.login(email, password, new BackendManager.BackendResponseCallback() {
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                                         myApp.setUser_stock_id(stockId);
                                         int listeDeCourseId = response.getInt("listeDeCourse_id");
                                         myApp.setUser_listeCourse_id(listeDeCourseId);
-                                        Notification notif = new Notification();
+                                        NotificationUtils notif = new NotificationUtils(getApplicationContext());
                                         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
                                             @Override
                                             public void onComplete(@NonNull Task<String> task) {
