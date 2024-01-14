@@ -44,11 +44,13 @@ public class ListeproduitAdapter extends ArrayAdapter<ProduitALaListe> {
                 ProduitALaListe produit = getItem(position);
                 Intent intent = new Intent(getContext(), AjouterProduit_ListeProduit.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("sender","Global");
                 intent.putExtra("id", produit.getId());
                 intent.putExtra("intitule", produit.getIntitule());
                 intent.putExtra("imageUrl", produit.getimageUrl());
                 intent.putExtra("mesure", produit.getmesure());
                 getContext().startActivity(intent);
+                System.out.println(produit.getmesure());
 
             }
         });

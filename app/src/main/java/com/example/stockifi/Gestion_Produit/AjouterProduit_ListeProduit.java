@@ -36,6 +36,9 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
     TextView peremtiontext;
 
     TextView alerttext;
+    String intituleValue="";
+    String mesureValue="tonne";
+    int mesureInt=0;
 
     private int getIndex(Spinner spinner, String string) {
         ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
@@ -54,6 +57,8 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_produit_liste_produit);
 
+
+
         Button buttonValiderProd = findViewById(R.id.button_validerProd);
         EditText intitule = findViewById(R.id.editTexte_t);
         EditText quantite = findViewById(R.id.quant_ajoutModif);
@@ -61,6 +66,8 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
         TextView peremption = findViewById(R.id.peremtiontextproduit);
         TextView alerte = findViewById(R.id.alertetextproduit);
         EditText critique = findViewById(R.id.quantiteCritique);
+
+
 
         Spinner Mesure = findViewById(R.id.spinner_poid_ajoutModif1);
 
@@ -80,13 +87,17 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
         Intent intent = getIntent();
         String sender = intent.getStringExtra("sender");
         if (sender.equals("Global")){
-            intitule.setText(intent.getStringExtra("intitule"));
-            int mesure = getIndex(Mesure, intent.getStringExtra("mesure"));
-            Mesure.setSelection(mesure);
+            intituleValue = intent.getStringExtra("intitule");
+            mesureValue = intent.getStringExtra("mesure");
 
-        } else if (sender.equals("New")) {
-            //do something
+        } else{
+            intituleValue = "";
+            mesureValue = "tonne";
         }
+
+        intitule.setText(intituleValue);
+        mesureInt = getIndex(Mesure,mesureValue);
+        Mesure.setSelection(mesureInt);
 
         peremtion=findViewById(R.id.peremtionDateProduit);
         peremtiontext = findViewById(R.id.peremtiontextproduit);
