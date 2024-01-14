@@ -24,6 +24,7 @@ import com.example.stockifi.Gestion_Produit.AjouterProduit_ListeProduit;
 import com.example.stockifi.Gestion_Produit.ListeProduit;
 import com.example.stockifi.Liste_Course.AjouterProduit;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.budget.budgetActivity;
@@ -69,7 +70,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
-            if (item.getItemId() == R.id.poubelle) {
+            else if (item.getItemId() == R.id.message) {
+                Intent profilIntent = new Intent(HomeActivity.this, MessageActivity.class);
+                startActivity(profilIntent);
+                return true;
+            }
+           else if (item.getItemId() == R.id.poubelle) {
                 // L'utilisateur a cliqué sur "profil1"
                 Intent intent = new Intent(HomeActivity.this, corbeille.class);
                 startActivity(intent);
@@ -84,6 +90,7 @@ public class HomeActivity extends AppCompatActivity {
 
             Intent intent = new Intent(HomeActivity.this, ListeDeCourse.class);
             startActivity(intent);
+            finish();
 
             return true;
         });
@@ -91,6 +98,7 @@ public class HomeActivity extends AppCompatActivity {
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, budgetActivity.class);
             startActivity(intent);
+            finish();
 
             return true;
         });
@@ -103,6 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
+            finish();
 
             return true;
         });

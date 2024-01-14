@@ -9,34 +9,59 @@
     tools:context=".MessageActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/appBar_notification">
+        android:orientation="vertical"
+        android:id="@+id/appBarAjout"
+        android:background="@color/vertTexte">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_notification"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        <androidx.appcompat.widget.Toolbar
+
+
+            android:id="@+id/toolbar_corbeille"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/menu_profil"
-            app:title="@string/notification" />
-    </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="?attr/actionBarSize">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+            <ImageView
+                android:id="@+id/toolbar_back_button_ajout"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fleche"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                />
 
-        android:id="@+id/androidx_window_notification"
-        android:layout_width="match_parent"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Notification"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-        android:background="@color/vertTexte"
-        app:menu="@menu/menu_bottom_navigation"/>
+            <ImageView
+                android:id="@+id/item_poubelle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/message_grise"
+                android:layout_gravity="start"
+                android:layout_marginStart="150dp"
+                />
 
 
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

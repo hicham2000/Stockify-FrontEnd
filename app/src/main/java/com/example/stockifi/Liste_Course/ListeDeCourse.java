@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Home.HomeActivity;
+import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.budget.budgetActivity;
@@ -47,6 +48,8 @@ import java.util.ArrayList;
 public class ListeDeCourse extends AppCompatActivity {
 
     private static final String BASE_URL = "192.168.11.100:1111";
+    ArrayList<Produit> dataList = new ArrayList<>();
+    ListeCourseAdapter adapter;
 
     Button AjouterBouton;
     SearchView search_listeCourse;
@@ -114,9 +117,12 @@ public class ListeDeCourse extends AppCompatActivity {
                 );
 
                 queue.add(request);
-                Intent intent = new Intent(ListeDeCourse.this, ListeDeCourse.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+               // dataList.clear();
+
+                    adapter.clearData();
+
+                  //  notifyDataSetChanged();
+
 
 
             }
@@ -143,7 +149,7 @@ public class ListeDeCourse extends AppCompatActivity {
 
                 ListView listView = findViewById(R.id.myListViewCourse);
 
-                ArrayList<Produit> dataList = new ArrayList<>();
+
 
                 RequestQueue queue = Volley.newRequestQueue(ListeDeCourse.this);
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -164,7 +170,7 @@ public class ListeDeCourse extends AppCompatActivity {
                                         dataList.add(new Produit(id, intitule, quantite, mesure, check));
                                     }
 
-                                    ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                     adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                                     adapter.notifyDataSetChanged();
 
 
@@ -182,7 +188,7 @@ public class ListeDeCourse extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //   dataList.add("That didn't work!");
-                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                         adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
 
                         adapter.notifyDataSetChanged();
                         listView.setAdapter(adapter);
@@ -238,7 +244,7 @@ public class ListeDeCourse extends AppCompatActivity {
                                             dataList.add(new Produit(id, intitule, quantite, mesure, check));
                                         }
 
-                                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                        adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                                         adapter.notifyDataSetChanged();
 
 
@@ -256,7 +262,7 @@ public class ListeDeCourse extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             //   dataList.add("That didn't work!");
-                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                           adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
 
                             adapter.notifyDataSetChanged();
                             listView.setAdapter(adapter);
@@ -303,7 +309,7 @@ public class ListeDeCourse extends AppCompatActivity {
                                             dataList.add(new Produit(id,intitule,quantite,mesure,check));
                                         }
 
-                                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                         adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                                         adapter.notifyDataSetChanged();
 
 
@@ -324,11 +330,12 @@ public class ListeDeCourse extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //   dataList.add("That didn't work!");
-                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                            //   dataList.add("That didn't work!")
+                               adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
 
                             adapter.notifyDataSetChanged();
                             listView.setAdapter(adapter);
+
 
                         }
 
@@ -379,12 +386,13 @@ public class ListeDeCourse extends AppCompatActivity {
                                 dataList.add(new Produit(id,intitule,quantite,mesure,check));
                             }
 
-                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                             adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                             adapter.notifyDataSetChanged();
 
 
 
                             listView.setAdapter(adapter);
+
 
 
 
@@ -401,10 +409,11 @@ public class ListeDeCourse extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
              //   dataList.add("That didn't work!");
-                ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                 adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
 
                 adapter.notifyDataSetChanged();
                 listView.setAdapter(adapter);
+
 
             }
 
@@ -435,21 +444,21 @@ public class ListeDeCourse extends AppCompatActivity {
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, budgetActivity.class);
             startActivity(intent);
-     //       finish();
+            finish();
             return true;
         });
 
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, HomeActivity.class);
             startActivity(intent);
-       //     finish();
+           finish();
             return true;
         });
 
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, RecettesRecommendeActivity.class);
             startActivity(intent);
-         //   finish();
+            finish();
             return true;
         });
 
@@ -463,9 +472,16 @@ public class ListeDeCourse extends AppCompatActivity {
             Intent intent = new Intent(ListeDeCourse.this, ProfilActivity.class);
             startActivity(intent);
             return true;
+
+        } else if (item.getItemId() == R.id.message) {
+
+            Intent profilIntent = new Intent(ListeDeCourse.this, MessageActivity.class);
+            startActivity(profilIntent);
+
+            return true;
         }
 
-          else if (item.getItemId() == R.id.poubelle) {
+        else if (item.getItemId() == R.id.poubelle) {
                 // L'utilisateur a cliqué sur "profil1"
                 Intent intent = new Intent(ListeDeCourse.this, corbeille.class);
                 startActivity(intent);
