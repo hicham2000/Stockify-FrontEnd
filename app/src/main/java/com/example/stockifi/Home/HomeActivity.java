@@ -27,6 +27,7 @@ import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
+import com.example.stockifi.Repas.ingredients;
 import com.example.stockifi.budget.budgetActivity;
 import com.example.stockifi.corbeille.corbeille;
 import com.example.stockifi.databinding.ActivityHomeBinding;
@@ -170,6 +171,21 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        Button ajouterRepas = findViewById(R.id.button2);
+
+        ajouterRepas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(HomeActivity.this, ingredients.class);
+                startActivity(intent);
+
+
+
+            }
+        });
+
     }
     public void parseJson(String response) {
         try {
