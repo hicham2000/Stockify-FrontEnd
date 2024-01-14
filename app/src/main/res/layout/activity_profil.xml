@@ -399,7 +399,7 @@
 
 
                 android:textColor="@color/white"
-                android:text="@string/Kg_jetes"
+                android:text="@string/produit_gaspille_en_cuisine"
                 android:layout_marginLeft="32dp"
 
                 android:gravity="center"
