@@ -533,7 +533,7 @@ public class ProfilActivity extends AppCompatActivity {
                 // Conversion de la taille si l'unité est en mètres
                 String taille = String.valueOf(editTextTaille.getText());
                 if (selectedTailleUnit.equals("m")) {
-                    taille = String.valueOf((int) (Double.parseDouble(taille) * 100));
+                    taille = String.valueOf((int) (Integer.parseInt(taille) * 100));
                 }
                 UpdateRequest updatedUtilisateur = new UpdateRequest();
                 updatedUtilisateur.setTaille(taille);
@@ -1016,7 +1016,7 @@ public class ProfilActivity extends AppCompatActivity {
 
                 String taille = String.valueOf(editTextTaille.getText());
                 if (selectedTailleUnit.equals("m")) {
-                    taille = String.valueOf((int) (Double.parseDouble(taille) * 100));
+                    taille = String.valueOf((int) (Integer.parseInt(taille) * 100));
                 }
 
 
@@ -1081,9 +1081,9 @@ public class ProfilActivity extends AppCompatActivity {
                 // Conversion de la taille si l'unité est en mètres
                 String poids = String.valueOf(editTextPoids.getText());
                 if (selectedPoidsUnit.equals("tonne")) {
-                    poids = String.valueOf((int) (Double.parseDouble(poids) * 1000));
+                    poids = String.valueOf((int) (Integer.parseInt(poids) * 1000));
                 } else if (selectedPoidsUnit.equals("g")) {
-                    poids = String.valueOf((int) (Double.parseDouble(poids) * 0.001));
+                    poids = String.valueOf((int) (Integer.parseInt(poids) * 0.001));
                 }
 
                 UpdateRequest updatedUtilisateur = new UpdateRequest();
@@ -1128,9 +1128,9 @@ public class ProfilActivity extends AppCompatActivity {
                     // Conversion de la taille si l'unité est en mètres
                     String poids = String.valueOf(editTextPoids.getText());
                     if (selectedPoidsUnit.equals("tonne")) {
-                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 1000));
+                        poids = String.valueOf((int) ( Integer.parseInt(poids)* 1000));
                     } else if (selectedPoidsUnit.equals("g")) {
-                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 0.001));
+                        poids = String.valueOf((int) ( Integer.parseInt(poids)* 0.001));
                     }
 
                     updateRequest.setPoids(poids);
