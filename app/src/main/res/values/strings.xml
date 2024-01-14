@@ -38,6 +38,13 @@
         <item>tonne</item>
         <item>Kg</item>
         <item>g</item>
+
+    </string-array>
+
+    <string-array name="poids_ajoutpr">
+        <item>tonne</item>
+        <item>Kg</item>
+        <item>g</item>
         <item>L</item>
         <item>cl</item>
         <item>ml</item>
@@ -82,8 +89,8 @@
     <string name="date">Date de naissance</string>
     <string name="password"><u>Changer mot de passe</u></string>
     <string name="reussite">Reussite/Information</string>
-    <string name="produit_en_cuisine">Produit en cuisine</string>
-    <string name="Kg_jetes">Kg jetes</string>
+    <string name="produit_en_cuisine">Produits en cuisine</string>
+    <string name="produit_gaspille_en_cuisine">Produis gaspillés</string>
     <string name="economies">Economies</string>
     <string name="regime_speciaux">Regimes speciaux et Intolerences</string>
     <string name="affichage_quantites">Affichage des quantites</string>

@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
         acceptConditionCheckBox = findViewById(R.id.checkBox);
         registerButton = findViewById(R.id.registerButton);
 
-        
+
         BackendManager backendManager = new BackendManager(this);
 
         registerButton.setOnClickListener(new View.OnClickListener() {

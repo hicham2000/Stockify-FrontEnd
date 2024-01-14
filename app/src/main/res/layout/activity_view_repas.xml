@@ -112,7 +112,7 @@ android:background="@color/vert">
         android:layout_height="match_parent"
 
         android:layout_below="@+id/appBarviewrepas"
-        android:layout_marginTop="-25dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -345,7 +345,7 @@ android:background="@color/vert">
                     android:text="Supprimer" />
 
                 <Button
-                    android:id="@+id/button_Editer"
+                    android:id="@+id/button_Editerr"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

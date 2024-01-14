@@ -88,7 +88,7 @@ public class corbeille extends AppCompatActivity{
                 MyApp myApp = (MyApp) getApplication();
                 int User_id = myApp.getUser_id();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://192.168.11.100:1111/corbeille/deletedProduct/ "+ User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/deletedProduct/ "+ User_Stock_id;
                 ListView listView = findViewById(R.id.myListViewCorbeille);
 
                 ArrayList<objet> dataList = new ArrayList<>();
@@ -108,6 +108,7 @@ public class corbeille extends AppCompatActivity{
                                         System.out.println(objet);
                                         String intitule = jsonObject.getString("intitule");
                                         dataList.add(objet);
+                                        System.out.println(response);
                                     }
 
                                     adapter = new corbeilleAdapter(corbeille.this, dataList);
@@ -144,7 +145,7 @@ public class corbeille extends AppCompatActivity{
                 MyApp myApp = (MyApp) getApplication();
                 int User_id = myApp.getUser_id();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://192.168.11.100:1111/corbeille/deletedRecipe/" + User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/deletedRecipe/" + User_Stock_id;
                 ListView listView = findViewById(R.id.myListViewCorbeille);
 
                 ArrayList<objet> dataList = new ArrayList<>();
@@ -216,7 +217,7 @@ public class corbeille extends AppCompatActivity{
             if (checkBoxProducts.isChecked() && checkBoxRecipes.isChecked()) {
                 MyApp myApp = (MyApp) getApplication();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://192.168.11.100:1111/corbeille/vidercorbeille/stockId=" + User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/vidercorbeille/stockId=" + User_Stock_id;
 
                 RequestQueue queue = Volley.newRequestQueue(corbeille.this);
                 StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
@@ -240,7 +241,7 @@ public class corbeille extends AppCompatActivity{
             else if (checkBoxRecipes.isChecked()) {
                 MyApp myApp = (MyApp) getApplication();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://192.168.11.100:1111/corbeille/viderrepas/stockId=" + User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/viderrepas/stockId=" + User_Stock_id;
 
                 RequestQueue queue = Volley.newRequestQueue(corbeille.this);
                 StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
@@ -261,7 +262,7 @@ public class corbeille extends AppCompatActivity{
             else if (checkBoxProducts.isChecked()) {
                 MyApp myApp = (MyApp) getApplication();
                 int User_Stock_id = myApp.getUser_stock_id();
-                String url = "http://192.168.11.100:1111/corbeille/viderproduits/stockId=" + User_Stock_id;
+                String url = "http://10.0.2.2:1111/corbeille/viderproduits/stockId=" + User_Stock_id;
 
                 RequestQueue queue = Volley.newRequestQueue(corbeille.this);
                 StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,

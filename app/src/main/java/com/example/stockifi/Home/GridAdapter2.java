@@ -12,20 +12,19 @@ import com.example.stockifi.R;
 
 import java.util.ArrayList;
 
-public class GridAdapter extends BaseAdapter {
+public class GridAdapter2 extends BaseAdapter {
     Context context;
-    ArrayList<listData> listdata;
+    ArrayList<listData2> listdata2;
 
-    public GridAdapter(Context context, ArrayList<listData> listdata) {
+    public GridAdapter2(Context context, ArrayList<listData2> listdata2) {
         this.context = context;
-        this.listdata = listdata;
-
+        this.listdata2 = listdata2;
     }
 
     LayoutInflater inflater;
     @Override
     public int getCount() {
-        return listdata.toArray().length;
+        return listdata2.toArray().length;
     }
 
     @Override
@@ -51,8 +50,8 @@ public class GridAdapter extends BaseAdapter {
         TextView textView = convertView.findViewById(R.id.gridName);
         TextView textView1 = convertView.findViewById(R.id.gridName);
         //imageView.setImageResource(image[position]);
-        textView.setText(listdata.get(position).getIntitule());
-        textView1.setText(listdata.get(position).getDateExpiration());
+        textView.setText(listdata2.get(position).getIntitule());
+        textView1.setText(listdata2.get(position).getDatePeremtion());
         return convertView;
     }
 }

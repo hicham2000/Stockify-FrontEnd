@@ -150,7 +150,7 @@ android:background="@color/vert">
                     android:gravity="center"/>
 
                 <EditText
-                    android:id="@+id/editTexte_t"
+                    android:id="@+id/editTexte_tupdtae"
                     style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -211,7 +211,7 @@ android:background="@color/vert">
             />
 
         <LinearLayout
-            android:id="@+id/container"
+            android:id="@+id/containerupdtae"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -257,7 +257,7 @@ android:background="@color/vert">
                 >
 
                 <TextView
-                    android:id="@+id/peremtiontext"
+                    android:id="@+id/peremtiontextupdtae"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -268,12 +268,13 @@ android:background="@color/vert">
 
 
                     />
+
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/calendrier"
+                    android:layout_width="7dp"
+                    android:layout_height="14dp"
                     android:layout_marginLeft="100dp"
-                    android:layout_marginTop="3dp"/>
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/calendrier" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -305,7 +306,7 @@ android:background="@color/vert">
                 >
 
                 <TextView
-                    android:id="@+id/alertt"
+                    android:id="@+id/alerttUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 

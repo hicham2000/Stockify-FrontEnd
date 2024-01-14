@@ -147,13 +147,13 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="All" />
+            android:text="Produit" />
         <Button
             android:id="@+id/button5"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="cat2" />
+            android:text="Repas" />
 
 
     </LinearLayout>
