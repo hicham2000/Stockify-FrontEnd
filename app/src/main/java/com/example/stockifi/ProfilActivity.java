@@ -478,6 +478,7 @@ public class ProfilActivity extends AppCompatActivity {
                         input_value = "0";
                     }
 
+
                     int selectedQuantiteCri = Integer.parseInt(input_value);
 
 
