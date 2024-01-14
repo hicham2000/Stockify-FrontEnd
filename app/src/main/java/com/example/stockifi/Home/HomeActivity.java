@@ -20,6 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.Gestion_Produit.AjouterProduit_ListeProduit;
+import com.example.stockifi.Gestion_Produit.ListeProduit;
+import com.example.stockifi.Liste_Course.AjouterProduit;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
@@ -40,6 +43,8 @@ import org.json.JSONObject;
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
     String apiUrl = "";
+
+    Button ajouterProduit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +167,19 @@ public class HomeActivity extends AppCompatActivity {
                 queue.add(getProduits);
             }
         });*/
+
+        ajouterProduit=findViewById(R.id.button);
+        ajouterProduit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(HomeActivity.this, ListeProduit.class);
+                startActivity(intent);
+
+
+
+            }
+        });
     }
     public void parseJson(String response) {
         try {
