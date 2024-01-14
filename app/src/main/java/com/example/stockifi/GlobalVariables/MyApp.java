@@ -19,6 +19,26 @@ public class MyApp extends Application {
     private  String notiftoken;
     private  int User_listeCourse_id = 1;
 
+    private boolean alerte_date_expiration;
+
+    public boolean isAlerte_date_expiration() {
+        return alerte_date_expiration;
+    }
+
+    public void setAlerte_date_expiration(boolean alerte_date_expiration) {
+        this.alerte_date_expiration = alerte_date_expiration;
+    }
+
+    public boolean isAlerte_produits_perissable() {
+        return alerte_produits_perissable;
+    }
+
+    public void setAlerte_produits_perissable(boolean alerte_produits_perissable) {
+        this.alerte_produits_perissable = alerte_produits_perissable;
+    }
+
+    private boolean alerte_produits_perissable;
+
     public int getUser_id() {
         return User_id;
     }

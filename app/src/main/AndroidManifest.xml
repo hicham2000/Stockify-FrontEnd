@@ -22,26 +22,28 @@
         tools:ignore="ExtraText"
         tools:targetApi="31">
         <activity
+
             android:name=".MessageActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+           
         </activity>
         <activity
-            android:name=".NotificationActivity"
+            android:name=".Repas.UpdateRepas"
+            android:exported="true" />
+        <activity
+            android:name=".Repas.ViewRepas"
+
             android:exported="true" />
         <activity
             android:name=".Gestion_Produit.InformationsProduitStock"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Gestion_Produit.ModifierProduitStock"
             android:exported="true" />
         <activity
             android:name=".Home.HomeActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Home.AjouterCategorie"
             android:exported="true" />
@@ -50,7 +52,7 @@
             android:exported="true" />
         <activity
             android:name=".Gestion_Produit.AjouterProduit_ListeProduit"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Repas.ajouter_repas"
             android:exported="false"
@@ -59,6 +61,12 @@
             android:name=".Repas.ingredients_quantity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".budget.budgetActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".Repas.ingredients"
             android:exported="true" />
@@ -110,9 +118,15 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".recettes.SelectionnerProduitActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+
             android:name=".corbeille.corbeille"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">

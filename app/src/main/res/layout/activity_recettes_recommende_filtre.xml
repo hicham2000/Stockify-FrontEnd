@@ -7,20 +7,49 @@
     android:background="@color/vert"
     tools:context=".recettes.RecettesRecommendeFiltreActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar_recette"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/appBar_recette">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_recette"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        <androidx.appcompat.widget.Toolbar
+
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/recette_recommende_filtre_title"
-            app:menu="@menu/menu_profil" />
+            android:layout_height="?attr/actionBarSize">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <ImageView
+                android:id="@+id/toolbar_back_buttonRe"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fleche"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Filtre"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_below="@+id/appBar_recette"
@@ -122,7 +151,7 @@
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/recette_Button_portion_plus"
+                    android:id="@+id/recette_Button_add_produit"
                     android:background="@android:color/transparent"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -136,6 +165,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+
                 android:id="@+id/produits_selectionne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -182,11 +212,12 @@
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:visibility="invisible"
         android:id="@+id/androidx_window_recette_recommende_filtre"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/vertTexte"

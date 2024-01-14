@@ -11,7 +11,10 @@ public class objet implements Parcelable {
     private Boolean check;
 
     private int stock_id;
+    private int gaspille;
 
+    public int getGaspille() { return gaspille; }
+    public void setGaspille(int gaspille) { this.gaspille = gaspille;}
     public int getId() {
         return id;
     }
@@ -36,11 +39,12 @@ public class objet implements Parcelable {
         this.stock_id = stock_id;
     }
 
-    public objet(int id, String intitule, boolean check, int stock_id) {
+    public objet(int id, String intitule, boolean check, int stock_id, int gaspille) {
         this.id = id;
         this.intitule = intitule;
         this.check=check;
         this.stock_id = stock_id;
+        this.gaspille=gaspille;
     }
     public objet(int id){
         this.id = id;
@@ -57,6 +61,7 @@ public class objet implements Parcelable {
     public String toString() {
         return "Item{" +
                 "id=" + id +
+                ", gaspille="+ gaspille +
                 ", intitule='" + intitule + '\'' +
                 '}';
     }
@@ -83,4 +88,6 @@ public class objet implements Parcelable {
         intitule = in.readString();
         id = in.readInt();
     }
+
+
 }

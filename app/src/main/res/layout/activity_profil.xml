@@ -11,8 +11,9 @@
     android:background="@color/vert">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:visibility="invisible"
+        android:layout_height="0dp"
         android:id="@+id/appBar">
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -26,12 +27,64 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/appBarProfil"
+        android:background="@color/vertTexte">
+
+        <androidx.appcompat.widget.Toolbar
+
+
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/toolbar_back_button_profil"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fleche"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/Profil"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+            <ImageView
+                android:id="@+id/item_profil"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/prof_gris"
+                android:layout_gravity="start"
+                android:layout_marginStart="200dp"
+                />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/androidx_window_profil"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
 
-        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/vertTexte"
@@ -43,6 +96,13 @@
 
 
         />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarProfil"
+        android:layout_above="@+id/androidx_window_profil"
+
+        >
 
 <ScrollView
     android:layout_width="match_parent"
@@ -81,7 +141,7 @@
             android:layout_height="wrap_content"
             android:text="profile1@gmail.com"
             android:textColor="@color/vertTexte"
-            android:textSize="@dimen/enHaut"
+            android:textSize="20dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             />
@@ -275,9 +335,10 @@
            >
 
            <TextView
+               android:id="@+id/produitencuisine"
                android:layout_width="@dimen/rond"
                android:layout_height="@dimen/rond"
-               android:text="50"
+
 
 
                android:textColor="@color/vertTexte"
@@ -287,6 +348,7 @@
                android:background="@drawable/sphere"/>
 
            <TextView
+               android:id="@+id/produitjetes"
                android:layout_width="@dimen/rond"
                android:layout_height="@dimen/rond"
                android:text="0,0"
@@ -299,9 +361,10 @@
 
 
            <TextView
-               android:layout_width="@dimen/rond"
-               android:layout_height="@dimen/rond"
+               android:layout_width="0dp"
+               android:layout_height="0dp"
                android:text="0 mad"
+               android:visibility="invisible"
                android:textColor="@color/vertTexte"
                android:layout_marginLeft="@dimen/enHaut"
 
@@ -326,7 +389,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/produit_en_cuisine"
-                android:layout_marginLeft="24dp"
+                android:layout_marginLeft="64dp"
                 android:textColor="@color/white"
                />
 
@@ -345,8 +408,9 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:text="@string/economies"
 
 
@@ -371,7 +435,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/dimenTexte"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/enHaut"
+            android:layout_marginTop="25dp"
             android:text="@string/regime_speciaux"
             android:textColor="@color/vertTexte"/>
 
@@ -396,73 +460,7 @@
             />
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimenTexte"
-           android:layout_marginLeft="15dp"
-            android:layout_marginTop="@dimen/enHaut"
-            android:text="@string/affichage_quantites"
-            android:textColor="@color/vertTexte"/>
 
-        <!-- res/layout/activity_main.xml -->
-        <!-- res/layout/activity_main.xml -->
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="@dimen/enHaut"
-            android:layout_marginTop="@dimen/enHaut"
-            android:backgroundTint="@color/white">
-
-            <RadioButton
-                android:id="@+id/radioButtonMetric"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/vertTexte"
-                android:backgroundTint="@color/white"
-
-                android:text="Métrique"/>
-
-            <RadioButton
-                android:id="@+id/radioButtonImperial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/vertTexte"
-                android:text="Impérial"
-                android:shadowColor="@color/vertTexte"
-                android:backgroundTint="@color/white"
-                />
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimenTexte"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="@dimen/enHaut"
-            android:text="@string/device"
-            android:textColor="@color/vertTexte"/>
-
-        <RelativeLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ellipse"
-            android:layout_marginTop="@dimen/enHaut"
-            android:layout_gravity="center">
-
-        <Spinner
-            android:id="@+id/devise"
-
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_gravity="center"
-
-            android:entries="@array/devise"
-            />
-        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -503,9 +501,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
             android:orientation="horizontal">
 
 
@@ -597,8 +596,8 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:textSize="@dimen/dimenTexte"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="@dimen/enHaut"
@@ -607,10 +606,11 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
 
            <EditText
@@ -697,18 +697,17 @@
         </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimenTexte"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="@dimen/enHaut"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+        android:visibility="invisible"
             android:text="@string/peremption"
             android:textColor="@color/vertTexte"/>
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -765,18 +764,21 @@
         android:layout_marginLeft="50dp">
 
         <ImageView
+            android:id="@+id/facebookImageView"
             android:layout_width="@dimen/image"
             android:layout_height="@dimen/image"
             android:src="@drawable/facebook"
             android:layout_marginRight="60dp"/>
 
         <ImageView
+            android:id="@+id/instagramImageView"
             android:layout_width="@dimen/image"
             android:layout_height="@dimen/image"
             android:src="@drawable/instagram"
             android:layout_marginRight="60dp"/>
 
         <ImageView
+            android:id="@+id/twitterImageView"
             android:layout_width="@dimen/image"
             android:layout_height="@dimen/image"
             android:src="@drawable/twitter"/>
@@ -885,6 +887,7 @@
 
 
 </ScrollView>
+    </FrameLayout>
 
 
 </RelativeLayout>

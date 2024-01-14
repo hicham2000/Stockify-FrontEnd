@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Gestion_Produit.ListeProduit"
-    android:background="@color/vert">
+    android:background="@color/vert"
+    tools:context=".recettes.SelectionnerProduitActivity">
 
 
     <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Liste Produit"
+                android:text="Selectionner Produit"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -51,81 +51,72 @@
             android:background="@color/white" />
 
     </LinearLayout>
+
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_liste_produit_selectionner"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="invisible"
-        android:id="@+id/appBar_liste_course">
+        android:visibility="invisible">
+
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_liste_course"
+            android:id="@+id/toolbar_liste_produit_selectionner"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/recherche_produit"
+            app:title="@string/SelectionnerProduitFiltre_text"
             app:menu="@menu/menu_profil"
             />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-
-        android:id="@+id/androidx_window_Produit"
-        android:layout_width="0dp"
-        android:visibility="invisible"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-
-        android:background="@color/vertTexte"
-        app:menu="@menu/menu_bottom_navigation"/>
-
     <android.widget.SearchView
-        android:id="@+id/search_produit"
+        android:id="@+id/search_produit_selectionner"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:background="@drawable/ellipse"
         android:layout_centerHorizontal="true"
         android:theme="@style/SearchViewStyle"
-        android:queryHint="@string/chercherProd"
-        />
-
-
+        android:queryHint="@string/chercherProd" />
 
     <LinearLayout
+        android:layout_below="@+id/search_produit_selectionner"
+        android:layout_above="@+id/androidx_window_produit_selectionner"
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/dimenTexte"
-        android:layout_below="@+id/search_produit">
+        android:orientation="vertical">
 
-        <!-- CheckBox 2 -->
-
-
-        <ListView
-            android:id="@+id/myListViewProduit"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_produit_selecionner"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:paddingBottom="20dp"/>
-
+            android:layout_height="400dp"
+            android:layout_margin="20dp"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/recette_produit_selectionne_item" />
 
         <Button
-            android:id="@+id/ajouter_produit_Liste_Produit"
+            android:id="@+id/valider_produit_list_produit_selectionner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@drawable/ellipse_menu"
             android:textColor="@color/white"
             android:padding="10dp"
-            android:layout_gravity="right"
-
-            android:text="@string/produit_acheter"/>
-
-
+            android:text="@string/SelectionnerProduitFiltre_valider_text"/>
 
     </LinearLayout>
 
-
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/androidx_window_produit_selectionner"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/vertTexte"
+        app:menu="@menu/menu_bottom_navigation" />
 
 </RelativeLayout>

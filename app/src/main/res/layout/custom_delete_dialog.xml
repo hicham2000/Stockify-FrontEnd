@@ -21,22 +21,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        style="?android:attr/buttonBarStyle">
 
         <Button
             android:id="@+id/buttonCancel"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:layout_marginRight="10dp"/>
+            android:text="@string/corbeilleActivity_cancel_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_marginEnd="50dp"
+            />
 
         <Button
             android:id="@+id/buttonOk"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
-            android:text="OK" />
+            android:text="@string/corbeilleActivity_ok_button"
+            style="?android:attr/buttonBarButtonStyle"            />
     </LinearLayout>
 
 </LinearLayout>

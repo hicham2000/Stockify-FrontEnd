@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="16dp">
+
+    <TextView
+        android:id="@+id/customDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/corbeilleActivity_dialog_title"
+        android:fontFamily="@font/hubballi_regular"
+        android:textSize="24sp"
+        android:textColor="@color/vert" />
+
+
+    <EditText
+        android:id="@+id/customDialogInput"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:inputType="numberDecimal"
+        android:fontFamily="@font/hubballi_regular"
+        android:textSize="22sp"
+        android:hint="@string/corbeilleActivity_dialog_input_hint" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        style="?android:attr/buttonBarStyle">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="141dp"
+            android:layout_height="wrap_content"
+            android:text="@string/corbeilleActivity_cancel_button"
+            android:layout_marginEnd="50dp"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/buttonOk"
+            android:layout_width="141dp"
+            android:layout_height="wrap_content"
+            android:text="@string/corbeilleActivity_ok_button"
+            android:layout_marginStart="5dp"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

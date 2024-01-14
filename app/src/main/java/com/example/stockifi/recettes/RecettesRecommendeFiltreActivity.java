@@ -1,11 +1,17 @@
 package com.example.stockifi.recettes;
 
+import static com.example.stockifi.recettes.SelectionnerProduitActivity.REQUEST_CODE_SELECTION;
+
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -27,20 +33,25 @@ import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
 
+    public Context context = this;
+
+    private List<String> produitsSelectionnesList = new ArrayList<String>();
     private MaterialToolbar toolbarAppReccette;
     private BottomNavigationView bottomNavigationView;
     private RecyclerView regimeSpeciauxRecyclerView;
     private SeekBar tempsDePreparationSeekBar;
     private TextView tempsDePreparationTextView;
-    private AppCompatButton recetteButtonPortionPlus;
+    private AppCompatButton recetteButtonAjouterProduit;
     private RecyclerView produitsSelectionneRecyclerView;
     private Button annulerButton;
     private Button appliquerButton;
@@ -52,6 +63,8 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_profil, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -81,16 +94,37 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recettes_recommende_filtre);
 
-        toolbarAppReccette = findViewById(R.id.toolbar_recette);
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_buttonRe);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
+
+      //  toolbarAppReccette = findViewById(R.id.toolbar_recette);
         bottomNavigationView = findViewById(R.id.androidx_window_recette_recommende_filtre);
 
         tempsDePreparationSeekBar = findViewById(R.id.temps_de_preparation_seekBar);
         tempsDePreparationTextView = findViewById(R.id.temps_de_preparation_textView);
-        recetteButtonPortionPlus = findViewById(R.id.recette_Button_portion_plus);
+        recetteButtonAjouterProduit = findViewById(R.id.recette_Button_add_produit);
         produitsSelectionneRecyclerView = findViewById(R.id.produits_selectionne);
         annulerButton = findViewById(R.id.recette_recommende_filtre_annuler_button);
         appliquerButton = findViewById(R.id.recette_recommende_filtre_appliquer_button);
         regimeSpeciauxRecyclerView = findViewById(R.id.regime_speciaux_recycler_view);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String produitsSelectionnesListJson = sharedPreferences.getString("produitsSelectionnesList", "");
+
+        if (!produitsSelectionnesListJson.isEmpty()) {
+            Gson gson = new Gson();
+            produitsSelectionnesList = gson.fromJson(produitsSelectionnesListJson, new TypeToken<List<String>>() {}.getType());
+        }
 
         // Set up the RecyclerView
         regimeSpeciauxRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
@@ -118,10 +152,12 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
             }
         });
 
-        recetteButtonPortionPlus.setOnClickListener(new View.OnClickListener() {
+        recetteButtonAjouterProduit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle recette button portion plus click
+                Intent intent = new Intent(context, SelectionnerProduitActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_SELECTION);
+
             }
         });
 
@@ -130,10 +166,9 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
         flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
         flexboxLayoutManager.setAlignItems(AlignItems.STRETCH);
-
         produitsSelectionneRecyclerView.setLayoutManager(flexboxLayoutManager);
 
-        List<String> produitsSelectionnesList = new ArrayList<String>(Arrays.asList("Egg", "Tomato", "onions"));
+
         ProduitsSelectionneAdapter produitsSelectionneAdapter = new ProduitsSelectionneAdapter(produitsSelectionnesList);
         produitsSelectionneRecyclerView.setAdapter(produitsSelectionneAdapter);
 
@@ -171,24 +206,24 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         });
 
         /* ------------------------------------------------------------------------------------------ */
-        Menu appBar = toolbarAppReccette.getMenu();
-        appBar.findItem(R.id.poubelle).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, corbeille.class);
-            startActivity(intent);
-            finish();
-            return true;
-        });
+     //   Menu appBar = toolbarAppReccette.getMenu();
+     //   appBar.findItem(R.id.poubelle).setOnMenuItemClickListener(item -> {
+     //       Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, corbeille.class);
+     //       startActivity(intent);
+     //       finish();
+     //       return true;
+     //   });
 
-        appBar.findItem(R.id.message).setOnMenuItemClickListener(item -> {
-            return true;
-        });
+      //  appBar.findItem(R.id.message).setOnMenuItemClickListener(item -> {
+      //      return true;
+    //    });
 
-        appBar.findItem(R.id.profil1).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, ProfilActivity.class);
-            startActivity(intent);
-            finish();
-            return true;
-        });
+    //    appBar.findItem(R.id.profil1).setOnMenuItemClickListener(item -> {
+    //        Intent intent = new Intent(RecettesRecommendeFiltreActivity.this, ProfilActivity.class);
+    //        startActivity(intent);
+    //        finish();
+     //       return true;
+   //     });
 
         // Set up the BottomNavigationView
 
@@ -209,4 +244,26 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
             return true;
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SELECTION && resultCode == Activity.RESULT_OK) {
+            assert data != null;
+            produitsSelectionnesList = data.getStringArrayListExtra("ProduitsSelectionnes");
+
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            Gson gson = new Gson();
+            String produitsSelectionnesListJson = gson.toJson(produitsSelectionnesList);
+
+            editor.putString("produitsSelectionnesList", produitsSelectionnesListJson);
+            editor.apply();
+
+            ProduitsSelectionneAdapter produitsSelectionneAdapter = new ProduitsSelectionneAdapter(produitsSelectionnesList);
+            produitsSelectionneRecyclerView.setAdapter(produitsSelectionneAdapter);
+        }
+    }
+
 }

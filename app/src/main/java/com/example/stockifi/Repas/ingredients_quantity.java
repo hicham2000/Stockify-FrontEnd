@@ -34,6 +34,19 @@ public class ingredients_quantity extends AppCompatActivity {
         Intent intent = getIntent();
         t = findViewById(R.id.errormessage);
 
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_quanting);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
+
             ArrayList<Produit> productList =intent.getParcelableArrayListExtra("selectedItems");
 
 

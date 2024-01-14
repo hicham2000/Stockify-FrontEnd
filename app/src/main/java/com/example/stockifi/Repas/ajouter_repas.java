@@ -62,6 +62,19 @@ public class ajouter_repas extends AppCompatActivity {
         e.setText("");
         Intent intent = getIntent();
 
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_ajoutrepas);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
+
         container = findViewById(R.id.container);
         ArrayList<String> quantity = intent.getStringArrayListExtra("stringListExtra");
         ArrayList<Produit> productList =intent.getParcelableArrayListExtra("selectedItems");
@@ -197,12 +210,14 @@ public class ajouter_repas extends AppCompatActivity {
                             productObj.put("quantite", quantity.get(l));
                             l++;
                             productObj.put("uniteMesure", product.getUniteMesure());
+                            System.out.println(product.getUniteMesure());
 
                             // Add each product JSON object to the productsArray
                             productsArray.put(productObj);
                         }
                      jsonProduit.put("arraylist_of_product", productsArray);
                       jsonProduit.put("spinnerText", spinnerText.trim());
+
 
 
                         System.out.println(jsonProduit);

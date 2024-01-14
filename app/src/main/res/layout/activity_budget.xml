@@ -24,7 +24,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
-        android:id="@+id/androidx_window_course"
+        android:id="@+id/androidx_window_budget"
         android:layout_width="match_parent"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
@@ -33,157 +33,178 @@
         android:layout_centerHorizontal="true"
         android:background="@color/vertTexte"
         app:menu="@menu/menu_bottom_navigation"/>
-    
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/dimenTexte"
-        >
 
 
-        <TextView
-            android:id="@+id/aboveListViewText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/budgetActivity_mois"
-            android:fontFamily="@font/hubballi_regular"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:padding="8dp"
-            android:layout_marginTop="70dp"
-            android:layout_gravity="center"
-            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimenTexte"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/aboveListViewText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/hubballi_regular"
+                android:padding="8dp"
+                android:text="@string/budgetActivity_mois"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/pourcentage_consomme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/montant_consomme"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="@string/budgetActivity_pourcentage_consomme"
+                    android:textColor="@android:color/white"
+                    android:textSize="24dp" />
+
+                <Space
+                    android:layout_width="75dp"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/pourcentage_gaspille"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/montant_gaspille"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="@string/budgetActivity_pourcentage_gaspille"
+                    android:textColor="@android:color/white"
+                    android:textSize="24dp" />
+            </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="70dp"
-            android:gravity="center">
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/montant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/montant_consomme"
-                android:padding="16dp"
-                android:text="@string/budgetActivity_pourcentage_consomme"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:textSize="24dp"/>
-
-            <Space
-                android:layout_width="75dp"
-                android:layout_height="1dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/montant_gaspille"
-                android:padding="16dp"
-                android:text="@string/budgetActivity_pourcentage_gaspille"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:textSize="24dp"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/montant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/budgetActivity_montant_total"
-            android:fontFamily="@font/hubballi_regular"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:padding="8dp"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/little_montant_consomme"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="15dp"/>
-
-            <Space
-                android:layout_width="15dp"
-                android:layout_height="1dp"/>
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/hubballi_regular"
+                android:padding="8dp"
+                android:text="@string/budgetActivity_montant_total"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
 
             <TextView
+                android:id="@+id/montant_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/budgetActivity_montant_consomme"
-                android:textSize="25sp"
+                android:layout_marginRight="10dp"
                 android:gravity="center_vertical"
-                android:textColor="@color/vertTexte"/>
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="1dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/budgetActivity_dh_consomme"
                 android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:gravity="center_vertical"
-                android:layout_marginRight="10dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="35dp">
+                android:textSize="20sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/little_montant_gaspille"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="15dp"/>
-
-            <Space
-                android:layout_width="15dp"
-                android:layout_height="1dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/budgetActivity_montant_gaspille"
-                android:textSize="25sp"
-                android:gravity="center_vertical"
-                android:textColor="@color/budgetActivity_red_gaspille"/>
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="1dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/budgetActivity_dh_gaspille"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="20dp"/>
         </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:src="@drawable/little_montant_consomme" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/budgetActivity_montant_consomme"
+                    android:textColor="@color/vertTexte"
+                    android:textSize="25sp" />
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/montant_consomme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/budgetActivity_dh_consomme"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:src="@drawable/little_montant_gaspille" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/budgetActivity_montant_gaspille"
+                    android:textColor="@color/budgetActivity_red_gaspille"
+                    android:textSize="25sp" />
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/montant_gaspille"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/budgetActivity_dh_gaspille"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
 
+        </LinearLayout>
 
-
-
-
-    </LinearLayout>
-
-
+    
 
 
 </RelativeLayout>

@@ -1,13 +1,19 @@
 package com.example.stockifi.corbeille;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -68,7 +74,7 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
         textViewP.setText(data.get(position).getIntitule());
 
 
-        buttonRecup.setOnClickListener(new View.OnClickListener() {
+        /*buttonRecup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -89,9 +95,142 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
                 });
 
             }
+        });*/
+        /*buttonRecup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show a dialog box to get the new quantity
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Restore Product");
+                builder.setMessage("Enter the new quantity:");
+
+                // Set up the input
+                final EditText input = new EditText(getContext());
+                input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                builder.setView(input);
+
+                // Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newQuantityStr = input.getText().toString();
+                        if (!newQuantityStr.isEmpty()) {
+                            // Parse the new quantity
+                            double newQuantity = Double.parseDouble(newQuantityStr);
+
+                            int productId = data.get(position).getId();
+                            int stockId = myApp.getUser_stock_id();
+
+                            // Call the backend to restore the product with the new quantity
+                            backendManager.restoreProductFromCorbeille((long) stockId, (long) productId, newQuantity, new BackendManager.BackendResponseCallback() {
+                                @Override
+                                public void onSuccess(JSONObject response) {
+                                    data.remove(position);
+                                    notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onError(Exception error) {
+                                    Toast.makeText(getContext().getApplicationContext(), "Error during product restoration: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Toast.makeText(getContext().getApplicationContext(), "Please enter a valid quantity", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+            }
+        });*/
+        buttonRecup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.corbeille_quantity_custom_alert_dialog);
+
+                TextView customDialogTitle = dialog.findViewById(R.id.customDialogTitle);
+                EditText customDialogInput = dialog.findViewById(R.id.customDialogInput);
+                Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
+                Button buttonOk = dialog.findViewById(R.id.buttonOk);
+
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                layoutParams.copyFrom(dialog.getWindow().getAttributes());
+                layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+                dialog.getWindow().setAttributes(layoutParams);
+
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                buttonOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String newQuantityStr = customDialogInput.getText().toString();
+                        if (!newQuantityStr.isEmpty()) {
+                            double newQuantity = Double.parseDouble(newQuantityStr);
+
+                            int productId = data.get(position).getId();
+                            int stockId = myApp.getUser_stock_id();
+
+                            backendManager.restoreProductFromCorbeille((long) stockId, (long) productId, newQuantity, new BackendManager.BackendResponseCallback() {
+                                @Override
+                                public void onSuccess(JSONObject response) {
+                                    data.remove(position);
+                                    notifyDataSetChanged();
+                                    dialog.dismiss(); // Dismiss the dialog after success
+                                }
+
+                                @Override
+                                public void onError(Exception error) {
+                                    Toast.makeText(getContext().getApplicationContext(), "Error during product restoration: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Toast.makeText(getContext().getApplicationContext(), "Please enter a valid quantity", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                dialog.show();
+            }
         });
 
+
         buttonSupp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int productId = data.get(position).getId();
+                int stockId = myApp.getUser_stock_id();
+
+                backendManager.supprimerDefPermanentlyUnProduitFromCorbeille((long) stockId, (long) productId, new BackendManager.BackendResponseCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        if (position >= 0 && position < data.size()) {
+                            data.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        Toast.makeText(getContext().getApplicationContext(), "Erreur lors de la mise à jour du Permanent: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+        /*buttonSupp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -114,7 +253,7 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
                 });
 
             }
-        });
+        });*/
 
 
         return convertView;
