@@ -112,8 +112,8 @@ public class ProfilActivity extends AppCompatActivity {
 
     private static final String SPINNER_DATE_PER_SELECTION_KEY = "spinnerDatePerSelectionKey";
 
-   private static final String BASE_URL = "10.0.2.2:1111";
-  //private static final String BASE_URL = "192.168.11.100:1111";
+  // private static final String BASE_URL = "10.0.2.2:1111";
+  private static final String BASE_URL = "192.168.11.100:1111";
     private TextView nomProfilView;
     private TextView emailProfilView;
 

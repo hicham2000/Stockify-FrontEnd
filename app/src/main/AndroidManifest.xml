@@ -21,44 +21,30 @@
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText"
         tools:targetApi="31">
-
-        <activity
-
-            android:name=".Liste_Course.information_produit_listeCourse"
-            android:exported="false" />
-        <activity
-
-            android:name=".MessageActivity"
-            android:exported="true">
-
-        </activity>
-
         <activity
             android:name=".Repas.UpdateRepas"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Repas.ViewRepas"
-
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Gestion_Produit.InformationsProduitStock"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Gestion_Produit.ModifierProduitStock"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Home.HomeActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:exported="false" />
         <activity
             android:name=".Home.AjouterCategorie"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Gestion_Produit.ListeProduit"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Gestion_Produit.AjouterProduit_ListeProduit"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Repas.ajouter_repas"
             android:exported="false"
@@ -68,28 +54,24 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".budget.budgetActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".Repas.ingredients"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Liste_Course.ModifierProduit"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Liste_Course.AjouterProduit"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Liste_Course.ListeDeCourse"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Sprint2Activity"
             android:exported="false" />
         <activity
             android:name=".ProduitCardActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Produit.AjouterProduitRecherche"
             android:exported="false" />
@@ -101,7 +83,7 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ChangerPassword"
             android:exported="false" />
@@ -111,24 +93,23 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".recettes.RecettesRecommendeActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".recettes.RecettesRecommendeFiltreActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".recettes.RecetteActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".recettes.SelectionnerProduitActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-
             android:name=".corbeille.corbeille"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginActivity"
@@ -143,9 +124,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id" />
 
         <service
             android:name=".NotificationService"
