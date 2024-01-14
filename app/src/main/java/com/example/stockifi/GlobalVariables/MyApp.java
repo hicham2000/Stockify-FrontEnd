@@ -11,9 +11,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import androidx.annotation.NonNull;
 public class MyApp extends Application {
 
-
-
-
     private int User_id = 1;
     private int User_stock_id = 1;
     private  String notiftoken;

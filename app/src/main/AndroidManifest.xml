@@ -22,10 +22,22 @@
         tools:ignore="ExtraText"
         tools:targetApi="31">
         <activity
+
+            android:name=".Liste_Course.information_produit_listeCourse"
+            android:exported="false" />
+        <activity
+
+            android:name=".MessageActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
             android:name=".Repas.UpdateRepas"
             android:exported="true" />
         <activity
             android:name=".Repas.ViewRepas"
+
             android:exported="true" />
         <activity
             android:name=".Gestion_Produit.InformationsProduitStock"
@@ -36,7 +48,7 @@
         <activity
             android:name=".Home.HomeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Home.AjouterCategorie"
             android:exported="true" />
@@ -54,12 +66,10 @@
             android:name=".Repas.ingredients_quantity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".budget.budgetActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".Repas.ingredients"
             android:exported="true" />
@@ -90,7 +100,7 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ChangerPassword"
             android:exported="false" />
@@ -115,10 +125,10 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
+
             android:name=".corbeille.corbeille"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".LoginActivity"
             android:exported="true">

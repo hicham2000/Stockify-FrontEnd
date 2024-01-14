@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/vert"
 
-    tools:context=".corbeille.corbeille">
+    tools:context=".MessageActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:layout_height="?attr/actionBarSize">
 
             <ImageView
-                android:id="@+id/toolbar_back_button_ajoutCorbe"
+                android:id="@+id/toolbar_back_button_ajout"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/fleche"
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Corbeille"
+                android:text="Notification"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -43,9 +44,9 @@
                 android:id="@+id/item_poubelle"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/poub_gris"
+                android:src="@drawable/message_grise"
                 android:layout_gravity="start"
-                android:layout_marginStart="180dp"
+                android:layout_marginStart="150dp"
                 />
 
 
@@ -61,41 +62,25 @@
             android:background="@color/white" />
 
     </LinearLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-
-        android:id="@+id/androidx_window_corbeille"
-        android:layout_width="0dp"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"
-
-        android:background="@color/vertTexte"
-        app:menu="@menu/menu_bottom_navigation"/>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="60dp"
-       >
-
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="end"
-            android:paddingEnd="20dp">
+            android:paddingEnd="20dp"
+            >
 
             <TextView
                 android:id="@+id/aboveListViewText"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:text="@string/Emptycorbeille"
+                android:text="@string/effacer_notification"
                 android:fontFamily="@font/hubballi_regular"
                 android:textSize="20sp"
                 android:textColor="@color/vidercorbeille"
@@ -111,44 +96,14 @@
                 android:clickable="true"
                 android:src="@drawable/delete" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:paddingEnd="20dp">
-
-            <Button
-                android:layout_width="141dp"
-                android:id="@+id/produits"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:fontFamily="@font/hubballi_regular"
-                android:paddingLeft="8dp"
-                android:text="@string/produits"
-                android:textSize="20dp" />
-
-            <Button
-                android:layout_width="141dp"
-                android:id="@+id/repas"
-                android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:layout_marginLeft="20dp"
-                android:text="@string/repas"
-                android:fontFamily="@font/hubballi_regular"
-                android:textSize="20dp"
-                />
-        </LinearLayout>
-
         <ListView
-            android:id="@+id/myListViewCorbeille"
+            android:id="@+id/notificationListView"
             android:layout_width="match_parent"
-            android:layout_height="460dp"
-            android:dividerHeight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            />
+            android:layout_height="match_parent"
+            >
+
+
+        </ListView>
 
     </LinearLayout>
 
