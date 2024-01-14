@@ -38,6 +38,13 @@
         <item>tonne</item>
         <item>Kg</item>
         <item>g</item>
+
+    </string-array>
+
+    <string-array name="poids_ajoutpr">
+        <item>tonne</item>
+        <item>Kg</item>
+        <item>g</item>
         <item>L</item>
         <item>cl</item>
         <item>ml</item>

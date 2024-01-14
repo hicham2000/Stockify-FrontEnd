@@ -91,7 +91,7 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         } else if (itemId == R.id.profil1) {
             Intent profilIntent = new Intent(RecettesRecommendeActivity.this, ProfilActivity.class);
             startActivity(profilIntent);
-            finish();
+
             return true;
         } else {
             return super.onOptionsItemSelected(item);
