@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,6 +20,8 @@ import com.example.stockifi.Liste_Course.ListeCourseAdapter;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.example.stockifi.Liste_Course.Produit;
 import com.example.stockifi.R;
+import com.example.stockifi.Repas.CustomAdapter;
+import com.example.stockifi.Repas.ingredients;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +39,7 @@ public class ListeProduit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_produit);
+
 
         Button nouveau=findViewById(R.id.ajouter_produit_Liste_Produit);
 
@@ -85,12 +89,41 @@ public class ListeProduit extends AppCompatActivity {
                                 dataList.add(new ProduitALaListe(id,imageUrl,intitule,mesure));
                             }
 
-                            ListeproduitAdapter adapter = new ListeproduitAdapter(ListeProduit.this, dataList);
-                       //     adapter.notifyDataSetChanged();
+                            final ListeproduitAdapter[] adapter = {new ListeproduitAdapter(ListeProduit.this, dataList)};
+
+                            listView.setAdapter(adapter[0]);
 
 
 
-                            listView.setAdapter(adapter);
+                            listView.setAdapter(adapter[0]);
+                            SearchView search_listeCourse = findViewById(R.id.search_produit);
+                            search_listeCourse.setFocusable(true);
+
+                            search_listeCourse.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String s) {
+                                    String produit = search_listeCourse.getQuery().toString();
+                                    // Handle the submitted query
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onQueryTextChange(String newText) {
+
+
+                                    String produit = search_listeCourse.getQuery().toString();
+                                    System.out.println(produit);
+                                    ArrayList<ProduitALaListe> p = new ArrayList<>();
+                                    dataList.stream()
+                                            .filter(a -> a.getIntitule().toLowerCase().contains(produit.toLowerCase()))
+                                            .forEach(p::add);
+                                    adapter[0] = new ListeproduitAdapter(ListeProduit.this, p);
+                                    ListView listView = findViewById(R.id.myListViewProduit);
+                                    listView.setAdapter(adapter[0]);
+
+                                    return false;
+                                }
+                            });
 
 
 

@@ -125,8 +125,9 @@ public class ingredients extends AppCompatActivity {
 
 
                                     String produit = search_listeCourse.getQuery().toString();
-                                    System.out.println(produit);
+                                  //  System.out.println(produit);
                                     ArrayList<Produit> p = new ArrayList<>();
+
                                     dataList.stream()
                                             .filter(a -> a.getIntitule().toLowerCase().contains(produit.toLowerCase()))
                                             .forEach(p::add);
