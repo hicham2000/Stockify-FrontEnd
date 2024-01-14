@@ -46,8 +46,8 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
 
-    String apiUrl = "http://localhost:1111/stocks/1/products";
-    String apiRepasUrl = "";
+    String apiUrl = "http://10.0.2.2:1111/stocks/1/products";
+    String apiRepasUrl = "http://10.0.2.2:1111/listRepas/repas/1";
     ArrayList<listData> listdata;
     ArrayList<listData2> listdata2;
 
@@ -181,6 +181,7 @@ public class HomeActivity extends AppCompatActivity {
                 String imageUrl = object.getString("imageUrl");
                 String intitule = object.getString("intitule");
                 String dateExpiration = object.getString("dateExpiration");
+                System.out.println(object);
                 listdata.add(new listData(id, intitule, dateExpiration,imageUrl));
             }
             GridAdapter gridAdapter = new GridAdapter(HomeActivity.this, listdata);
@@ -190,7 +191,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
     public void fetchProduit() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -202,6 +203,7 @@ public class HomeActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
+        requestQueue.add(stringRequest);
     }
     public void parseJson2(String response) {
         try {
@@ -223,8 +225,8 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
     public void fetchRepas() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiRepasUrl, new Response.Listener<String>() {
+        RequestQueue requestQueue1 = Volley.newRequestQueue(this);
+        StringRequest stringRequest1 = new StringRequest(Request.Method.GET, apiRepasUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 parseJson2(response);
@@ -235,5 +237,6 @@ public class HomeActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
+        requestQueue1.add(stringRequest1);
     }
 }
