@@ -15,6 +15,7 @@ import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.budget.budgetActivity;
@@ -82,8 +83,10 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (itemId == R.id.message) {
-            // Handle the message item click
-            // You can add your code here
+
+                Intent profilIntent = new Intent(RecettesRecommendeActivity.this, MessageActivity.class);
+                startActivity(profilIntent);
+
             return true;
         } else if (itemId == R.id.profil1) {
             Intent profilIntent = new Intent(RecettesRecommendeActivity.this, ProfilActivity.class);

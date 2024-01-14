@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 
 import android.widget.TextView;
@@ -66,8 +67,8 @@ public class budgetActivity extends AppCompatActivity {
                 //     finish();
                 return true;
             } else if (item.getItemId() == R.id.message) {
-                // Handle the message item click
-                // You can add your code here
+                Intent profilIntent = new Intent(budgetActivity.this, MessageActivity.class);
+                startActivity(profilIntent);
                 return true;
             } else if (item.getItemId() == R.id.profil1) {
                 Intent profilIntent = new Intent(budgetActivity.this, ProfilActivity.class);

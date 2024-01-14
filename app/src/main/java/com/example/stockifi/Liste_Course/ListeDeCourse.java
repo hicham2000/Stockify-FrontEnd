@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Home.HomeActivity;
+import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.budget.budgetActivity;
@@ -471,9 +472,16 @@ public class ListeDeCourse extends AppCompatActivity {
             Intent intent = new Intent(ListeDeCourse.this, ProfilActivity.class);
             startActivity(intent);
             return true;
+
+        } else if (item.getItemId() == R.id.message) {
+
+            Intent profilIntent = new Intent(ListeDeCourse.this, MessageActivity.class);
+            startActivity(profilIntent);
+
+            return true;
         }
 
-          else if (item.getItemId() == R.id.poubelle) {
+        else if (item.getItemId() == R.id.poubelle) {
                 // L'utilisateur a cliqué sur "profil1"
                 Intent intent = new Intent(ListeDeCourse.this, corbeille.class);
                 startActivity(intent);
