@@ -36,5 +36,13 @@ public class GetImageFromUrlTest {
         assertNotNull(result);
     }
 
+    @Test
+    public void doInBackground_withoutInternetConnection_shouldNotFetchImage() {
+
+        Bitmap result = getImageFromUrl.doInBackground("");
+
+        assertNull(result);
+    }
+
 }
 
