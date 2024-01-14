@@ -235,17 +235,9 @@ public class ModifierProduitStock extends AppCompatActivity {
                 // Add the request to the RequestQueue.
                 queue.add(modifierProduit);
 
-            }
-        });
-
-        Button valider = findViewById(R.id.button_validerProd_modif);
-        valider.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
                 // Action à effectuer lors du clic sur le bouton
                 Intent intent = new Intent(ModifierProduitStock.this, InformationsProduitStock.class);
                 startActivity(intent);
-
 
             }
         });

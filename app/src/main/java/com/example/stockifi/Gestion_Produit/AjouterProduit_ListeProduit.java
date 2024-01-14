@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.R;
 
 import org.json.JSONException;
@@ -200,6 +201,10 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
 
                 // Add the request to the RequestQueue.
                 queue.add(ajouterProduit);
+
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(AjouterProduit_ListeProduit.this, HomeActivity.class);
+                startActivity(intent);
 
             }
 

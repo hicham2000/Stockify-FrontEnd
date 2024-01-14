@@ -38,7 +38,8 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
 
     private ArrayList<Produit> data;
     private ArrayList<Boolean> checkedPositions;
-    private static final String BASE_URL = "192.168.11.100:1111";
+    //private static final String BASE_URL = "192.168.11.100:1111";
+    private static final String BASE_URL = "10.0.2.2:1111";
 
     public ListeCourseAdapter(Context context, ArrayList<Produit> data) {
         super(context, 0, data);
