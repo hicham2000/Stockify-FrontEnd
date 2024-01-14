@@ -28,7 +28,8 @@ import org.json.JSONObject;
 
 public class AjouterProduit extends AppCompatActivity {
 
-    private static final String BASE_URL = "192.168.11.100:1111";
+   // private static final String BASE_URL = "192.168.11.100:1111";
+    private static final String BASE_URL = "10.0.2.2:1111";
 
     Button ajouterProduitButton;
 

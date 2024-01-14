@@ -89,8 +89,8 @@
     <string name="date">Date de naissance</string>
     <string name="password"><u>Changer mot de passe</u></string>
     <string name="reussite">Reussite/Information</string>
-    <string name="produit_en_cuisine">Produit en cuisine</string>
-    <string name="Kg_jetes">Kg jetes</string>
+    <string name="produit_en_cuisine">Produits en cuisine</string>
+    <string name="produit_gaspille_en_cuisine">Produis gaspillés</string>
     <string name="economies">Economies</string>
     <string name="regime_speciaux">Regimes speciaux et Intolerences</string>
     <string name="affichage_quantites">Affichage des quantites</string>
@@ -267,4 +267,5 @@ la quantite critique</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="effacer_notification">Effacer notification</string>
+    <string name="default_notification_channel_id">aissa</string>
 </resources>

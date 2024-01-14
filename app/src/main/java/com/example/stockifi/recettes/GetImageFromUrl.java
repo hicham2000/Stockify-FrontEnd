@@ -19,7 +19,7 @@ import java.net.URL;
 public class GetImageFromUrl extends AsyncTask<String, Void, Bitmap> {
     private static final String TAG = GetImageFromUrl.class.getSimpleName();
     private ImageView imageView;
-    ProgressBar loadingProgressBar;
+    private ProgressBar loadingProgressBar;
     private Bitmap bitmap;
 
     public GetImageFromUrl(ImageView img, ProgressBar progressBar) {
@@ -65,7 +65,6 @@ public class GetImageFromUrl extends AsyncTask<String, Void, Bitmap> {
             imageView.setImageBitmap(bitmap);
             loadingProgressBar.setVisibility(View.GONE);
         } else {
-            // Handle the case where the image could not be fetched
             Log.e(TAG, "Error fetching image");
         }
     }
