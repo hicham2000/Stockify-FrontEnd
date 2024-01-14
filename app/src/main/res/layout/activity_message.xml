@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vert"
+
+    tools:context=".MessageActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/appBarAjout"
+        android:background="@color/vertTexte">
+
+        <androidx.appcompat.widget.Toolbar
+
+
+            android:id="@+id/toolbar_corbeille"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/toolbar_back_button_ajout"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fleche"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Notification"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/item_poubelle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/message_grise"
+                android:layout_gravity="start"
+                android:layout_marginStart="150dp"
+                />
+
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:paddingEnd="20dp"
+            >
+
+            <TextView
+                android:id="@+id/aboveListViewText"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/effacer_notification"
+                android:fontFamily="@font/hubballi_regular"
+                android:textSize="20sp"
+                android:textColor="@color/vidercorbeille"
+                android:padding="8dp"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/trash"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:src="@drawable/delete" />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/notificationListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+        </ListView>
+
+    </LinearLayout>
+
+</RelativeLayout>

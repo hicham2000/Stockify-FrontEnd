@@ -10,23 +10,22 @@ import android.widget.TextView;
 
 import com.example.stockifi.R;
 
+import java.util.ArrayList;
+
 public class GridAdapter extends BaseAdapter {
     Context context;
-    String[] itemsName;
-    int[] image;
+    ArrayList<listData> listdata;
 
-
-
-    public GridAdapter(Context context, String[] itemsName, int[] image) {
+    public GridAdapter(Context context, ArrayList<listData> listdata) {
         this.context = context;
-        this.itemsName = itemsName;
-        this.image = image;
+        this.listdata = listdata;
+
     }
 
     LayoutInflater inflater;
     @Override
     public int getCount() {
-        return itemsName.length;
+        return listdata.toArray().length;
     }
 
     @Override
@@ -50,8 +49,10 @@ public class GridAdapter extends BaseAdapter {
 
         ImageView imageView = convertView.findViewById(R.id.gridImage);
         TextView textView = convertView.findViewById(R.id.gridName);
-        imageView.setImageResource(image[position]);
-        textView.setText(itemsName[position]);
+        TextView textView1 = convertView.findViewById(R.id.gridName);
+        //imageView.setImageResource(image[position]);
+        textView.setText(listdata.get(position).getIntitule());
+        textView1.setText(listdata.get(position).getDateExpiration());
         return convertView;
     }
 }

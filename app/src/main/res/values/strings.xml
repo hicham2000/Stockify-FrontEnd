@@ -13,7 +13,7 @@
     <string name="ingredient"> Ingrédients </string>
     <string name="chercherProd">Chercher un produit</string>
     <string name="chercherRecettesRecommende">Rechercher Recette</string>
-
+    <string name="notification">Notification</string>
     <string name="inscrire">S\'inscrire</string>
     <string-array name="regimes">
         <item>Regimes specieux</item>
@@ -35,6 +35,13 @@
     </string-array>
 
     <string-array name="poids">
+        <item>tonne</item>
+        <item>Kg</item>
+        <item>g</item>
+
+    </string-array>
+
+    <string-array name="poids_ajoutpr">
         <item>tonne</item>
         <item>Kg</item>
         <item>g</item>
@@ -82,8 +89,8 @@
     <string name="date">Date de naissance</string>
     <string name="password"><u>Changer mot de passe</u></string>
     <string name="reussite">Reussite/Information</string>
-    <string name="produit_en_cuisine">Produit en cuisine</string>
-    <string name="Kg_jetes">Kg jetes</string>
+    <string name="produit_en_cuisine">Produits en cuisine</string>
+    <string name="produit_gaspille_en_cuisine">Produis gaspillés</string>
     <string name="economies">Economies</string>
     <string name="regime_speciaux">Regimes speciaux et Intolerences</string>
     <string name="affichage_quantites">Affichage des quantites</string>
@@ -92,7 +99,6 @@
     <string name="mode_sportif">Mode Sportif</string>
     <string name="device2">Ajout automatique des produit
     a la corbeille en cas de peremption</string>
-    <string name="notification">Notification</string>
     <string name="notification1">Alerte des dates expirations</string>
     <string name="notification2">Alerte quand les produits atteignent
 la quantite critique</string>
@@ -206,6 +212,9 @@ la quantite critique</string>
     <string name="repas">Repas</string>
     <string name="corbeilleActivity_dialog_title">Restaurer le produit</string>
     <string name="corbeilleActivity_dialog_input_hint">Entrez la nouvelle quantité</string>
+    <string name="corbeilleActivity_ok_button">OK</string>
+    <string name="corbeilleActivity_cancel_button">Cancel</string>
+
 
     <!-- budget's strings -->
 
@@ -255,4 +264,8 @@ la quantite critique</string>
     <string name="floating_button_pour_l_ajout_de_recette_au_stock">Floating button pour l\'ajout de recette au stock</string>
     <string name="SelectionnerProduitFiltre_text">Selectionner Produit</string>
     <string name="SelectionnerProduitFiltre_valider_text">Valider Votre Choix</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="effacer_notification">Effacer notification</string>
+    <string name="default_notification_channel_id">aissa</string>
 </resources>

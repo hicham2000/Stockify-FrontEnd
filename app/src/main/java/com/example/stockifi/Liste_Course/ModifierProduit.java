@@ -28,7 +28,8 @@ import java.util.Arrays;
 
 public class ModifierProduit extends AppCompatActivity {
 
-    private static final String BASE_URL = "192.168.11.100:1111";
+    //private static final String BASE_URL = "192.168.11.100:1111";
+    private static final String BASE_URL = "10.0.2.2:1111";
     EditText nom;
     EditText quantite;
 
@@ -131,32 +132,39 @@ public class ModifierProduit extends AppCompatActivity {
                                                          e.printStackTrace();
                                                      }
 
-                                                     JsonObjectRequest request = new JsonObjectRequest(
-                                                             Request.Method.PUT,
-                                                             url,
-                                                             jsonBody,
-                                                             new Response.Listener<JSONObject>() {
-                                                                 @Override
-                                                                 public void onResponse(JSONObject response) {
-                                                                     // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
-                                                                  //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                                     if (!nomProduit.isEmpty()) {
+                                                         JsonObjectRequest request = new JsonObjectRequest(
+                                                                 Request.Method.PUT,
+                                                                 url,
+                                                                 jsonBody,
+                                                                 new Response.Listener<JSONObject>() {
+                                                                     @Override
+                                                                     public void onResponse(JSONObject response) {
+                                                                         // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
+                                                                         //   Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                                                     }
+                                                                 },
+                                                                 new Response.ErrorListener() {
+                                                                     @Override
+                                                                     public void onErrorResponse(VolleyError error) {
+                                                                         // Gérez les erreurs de la requête ici
+                                                                         //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
+                                                                     }
                                                                  }
-                                                             },
-                                                             new Response.ErrorListener() {
-                                                                 @Override
-                                                                 public void onErrorResponse(VolleyError error) {
-                                                                     // Gérez les erreurs de la requête ici
-                                                                //     Toast.makeText(ModifierProduit.this, "Erreur lors de la mise à jour du produit", Toast.LENGTH_SHORT).show();
-                                                                 }
-                                                             }
-                                                     );
+                                                         );
 
-                                                     queue.add(request);
-                                                     Intent intent = new Intent(ModifierProduit.this, ListeDeCourse.class);
-                                                     startActivity(intent);
+                                                         queue.add(request);
+                                                         Intent intent = new Intent(ModifierProduit.this, ListeDeCourse.class);
+                                                         startActivity(intent);
+                                                     }
+                                                     else {
+                                                         Toast.makeText(ModifierProduit.this, "vous dever entrer le nom du produit", Toast.LENGTH_SHORT).show();
+
+                                                     }
                                                  }
 
                                              });
+
 
 
       //  mesure.setText(date);

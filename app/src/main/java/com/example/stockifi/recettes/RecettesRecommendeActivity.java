@@ -13,9 +13,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
+import com.example.stockifi.budget.budgetActivity;
 import com.example.stockifi.corbeille.corbeille;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -80,13 +83,15 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (itemId == R.id.message) {
-            // Handle the message item click
-            // You can add your code here
+
+                Intent profilIntent = new Intent(RecettesRecommendeActivity.this, MessageActivity.class);
+                startActivity(profilIntent);
+
             return true;
         } else if (itemId == R.id.profil1) {
             Intent profilIntent = new Intent(RecettesRecommendeActivity.this, ProfilActivity.class);
             startActivity(profilIntent);
-            finish();
+
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -98,8 +103,21 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recettes_recommende);
 
+
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_recettes_recommende);
+
+
+        // Sélectionner l'élément
+        MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.recette);
+        menuItem.setChecked(true);
+
+      //  int currentUser_id = 1;//myApp.getUser_id();
+
         myApp = (MyApp) getApplication();
         int currentUser_id = myApp.getUser_id();
+
         backendManager = new BackendManager(context);
 
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
@@ -203,6 +221,20 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
 
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, ListeDeCourse.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+        navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(RecettesRecommendeActivity.this, budgetActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        });
+
+        navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(RecettesRecommendeActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
             return true;

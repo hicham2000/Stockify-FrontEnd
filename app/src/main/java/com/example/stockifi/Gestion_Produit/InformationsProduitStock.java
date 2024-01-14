@@ -3,9 +3,13 @@ package com.example.stockifi.Gestion_Produit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
+import android.icu.text.IDNA;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.Repas.ViewRepas;
 
@@ -84,6 +89,21 @@ public class InformationsProduitStock extends AppCompatActivity {
         });
 
         queue1.add(stringRequest);
+
+        Button editerProduit = findViewById(R.id.button_modifier_info);
+
+        editerProduit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(InformationsProduitStock.this, ModifierProduitStock.class);
+                intent.putExtra("produitid", Integer.toString(produitId));
+                startActivity(intent);
+
+
+
+            }
+        });
 
     }
 

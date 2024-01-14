@@ -2,6 +2,11 @@ package com.example.stockifi;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +14,7 @@ import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 import android.content.Intent;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +28,13 @@ import android.database.Cursor;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri;
-    private static final long MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024; // 5MB
+    private static final long MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024;
 
     EditText nomText, prenomText, emailText, passwordText, confirmPasswordText, regimeDescriptionText;
     Spinner regimeOptionSpinner;
@@ -48,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         regimeDescriptionText = findViewById(R.id.regime_description);
         acceptConditionCheckBox = findViewById(R.id.checkBox);
         registerButton = findViewById(R.id.registerButton);
+
 
         BackendManager backendManager = new BackendManager(this);
 
@@ -112,6 +121,13 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private boolean validateInput() {
+       Pattern PASSWORD_PATTERN =
+                Pattern.compile("^" +
+                        "(?=.*[a-zA-Z])" +      // any letter
+                        "(?=.*[@#$%^&+=])" +    // at least 1 special character
+                        "(?=\\S+$)" +           // no white spaces
+                        ".{4,}" +               // at least 4 characters
+                        "$");
         boolean acceptCondition = acceptConditionCheckBox.isChecked();
         boolean isValid = true;
 
@@ -140,7 +156,8 @@ public class RegisterActivity extends AppCompatActivity {
             passwordText.setError("Password est un champs obligatoire");
             isValid = false;
         } else {
-            passwordText.setError(null);
+            if(!PASSWORD_PATTERN.matcher(password).matches()){passwordText.setError("Password must be at least 4 characters long and include at least one letter, one special character (@, #, $, %, ^, &, +), and no white spaces.");}
+            else{passwordText.setError(null);}
         }
 
         if (confirmPassword.isEmpty()) {

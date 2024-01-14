@@ -13,6 +13,8 @@ public class Produit implements Parcelable {
 
     private Boolean check;
 
+    private String imageUrl;
+
     public int getId() {
         return id;
     }
@@ -25,10 +27,19 @@ public class Produit implements Parcelable {
         return intitule;
     }
 
+
+
     public void setIntitule(String intitule) {
         this.intitule = intitule;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl() {
+        this.imageUrl = imageUrl;
+    }
 
     public double getQuantite() {
         return quantite;
@@ -52,6 +63,13 @@ public class Produit implements Parcelable {
         this.quantite = quantite;
         this.uniteMesure = uniteMesure;
         this.check=check;
+    }
+
+    public Produit(int id, String intitule, String uniteMesure,String imageUrl) {
+        this.id = id;
+        this.intitule = intitule;
+        this.uniteMesure = uniteMesure;
+        this.imageUrl = imageUrl;
     }
 
     public Produit(int id){

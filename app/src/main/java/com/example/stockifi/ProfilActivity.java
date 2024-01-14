@@ -112,7 +112,8 @@ public class ProfilActivity extends AppCompatActivity {
 
     private static final String SPINNER_DATE_PER_SELECTION_KEY = "spinnerDatePerSelectionKey";
 
-    private static final String BASE_URL = "10.0.2.2:1111";
+   private static final String BASE_URL = "10.0.2.2:1111";
+  //private static final String BASE_URL = "192.168.11.100:1111";
     private TextView nomProfilView;
     private TextView emailProfilView;
 
@@ -248,6 +249,19 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_profil);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
 
         MyApp myApp = (MyApp) getApplication();
 
@@ -464,6 +478,7 @@ public class ProfilActivity extends AppCompatActivity {
                         input_value = "0";
                     }
 
+
                     int selectedQuantiteCri = Integer.parseInt(input_value);
 
 
@@ -518,7 +533,7 @@ public class ProfilActivity extends AppCompatActivity {
                 // Conversion de la taille si l'unité est en mètres
                 String taille = String.valueOf(editTextTaille.getText());
                 if (selectedTailleUnit.equals("m")) {
-                    taille = String.valueOf((int) (Double.parseDouble(taille) * 100));
+                    taille = String.valueOf((int) (Integer.parseInt(taille) * 100));
                 }
                 UpdateRequest updatedUtilisateur = new UpdateRequest();
                 updatedUtilisateur.setTaille(taille);
@@ -1001,7 +1016,7 @@ public class ProfilActivity extends AppCompatActivity {
 
                 String taille = String.valueOf(editTextTaille.getText());
                 if (selectedTailleUnit.equals("m")) {
-                    taille = String.valueOf((int) (Double.parseDouble(taille) * 100));
+                    taille = String.valueOf((int) (Integer.parseInt(taille) * 100));
                 }
 
 
@@ -1066,9 +1081,9 @@ public class ProfilActivity extends AppCompatActivity {
                 // Conversion de la taille si l'unité est en mètres
                 String poids = String.valueOf(editTextPoids.getText());
                 if (selectedPoidsUnit.equals("tonne")) {
-                    poids = String.valueOf((int) (Double.parseDouble(poids) * 1000));
+                    poids = String.valueOf((int) (Integer.parseInt(poids) * 1000));
                 } else if (selectedPoidsUnit.equals("g")) {
-                    poids = String.valueOf((int) (Double.parseDouble(poids) * 0.001));
+                    poids = String.valueOf((int) (Integer.parseInt(poids) * 0.001));
                 }
 
                 UpdateRequest updatedUtilisateur = new UpdateRequest();
@@ -1113,9 +1128,9 @@ public class ProfilActivity extends AppCompatActivity {
                     // Conversion de la taille si l'unité est en mètres
                     String poids = String.valueOf(editTextPoids.getText());
                     if (selectedPoidsUnit.equals("tonne")) {
-                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 1000));
+                        poids = String.valueOf((int) ( Integer.parseInt(poids)* 1000));
                     } else if (selectedPoidsUnit.equals("g")) {
-                        poids = String.valueOf((int) ( Double.parseDouble(poids)* 0.001));
+                        poids = String.valueOf((int) ( Integer.parseInt(poids)* 0.001));
                     }
 
                     updateRequest.setPoids(poids);
@@ -1214,8 +1229,8 @@ public class ProfilActivity extends AppCompatActivity {
         produitCuisine = findViewById(R.id.produitencuisine);
 
 
-        String url = "http://" + BASE_URL+"/stocks/" + stockUserId+ "/products";
-        String url1 = "http://" + BASE_URL+"/stocks/" + stockUserId+ "/products/gaspille";
+        String url = "http://10.0.2.2stocks/" + stockUserId+ "/products";
+        String url1 = "http://10.0.2.2/stocks/" + stockUserId+ "/products/gaspille";
         RequestQueue queue = Volley.newRequestQueue(ProfilActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

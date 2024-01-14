@@ -9,10 +9,57 @@
     android:orientation="vertical"
     android:background="@color/vert">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/appBarAjout"
+        android:background="@color/vertTexte">
+
+        <androidx.appcompat.widget.Toolbar
+
+
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            >
+
+            <ImageView
+                android:id="@+id/toolbar_back_button_quanting"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fleche"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Quantite Ingredient"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_width="0dp"
+        android:visibility="invisible"
+        android:layout_height="0dp"
         android:background="?attr/colorPrimary">
 
         <!-- Ajoutez une flèche de retour à la Toolbar -->
@@ -36,12 +83,12 @@
 
     </androidx.appcompat.widget.Toolbar>
     <com.google.android.material.bottomnavigation.BottomNavigationView
-
+android:visibility="invisible"
         android:id="@+id/androidx_window_course"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
 
@@ -75,9 +122,9 @@
         <ListView
             android:id="@+id/myListViewingredientquantity"
             android:layout_width="match_parent"
-            android:layout_height="470dp"
+            android:layout_height="540dp"
             android:paddingBottom="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="130dp"
 
             />
 

@@ -1,22 +1,41 @@
 package com.example.stockifi.Gestion_Produit;
 
 public class ProduitALaListe {
-    Integer image;
+
+    Long id;
+    String mesure;
+    String imageUrl;
     String intitule;
-    //   Integer imageAjout;
+    //   Integer imageUrlAjout;
 
-    public ProduitALaListe(Integer image, String intitule) {
-        this.image = image;
+
+    public ProduitALaListe(Long id, String imageUrl, String intitule, String mesure) {
+        this.id = id;
+        this.imageUrl = imageUrl;
         this.intitule = intitule;
-        // this.imageAjout = imageAjout;
+        this.mesure= mesure;
     }
 
-    public Integer getImage() {
-        return image;
+    public Long getId() {
+        return id;
     }
 
-    public void setImage(Integer image) {
-        this.image = image;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getmesure() {
+        return mesure;
+    }
+
+
+
+    public String getimageUrl() {
+        return imageUrl;
+    }
+
+    public void setimageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getIntitule() {
@@ -27,11 +46,11 @@ public class ProduitALaListe {
         this.intitule = intitule;
     }
 
-    //  public Integer getImageAjout() {
-    //    return imageAjout;
+    //  public Integer getimageUrlAjout() {
+    //    return imageUrlAjout;
     //  }
 
-    //  public void setImageAjout(Integer imageAjout) {
-    //    this.imageAjout = imageAjout;
+    //  public void setimageUrlAjout(Integer imageUrlAjout) {
+    //    this.imageUrlAjout = imageUrlAjout;
     //  }
 }

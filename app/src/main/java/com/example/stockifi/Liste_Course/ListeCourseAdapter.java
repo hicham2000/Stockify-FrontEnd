@@ -38,12 +38,18 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
 
     private ArrayList<Produit> data;
     private ArrayList<Boolean> checkedPositions;
-    private static final String BASE_URL = "192.168.11.100:1111";
+    //private static final String BASE_URL = "192.168.11.100:1111";
+    private static final String BASE_URL = "10.0.2.2:1111";
 
     public ListeCourseAdapter(Context context, ArrayList<Produit> data) {
         super(context, 0, data);
         this.data = data;
         checkedPositions = new ArrayList<>(Collections.nCopies(data.size(), false));
+    }
+
+    public void clearData() {
+        data.clear();
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -57,6 +63,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
         CheckBox checkBox = convertView.findViewById(R.id.checkBox1);
         ImageView modif=convertView.findViewById(R.id.modifier_prod);
         ImageView suppr=convertView.findViewById(R.id.supprim);
+        ImageView visualise=convertView.findViewById(R.id.visualis_prod);
         if (data.get(position).getCheck()){
                   checkedPositions.set(position,true);
         }
@@ -96,6 +103,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
                                     // La mise à jour a réussi, vous pouvez traiter la réponse si nécessaire
 //                                    Toast.makeText(ModifierProduit.this, "Produit mis à jour avec succès", Toast.LENGTH_SHORT).show();
 
+
                                 }
                             },
                             new Response.ErrorListener() {
@@ -109,9 +117,10 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
                     );
 
                     queue.add(request);
-                    Intent intent = new Intent(getContext(), ListeDeCourse.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    getContext().startActivity(intent);
+                    if (position >= 0 && position < data.size()) {
+                        data.remove(position);
+                        notifyDataSetChanged();
+                    }
 
 
                 }
@@ -137,6 +146,26 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
             }
         });
 
+        visualise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Produit produit = getItem(position);
+                if (produit != null) {
+                    // Créez une intention pour l'activité ModifierProduit
+                    Intent intent = new Intent(getContext(), information_produit_listeCourse.class);
+
+                    // Ajoutez les données du produit à l'intention
+                    intent.putExtra("id", produit.getId());
+                    intent.putExtra("intitule", produit.getIntitule());
+                    intent.putExtra("quantite", produit.getQuantite());
+                    intent.putExtra("mesure", produit.getUniteMesure());
+
+                    // Démarrez l'activité ModifierProduit
+                    getContext().startActivity(intent);
+                }
+            }
+        });
+
 
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,8 +173,9 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
 
              //   boolean isChecked = checkedPositions.get(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Confirmation");
                 if (data.get(position).getCheck()==false) {
+                builder.setTitle("Confirmation d'ajout du produit au stock");
+
                     // If the checkbox is not checked and the user clicks to check it
                     builder.setMessage("Vous voulez ajouter le produit acheter a votre stock?");
                     builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
@@ -250,6 +280,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
                     alertDialog.show();
                 } else {
                     // If the checkbox is checked and the user clicks to uncheck it
+                    builder.setTitle("Confirmation d'annulaion du produit au stock");
                     builder.setMessage("Vous voulez enlever le produit de votre stock?");
                     builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         @Override

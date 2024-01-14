@@ -8,6 +8,7 @@ import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -40,6 +41,19 @@ public class ingredients extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients);
+
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_ingredient);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
 
         MyApp myApp = (MyApp) getApplication();
         int User_id = myApp.getUser_id();
@@ -111,8 +125,9 @@ public class ingredients extends AppCompatActivity {
 
 
                                     String produit = search_listeCourse.getQuery().toString();
-                                    System.out.println(produit);
+                                  //  System.out.println(produit);
                                     ArrayList<Produit> p = new ArrayList<>();
+
                                     dataList.stream()
                                             .filter(a -> a.getIntitule().toLowerCase().contains(produit.toLowerCase()))
                                             .forEach(p::add);

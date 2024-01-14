@@ -10,9 +10,53 @@ android:layout_height="match_parent"
 tools:context=".Repas.UpdateRepas"
 android:background="@color/vert">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/appBarUpdaterepa"
+        android:background="@color/vertTexte">
+
+        <androidx.appcompat.widget.Toolbar
+
+
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/toolbar_back_button_updaterepas"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fleche"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Modifier Repas"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
 <com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:visibility="invisible"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
     android:id="@+id/appBar">
 
     <androidx.appcompat.widget.Toolbar
@@ -48,9 +92,10 @@ android:background="@color/vert">
 
 <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/androidx_window"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
 
-    android:layout_height="wrap_content"
+    android:visibility="invisible"
+    android:layout_height="0dp"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
 
@@ -65,7 +110,7 @@ android:background="@color/vert">
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:layout_below="@+id/appBar">
+    android:layout_below="@+id/appBarUpdaterepa">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -105,7 +150,7 @@ android:background="@color/vert">
                     android:gravity="center"/>
 
                 <EditText
-                    android:id="@+id/editTexte_t"
+                    android:id="@+id/editTexte_tupdtae"
                     style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -166,7 +211,7 @@ android:background="@color/vert">
             />
 
         <LinearLayout
-            android:id="@+id/container"
+            android:id="@+id/containerupdtae"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -212,7 +257,7 @@ android:background="@color/vert">
                 >
 
                 <TextView
-                    android:id="@+id/peremtiontext"
+                    android:id="@+id/peremtiontextupdtae"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -223,12 +268,13 @@ android:background="@color/vert">
 
 
                     />
+
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/calendrier"
+                    android:layout_width="7dp"
+                    android:layout_height="14dp"
                     android:layout_marginLeft="100dp"
-                    android:layout_marginTop="3dp"/>
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/calendrier" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -260,7 +306,7 @@ android:background="@color/vert">
                 >
 
                 <TextView
-                    android:id="@+id/alertt"
+                    android:id="@+id/alerttUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 

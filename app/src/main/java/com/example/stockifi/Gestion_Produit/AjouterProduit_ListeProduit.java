@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.R;
 
 import org.json.JSONException;
@@ -36,10 +37,68 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
     TextView peremtiontext;
 
     TextView alerttext;
+    String intituleValue="";
+    String mesureValue="tonne";
+    int mesureInt=0;
+
+    private int getIndex(Spinner spinner, String string) {
+        ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
+
+        int s = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            if (adapter.getItem(i).toString().equalsIgnoreCase(string)) {
+                s = i;
+            }
+
+        }
+        return s;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_produit_liste_produit);
+
+
+
+        Button buttonValiderProd = findViewById(R.id.button_validerProd);
+        EditText intitule = findViewById(R.id.editTexte_t);
+        EditText quantite = findViewById(R.id.quant_ajoutModif);
+        EditText prix = findViewById(R.id.Prix_produit);
+        TextView peremption = findViewById(R.id.peremtiontextproduit);
+        TextView alerte = findViewById(R.id.alertetextproduit);
+        EditText critique = findViewById(R.id.quantiteCritique);
+
+
+
+        Spinner Mesure = findViewById(R.id.spinner_poid_ajoutModif1);
+
+        // Créer un ArrayAdapter en utilisant les éléments du tableau défini dans les ressources
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.poids,
+                android.R.layout.simple_spinner_item
+        );
+
+        // Spécifier le layout à utiliser lorsque la liste des choix apparaît
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Appliquer l'adaptateur au Spinner
+        Mesure.setAdapter(adapter);
+
+        Intent intent = getIntent();
+        String sender = intent.getStringExtra("sender");
+        if (sender.equals("Global")){
+            intituleValue = intent.getStringExtra("intitule");
+            mesureValue = intent.getStringExtra("mesure");
+
+        } else{
+            intituleValue = "";
+            mesureValue = "tonne";
+        }
+
+        intitule.setText(intituleValue);
+        mesureInt = getIndex(Mesure,mesureValue);
+        Mesure.setSelection(mesureInt);
 
         peremtion=findViewById(R.id.peremtionDateProduit);
         peremtiontext = findViewById(R.id.peremtiontextproduit);
@@ -93,28 +152,7 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
             }
         });
 
-        Button buttonValiderProd = findViewById(R.id.button_validerProd);
-        EditText intitule = findViewById(R.id.editTexte_t);
-        EditText quantite = findViewById(R.id.quant_ajoutModif);
-        EditText prix = findViewById(R.id.Prix_produit);
-        TextView peremption = findViewById(R.id.peremtiontextproduit);
-        TextView alerte = findViewById(R.id.alertetextproduit);
-        EditText critique = findViewById(R.id.quantiteCritique);
 
-        Spinner uniteDeMesure = findViewById(R.id.spinner_poid_ajoutModif1);
-
-        // Créer un ArrayAdapter en utilisant les éléments du tableau défini dans les ressources
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.poids,
-                android.R.layout.simple_spinner_item
-        );
-
-        // Spécifier le layout à utiliser lorsque la liste des choix apparaît
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Appliquer l'adaptateur au Spinner
-        uniteDeMesure.setAdapter(adapter);
 
 
         MyApp myApp = (MyApp) getApplication();
@@ -132,7 +170,7 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
                     // Set the properties based on your Produit entity
                     requestProduits.put("intitule", intitule.getText().toString());
                     requestProduits.put("quantite", quantite.getText().toString());
-                    requestProduits.put("uniteDeMesure", uniteDeMesure.getSelectedItem().toString());
+                    requestProduits.put("uniteDeMesure", Mesure.getSelectedItem().toString());
                     requestProduits.put("dateExpiration", peremption.getText().toString());
                     requestProduits.put("prix", prix.getText().toString());
                     requestProduits.put("dateAlerte", alerte.getText().toString());
@@ -163,6 +201,10 @@ public class AjouterProduit_ListeProduit extends AppCompatActivity {
 
                 // Add the request to the RequestQueue.
                 queue.add(ajouterProduit);
+
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(AjouterProduit_ListeProduit.this, HomeActivity.class);
+                startActivity(intent);
 
             }
 
