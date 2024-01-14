@@ -83,12 +83,11 @@
     <android.widget.SearchView
         android:id="@+id/search_produit"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/ellipse"
         android:layout_centerHorizontal="true"
         android:theme="@style/SearchViewStyle"
-        android:queryHint="@string/chercherProd"
         />
 
 
@@ -106,8 +105,8 @@
         <ListView
             android:id="@+id/myListViewProduit"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:paddingBottom="20dp"/>
+            android:layout_height="492dp"
+            android:paddingBottom="20dp" />
 
 
         <Button
