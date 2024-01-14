@@ -8,13 +8,14 @@
 
     tools:context=".MessageActivity">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/appBar_notification">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_corbeille"
+            android:id="@+id/toolbar_notification"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,14 +43,42 @@
         android:orientation="vertical"
         android:layout_marginTop="60dp"
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:paddingEnd="20dp"
+            >
+
+            <TextView
+                android:id="@+id/aboveListViewText"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/effacer_notification"
+                android:fontFamily="@font/hubballi_regular"
+                android:textSize="20sp"
+                android:textColor="@color/vidercorbeille"
+                android:padding="8dp"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/trash"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:src="@drawable/delete" />
+        </LinearLayout>
         <ListView
             android:id="@+id/notificationListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
 
-        </ListView>
 
+        </ListView>
 
     </LinearLayout>
 

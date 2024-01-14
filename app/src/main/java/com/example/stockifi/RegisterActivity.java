@@ -22,11 +22,13 @@ import android.database.Cursor;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri;
-    private static final long MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024; // 5MB
+    private static final long MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024;
 
     EditText nomText, prenomText, emailText, passwordText, confirmPasswordText, regimeDescriptionText;
     Spinner regimeOptionSpinner;
@@ -112,6 +114,13 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private boolean validateInput() {
+       Pattern PASSWORD_PATTERN =
+                Pattern.compile("^" +
+                        "(?=.*[a-zA-Z])" +      // any letter
+                        "(?=.*[@#$%^&+=])" +    // at least 1 special character
+                        "(?=\\S+$)" +           // no white spaces
+                        ".{4,}" +               // at least 4 characters
+                        "$");
         boolean acceptCondition = acceptConditionCheckBox.isChecked();
         boolean isValid = true;
 
@@ -140,7 +149,8 @@ public class RegisterActivity extends AppCompatActivity {
             passwordText.setError("Password est un champs obligatoire");
             isValid = false;
         } else {
-            passwordText.setError(null);
+            if(!PASSWORD_PATTERN.matcher(password).matches()){passwordText.setError("Password must be at least 4 characters long and include at least one letter, one special character (@, #, $, %, ^, &, +), and no white spaces.");}
+            else{passwordText.setError(null);}
         }
 
         if (confirmPassword.isEmpty()) {
