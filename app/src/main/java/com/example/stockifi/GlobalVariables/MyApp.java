@@ -18,12 +18,13 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        createNotificationChannel(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(getApplicationContext());
+        }
     }
 
     public static void createNotificationChannel(Context context) {
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "My App Channel";
             String description = "This is the default channel for My App";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
@@ -33,7 +34,7 @@ public class MyApp extends Application {
 
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
-
+        }
     }
     public boolean isAlerte_date_expiration() {
         return alerte_date_expiration;
@@ -83,7 +84,6 @@ public class MyApp extends Application {
     public void setNotiftoken(String notiftoken) {
         this.notiftoken = notiftoken;
     }
-
 
 
 

@@ -10,6 +10,8 @@ import android.content.Intent;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.MessageActivity;
 import com.example.stockifi.sqlite.DatabaseHelper;
 import android.database.Cursor;
@@ -32,7 +34,6 @@ public class NotificationUtils {
     private String body;
 
 
-
     private DatabaseHelper dbHelper;
     private Context context;
 
@@ -41,7 +42,7 @@ public class NotificationUtils {
         dbHelper = new DatabaseHelper(context);
     }
 
-    public void sendNotificationToken(Context context , String token, int userId) {
+    public void sendNotificationToken(Context context, String token, int userId) {
         String url = BASE_URL + userId + "/updateFcmToken";
         try {
             JSONObject jsonBody = new JSONObject();
@@ -101,14 +102,11 @@ public class NotificationUtils {
         }
     }
 
-    public void sendNotification(String messageBody,String title , Context context) {
+    public void sendNotification(String messageBody, String title, Context context) {
+        MyApp myApp = new MyApp();
+        myApp.createNotificationChannel(context);
 
-
-
-        String CHANNEL_ID = "default_channel";
-        CharSequence name = "Default Channel";
-        String description = "Default notifications";
-        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        String CHANNEL_ID = myApp.DEFAULT_NOTIFICATION_CHANNEL_ID;
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
@@ -117,13 +115,6 @@ public class NotificationUtils {
                 .setAutoCancel(true);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            notificationManager.createNotificationChannel(channel);
-        }
-
         notificationManager.notify(0, notificationBuilder.build());
     }
 }

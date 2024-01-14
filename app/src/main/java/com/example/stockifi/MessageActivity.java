@@ -47,7 +47,6 @@ public class MessageActivity extends AppCompatActivity {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
         return dbHelper.getAllNotifications();
     }
-
     private List<HashMap<String, String>> convertNotificationListToHashMap(List<NotificationModel> notificationList) {
         List<HashMap<String, String>> list = new ArrayList<>();
         for (NotificationModel notification : notificationList) {
