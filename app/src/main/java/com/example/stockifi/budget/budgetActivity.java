@@ -87,7 +87,7 @@ public class budgetActivity extends AppCompatActivity {
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, ListeDeCourse.class);
             startActivity(intent);
-            //    finish();
+                finish();
             return true;
         });
 
@@ -99,14 +99,14 @@ public class budgetActivity extends AppCompatActivity {
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, HomeActivity.class);
             startActivity(intent);
-            //   finish();
+               finish();
             return true;
         });
 
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(budgetActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
-            // finish();
+             finish();
             return true;
         });
 

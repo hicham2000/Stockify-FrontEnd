@@ -219,21 +219,21 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, ListeDeCourse.class);
             startActivity(intent);
-          //  finish();
+            finish();
             return true;
         });
 
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, budgetActivity.class);
             startActivity(intent);
-            //finish();
+            finish();
             return true;
         });
 
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, HomeActivity.class);
             startActivity(intent);
-            //finish();
+            finish();
             return true;
         });
 

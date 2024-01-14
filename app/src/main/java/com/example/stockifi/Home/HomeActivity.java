@@ -84,6 +84,7 @@ public class HomeActivity extends AppCompatActivity {
 
             Intent intent = new Intent(HomeActivity.this, ListeDeCourse.class);
             startActivity(intent);
+            finish();
 
             return true;
         });
@@ -91,6 +92,7 @@ public class HomeActivity extends AppCompatActivity {
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, budgetActivity.class);
             startActivity(intent);
+            finish();
 
             return true;
         });
@@ -103,6 +105,7 @@ public class HomeActivity extends AppCompatActivity {
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
+            finish();
 
             return true;
         });

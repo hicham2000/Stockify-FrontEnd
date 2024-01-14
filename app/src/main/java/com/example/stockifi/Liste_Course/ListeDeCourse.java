@@ -47,6 +47,8 @@ import java.util.ArrayList;
 public class ListeDeCourse extends AppCompatActivity {
 
     private static final String BASE_URL = "192.168.11.100:1111";
+    ArrayList<Produit> dataList = new ArrayList<>();
+    ListeCourseAdapter adapter;
 
     Button AjouterBouton;
     SearchView search_listeCourse;
@@ -114,9 +116,12 @@ public class ListeDeCourse extends AppCompatActivity {
                 );
 
                 queue.add(request);
-                Intent intent = new Intent(ListeDeCourse.this, ListeDeCourse.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+               // dataList.clear();
+
+                    adapter.clearData();
+
+                  //  notifyDataSetChanged();
+
 
 
             }
@@ -143,7 +148,7 @@ public class ListeDeCourse extends AppCompatActivity {
 
                 ListView listView = findViewById(R.id.myListViewCourse);
 
-                ArrayList<Produit> dataList = new ArrayList<>();
+
 
                 RequestQueue queue = Volley.newRequestQueue(ListeDeCourse.this);
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -164,7 +169,7 @@ public class ListeDeCourse extends AppCompatActivity {
                                         dataList.add(new Produit(id, intitule, quantite, mesure, check));
                                     }
 
-                                    ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                     adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                                     adapter.notifyDataSetChanged();
 
 
@@ -182,7 +187,7 @@ public class ListeDeCourse extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //   dataList.add("That didn't work!");
-                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                         adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
 
                         adapter.notifyDataSetChanged();
                         listView.setAdapter(adapter);
@@ -238,7 +243,7 @@ public class ListeDeCourse extends AppCompatActivity {
                                             dataList.add(new Produit(id, intitule, quantite, mesure, check));
                                         }
 
-                                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                        adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                                         adapter.notifyDataSetChanged();
 
 
@@ -256,7 +261,7 @@ public class ListeDeCourse extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             //   dataList.add("That didn't work!");
-                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                           adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
 
                             adapter.notifyDataSetChanged();
                             listView.setAdapter(adapter);
@@ -303,7 +308,7 @@ public class ListeDeCourse extends AppCompatActivity {
                                             dataList.add(new Produit(id,intitule,quantite,mesure,check));
                                         }
 
-                                        ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                                         adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                                         adapter.notifyDataSetChanged();
 
 
@@ -324,11 +329,12 @@ public class ListeDeCourse extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //   dataList.add("That didn't work!");
-                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                            //   dataList.add("That didn't work!")
+                               adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
 
                             adapter.notifyDataSetChanged();
                             listView.setAdapter(adapter);
+
 
                         }
 
@@ -379,12 +385,13 @@ public class ListeDeCourse extends AppCompatActivity {
                                 dataList.add(new Produit(id,intitule,quantite,mesure,check));
                             }
 
-                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                             adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
                             adapter.notifyDataSetChanged();
 
 
 
                             listView.setAdapter(adapter);
+
 
 
 
@@ -401,10 +408,11 @@ public class ListeDeCourse extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
              //   dataList.add("That didn't work!");
-                ListeCourseAdapter adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
+                 adapter = new ListeCourseAdapter(ListeDeCourse.this, dataList);
 
                 adapter.notifyDataSetChanged();
                 listView.setAdapter(adapter);
+
 
             }
 
@@ -435,21 +443,21 @@ public class ListeDeCourse extends AppCompatActivity {
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, budgetActivity.class);
             startActivity(intent);
-     //       finish();
+            finish();
             return true;
         });
 
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, HomeActivity.class);
             startActivity(intent);
-       //     finish();
+           finish();
             return true;
         });
 
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(ListeDeCourse.this, RecettesRecommendeActivity.class);
             startActivity(intent);
-         //   finish();
+            finish();
             return true;
         });
 

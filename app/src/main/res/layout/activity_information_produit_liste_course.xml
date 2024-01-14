@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vert"
+    tools:context=".Liste_Course.information_produit_listeCourse">
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/appBarAjout">
+
+        <androidx.appcompat.widget.Toolbar
+
+
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/toolbar_back_button_inform"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fleche"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Information sur Produit"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/appBarAjout"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="150dp"
+
+
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Nom :"
+                android:layout_marginRight="20dp"
+                android:textSize="@dimen/dimenTexte"
+
+                />
+            <TextView
+                android:id="@+id/editTexte_modifProduitInf"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                android:textColor="@color/vertTexte"
+                android:textSize="20dp"
+                android:layout_marginLeft="50dp"
+
+
+
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Quantite :"
+                android:textSize="@dimen/dimenTexte"
+                android:layout_marginRight="20dp"
+                />
+            <TextView
+                android:id="@+id/quant_ajoutModifInf"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                style="@style/EditTextStyle"
+
+                android:textColor="@color/vertTexte"
+                android:textSize="20dp"
+
+                android:gravity="center"
+                android:layout_marginLeft="18dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+
+                android:layout_marginLeft="8dp"
+
+                >
+
+
+                <TextView
+
+
+                    android:textColor="@color/vertTexte"
+                    android:textSize="20dp"
+
+                    android:id="@+id/spinner_poid_ajoutModif1Inf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    style="@style/EditTextStyle"
+
+
+
+                    />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+
+
+
+
+
