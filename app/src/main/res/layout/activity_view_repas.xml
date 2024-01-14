@@ -36,7 +36,7 @@ android:background="@color/vert">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Modifier Repas"
+                android:text="Afficher Repas"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
