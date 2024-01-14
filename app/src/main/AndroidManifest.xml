@@ -22,10 +22,17 @@
         tools:ignore="ExtraText"
         tools:targetApi="31">
         <activity
+
+            android:name=".MessageActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".Repas.UpdateRepas"
             android:exported="true" />
         <activity
             android:name=".Repas.ViewRepas"
+
             android:exported="true" />
         <activity
             android:name=".Gestion_Produit.InformationsProduitStock"
@@ -90,7 +97,7 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ChangerPassword"
             android:exported="false" />
@@ -115,6 +122,7 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
+
             android:name=".corbeille.corbeille"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
