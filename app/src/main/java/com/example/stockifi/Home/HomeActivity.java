@@ -20,7 +20,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.Gestion_Produit.AjouterProduit_ListeProduit;
+import com.example.stockifi.Gestion_Produit.ListeProduit;
+import com.example.stockifi.Liste_Course.AjouterProduit;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.budget.budgetActivity;
@@ -41,10 +45,13 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
+
     String apiUrl = "http://localhost:1111/stocks/1/products";
     String apiRepasUrl = "";
     ArrayList<listData> listdata;
     ArrayList<listData2> listdata2;
+
+    Button ajouterProduit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +80,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
-            if (item.getItemId() == R.id.poubelle) {
+            else if (item.getItemId() == R.id.message) {
+                Intent profilIntent = new Intent(HomeActivity.this, MessageActivity.class);
+                startActivity(profilIntent);
+                return true;
+            }
+           else if (item.getItemId() == R.id.poubelle) {
                 // L'utilisateur a cliqué sur "profil1"
                 Intent intent = new Intent(HomeActivity.this, corbeille.class);
                 startActivity(intent);
@@ -88,6 +100,7 @@ public class HomeActivity extends AppCompatActivity {
 
             Intent intent = new Intent(HomeActivity.this, ListeDeCourse.class);
             startActivity(intent);
+            finish();
 
             return true;
         });
@@ -95,6 +108,7 @@ public class HomeActivity extends AppCompatActivity {
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, budgetActivity.class);
             startActivity(intent);
+            finish();
 
             return true;
         });
@@ -107,6 +121,7 @@ public class HomeActivity extends AppCompatActivity {
         navBar.findItem(R.id.recette).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, RecettesRecommendeActivity.class);
             startActivity(intent);
+            finish();
 
             return true;
         });
@@ -143,6 +158,18 @@ public class HomeActivity extends AppCompatActivity {
         String[] itemsName = {"Mehdi", "Mehdi", "Mehdi", "Mehdi"};
         int[] image = {R.drawable.instagram, R.drawable.instagram, R.drawable.instagram, R.drawable.instagram};
 
+        ajouterProduit=findViewById(R.id.button);
+        ajouterProduit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(HomeActivity.this, ListeProduit.class);
+                startActivity(intent);
+
+
+
+            }
+        });
     }
     public void parseJson(String response) {
         try {

@@ -31,6 +31,7 @@ public class RegisterRequest implements Serializable {
         this.dateDeNaissance = null;
         this.régimeSpécieux = régimeSpécieux;
         this.modeSportif = modeSportif;
+
     }
 
     // Getter and Setter methods

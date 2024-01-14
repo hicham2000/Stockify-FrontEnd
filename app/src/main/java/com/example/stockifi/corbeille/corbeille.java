@@ -108,6 +108,7 @@ public class corbeille extends AppCompatActivity{
                                         System.out.println(objet);
                                         String intitule = jsonObject.getString("intitule");
                                         dataList.add(objet);
+                                        System.out.println(response);
                                     }
 
                                     adapter = new corbeilleAdapter(corbeille.this, dataList);

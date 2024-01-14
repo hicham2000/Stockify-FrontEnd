@@ -64,6 +64,9 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics:21.5.0")
     implementation("org.chromium.net:cronet-common:76.3809.111")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
+    implementation ("org.mockito:mockito-core:5.8.0")
+
+
 
 }
 

@@ -15,6 +15,7 @@ import com.example.stockifi.BackendManager;
 import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.MessageActivity;
 import com.example.stockifi.ProfilActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.budget.budgetActivity;
@@ -82,13 +83,15 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (itemId == R.id.message) {
-            // Handle the message item click
-            // You can add your code here
+
+                Intent profilIntent = new Intent(RecettesRecommendeActivity.this, MessageActivity.class);
+                startActivity(profilIntent);
+
             return true;
         } else if (itemId == R.id.profil1) {
             Intent profilIntent = new Intent(RecettesRecommendeActivity.this, ProfilActivity.class);
             startActivity(profilIntent);
-            finish();
+
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -219,21 +222,21 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         navBar.findItem(R.id.courses).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, ListeDeCourse.class);
             startActivity(intent);
-          //  finish();
+            finish();
             return true;
         });
 
         navBar.findItem(R.id.budget).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, budgetActivity.class);
             startActivity(intent);
-            //finish();
+            finish();
             return true;
         });
 
         navBar.findItem(R.id.stock).setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecettesRecommendeActivity.this, HomeActivity.class);
             startActivity(intent);
-            //finish();
+            finish();
             return true;
         });
 

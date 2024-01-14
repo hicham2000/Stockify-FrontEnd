@@ -4,6 +4,7 @@ import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -19,8 +20,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.R;
 
 import org.json.JSONArray;
@@ -32,6 +35,8 @@ import java.util.List;
 
 public class ViewRepas extends AppCompatActivity {
     private LinearLayout container;
+    int repasId=0;
+     String categories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +61,7 @@ public class ViewRepas extends AppCompatActivity {
         Button buttonAnnuler = findViewById(R.id.button_supprimer);
         buttonAnnuler.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
 
-        int repasId = 2;
+        repasId = 2;
         TextView name = findViewById(R.id.editTexte_t);
         TextView cat = findViewById(R.id.cat);
         TextView alert = findViewById(R.id.alertt);
@@ -134,7 +139,7 @@ public class ViewRepas extends AppCompatActivity {
                         }
                         try {
                             String intituleValue = jsonObject.getString("intitule");
-                            String categories = jsonObject.getString("categories");
+                            categories = jsonObject.getString("categories");
                             String al = jsonObject.getString("dateAlert");
                             String pero = jsonObject.getString("datePeremtion");
                             name.setText(intituleValue);
@@ -162,4 +167,63 @@ public class ViewRepas extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Button delete = findViewById(R.id.button_supprimer);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // This code will be executed when the button is clicked
+                RequestQueue queue = Volley.newRequestQueue(ViewRepas.this);
+                String url = "http://10.0.2.2:1111/stocks/repas/"+repasId;
+
+                // Create a JsonObjectRequest for DELETE
+                JsonObjectRequest request = new JsonObjectRequest(
+                        Request.Method.DELETE,
+                        url,
+                        null, // Request body is null for DELETE requests
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Handle the server response on success
+                                System.out.println("yes");
+                                Intent intent = new Intent(ViewRepas.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Handle network or server errors
+                                System.out.println("No");
+                                Intent intent = new Intent(ViewRepas.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                );
+
+                queue.add(request);
+            }
+        });
+
+
+
+        Button edit = findViewById(R.id.button_Editerr);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // This code will be executed when the button is clicked
+                Intent intent = new Intent(ViewRepas.this, UpdateRepas.class);
+
+                intent.putExtra("repasId", repasId);
+                intent.putExtra("cat",categories);
+                startActivity(intent);
+            }
+        });
+
+    }
+
 }

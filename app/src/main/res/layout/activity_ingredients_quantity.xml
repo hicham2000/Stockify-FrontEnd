@@ -20,7 +20,8 @@
 
 
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            >
 
             <ImageView
                 android:id="@+id/toolbar_back_button_quanting"
@@ -121,9 +122,9 @@ android:visibility="invisible"
         <ListView
             android:id="@+id/myListViewingredientquantity"
             android:layout_width="match_parent"
-            android:layout_height="470dp"
+            android:layout_height="540dp"
             android:paddingBottom="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="130dp"
 
             />
 

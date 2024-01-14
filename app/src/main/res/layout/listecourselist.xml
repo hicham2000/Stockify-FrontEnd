@@ -25,7 +25,7 @@
             android:layout_height="20dp"
             android:src="@drawable/poubelle"
             android:layout_gravity="center"
-            android:layout_marginLeft="100dp"/>
+            android:layout_marginLeft="80dp"/>
 
         <ImageView
             android:id="@+id/modifier_prod"
@@ -35,6 +35,13 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"/>
 
+        <ImageView
+            android:id="@+id/visualis_prod"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_visualise"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"/>
 
 
 
