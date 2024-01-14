@@ -2,6 +2,11 @@ package com.example.stockifi;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +14,7 @@ import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 import android.content.Intent;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
         acceptConditionCheckBox = findViewById(R.id.checkBox);
         registerButton = findViewById(R.id.registerButton);
 
+        
         BackendManager backendManager = new BackendManager(this);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
