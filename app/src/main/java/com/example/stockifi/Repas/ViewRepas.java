@@ -36,6 +36,7 @@ import java.util.List;
 public class ViewRepas extends AppCompatActivity {
     private LinearLayout container;
     int repasId=0;
+     String categories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,7 +139,7 @@ public class ViewRepas extends AppCompatActivity {
                         }
                         try {
                             String intituleValue = jsonObject.getString("intitule");
-                            String categories = jsonObject.getString("categories");
+                            categories = jsonObject.getString("categories");
                             String al = jsonObject.getString("dateAlert");
                             String pero = jsonObject.getString("datePeremtion");
                             name.setText(intituleValue);
@@ -198,6 +199,8 @@ public class ViewRepas extends AppCompatActivity {
                             public void onErrorResponse(VolleyError error) {
                                 // Handle network or server errors
                                 System.out.println("No");
+                                Intent intent = new Intent(ViewRepas.this, HomeActivity.class);
+                                startActivity(intent);
                             }
                         }
                 );
@@ -205,6 +208,22 @@ public class ViewRepas extends AppCompatActivity {
                 queue.add(request);
             }
         });
+
+
+
+        Button edit = findViewById(R.id.button_Editerr);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // This code will be executed when the button is clicked
+                Intent intent = new Intent(ViewRepas.this, UpdateRepas.class);
+
+                intent.putExtra("repasId", repasId);
+                intent.putExtra("cat",categories);
+                startActivity(intent);
+            }
+        });
+
     }
 
 }

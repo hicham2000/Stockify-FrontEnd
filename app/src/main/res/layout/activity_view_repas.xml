@@ -345,7 +345,7 @@ android:background="@color/vert">
                     android:text="Supprimer" />
 
                 <Button
-                    android:id="@+id/button_Editer"
+                    android:id="@+id/button_Editerr"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
