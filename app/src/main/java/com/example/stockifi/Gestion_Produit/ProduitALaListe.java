@@ -1,21 +1,34 @@
 package com.example.stockifi.Gestion_Produit;
 
 public class ProduitALaListe {
-    Integer image;
+
+    Long id;
+    String image;
     String intitule;
     //   Integer imageAjout;
 
-    public ProduitALaListe(Integer image, String intitule) {
+
+    public ProduitALaListe(Long id, String image, String intitule) {
+        this.id = id;
         this.image = image;
         this.intitule = intitule;
-        // this.imageAjout = imageAjout;
     }
 
-    public Integer getImage() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Integer image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

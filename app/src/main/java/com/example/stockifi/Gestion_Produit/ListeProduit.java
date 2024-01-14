@@ -46,17 +46,17 @@ public class ListeProduit extends AppCompatActivity {
             }
         });
 
-        list_produit=findViewById(R.id.myListViewProduit);
+      //  list_produit=findViewById(R.id.myListViewProduit);
 
-        ArrayList<ProduitALaListe> objets=new ArrayList<>();
-        objets.add(new ProduitALaListe(R.drawable.profil,"lait"));
-        ListeproduitAdapter adapter=new ListeproduitAdapter(getApplicationContext(),R.layout.liste_produit,objets);
-        list_produit.setAdapter(adapter);
+        //ArrayList<ProduitALaListe> objets=new ArrayList<>();
+      //  objets.add(new ProduitALaListe(R.drawable.profil,"lait"));
+      //  ListeproduitAdapter adapter=new ListeproduitAdapter(getApplicationContext(),R.layout.liste_produit,objets);
+    //    list_produit.setAdapter(adapter);
 
 
         ListView listView = findViewById(R.id.myListViewProduit);
 
-        ArrayList<Produit> dataList = new ArrayList<>();
+        ArrayList<ProduitALaListe> dataList = new ArrayList<>();
 
         String url = "http://10.0.2.2:1111/globals";
 
@@ -71,16 +71,16 @@ public class ListeProduit extends AppCompatActivity {
                             JSONArray jsonResponse = new JSONArray(response);
                             for (int i = 0; i < jsonResponse.length(); i++) {
                                 JSONObject jsonObject = jsonResponse.getJSONObject(i);
-                                int id=jsonObject.getInt("id");
+                                Long id=jsonObject.getLong("id");
                                 String intitule = jsonObject.getString("intitule");
                                 String imageUrl = jsonObject.getString("imageUrl");
-                                String mesure = jsonObject.getString("uniteDeMesure");
+        //                        String mesure = jsonObject.getString("uniteDeMesure");
 
-                                dataList.add(new Produit(id,intitule,mesure,imageUrl));
+                                dataList.add(new ProduitALaListe(id,imageUrl,intitule));
                             }
 
-                            ListeCourseAdapter adapter = new ListeCourseAdapter(ListeProduit.this, dataList);
-                            adapter.notifyDataSetChanged();
+                            ListeproduitAdapter adapter = new ListeproduitAdapter(ListeProduit.this, dataList);
+                       //     adapter.notifyDataSetChanged();
 
 
 
@@ -101,7 +101,7 @@ public class ListeProduit extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //   dataList.add("That didn't work!");
-                ListeCourseAdapter adapter = new ListeCourseAdapter(ListeProduit.this, dataList);
+                ListeproduitAdapter adapter = new ListeproduitAdapter(ListeProduit.this, dataList);
 
                 adapter.notifyDataSetChanged();
                 listView.setAdapter(adapter);
