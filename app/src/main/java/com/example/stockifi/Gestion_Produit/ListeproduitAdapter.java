@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.stockifi.Liste_Course.ListeDeCourse;
+import com.example.stockifi.Liste_Course.Produit;
 import com.example.stockifi.R;
 
 import java.util.ArrayList;
@@ -40,9 +41,15 @@ public class ListeproduitAdapter extends ArrayAdapter<ProduitALaListe> {
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProduitALaListe produit = getItem(position);
                 Intent intent = new Intent(getContext(), AjouterProduit_ListeProduit.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("id", produit.getId());
+                intent.putExtra("intitule", produit.getIntitule());
+                intent.putExtra("imageUrl", produit.getimageUrl());
+                intent.putExtra("mesure", produit.getmesure());
                 getContext().startActivity(intent);
+
             }
         });
 
