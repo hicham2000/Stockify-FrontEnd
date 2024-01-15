@@ -516,7 +516,6 @@ public class BackendManager {
         requestQueue.add(jsonObjectRequest);
     }
 
-
     public void recupererIngredients(@NonNull BackendResponseCallback callback) {
         String url = getFullUrl(ENDPOINT + "/Ingredients");
 
