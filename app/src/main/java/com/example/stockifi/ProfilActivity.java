@@ -378,36 +378,6 @@ public class ProfilActivity extends AppCompatActivity {
         produitGaspille=findViewById(R.id.produitjetes);
 
 
-     //   editTextPerempt = findViewById(R.id.perempt);
-
-        // Restaurer la valeur de l'EditText "perempt" lors du démarrage de l'application
-   //     SharedPreferences sharedPreferences_peremp = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-     //   String savedPerempt = sharedPreferences_peremp.getString(PEREMPT_KEY, "3"); // "3" est la valeur par défaut
-       // editTextPerempt.setText(savedPerempt);
-
-        // Ajouter un TextWatcher pour détecter les changements dans l'EditText "perempt"
-   //     editTextPerempt.addTextChangedListener(new TextWatcher() {
-     //       @Override
-       //     public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
-                // Avant que le texte change
-         //   }
-
-           // @Override
-          //  public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                // Pendant que le texte change
-         //   }
-
-            //@Override
-           // public void afterTextChanged(Editable editable) {
-                // Après que le texte a changé
-
-                // Sauvegarder la nouvelle valeur automatiquement
-                //String enteredPerempt = editable.toString();
-              //  SharedPreferences.Editor editor = sharedPreferences_peremp.edit();
-            //    editor.putString(PEREMPT_KEY, enteredPerempt);
-          //      editor.apply();
-        //    }
-      //  });
 
 
         editTextDelaiRappel = findViewById(R.id.delai_rappel);
@@ -1447,11 +1417,19 @@ public class ProfilActivity extends AppCompatActivity {
                 editor.apply();
                 String dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
 
-                if(String.valueOf(day).length() == 1){
-                    dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-0" + String.valueOf(day);
-                }
-                if(String.valueOf(month).length() == 1){
+                if(String.valueOf(day).length() == 1 && String.valueOf(month).length() == 1){
                     dateDeNaissance = String.valueOf(year) + "-0" + String.valueOf(month + 1) + "-0" + String.valueOf(day);
+                }
+                if(String.valueOf(day).length() > 1 && String.valueOf(month).length() == 1){
+                    dateDeNaissance = String.valueOf(year) + "-0" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+                }
+
+                if(String.valueOf(day).length() > 1 && String.valueOf(month).length() > 1){
+                    dateDeNaissance = String.valueOf(year)  + "-" + String.valueOf(month + 1)  + "-" + String.valueOf(day);
+                }
+
+                if(String.valueOf(day).length() == 1 && String.valueOf(month).length() > 1){
+                    dateDeNaissance = String.valueOf(year) + "-" + String.valueOf(month + 1)   + "-0" + String.valueOf(day);
                 }
 
                 Date dateNaissance=new Date(year,month+1,day,00,00,00);
