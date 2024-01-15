@@ -30,7 +30,7 @@ import java.util.Map;
     // private static final String BASE_URL = "http://192.168.11.100:1111";
 
     private static final String BASE_URL = "http://192.168.1.17:1111";
-    //  private static final String BASE_URL = "http://10.0.2.2:1111";
+      //private static final String BASE_URL = "http://10.0.2.2:1111";
 
     private static final String ENDPOINT = "/api";
 
