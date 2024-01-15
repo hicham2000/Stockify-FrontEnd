@@ -25,6 +25,9 @@
             android:name=".Repas.UpdateRepas"
             android:exported="false" />
         <activity
+            android:name=".MessageActivity"
+            android:exported="true" />
+        <activity
             android:name=".Repas.ViewRepas"
             android:exported="false" />
         <activity

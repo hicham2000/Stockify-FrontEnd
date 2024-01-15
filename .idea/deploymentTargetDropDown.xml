@@ -5,10 +5,10 @@
       <entry key="GetImageFromUrlTest">
         <State />
       </entry>
-      <entry key="ModifierProduitStock">
+      <entry key="LoginActivity">
         <State />
       </entry>
-      <entry key="ProfilActivity">
+      <entry key="MessageActivity">
         <State />
       </entry>
       <entry key="app">
@@ -18,9 +18,6 @@
         <State />
       </entry>
       <entry key="doInBackground_withoutInternetConnection_shouldNotFetchImage()">
-        <State />
-      </entry>
-      <entry key="app">
         <State />
       </entry>
     </value>
