@@ -11,7 +11,6 @@ import com.example.stockifi.notification.NotificationModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
@@ -60,6 +59,9 @@ public class MessageActivity extends AppCompatActivity {
                                 if (list != null) {
                                     list.clear();
                                     adapter.notifyDataSetChanged();
+                                    DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+                                    dbHelper.clearAllNotifications();
+
                                 }
                             }
                         })
@@ -73,11 +75,10 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private List<NotificationModel> loadNotificationData() {
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
 
         return dbHelper.getAllNotifications();
     }
