@@ -35,6 +35,7 @@ public class InformationsProduitStock extends AppCompatActivity {
         setContentView(R.layout.activity_informations_produit_stock);
 
 
+
         TextView nom = findViewById(R.id.nom_produit);
         TextView Cat = findViewById(R.id.cat_produit);
         TextView Mesure = findViewById(R.id.mesure_produit);
