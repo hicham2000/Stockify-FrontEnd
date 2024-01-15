@@ -35,6 +35,7 @@ public class InformationsProduitStock extends AppCompatActivity {
         setContentView(R.layout.activity_informations_produit_stock);
 
 
+
         TextView nom = findViewById(R.id.nom_produit);
         TextView Cat = findViewById(R.id.cat_produit);
         TextView Mesure = findViewById(R.id.mesure_produit);
@@ -44,7 +45,8 @@ public class InformationsProduitStock extends AppCompatActivity {
         TextView QteC = findViewById(R.id.qteC_produit);
         TextView Qte = findViewById(R.id.qte_produit);
 
-        int produitId = 4;
+        Intent intent = getIntent();
+        int produitId = Integer.parseInt(intent.getStringExtra("produitid"));
 
         String url = "http://10.0.2.2:1111/stocks/productid/" + produitId;
         RequestQueue queue1 = Volley.newRequestQueue(this);

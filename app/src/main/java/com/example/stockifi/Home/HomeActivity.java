@@ -2,6 +2,7 @@ package com.example.stockifi.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.Gestion_Produit.AjouterProduit_ListeProduit;
 import com.example.stockifi.Gestion_Produit.ListeProduit;
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Liste_Course.AjouterProduit;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.example.stockifi.MessageActivity;
@@ -43,9 +46,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
+    /*MyApp myApp = (MyApp) getApplication();
+    int User_Stock_id = myApp.getUser_stock_id();*/
 
     String apiUrl = "http://10.0.2.2:1111/stocks/1/products";
     String apiRepasUrl = "http://10.0.2.2:1111/listRepas/repas/1";
@@ -65,7 +71,22 @@ public class HomeActivity extends AppCompatActivity {
         ImageView xredImageView = findViewById(R.id.xImageView);
         Button produit = findViewById(R.id.button4);
         Button repas = findViewById(R.id.button5);
+        SearchView search_item = findViewById(R.id.search_item);
 
+
+        search_item.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchProduit(newText);
+                searchPepas(newText);
+                return true;
+            }
+        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window);
         Menu navBar = bottomNavigationView.getMenu();
@@ -187,9 +208,38 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+    private void searchProduit(String query){
+        ArrayList<listData> produits = new ArrayList<>();
+        if(query.isEmpty()) {
+            produits = listdata;
+        } else  {
+            for (listData produit : listdata){
+                if (produit.getIntitule().toLowerCase().contains(query.toLowerCase())) {
+                    produits.add(produit);
+                }
+            }
+            GridAdapter gridAdapter2 = new GridAdapter(HomeActivity.this, produits);
+            binding.gridV.setAdapter(gridAdapter2);
+        }
+    }
+    private void searchPepas(String query){
+        ArrayList<listData2> repas = new ArrayList<>();
+        if(query.isEmpty()) {
+            repas = listdata2;
+        } else  {
+            for (listData2 repa : listdata2){
+                if (repa.getIntitule().toLowerCase().contains(query.toLowerCase())) {
+                    repas.add(repa);
+                }
+            }
+            GridAdapter2 gridAdapter2 = new GridAdapter2(HomeActivity.this, repas);
+            binding.gridV.setAdapter(gridAdapter2);
+        }
+    }
     public void parseJson(String response) {
         try {
             JSONArray jsonArray = new JSONArray(response);
+            listdata.clear();
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject object = jsonArray.getJSONObject(i);
                 // extract produit informations
@@ -198,6 +248,7 @@ public class HomeActivity extends AppCompatActivity {
                 String intitule = object.getString("intitule");
                 String dateExpiration = object.getString("dateExpiration");
                 System.out.println(object);
+
                 listdata.add(new listData(id, intitule, dateExpiration,imageUrl));
             }
             GridAdapter gridAdapter = new GridAdapter(HomeActivity.this, listdata);
@@ -224,6 +275,7 @@ public class HomeActivity extends AppCompatActivity {
     public void parseJson2(String response) {
         try {
             JSONArray jsonArray = new JSONArray(response);
+            listdata2.clear();
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject object = jsonArray.getJSONObject(i);
                 // extract produit informations
@@ -231,6 +283,7 @@ public class HomeActivity extends AppCompatActivity {
                 String imageUrl = object.getString("imageUrl");
                 String intitule = object.getString("intitule");
                 String datePeremtion = object.getString("datePeremtion");
+
                 listdata2.add(new listData2(id, intitule, datePeremtion,imageUrl));
 
             }

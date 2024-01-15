@@ -51,7 +51,8 @@ public class ViewRepas extends AppCompatActivity {
             @Override
             public void onClick (View v){
                 // Appel de la méthode onBackPressed pour revenir à l'écran précédent
-                onBackPressed();
+                Intent intent = new Intent(ViewRepas.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
         EditText editText = findViewById(R.id.editTexte_t);
@@ -61,7 +62,9 @@ public class ViewRepas extends AppCompatActivity {
         Button buttonAnnuler = findViewById(R.id.button_supprimer);
         buttonAnnuler.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
 
-        repasId = 2;
+        Intent intent = getIntent();
+        repasId = Integer.parseInt(intent.getStringExtra("repasid"));
+        System.out.println(repasId);
         TextView name = findViewById(R.id.editTexte_t);
         TextView cat = findViewById(R.id.cat);
         TextView alert = findViewById(R.id.alertt);
