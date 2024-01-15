@@ -52,7 +52,7 @@ public class GridAdapter2 extends ArrayAdapter<listData2> {
         ImageView imageView = convertView.findViewById(R.id.gridImage);
         TextView textView = convertView.findViewById(R.id.gridName);
         TextView textView1 = convertView.findViewById(R.id.gridtemps);
-        imageView.setImageResource(R.drawable.instagram);
+        imageView.setImageResource(R.drawable.meal);
         textView.setText(listdata2.get(position).getIntitule());
         textView1.setText(listdata2.get(position).getDatePeremtion());
 
