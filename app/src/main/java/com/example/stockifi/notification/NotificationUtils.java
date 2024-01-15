@@ -113,7 +113,6 @@ public class NotificationUtils {
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true);
-
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationBuilder.build());
     }

@@ -61,7 +61,8 @@ public class ViewRepas extends AppCompatActivity {
         Button buttonAnnuler = findViewById(R.id.button_supprimer);
         buttonAnnuler.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
 
-        repasId = 2;
+        Intent intent = getIntent();
+        int repasId = Integer.parseInt(intent.getStringExtra("repasid"));
         TextView name = findViewById(R.id.editTexte_t);
         TextView cat = findViewById(R.id.cat);
         TextView alert = findViewById(R.id.alertt);

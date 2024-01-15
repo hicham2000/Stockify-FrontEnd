@@ -1,3 +1,5 @@
+
+
 package com.example.stockifi;
 
 import android.content.Context;
@@ -16,7 +18,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Map;
 
-public class BackendManager {
+ public class BackendManager {
 
 
 
@@ -24,19 +26,19 @@ public class BackendManager {
 
     //private static final String BASE_URL = "http://100.89.18.54:1111";
 
-  //  private static final String BASE_URL = "http://10.0.2.2:1111";
-   // private static final String BASE_URL = "http://192.168.11.100:1111";
+    //  private static final String BASE_URL = "http://10.0.2.2:1111";
+    // private static final String BASE_URL = "http://192.168.11.100:1111";
 
-    //private static final String BASE_URL = "http://192.168.1.17:1111";
-    private static final String BASE_URL = "http://10.0.2.2:1111";
+    private static final String BASE_URL = "http://192.168.1.17:1111";
+      //private static final String BASE_URL = "http://10.0.2.2:1111";
 
     private static final String ENDPOINT = "/api";
 
     private final RequestQueue requestQueue;
 
-    public BackendManager(Context context) {
-        requestQueue = Volley.newRequestQueue(context.getApplicationContext());
-    }
+     public BackendManager(Context context) {
+         requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+     }
 
     public void login(String email, String password, BackendResponseCallback callback) throws JSONException {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -108,130 +110,130 @@ public class BackendManager {
         return jsonRequest;
     }
 
-    public void getUtilisateur(int id, BackendResponseCallback callback) {
-        String url = getFullUrl(ENDPOINT + "/Utilisateur/" + id);
+     public void getUtilisateur(int id, BackendResponseCallback callback) {
+         String url = getFullUrl(ENDPOINT + "/Utilisateur/" + id);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                },
-                callback::onError);
+         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                 Request.Method.GET,
+                 url,
+                 null,
+                 response -> {
+                     try {
+                         callback.onSuccess(response);
+                     } catch (JSONException e) {
+                         throw new RuntimeException(e);
+                     }
+                 },
+                 callback::onError);
 
-        requestQueue.add(jsonObjectRequest);
-    }
+         requestQueue.add(jsonObjectRequest);
+     }
 
-    public void deleteUtilisateur(int id, BackendResponseCallback callback) {
-        String url = getFullUrl(ENDPOINT + "/Utilisateurs/" + id);
+     public void deleteUtilisateur(int id, BackendResponseCallback callback) {
+         String url = getFullUrl(ENDPOINT + "/Utilisateurs/" + id);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.DELETE,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                },
-                callback::onError);
+         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                 Request.Method.DELETE,
+                 url,
+                 null,
+                 response -> {
+                     try {
+                         callback.onSuccess(response);
+                     } catch (JSONException e) {
+                         throw new RuntimeException(e);
+                     }
+                 },
+                 callback::onError);
 
-        requestQueue.add(jsonObjectRequest);
-    }
+         requestQueue.add(jsonObjectRequest);
+     }
 
-    public void updateUtilisateur(Long id, UpdateRequest updatedUtilisateur, BackendResponseCallback callback) throws JSONException {
-        String url = getFullUrl(ENDPOINT + "/Utilisateur/" + id);
+     public void updateUtilisateur(Long id, UpdateRequest updatedUtilisateur, BackendResponseCallback callback) throws JSONException {
+         String url = getFullUrl(ENDPOINT + "/Utilisateur/" + id);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.PUT,
-                url,
-                createUpdateUtilisateurRequestBody(updatedUtilisateur),
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        callback.onError(e);
-                    }
-                },
-                callback::onError);
+         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                 Request.Method.PUT,
+                 url,
+                 createUpdateUtilisateurRequestBody(updatedUtilisateur),
+                 response -> {
+                     try {
+                         callback.onSuccess(response);
+                     } catch (JSONException e) {
+                         callback.onError(e);
+                     }
+                 },
+                 callback::onError);
 
-        requestQueue.add(jsonObjectRequest);
-    }
+         requestQueue.add(jsonObjectRequest);
+     }
 
-    private JSONObject createUpdateUtilisateurRequestBody(UpdateRequest updatedUtilisateur) throws JSONException {
-        JSONObject updatedUserJson = new JSONObject();
-        try {
-            if (updatedUtilisateur.getPrénom() != null) {
-                updatedUserJson.put("prenom", updatedUtilisateur.getPrénom());
-            }
+     private JSONObject createUpdateUtilisateurRequestBody(UpdateRequest updatedUtilisateur) throws JSONException {
+         JSONObject updatedUserJson = new JSONObject();
+         try {
+             if (updatedUtilisateur.getPrénom() != null) {
+                 updatedUserJson.put("prenom", updatedUtilisateur.getPrénom());
+             }
 
-            if (updatedUtilisateur.getNom() != null) {
-                updatedUserJson.put("nom", updatedUtilisateur.getNom());
-            }
+             if (updatedUtilisateur.getNom() != null) {
+                 updatedUserJson.put("nom", updatedUtilisateur.getNom());
+             }
 
-            if (updatedUtilisateur.getEmail() != null) {
-                updatedUserJson.put("email", updatedUtilisateur.getEmail());
-            }
+             if (updatedUtilisateur.getEmail() != null) {
+                 updatedUserJson.put("email", updatedUtilisateur.getEmail());
+             }
 
-            if (updatedUtilisateur.getPassword() != null) {
-                updatedUserJson.put("password", updatedUtilisateur.getPassword());
-            }
+             if (updatedUtilisateur.getPassword() != null) {
+                 updatedUserJson.put("password", updatedUtilisateur.getPassword());
+             }
 
-            if (updatedUtilisateur.getRégimeSpécieux() != null) {
-                updatedUserJson.put("régimeSpécieux", updatedUtilisateur.getRégimeSpécieux());
-            }
+             if (updatedUtilisateur.getRégimeSpécieux() != null) {
+                 updatedUserJson.put("régimeSpécieux", updatedUtilisateur.getRégimeSpécieux());
+             }
 
-            updatedUserJson.put("modeSportif", updatedUtilisateur.isModeSportif());
+             updatedUserJson.put("modeSportif", updatedUtilisateur.isModeSportif());
 
-            if (updatedUtilisateur.getSexe() != null) {
-                updatedUserJson.put("sexe", updatedUtilisateur.getSexe());
-            }
+             if (updatedUtilisateur.getSexe() != null) {
+                 updatedUserJson.put("sexe", updatedUtilisateur.getSexe());
+             }
 
-            if (updatedUtilisateur.getTaille() != null) {
-                updatedUserJson.put("taille", updatedUtilisateur.getTaille());
-            }
+             if (updatedUtilisateur.getTaille() != null) {
+                 updatedUserJson.put("taille", updatedUtilisateur.getTaille());
+             }
 
-            if (updatedUtilisateur.getPoids() != null) {
-                updatedUserJson.put("poids", updatedUtilisateur.getPoids());
-            }
+             if (updatedUtilisateur.getPoids() != null) {
+                 updatedUserJson.put("poids", updatedUtilisateur.getPoids());
+             }
 
-            if (updatedUtilisateur.getDateDeNaissance() != null) {
-                // Assume that "dateDeNaissance" is a string in the correct format
-                updatedUserJson.put("dateDeNaissance", updatedUtilisateur.getDateDeNaissance());
-            }
+             if (updatedUtilisateur.getDateDeNaissance() != null) {
+                 // Assume that "dateDeNaissance" is a string in the correct format
+                 updatedUserJson.put("dateDeNaissance", updatedUtilisateur.getDateDeNaissance());
+             }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return updatedUserJson;
-    }
+         } catch (JSONException e) {
+             e.printStackTrace();
+             return null;
+         }
+         return updatedUserJson;
+     }
 
-    public void updateQuantiteCritiqueParDefautStock(Long stockid, int quantiteCritiqueParDefautStock, BackendResponseCallback callback) throws JSONException {
-        String url = getFullUrl("/stocks/"+stockid+"/" + quantiteCritiqueParDefautStock);
+     public void updateQuantiteCritiqueParDefautStock(Long stockid, int quantiteCritiqueParDefautStock, BackendResponseCallback callback) throws JSONException {
+         String url = getFullUrl("/stocks/"+stockid+"/" + quantiteCritiqueParDefautStock);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.PUT,
-                url,
-                null,
-                response -> {
-                    try {
-                        callback.onSuccess(response);
-                    } catch (JSONException e) {
-                        callback.onError(e);
-                    }
-                },
-                callback::onError);
+         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                 Request.Method.PUT,
+                 url,
+                 null,
+                 response -> {
+                     try {
+                         callback.onSuccess(response);
+                     } catch (JSONException e) {
+                         callback.onError(e);
+                     }
+                 },
+                 callback::onError);
 
-        requestQueue.add(jsonObjectRequest);
-    }
+         requestQueue.add(jsonObjectRequest);
+     }
 
     public void getStock(Long stockid, BackendResponseCallback callback) throws JSONException {
         String url = getFullUrl("/stocks/"+stockid);
