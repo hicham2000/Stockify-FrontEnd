@@ -83,6 +83,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchProduit(newText);
+                searchPepas(newText);
                 return true;
             }
         });
@@ -218,6 +219,20 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
             GridAdapter gridAdapter2 = new GridAdapter(HomeActivity.this, produits);
+            binding.gridV.setAdapter(gridAdapter2);
+        }
+    }
+    private void searchPepas(String query){
+        ArrayList<listData2> repas = new ArrayList<>();
+        if(query.isEmpty()) {
+            repas = listdata2;
+        } else  {
+            for (listData2 repa : listdata2){
+                if (repa.getIntitule().toLowerCase().contains(query.toLowerCase())) {
+                    repas.add(repa);
+                }
+            }
+            GridAdapter2 gridAdapter2 = new GridAdapter2(HomeActivity.this, repas);
             binding.gridV.setAdapter(gridAdapter2);
         }
     }
