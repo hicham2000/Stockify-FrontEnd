@@ -23,6 +23,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.Gestion_Produit.InformationsProduitStock;
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.R;
 
@@ -175,39 +177,41 @@ public class ViewRepas extends AppCompatActivity {
         super.onStart();
         Button delete = findViewById(R.id.button_supprimer);
 
+        MyApp myApp = (MyApp) getApplication();
+        int stockId = myApp.getUser_stock_id();
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // This code will be executed when the button is clicked
                 RequestQueue queue = Volley.newRequestQueue(ViewRepas.this);
-                String url = "http://10.0.2.2:1111/stocks/repas/"+repasId;
+                String url = "http://10.0.2.2:1111/stocks/"+stockId+"/suppRepas/"+repasId;
 
-                // Create a JsonObjectRequest for DELETE
-                JsonObjectRequest request = new JsonObjectRequest(
-                        Request.Method.DELETE,
+                JSONObject request = new JSONObject();
+                System.out.println(request);
+
+                // Make sure to replace this with your actual parameters
+                JsonObjectRequest supprimer = new JsonObjectRequest(Request.Method.PUT,
                         url,
-                        null, // Request body is null for DELETE requests
+                        request,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                // Handle the server response on success
-                                System.out.println("yes");
-                                Intent intent = new Intent(ViewRepas.this, HomeActivity.class);
-                                startActivity(intent);
+                                // Handle the response from the server
+                                // You might want to parse and process the response JSON here
                             }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // Handle network or server errors
-                                System.out.println("No");
-                                Intent intent = new Intent(ViewRepas.this, HomeActivity.class);
-                                startActivity(intent);
-                            }
-                        }
-                );
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle errors here
+                        // You might want to display an error message to the user
+                    }
+                });
 
-                queue.add(request);
+                queue.add(supprimer);
+
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(ViewRepas.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
 
