@@ -150,7 +150,7 @@ android:background="@color/vert">
                         android:textColor="#FFFFFF"
                         android:textSize="25dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/editTexte_t"
                         style="@style/EditTextStyle"
                         android:layout_width="match_parent"
@@ -158,7 +158,7 @@ android:background="@color/vert">
                         android:layout_marginLeft="180dp"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/ellipse"
-
+                        android:inputType="none"
 
                         />
 
@@ -185,7 +185,7 @@ android:background="@color/vert">
                         android:textColor="#FFFFFF"
                         android:textSize="25dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/cat"
                         style="@style/EditTextStyle"
                         android:layout_width="match_parent"
@@ -193,7 +193,7 @@ android:background="@color/vert">
                         android:layout_marginLeft="180dp"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/ellipse"
-
+                        android:inputType="none"
 
                         />
 
