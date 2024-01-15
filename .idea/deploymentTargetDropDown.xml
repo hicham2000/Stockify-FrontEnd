@@ -20,6 +20,9 @@
       <entry key="doInBackground_withoutInternetConnection_shouldNotFetchImage()">
         <State />
       </entry>
+      <entry key="app">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
