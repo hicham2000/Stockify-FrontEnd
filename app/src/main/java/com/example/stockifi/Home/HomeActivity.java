@@ -239,6 +239,7 @@ public class HomeActivity extends AppCompatActivity {
     public void parseJson(String response) {
         try {
             JSONArray jsonArray = new JSONArray(response);
+            listdata.clear();
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject object = jsonArray.getJSONObject(i);
                 // extract produit informations
@@ -247,6 +248,7 @@ public class HomeActivity extends AppCompatActivity {
                 String intitule = object.getString("intitule");
                 String dateExpiration = object.getString("dateExpiration");
                 System.out.println(object);
+
                 listdata.add(new listData(id, intitule, dateExpiration,imageUrl));
             }
             GridAdapter gridAdapter = new GridAdapter(HomeActivity.this, listdata);
@@ -273,6 +275,7 @@ public class HomeActivity extends AppCompatActivity {
     public void parseJson2(String response) {
         try {
             JSONArray jsonArray = new JSONArray(response);
+            listdata2.clear();
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject object = jsonArray.getJSONObject(i);
                 // extract produit informations
@@ -280,6 +283,7 @@ public class HomeActivity extends AppCompatActivity {
                 String imageUrl = object.getString("imageUrl");
                 String intitule = object.getString("intitule");
                 String datePeremtion = object.getString("datePeremtion");
+
                 listdata2.add(new listData2(id, intitule, datePeremtion,imageUrl));
 
             }
