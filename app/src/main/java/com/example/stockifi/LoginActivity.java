@@ -46,8 +46,6 @@ public class LoginActivity extends AppCompatActivity {
 
         MyApp myApp = (MyApp) getApplication();
 
-        myApp.setUser_id(-1);
-
         if(myApp.getUser_id() > 0) {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
@@ -77,20 +75,20 @@ public class LoginActivity extends AppCompatActivity {
                                         myApp.setUser_listeCourse_id(listeDeCourseId);
                                         NotificationUtils notif = new NotificationUtils(getApplicationContext());
                                         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<String> task) {
-                                                if (!task.isSuccessful()) {
-                                                    Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                                                    return;
+                                                @Override
+                                                public void onComplete(@NonNull Task<String> task) {
+                                                    if (!task.isSuccessful()) {
+                                                        Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                                                        return;
+                                                    }
+
+                                                    String token = task.getResult();
+                                                    myApp.setNotiftoken(token);
+                                                    Log.d(TAG, "token: "+token);
+                                                    notif.sendNotificationToken(getApplicationContext() , token ,  userId);
+
                                                 }
-
-                                                String token = task.getResult();
-                                                myApp.setNotiftoken(token);
-                                                Log.d(TAG, "token: "+token);
-                                                notif.sendNotificationToken(getApplicationContext() , token ,  userId);
-
-                                            }
-                                        });
+                                            });
 
                                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                         startActivity(intent);
@@ -104,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(Exception error) {
-                                    // Handle errors, for example, display an error message
+                                    Toast.makeText(getBaseContext(), "Mot de passe ou Email incorrect", Toast.LENGTH_SHORT).show();
                                     error.printStackTrace();
                                 }
                             });
@@ -112,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
                             throw new RuntimeException(e);
                         }
                     }
-
                 }
             }
         });

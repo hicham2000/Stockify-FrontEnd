@@ -47,17 +47,8 @@ public class RegisterActivityInstrumentedTest {
 
     @Test
     public void testInscriptionButton() {
-        // Perform actions to fill the registration form
-        // ...
-
-        // Perform click on the inscription button
         Espresso.onView(withId(R.id.registerButton)).perform(ViewActions.click());
-
-        // Check if the LoginActivity is launched after successful registration
         Espresso.onView(withText("LoginActivity")).check(matches(isDisplayed()));
     }
-
-    // Add more tests for other functionalities in the RegisterActivity
-    // ...
 
 }
