@@ -67,8 +67,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-        apiUrl = "http://192.168.11.100:1111/stocks/"+User_Stock_id+"/products";
-        apiRepasUrl = "http://192.168.11.100:1111/listRepas/repas/"+User_Stock_id;
+        apiUrl = "http://10.0.2.2:1111/stocks/"+User_Stock_id+"/products";
+        apiRepasUrl = "http://10.0.2.2:1111/listRepas/repas/"+User_Stock_id;
         setContentView(binding.getRoot());
         listdata = new ArrayList<>();
         listdata2 = new ArrayList<>();

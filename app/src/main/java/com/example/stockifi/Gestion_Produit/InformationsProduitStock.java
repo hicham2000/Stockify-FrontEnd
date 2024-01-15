@@ -145,28 +145,14 @@ public class InformationsProduitStock extends AppCompatActivity {
             public void onClick(View v) {
                 // Call the method to send the POST request
                 RequestQueue queue = Volley.newRequestQueue(InformationsProduitStock.this);
-                String url = "http://10.0.2.2:1111/stocks/" + stockId + "/products/" + produitId;
+                String url = "http://10.0.2.2:1111/stocks/" + stockId + "/suppProduit/" + produitId;
 
                 // Example data to send in the request body
                 JSONObject request = new JSONObject();
-                try {
-                    // Set the properties based on your Produit entity
-                    request.put("intitule", nom.getText().toString());
-                    request.put("quantite", Qte.getText().toString());
-                    //request.put("uniteDeMesure", Mesure.toString());
-                    request.put("dateExpiration", "2024.01.27");
-                    request.put("prix", Prix.getText().toString());
-                    request.put("dateAlerte", "2024.01.29");
-                    request.put("quantiteCritique", QteC.getText().toString());
-                    request.put("is_deleted",1);
-                    System.out.println(request);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                System.out.println(request);
 
                 // Make sure to replace this with your actual parameters
-                JsonObjectRequest modifierProduit = new JsonObjectRequest(Request.Method.PUT,
+                JsonObjectRequest supprimerProduit = new JsonObjectRequest(Request.Method.PUT,
                         url,
                         request,
                         new Response.Listener<JSONObject>() {
@@ -184,7 +170,7 @@ public class InformationsProduitStock extends AppCompatActivity {
                 });
 
                 // Add the request to the RequestQueue.
-                queue.add(modifierProduit);
+                queue.add(supprimerProduit);
 
                 // Action à effectuer lors du clic sur le bouton
                 Intent intent = new Intent(InformationsProduitStock.this, HomeActivity.class);
