@@ -318,6 +318,7 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
+
     public void supprimerDefUnRepasFromCorbeille(long stockId,long productId, BackendResponseCallback callback){
         String url = getFullUrl( "/corbeille/supprmerdefdeletedrecipe/stockId="+stockId+"/supprimerRepasId="+productId);
 
@@ -336,6 +337,7 @@ public class BackendManager {
 
         requestQueue.add(jsonObjectRequest);
     }
+
     public void supprimerDefPermanentlyUnRepasFromCorbeille(long stockId,long repasId, BackendResponseCallback callback){
         String url = getFullUrl( "/corbeille/supprimerdefPermanentdeletedrepas/stockId="+stockId+"/supprimerPrmRecipetId="+repasId);
 
