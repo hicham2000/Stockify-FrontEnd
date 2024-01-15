@@ -50,19 +50,25 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
-    /*MyApp myApp = (MyApp) getApplication();
-    int User_Stock_id = myApp.getUser_stock_id();*/
 
-    String apiUrl = "http://10.0.2.2:1111/stocks/1/products";
-    String apiRepasUrl = "http://10.0.2.2:1111/listRepas/repas/1";
     ArrayList<listData> listdata;
     ArrayList<listData2> listdata2;
+    String apiUrl;
+    String apiRepasUrl;
 
     Button ajouterProduit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
+
+        MyApp myApp = (MyApp) getApplication();
+        int User_Stock_id = myApp.getUser_stock_id();
+
+
+
+        apiUrl = "http://10.0.2.2:1111/stocks/"+User_Stock_id+"/products";
+        apiRepasUrl = "http://10.0.2.2:1111/listRepas/repas/"+User_Stock_id;
         setContentView(binding.getRoot());
         listdata = new ArrayList<>();
         listdata2 = new ArrayList<>();
