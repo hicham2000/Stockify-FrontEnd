@@ -47,8 +47,8 @@ import java.util.ArrayList;
 
 public class ListeDeCourse extends AppCompatActivity {
 
-   // private static final String BASE_URL = "192.168.11.100:1111";
-    private static final String BASE_URL = "10.0.2.2:1111";
+    private static final String BASE_URL = "192.168.11.100:1111";
+  //  private static final String BASE_URL = "10.0.2.2:1111";
     ArrayList<Produit> dataList = new ArrayList<>();
     ListeCourseAdapter adapter;
 
@@ -120,8 +120,9 @@ public class ListeDeCourse extends AppCompatActivity {
                 queue.add(request);
                // dataList.clear();
 
+                if (adapter!=null) {
                     adapter.clearData();
-
+                }
                   //  notifyDataSetChanged();
 
 
