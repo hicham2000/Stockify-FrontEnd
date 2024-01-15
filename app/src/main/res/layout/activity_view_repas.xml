@@ -24,7 +24,7 @@ android:background="@color/vert">
             android:layout_height="?attr/actionBarSize">
 
             <ImageView
-                android:id="@+id/toolbar_back_button_updaterepas"
+                android:id="@+id/toolbar_back_button_updaterepas1"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/fleche"
@@ -67,14 +67,14 @@ android:background="@color/vert">
         android:background="?attr/colorPrimary">
 
         <!-- Ajoutez une flèche de retour à la Toolbar -->
+
         <ImageView
-            android:id="@+id/toolbar_back_button_view_repas"
+            android:id="@+id/toolbar_back_button_view_repas1"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:src="@drawable/fleche"
             android:layout_gravity="start"
-            android:layout_marginStart="16dp"
-            />
+            android:layout_marginStart="16dp"/>
 
         <com.google.android.material.appbar.MaterialToolbar
 

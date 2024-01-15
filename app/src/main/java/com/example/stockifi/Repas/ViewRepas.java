@@ -42,7 +42,7 @@ public class ViewRepas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_repas);
 
-        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_view_repas);
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_updaterepas1);
 
         // Ajoutez un écouteur de clic à l'ImageView
         toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
@@ -51,8 +51,7 @@ public class ViewRepas extends AppCompatActivity {
             @Override
             public void onClick (View v){
                 // Appel de la méthode onBackPressed pour revenir à l'écran précédent
-                Intent intent = new Intent(ViewRepas.this, HomeActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
         EditText editText = findViewById(R.id.editTexte_t);

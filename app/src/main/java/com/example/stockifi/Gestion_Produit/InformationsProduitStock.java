@@ -37,6 +37,7 @@ public class InformationsProduitStock extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informations_produit_stock);
 
+
         ImageView toolbarBackButton = findViewById(R.id.toolbar_back_button_ajout_info);
 
         toolbarBackButton.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +47,21 @@ public class InformationsProduitStock extends AppCompatActivity {
                 finish();
             }
         });
+
+        ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_ajout_info);
+
+        // Ajoutez un écouteur de clic à l'ImageView
+        toolbarBackButton_ajout.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // Appel de la méthode onBackPressed pour revenir à l'écran précédent
+                onBackPressed();
+            }
+        });
+
+
 
 
         TextView nom = findViewById(R.id.nom_produit);
