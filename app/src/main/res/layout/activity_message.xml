@@ -55,11 +55,7 @@
         </androidx.appcompat.widget.Toolbar>
 
 
-        <View
 
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/white" />
 
     </LinearLayout>
     <LinearLayout
@@ -68,24 +64,25 @@
         android:orientation="vertical"
         android:layout_marginTop="60dp"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:clickable="true"
             android:gravity="end"
-            android:paddingEnd="20dp"
-            >
+            android:orientation="horizontal"
+            android:paddingEnd="20dp">
 
             <TextView
                 android:id="@+id/aboveListViewText"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:text="@string/effacer_notification"
+                android:clickable="true"
                 android:fontFamily="@font/hubballi_regular"
-                android:textSize="20sp"
-                android:textColor="@color/vidercorbeille"
                 android:padding="8dp"
-                android:clickable="true" />
+                android:text="@string/effacer_notification"
+                android:textColor="@color/vidercorbeille"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/trash"

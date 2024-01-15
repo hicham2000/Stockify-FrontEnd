@@ -20,9 +20,9 @@
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
-
+            android:maxLines="3"
+            android:ellipsize="end"
             />
-
 
     </LinearLayout>
 

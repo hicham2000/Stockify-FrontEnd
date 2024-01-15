@@ -25,6 +25,9 @@
             android:name=".Repas.UpdateRepas"
             android:exported="false" />
         <activity
+            android:name=".MessageActivity"
+            android:exported="true" />
+        <activity
             android:name=".Repas.ViewRepas"
             android:exported="false" />
         <activity
@@ -35,7 +38,8 @@
             android:exported="false" />
         <activity
             android:name=".Home.HomeActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Home.AjouterCategorie"
             android:exported="false" />
@@ -109,7 +113,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".corbeille.corbeille"
-            android:exported="false"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginActivity"

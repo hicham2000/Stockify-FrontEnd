@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">stockifi</string>
+    <string name="app_name">Stockify</string>
 
     <string name="nom_champ">Nom</string>
     <string name="prenom_champ">Prénom</string>

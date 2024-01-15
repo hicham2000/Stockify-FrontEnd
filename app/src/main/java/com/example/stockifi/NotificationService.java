@@ -22,14 +22,13 @@ public class NotificationService extends FirebaseMessagingService {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext()) ;
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d(TAG,"Message Notification Body: " + remoteMessage.getNotification().getBody());
 
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
 
-                    notificationUtils.addToDatabase(title, body);
-                    notificationUtils.sendNotification(body,title,getApplicationContext());
-
+            notificationUtils.addToDatabase(title, body);
+            notificationUtils.sendNotification(body,title,getApplicationContext());
 
         }
     }
