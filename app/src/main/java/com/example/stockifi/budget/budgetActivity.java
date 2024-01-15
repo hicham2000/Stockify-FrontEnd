@@ -120,7 +120,7 @@ public class budgetActivity extends AppCompatActivity {
          pourcentageGaspilleTextView = findViewById(R.id.pourcentage_gaspille);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String apiUrl = "http://192.168.11.100:1111/stocks/1/budget";
+        String apiUrl = "http://10.0.2.2:1111/stocks/1/budget";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
                 new Response.Listener<String>() {
             @Override

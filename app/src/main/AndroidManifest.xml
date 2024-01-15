@@ -36,6 +36,7 @@
         <activity
             android:name=".Gestion_Produit.ModifierProduitStock"
             android:exported="false" />
+
         <activity
             android:name=".Home.HomeActivity"
             android:exported="true"
@@ -115,6 +116,9 @@
             android:name=".corbeille.corbeille"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".budget.budgetActivity"
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
