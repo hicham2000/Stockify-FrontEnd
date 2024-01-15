@@ -2,13 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="GetImageFromUrlTest">
-        <State />
-      </entry>
-      <entry key="ModifierProduitStock">
-        <State />
-      </entry>
-      <entry key="ProfilActivity">
+      <entry key="ConditionUtilisationActivityInstrumentedTest">
         <State />
       </entry>
       <entry key="app">
@@ -18,6 +12,12 @@
         <State />
       </entry>
       <entry key="doInBackground_withoutInternetConnection_shouldNotFetchImage()">
+        <State />
+      </entry>
+      <entry key="testLoginButton()">
+        <State />
+      </entry>
+      <entry key="testLoginButton_Success()">
         <State />
       </entry>
     </value>

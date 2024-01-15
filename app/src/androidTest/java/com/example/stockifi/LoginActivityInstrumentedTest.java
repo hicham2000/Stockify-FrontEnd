@@ -21,45 +21,41 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 public class LoginActivityInstrumentedTest {
 
     @Rule
-    public IntentsTestRule<LoginActivity> activityRule = new IntentsTestRule<>(LoginActivity.class);
+    public IntentsTestRule<LoginActivity> activityRule = new IntentsTestRule<>(LoginActivity.class, false, false);
 
     @Before
     public void setUp() {
-        // Initialize ActivityScenario for the LoginActivity
         ActivityScenario.launch(LoginActivity.class);
     }
 
     @Test
-    public void testLoginButton() {
-        // Perform actions to fill the login form
-        // ...
-
-        // Perform click on the login button
+    public void testLoginButton_Success() {
+        Espresso.onView(withId(R.id.email_login)).perform(ViewActions.typeText("rifaywassim@gmail.com"));
+        Espresso.onView(withId(R.id.password_login)).perform(ViewActions.typeText("123456@Wassim"));
+        Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.button_login)).perform(ViewActions.click());
-
-        // Check if the ProfilActivity is launched after successful login
         Espresso.onView(withId(R.layout.activity_profil)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testForgottenPasswordLink() {
-        // Perform click on the forgotten password link
-        Espresso.onView(withId(R.id.textViewForgottenPwd)).perform(ViewActions.click());
+    public void testLoginButton_Failure() {
+        Espresso.onView(withId(R.id.email_login)).perform(ViewActions.typeText("example@gmail.com"));
+        Espresso.onView(withId(R.id.password_login)).perform(ViewActions.typeText("123456@Wassim"));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.button_login)).perform(ViewActions.click());
+        //complete this parts
+    }
 
-        // Check if the ResetPasswordActivity is launched
+    @Test
+    public void testForgottenPasswordLink() {
+        Espresso.onView(withId(R.id.textViewForgottenPwd)).perform(ViewActions.click());
         Espresso.onView(withId(R.layout.activity_reset_password)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testCreateAccountLink() {
-        // Perform click on the create account link
         Espresso.onView(withId(R.id.textViewCreateCompte)).perform(ViewActions.click());
-
-        // Check if the RegisterActivity is launched
         Espresso.onView(withId(R.layout.activity_register)).check(matches(isDisplayed()));
     }
-
-    // Add more tests for other functionalities in the LoginActivity
-    // ...
 
 }

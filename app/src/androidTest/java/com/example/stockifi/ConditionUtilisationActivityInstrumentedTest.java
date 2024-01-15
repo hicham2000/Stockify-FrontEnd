@@ -27,26 +27,20 @@ public class ConditionUtilisationActivityInstrumentedTest {
 
     @Before
     public void setUp() {
-        // Initialize Intents before each test
         Intents.init();
-        // Launch ActivityScenario for the ConditionUtilisationActivity
         ActivityScenario.launch(ConditionUtilisationActivity.class);
     }
 
     @After
     public void tearDown() {
-        // Release Intents after each test
         Intents.release();
     }
 
     @Test
     public void testBackButton() {
-        // Perform click on the back button
         Espresso.onView(withId(R.id.toolbar_back_button_condi)).perform(ViewActions.click());
 
-        // Check if the onBackPressed method is called and the activity is finished
         intended(allOf(hasAction("android.intent.action.MAIN"), hasData((Uri) null)));
 
-        // Add additional assertions if needed
     }
 }
