@@ -40,30 +40,23 @@ public class BudgetActivityTest {
 
     @Test
     public void checkNavigationToCorbeille() {
-        // Click on the poubelle icon in the toolbar and check if it navigates to the corbeille activity
         Espresso.onView(ViewMatchers.withId(R.id.poubelle)).perform(ViewActions.click());
-        // Add more assertions for the corbeille activity if needed
     }
 
 
     @Test
     public void checkBudgetValuesUpdate() {
-        // Mock the response for budget values and check if the TextViews are updated accordingly
-        // Replace these mock values with the expected values after parsing the API response
+
         String mockApiResponse = "[1600.0, 800.0, 800.0, 50.0, 50.0]"; // Adjusted mock values
 
-        // Use Espresso Intents to intercept the HTTP request (if needed) and provide a mock response
-        // ...
-
-        // Re-launch the activity to see if it updates the TextViews
         ActivityScenario.launch(budgetActivity.class);
 
         // Check if the TextViews display the expected values
-        checkTextViewWithFormattedText(R.id.montant_total, "1600 DH");
-        checkTextViewWithFormattedText(R.id.montant_consomme, "1600 DH");
-        checkTextViewWithFormattedText(R.id.montant_gaspille, "400 DH");
-        checkTextViewWithFormattedText(R.id.pourcentage_consomme, "80%");
-        checkTextViewWithFormattedText(R.id.pourcentage_gaspille, "20%");
+        checkTextViewWithFormattedText(R.id.montant_total, "30.00 DH");
+        checkTextViewWithFormattedText(R.id.montant_consomme, "20.00 DH");
+        checkTextViewWithFormattedText(R.id.montant_gaspille, "10.00 DH");
+        checkTextViewWithFormattedText(R.id.pourcentage_consomme, "66.67%");
+        checkTextViewWithFormattedText(R.id.pourcentage_gaspille, "33.33%");
     }
 
     private static void checkTextViewWithFormattedText(int viewId, String expectedText) {

@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:gravity="center_vertical"
-                android:text="@string/budgetActivity_dh_consomme"
+                android:text="@string/budgetActivity_dh_total"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
