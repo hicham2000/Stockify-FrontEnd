@@ -18,8 +18,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.R;
 import com.example.stockifi.Repas.ViewRepas;
@@ -35,6 +37,17 @@ public class InformationsProduitStock extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informations_produit_stock);
 
+
+        ImageView toolbarBackButton = findViewById(R.id.toolbar_back_button_ajout_info);
+
+        toolbarBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+
         ImageView toolbarBackButton_ajout = findViewById(R.id.toolbar_back_button_ajout_info);
 
         // Ajoutez un écouteur de clic à l'ImageView
@@ -47,6 +60,7 @@ public class InformationsProduitStock extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
 
 
 
@@ -120,6 +134,51 @@ public class InformationsProduitStock extends AppCompatActivity {
 
             }
         });
+
+        MyApp myApp = (MyApp) getApplication();
+        int stockId = myApp.getUser_stock_id();
+
+        Button supprimerProduit = findViewById(R.id.button_supprimer_info);
+
+        supprimerProduit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Call the method to send the POST request
+                RequestQueue queue = Volley.newRequestQueue(InformationsProduitStock.this);
+                String url = "http://10.0.2.2:1111/stocks/" + stockId + "/suppProduit/" + produitId;
+
+                // Example data to send in the request body
+                JSONObject request = new JSONObject();
+                System.out.println(request);
+
+                // Make sure to replace this with your actual parameters
+                JsonObjectRequest supprimerProduit = new JsonObjectRequest(Request.Method.PUT,
+                        url,
+                        request,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Handle the response from the server
+                                // You might want to parse and process the response JSON here
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle errors here
+                        // You might want to display an error message to the user
+                    }
+                });
+
+                // Add the request to the RequestQueue.
+                queue.add(supprimerProduit);
+
+                // Action à effectuer lors du clic sur le bouton
+                Intent intent = new Intent(InformationsProduitStock.this, HomeActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 
