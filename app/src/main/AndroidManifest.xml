@@ -113,10 +113,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".budget.budgetActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".corbeille.corbeille"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
