@@ -39,7 +39,6 @@ public class ConditionUtilisationActivityInstrumentedTest {
     @Test
     public void testBackButton() {
         Espresso.onView(withId(R.id.toolbar_back_button_condi)).perform(ViewActions.click());
-
         intended(allOf(hasAction("android.intent.action.MAIN"), hasData((Uri) null)));
 
     }

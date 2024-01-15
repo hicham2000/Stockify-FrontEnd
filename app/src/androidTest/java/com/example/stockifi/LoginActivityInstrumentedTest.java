@@ -43,7 +43,6 @@ public class LoginActivityInstrumentedTest {
         Espresso.onView(withId(R.id.password_login)).perform(ViewActions.typeText("123456@Wassim"));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.button_login)).perform(ViewActions.click());
-        //complete this parts
     }
 
     @Test

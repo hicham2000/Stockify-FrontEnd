@@ -64,8 +64,6 @@ public class RecettesRecommendeFiltreActivity extends AppCompatActivity {
         return true;
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();

@@ -103,17 +103,12 @@ public class RecettesRecommendeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recettes_recommende);
 
-
-
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.androidx_window_recettes_recommende);
 
 
         // Sélectionner l'élément
         MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.recette);
         menuItem.setChecked(true);
-
-      //  int currentUser_id = 1;//myApp.getUser_id();
 
         myApp = (MyApp) getApplication();
         int currentUser_id = myApp.getUser_id();

@@ -7,20 +7,29 @@ import android.net.Uri;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intending;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasData;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
+@RunWith(AndroidJUnit4.class)
+@LargeTest
 public class RegisterActivityInstrumentedTest {
 
     @Rule
@@ -28,7 +37,6 @@ public class RegisterActivityInstrumentedTest {
 
     @Before
     public void setUp() {
-        // Stub the image picker intent
         Intent resultData = new Intent();
         Uri uri = Uri.parse("content://media/external/images/media/1");
         resultData.setData(uri);
@@ -38,17 +46,45 @@ public class RegisterActivityInstrumentedTest {
 
     @Test
     public void testImageUpload() {
-        // Perform click on the upload image button
-        Espresso.onView(withId(R.id.camera_icon)).perform(ViewActions.click());
-
-        // Check if the image is displayed after selection
-        Espresso.onView(withId(R.id.camera_icon)).check(matches(isDisplayed()));
+        onView(withId(R.id.camera_icon)).perform(ViewActions.click());
+        onView(withId(R.id.camera_icon)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testInscriptionButton() {
-        Espresso.onView(withId(R.id.registerButton)).perform(ViewActions.click());
-        Espresso.onView(withText("LoginActivity")).check(matches(isDisplayed()));
+        onView(withId(R.id.registerButton)).perform(ViewActions.click());
+        onView(withText("LoginActivity")).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void testSignupWithValidInput() {
+        onView(withId(R.id.nom)).perform(ViewActions.typeText("NomTest"));
+        onView(withId(R.id.prenom)).perform(ViewActions.typeText("PrenomTest"));
+        onView(withId(R.id.email)).perform(ViewActions.typeText("test@example.com"));
+        onView(withId(R.id.password)).perform(ViewActions.typeText("TestPassword123!"));
+        onView(withId(R.id.confirm_password)).perform(ViewActions.typeText("TestPassword123!"));
+        onView(withId(R.id.regime_option)).perform(ViewActions.click());
+        onView(withId(R.id.checkBox)).perform(ViewActions.click());
+
+        onView(withId(R.id.registerButton)).perform(ViewActions.click());
+
+        onView(withText("LoginActivity")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testSignupWithInvalidInput() {
+        onView(withId(R.id.nom)).perform(ViewActions.typeText("NomTest"));
+        onView(withId(R.id.prenom)).perform(ViewActions.typeText("PrenomTest"));
+        onView(withId(R.id.email)).perform(ViewActions.typeText("test@example.com"));
+        onView(withId(R.id.password)).perform(ViewActions.typeText("TestPassword123!"));
+        onView(withId(R.id.confirm_password)).perform(ViewActions.typeText("TestPassword123!"));
+
+        onView(withId(R.id.registerButton)).perform(ViewActions.click());
+
+        onView(withText("Accepter les conditions d'utilisation"))
+                .inRoot(withDecorView(not(is(activityRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed()));
+
+
+    }
 }

@@ -2,19 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="LoginActivityInstrumentedTest">
-        <State />
-      </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="testRecupererRecettesRecommendeesFiltrees_Success()">
+      <entry key="testBackButton()">
         <State />
       </entry>
-      <entry key="testRecupererRecettesRecommendees_Error()">
+      <entry key="testLoginButton_Success()">
         <State />
       </entry>
-      <entry key="testRecupererRecettesRecommendees_Success()">
+      <entry key="testRecupererIngredients_Success()">
+        <State />
+      </entry>
+      <entry key="testSignupWithInvalidInput()">
         <State />
       </entry>
       <entry key="testSupprimerRecetteDeFavoris_Success()">
