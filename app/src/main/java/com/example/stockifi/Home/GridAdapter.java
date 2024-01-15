@@ -49,8 +49,8 @@ public class GridAdapter extends BaseAdapter {
 
         ImageView imageView = convertView.findViewById(R.id.gridImage);
         TextView textView = convertView.findViewById(R.id.gridName);
-        TextView textView1 = convertView.findViewById(R.id.gridName);
-        //imageView.setImageResource(image[position]);
+        TextView textView1 = convertView.findViewById(R.id.gridtemps);
+        imageView.setImageResource(R.drawable.instagram);
         textView.setText(listdata.get(position).getIntitule());
         textView1.setText(listdata.get(position).getDateExpiration());
         return convertView;
