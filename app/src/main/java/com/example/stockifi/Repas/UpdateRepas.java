@@ -43,6 +43,8 @@ public class UpdateRepas extends AppCompatActivity {
     private LinearLayout peremtion;
     private LinearLayout alertr;
     int repasId;
+    int p1 =0;
+    int a1 =0;
 
     EditText name;
     TextView per;
@@ -58,6 +60,8 @@ public class UpdateRepas extends AppCompatActivity {
         repasId = getIntent().getIntExtra("repasId",0);
         categories = getIntent().getStringExtra("cat");
         System.out.println(repasId);
+
+
 
         Button buttonUpdate = findViewById(R.id.button_update);
         buttonUpdate.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
@@ -287,8 +291,22 @@ public class UpdateRepas extends AppCompatActivity {
                         int User_id = myApp.getUser_id();
                         int User_Stock_id = myApp.getUser_stock_id();
                         jsonProduit.put("intitule", name.getText().toString().trim());
-                        jsonProduit.put("datePeremtion", per.getText().toString().trim().split("-")[0]+"."+per.getText().toString().trim().split("-")[1]+"."+per.getText().toString().trim().split("-")[2]);
-                        jsonProduit.put("dateAlert", alert.getText().toString().trim().split("-")[0]+"."+alert.getText().toString().trim().split("-")[1]+"."+alert.getText().toString().trim().split("-")[2]);
+                        if(p1 == 0){
+                            jsonProduit.put("datePeremtion", per.getText().toString().trim().split("-")[0].trim()+"."+per.getText().toString().trim().split("-")[1].trim()+"."+per.getText().toString().trim().split("-")[2].trim());
+
+                        }
+                        else{
+                            jsonProduit.put("datePeremtion", per.getText());
+
+                        }
+                        if(a1 == 0){
+                            jsonProduit.put("dateAlert", alert.getText().toString().trim().split("-")[0].trim()+"."+alert.getText().toString().trim().split("-")[1].trim()+"."+alert.getText().toString().trim().split("-")[2].trim());
+
+                        }
+                        else {
+                            jsonProduit.put("dateAlert", alert.getText());
+
+                        }
                         jsonProduit.put("categorie",categories);
                         jsonProduit.put("id",repasId);
 
@@ -348,7 +366,8 @@ public class UpdateRepas extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                String selectedDate = "       " + String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
+                String selectedDate =String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
+                p1 =1;
                 per.setText(selectedDate);
 
 
@@ -368,8 +387,9 @@ public class UpdateRepas extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                String selectedDate = "       " + String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
+                String selectedDate =String.valueOf(year) + "." + String.valueOf(month + 1) + "." + String.valueOf(day);
                 alert.setText(selectedDate);
+                a1 =1;
 
 
             }
