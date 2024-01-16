@@ -24,7 +24,7 @@
             android:layout_height="?attr/actionBarSize">
 
             <ImageView
-                android:id="@+id/toolbar_back_button_ajout"
+                android:id="@+id/toolbar_back_button_message"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/fleche"

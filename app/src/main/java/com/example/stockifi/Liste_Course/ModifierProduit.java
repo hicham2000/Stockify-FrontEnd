@@ -28,8 +28,8 @@ import java.util.Arrays;
 
 public class ModifierProduit extends AppCompatActivity {
 
-    private static final String BASE_URL = "192.168.11.100:1111";
-  //  private static final String BASE_URL = "10.0.2.2:1111";
+   // private static final String BASE_URL = "192.168.11.100:1111";
+    private static final String BASE_URL = "10.0.2.2:1111";
     EditText nom;
     EditText quantite;
 

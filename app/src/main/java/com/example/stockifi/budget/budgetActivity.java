@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.stockifi.GlobalVariables.MyApp;
 import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.Liste_Course.ListeDeCourse;
 import com.example.stockifi.MessageActivity;
@@ -120,7 +121,9 @@ public class budgetActivity extends AppCompatActivity {
          pourcentageGaspilleTextView = findViewById(R.id.pourcentage_gaspille);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String apiUrl = "http://10.0.2.2:1111/stocks/1/budget";
+        MyApp myApp = (MyApp) getApplication();
+        int User_Stock_id = myApp.getUser_stock_id();
+        String apiUrl = "http://10.0.2.2:1111/stocks/"+User_Stock_id+"/budget";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
                 new Response.Listener<String>() {
             @Override

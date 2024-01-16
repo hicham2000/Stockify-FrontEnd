@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.Liste_Course.AjouterProduit;
 import com.example.stockifi.Liste_Course.Produit;
 import com.example.stockifi.R;
@@ -241,7 +242,7 @@ public class ajouter_repas extends AppCompatActivity {
                                     // Gérez la réponse du serveur en cas de succès
                                   //  Toast.makeText(AjouterProduit.this, "Produit ajouté avec succès", Toast.LENGTH_SHORT).show();
                                     System.out.println("yes");
-                                    Intent intent = new Intent(ajouter_repas.this, ingredients.class);
+                                    Intent intent = new Intent(ajouter_repas.this, HomeActivity.class);
 
                                     //  System.out.println(checked);
                                     startActivity(intent);
@@ -253,7 +254,7 @@ public class ajouter_repas extends AppCompatActivity {
                                     // Gérez les erreurs de réseau ou du serveur
                                     //       Toast.makeText(AjouterProduit.this, "Erreur lors de l'ajout du produit", Toast.LENGTH_SHORT).show();
                                     System.out.println("No");
-                                    Intent intent = new Intent(ajouter_repas.this, ingredients.class);
+                                    Intent intent = new Intent(ajouter_repas.this, HomeActivity.class);
 
                                     //  System.out.println(checked);
                                     startActivity(intent);

@@ -288,7 +288,7 @@ public class HomeActivity extends AppCompatActivity {
                 int id = object.getInt("id");
                 String imageUrl = object.getString("imageUrl");
                 String intitule = object.getString("intitule");
-                String datePeremtion = object.getString("datePeremtion");
+                String datePeremtion = object.getString("datePeremtion").split("T")[0];
 
                 listdata2.add(new listData2(id, intitule, datePeremtion,imageUrl));
 
