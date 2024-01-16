@@ -27,7 +27,7 @@ import android.app.NotificationChannel;
 
 public class NotificationUtils {
     private static final String CHANNEL_ID = "default_channel";
-    private static final String BASE_URL = "http://192.168.11.100:1111/api/users/";
+    private static final String BASE_URL = "http://10.0.2.2:1111/api/users/";
     private int id;
     private int type;
     private String title;

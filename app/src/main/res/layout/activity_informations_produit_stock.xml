@@ -61,11 +61,10 @@
             android:layout_marginTop="20dp">
 
             <ImageView
-                android:background="@drawable/rond_image"
                 android:id="@+id/imageProfil_info"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/profil"
+                android:src="@drawable/icon_produit"
                 android:layout_gravity="center"
 
                 />

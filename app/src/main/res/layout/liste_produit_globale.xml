@@ -11,7 +11,7 @@
         android:id="@+id/image_produit"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/food"
+        android:src="@drawable/icon_produit"
         android:scaleType="centerCrop"
         android:layout_marginEnd="8dp"/>
 
