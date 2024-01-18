@@ -119,6 +119,7 @@ public class ListeCourseAdapter extends ArrayAdapter<Produit> {
                     queue.add(request);
                     if (position >= 0 && position < data.size()) {
                         data.remove(position);
+                        checkedPositions.remove(position);
                         notifyDataSetChanged();
                     }
 

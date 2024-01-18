@@ -80,6 +80,16 @@ public class HomeActivity extends AppCompatActivity {
         SearchView search_item = findViewById(R.id.search_item);
 
 
+        Button bh = findViewById(R.id.button61);
+        bh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AjouterCategorie.class);
+                startActivity(intent);
+            }
+        });
+
+
         search_item.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

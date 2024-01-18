@@ -95,6 +95,12 @@
         tools:ignore="MissingConstraints">
 
         <Button
+            android:id="@+id/button3"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:text="Scan"
+            android:visibility="invisible"/>
+        <Button
             android:id="@+id/button"
             android:layout_width="171dp"
             android:layout_height="wrap_content"
@@ -106,11 +112,6 @@
             android:layout_height="wrap_content"
             android:text="Ajouter Repas" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="171dp"
-            android:layout_height="wrap_content"
-            android:text="Scan" />
     </LinearLayout>
 
     <ImageView
@@ -156,7 +157,7 @@
             android:layout_margin="20dp"
             android:text="Repas" />
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/button61"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

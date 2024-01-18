@@ -41,6 +41,13 @@
 
     </string-array>
 
+    <string-array name="categ">
+        <item>Refrigerateur</item>
+        <item>Congelateur</item>
+        <item>garde-manger</item>
+
+    </string-array>
+
     <string-array name="poids_ajoutpr">
         <item>tonne</item>
         <item>Kg</item>

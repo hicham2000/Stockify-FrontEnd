@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.GlobalVariables.MyApp;
+import com.example.stockifi.Home.HomeActivity;
 import com.example.stockifi.Liste_Course.ModifierProduit;
 import com.example.stockifi.R;
 
@@ -99,7 +100,7 @@ public class ModifierProduitStock extends AppCompatActivity {
         buttonannuler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ModifierProduitStock.this, ListeProduit.class);
+                Intent intent = new Intent(ModifierProduitStock.this, InformationsProduitStock.class);
                 startActivity(intent);
             }
         });
@@ -237,6 +238,7 @@ public class ModifierProduitStock extends AppCompatActivity {
 
                 // Action à effectuer lors du clic sur le bouton
                 Intent intent = new Intent(ModifierProduitStock.this, InformationsProduitStock.class);
+                intent.putExtra("produitid",Integer.toString(produitId));
                 startActivity(intent);
 
             }

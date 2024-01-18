@@ -203,7 +203,7 @@
                         android:layout_height="60dp"
                         android:padding="10dp"
                         style="@style/EditTextStyle"
-                        android:entries="@array/poids"
+                        android:entries="@array/categ"
 
 
                         />

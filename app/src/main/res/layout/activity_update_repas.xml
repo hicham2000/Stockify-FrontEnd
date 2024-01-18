@@ -122,7 +122,7 @@ android:background="@color/vert">
             android:id="@+id/imageProfil"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/profil"
+            android:src="@drawable/meal"
             android:layout_gravity="center"
 
             />

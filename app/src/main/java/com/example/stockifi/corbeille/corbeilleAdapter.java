@@ -73,7 +73,13 @@ public class corbeilleAdapter extends ArrayAdapter<objet> {
 
         textViewP.setText(data.get(position).getIntitule());
 
+        ImageView ellipseG = convertView.findViewById(R.id.ellipseG);
 
+        if (data.get(position).getGaspille() == 1) {
+            ellipseG.setVisibility(View.VISIBLE);
+        } else {
+            ellipseG.setVisibility(View.INVISIBLE);
+        }
         /*buttonRecup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

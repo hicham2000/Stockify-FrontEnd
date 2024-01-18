@@ -1,5 +1,6 @@
 package com.example.stockifi.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stockifi.R;
@@ -24,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AjouterCategorie extends AppCompatActivity {
-    String apiUrl = "";
+    String apiUrl = "http://10.0.2.2:1111/categorieDeProduits/categorie";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,8 @@ public class AjouterCategorie extends AppCompatActivity {
                 String catégorieName = editCatégorieText.getText().toString();
                 try {
                     ajouterCatégorie(catégorieName);
+                    Intent intent = new Intent(AjouterCategorie.this, HomeActivity.class);
+                    startActivity(intent);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -51,36 +55,22 @@ public class AjouterCategorie extends AppCompatActivity {
 
         JSONObject jsonParams = new JSONObject();
         jsonParams.put("intitule", categoryName);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    // Parse the JSON response if it's in JSON format
-                    JSONObject jsonResponse = new JSONObject(response);
-
-                    // Example: If the server returns a status field in the response
-                    boolean success = jsonResponse.getBoolean("success");
-                    if (success) {
-                        // Category added successfully
-                        // You can put additional code here if needed
-                    } else {
-                        // Category addition failed
-                        // You can put additional code here if needed
+        JsonObjectRequest ajouterCat = new JsonObjectRequest(Request.Method.POST,
+                apiUrl,
+                jsonParams,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Handle the response from the server
+                        // You might want to parse and process the response JSON here
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    // Handle JSON parsing error
-                }
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                // Handle error response from the server
+                // Handle errors here
+                // You might want to display an error message to the user
             }
         });
-
-        requestQueue.add(stringRequest);
+        requestQueue.add(ajouterCat);
     }
 }

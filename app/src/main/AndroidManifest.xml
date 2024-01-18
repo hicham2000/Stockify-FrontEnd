@@ -75,6 +75,9 @@
             android:name=".Sprint2Activity"
             android:exported="false" />
         <activity
+            android:name=".Liste_Course.information_produit_listeCourse"
+            android:exported="true" />
+        <activity
             android:name=".ProduitCardActivity"
             android:exported="false" />
         <activity

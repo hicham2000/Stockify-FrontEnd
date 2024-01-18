@@ -118,7 +118,7 @@
             android:padding="10dp"
             android:layout_gravity="right"
 
-            android:text="@string/produit_acheter"/>
+            android:text="+ Nouveau Produit"/>
 
 
 

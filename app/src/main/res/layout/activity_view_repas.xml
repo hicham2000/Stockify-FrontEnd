@@ -126,7 +126,7 @@ android:background="@color/vert">
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rond_image"
-                android:src="@drawable/profil"
+                android:src="@drawable/meal"
 
                 />
 
